@@ -2,7 +2,11 @@
   "name": "echo-code",
   "displayName": "Echo Code",
   "description": "Reads Python errors aloud using Pylint for visually impaired students.",
-  "version": "1.5.0",
+  "version": "1.7.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tjcrozier/CSCE-3444.001-Group-1.git"
+  },
   "icon": "images/icon.png",
   "publisher": "EchoCode",
   "engines": {
@@ -16,7 +20,23 @@
     "onLanguage:python",
     "onSave",
     "onView:echocode.chatView",
-    "onCommand:echocode.openChat"
+    "onCommand:echocode.openChat",
+    "onCommand:echocode.readHotkeyGuide",
+    "onCommand:echocode.readErrors",
+    "onCommand:echocode.annotate",
+    "onCommand:echocode.readAllAnnotations",
+    "onCommand:echocode.jumpToNextFunction",
+    "onCommand:echocode.jumpToPreviousFunction",
+    "onCommand:echocode.summarizeClass",
+    "onCommand:echocode.summarizeFunction",
+    "onCommand:echocode.summarizeProgram",
+    "onCommand:echocode.startVoiceInput",
+    "onCommand:echocode.loadAssignmentFile",
+    "onCommand:echocode.increaseSpeechSpeed",
+    "onCommand:echocode.decreaseSpeechSpeed",
+    "onCommand:echocode.rescanUserCode",
+    "onCommand:echocode.readNextSequentialTask",
+    "onCommand:echocode.whereAmI"
   ],
   "main": "./extension.js",
   "extensionDependencies": [
@@ -93,6 +113,46 @@
       {
         "command": "echocode.whereAmI",
         "title": "Where Am I?"
+      },
+      {
+        "command": "echocode.createFile",
+        "title": "Create File"
+      },
+      {
+        "command": "echocode.createFolder",
+        "title": "Create Folder"
+      },
+      {
+        "command": "echocode.navigateToNextFile",
+        "title": "Navigate to Next File"
+      },
+      {
+        "command": "echocode.initializeFolderList",
+        "title": "Initialize Folder List"
+      },
+      {
+        "command": "echocode.moveToNextFolder",
+        "title": "Move to Next Folder"
+      },
+      {
+        "command": "echocode.moveToPreviousFolder",
+        "title": "Move to Previous Folder"
+      },
+      {
+        "command": "echocode.navigateFilesInCurrentFolder",
+        "title": "Navigate Files in Current Folder"
+      },
+      {
+        "command": "echocode.readCurrentLine",
+        "title": "Read Current Line"
+      },
+      {
+        "command": "echocode.describeCurrentLine",
+        "title": "Describe Current Line"
+      },
+      {
+        "command": "echocode.toggleCharacterReadOut",
+        "title": "Toggle Character Read-Out"
       }
     ],
     "configuration": {
@@ -221,6 +281,47 @@
       {
         "command": "echocode.markTaskComplete",
         "key": "ctrl+alt+m",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.createFile",
+        "key": "ctrl+alt+;",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.createFolder",
+        "key": "ctrl+alt+f",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.navigateToNextFile",
+        "key": "ctrl+alt+p"
+      },
+      {
+        "command": "echocode.moveToNextFolder",
+        "key": "ctrl+alt+["
+      },
+      {
+        "command": "echocode.moveToPreviousFolder",
+        "key": "ctrl+alt+]"
+      },
+      {
+        "command": "echocode.initializeFolderList",
+        "title": "Initialize Folder List"
+      },
+      {
+        "command": "echocode.readCurrentLine",
+        "key": "ctrl+alt+l",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.describeCurrentLine",
+        "key": "ctrl+alt+k",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.toggleCharacterReadOut",
+        "key": "ctrl+alt+r",
         "when": "editorTextFocus"
       }
     ],

@@ -1,0 +1,42 @@
+const vscode = require("vscode");
+const {
+  speakMessage,
+} = require("../../program_settings/speech_settings/speechHandler");
+
+/**
+ * Reads the content of the current line and speaks it aloud.
+ */
+async function readCurrentLine() {
+  const editor = vscode.window.activeTextEditor;
+
+  if (!editor) {
+    vscode.window.showInformationMessage("No active editor found.");
+    return;
+  }
+
+  const cursorPosition = editor.selection.active;
+  const currentLine = editor.document.lineAt(cursorPosition.line);
+
+  const lineText = currentLine.text.trim();
+
+  if (lineText === "") {
+    vscode.window.showInformationMessage("The current line is empty.");
+    await speakMessage("The current line is empty.");
+  } else {
+    vscode.window.showInformationMessage(`Reading line: ${lineText}`);
+    await speakMessage(lineText);
+  }
+}
+
+function registerReadCurrentLineCommand(context) {
+  const readCurrentLineCommand = vscode.commands.registerCommand(
+    "echocode.readCurrentLine",
+    async () => {
+      await readCurrentLine();
+    }
+  );
+
+  context.subscriptions.push(readCurrentLineCommand);
+}
+
+module.exports = { registerReadCurrentLineCommand };

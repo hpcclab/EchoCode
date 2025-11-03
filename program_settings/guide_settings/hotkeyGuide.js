@@ -37,6 +37,9 @@ async function showHotkeyGuide() {
                 Ctrl + Alt + A: Generate annotations.
                 Ctrl + Alt + S: Read next annotation.
                 Ctrl + Alt + Q: Read all annotations in queue.
+                Ctrl + Alt + R: Toggle character read-out.
+                Ctrl + Alt + L: Read current line.
+                Ctrl + Alt + K: Describe current line.
             `);
       break;
     case "3":
@@ -64,17 +67,17 @@ async function showHotkeyGuide() {
       break;
     case "6":
       await speakMessage(`
-                    Time Complexity Hotkeys:
-                    Ctrl + Alt + N: Generate Big O annotations.
-                    Ctrl + Alt + B: Read the first annnotations in the queue.
-                    Ctrl + Alt + H: Read the entire queue of Big O annotations.
-                `);
+                Time Complexity Hotkeys:
+                Ctrl + Alt + N: Generate Big O annotations.
+                Ctrl + Alt + B: Read the first annotations in the queue.
+                Ctrl + Alt + H: Read the entire queue of Big O annotations.
+            `);
       break;
     case "7":
       await speakMessage(`
-                        Scope Detection Hotkeys:
-                        Ctrl + Alt + Space W: Detect the scope that the cursor is in and read it. 
-                    `);
+                Scope Detection Hotkeys:
+                Ctrl + Alt + Space W: Detect the scope that the cursor is in and read it. 
+            `);
       break;
     case "f1":
     case "F1":

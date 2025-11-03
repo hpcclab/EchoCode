@@ -1,5 +1,5 @@
 # 🚀 Ignore VS Code workspace settings
-.vscode/
+!node_modules/**
 
 # 🚀 Ignore Node.js dependencies (not needed in the packaged extension)
 node_modules/
