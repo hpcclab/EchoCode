@@ -1,11 +1,11 @@
 {
   "name": "echo-code",
   "displayName": "Echo Code",
-  "description": "Reads Python errors aloud using Pylint for visually impaired students.",
-  "version": "1.7.0",
+  "description": "AI-assisted speech, chat, and summaries for any language; Python lint-on-save + C++ support.",
+  "version": "2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tjcrozier/CSCE-3444.001-Group-1.git"
+    "url": "https://github.com/Team-1-4910-Edward/EchoCode-Capstone-Repo.git"
   },
   "icon": "images/icon.png",
   "publisher": "EchoCode",
@@ -17,7 +17,7 @@
     "AI"
   ],
   "activationEvents": [
-    "onLanguage:python",
+    "onStartupFinished",
     "onSave",
     "onView:echocode.chatView",
     "onCommand:echocode.openChat",
@@ -36,11 +36,13 @@
     "onCommand:echocode.decreaseSpeechSpeed",
     "onCommand:echocode.rescanUserCode",
     "onCommand:echocode.readNextSequentialTask",
-    "onCommand:echocode.whereAmI"
+    "onCommand:echocode.whereAmI",
+    "onCommand:echocode.compileAndParseCpp"
   ],
   "main": "./extension.js",
   "extensionDependencies": [
     "ms-python.python",
+    "ms-vscode.cpptools",
     "github.copilot"
   ],
   "contributes": {
@@ -153,6 +155,50 @@
       {
         "command": "echocode.toggleCharacterReadOut",
         "title": "Toggle Character Read-Out"
+      },
+      {
+        "command": "echocode.copyFileNameForImport",
+        "title": "Copy File Name for Import"
+      },
+      {
+        "command": "echocode.pasteImportAtCursor",
+        "title": "Paste Import Statement at Cursor"
+      },
+      {
+        "command": "echocode.stopSpeech",
+        "title": "Stop Speech"
+      },
+      {
+        "command": "echocode.readNextTask",
+        "title": "Read Next Task"
+      },
+      {
+        "command": "echocode.markTaskComplete",
+        "title": "Mark Task Complete"
+      },
+      {
+        "command": "echocode.speakNextAnnotation",
+        "title": "Speak Next Annotation"
+      },
+      {
+        "command": "code-tutor.analyzeBigO",
+        "title": "Analyze Big O (Queue)"
+      },
+      {
+        "command": "code-tutor.iterateBigOQueue",
+        "title": "Read Next Big O Recommendation"
+      },
+      {
+        "command": "code-tutor.readEntireBigOQueue",
+        "title": "Read All Big O Recommendations"
+      },
+      {
+        "command": "echocode.compileAndParseCpp",
+        "title": "EchoCode: Compile and Parse C++ File"
+      },
+      {
+        "command": "echocode.checkPythonErrors",
+        "title": "EchoCode: Check Python Errors"
       }
     ],
     "configuration": {
@@ -203,18 +249,18 @@
       },
       {
         "command": "echocode.summarizeClass",
-        "key": "ctrl+alt+space C",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "key": "ctrl+alt+e c",
+        "when": "editorTextFocus"
       },
       {
         "command": "echocode.summarizeFunction",
-        "key": "ctrl+alt+space F",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "key": "ctrl+alt+e f",
+        "when": "editorTextFocus"
       },
       {
         "command": "echocode.summarizeProgram",
-        "key": "ctrl+alt+space P",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "key": "ctrl+alt+e p",
+        "when": "editorTextFocus"
       },
       {
         "command": "echocode.startVoiceInput",
@@ -228,12 +274,12 @@
       {
         "command": "code-tutor.analyzeBigO",
         "key": "ctrl+alt+n",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "when": "editorTextFocus"
       },
       {
         "command": "echocode.whereAmI",
-        "key": "ctrl+alt+space W",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "key": "ctrl+alt+e w",
+        "when": "editorTextFocus"
       },
       {
         "command": "code-tutor.iterateBigOQueue",
@@ -323,6 +369,26 @@
         "command": "echocode.toggleCharacterReadOut",
         "key": "ctrl+alt+r",
         "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+i",
+        "command": "echocode.copyFileNameForImport",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+shift+i",
+        "command": "echocode.pasteImportAtCursor",
+        "when": "editorTextFocus"
+      },
+      {
+        "key": "ctrl+alt+g",
+        "command": "echocode.compileAndParseCpp",
+        "when": "editorTextFocus && editorLangId == 'cpp'"
+      },
+      {
+        "key": "ctrl+alt+g",
+        "command": "echocode.checkPythonErrors",
+        "when": "editorTextFocus && editorLangId == 'python'"
       }
     ],
     "viewsContainers": {

@@ -1,7 +1,7 @@
 const vscode = require("vscode");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const fs = require("fs");
 const path = require("path");
 

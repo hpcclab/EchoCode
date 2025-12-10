@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const {
   getCurrentFolder,
 } = require("../../navigation_features/Folder_File_Navigator/folder_navigator");

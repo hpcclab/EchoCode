@@ -4,7 +4,7 @@ const fs = require("fs");
 const {
   speakMessage,
   startSpeaking,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const { navigateToNextFile } = require("./file_navigator");
 
 let folderList = []; // Array to store the project folder and subfolders

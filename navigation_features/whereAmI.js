@@ -1,8 +1,8 @@
 const vscode = require("vscode"); // VSCode API
 const {
   speakMessage,
-} = require("../program_settings/speech_settings/speechHandler");
-const { analyzeAI } = require("../program_settings/program_settings/AIrequest");
+} = require("../Core/program_settings/speech_settings/speechHandler");
+const { analyzeAI } = require("../Core/program_settings/program_settings/AIrequest");
 
 async function describeCursorPosition(editor) {
   const document = editor.document;

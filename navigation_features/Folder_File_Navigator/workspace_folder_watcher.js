@@ -3,7 +3,7 @@ const path = require("path");
 const vscode = require("vscode");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 
 /**
  * Watches the workspace root for new folders and reinitializes the folder list if a new folder is created.

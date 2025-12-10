@@ -2,7 +2,7 @@ const vscode = require("vscode");
 const Queue = require("./queue_system");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler"); // Add this import
+} = require("../../Core/program_settings/speech_settings/speechHandler"); // Add this import
 
 let activeDecorations = [];
 const annotationQueue = new Queue();

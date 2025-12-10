@@ -1,10 +1,10 @@
 const vscode = require("vscode");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const {
   analyzeAI,
-} = require("../../program_settings/program_settings/AIrequest");
+} = require("../../Core/program_settings/program_settings/AIrequest");
 
 /**
  * Describes the content of the current line using AI and speaks it aloud.
@@ -34,7 +34,7 @@ async function describeCurrentLine() {
   try {
     // Use AI to analyze the current line
     const instructionPrompt =
-      "Describe what this line of Python code does in one concise sentence.";
+      "Describe what this line of code does in one concise sentence.";
     const aiResponse = await analyzeAI(lineText, instructionPrompt);
 
     if (aiResponse) {

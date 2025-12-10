@@ -1,6 +1,6 @@
 const vscode = require("vscode");
-const { runPylint } = require("../../program_settings/program_settings/pylintHandler");
-const { speakMessage } = require("../../program_settings/speech_settings/speechHandler");
+const { runPylint } = require("./pylintHandler");
+const { speakMessage } = require("../../Core/program_settings/speech_settings/speechHandler");
 
 let outputChannel;
 let isRunning = false;

@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const {
   speakMessage,
-} = require("../../program_settings/speech_settings/speechHandler");
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
 
