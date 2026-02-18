@@ -150,7 +150,9 @@ function checkCurrentPythonFile(currentFilePath) {
     const fileName = path.basename(currentFilePath);
 
     // Command: python "file.py" (Runs code, catches runtime errors)
-    const checkCommand = `python "${currentFilePath}"`;
+    // CHANGE: Detect platform to use python3 on Mac/Linux
+    const pythonCmd = process.platform === "win32" ? "python" : "python3";
+    const checkCommand = `${pythonCmd} "${currentFilePath}"`;
 
     console.log(`Checking for errors in: ${fileName}`);
     analyzePythonExecution(checkCommand);

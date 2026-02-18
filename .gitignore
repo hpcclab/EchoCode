@@ -26,3 +26,10 @@ Thumbs.db
 # Morgan is using this file for reference
 *-messy.js
 
+# Ignore environment variable files
+.env
+
+# Ignore venv folders for Python virtual environments
+echocode-venv/
+
+TestFile1.cpp

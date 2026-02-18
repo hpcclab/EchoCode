@@ -1,0 +1,132 @@
+[
+  {
+    "id": "echocode.annotate",
+    "title": "Toggle EchoCode Annotations",
+    "keywords": ["toggle annotation", "annotations", "turn on annotations", "generate annotations"]
+  },
+  {
+    "id": "echocode.readAllAnnotations",
+    "title": "Read All Annotations",
+    "keywords": ["read annotations", "read all annotations"]
+  },
+  {
+    "id": "echocode.summarizeFunction",
+    "title": "Summarize Function",
+    "keywords": ["summarize function", "explain function"]
+  },
+  {
+    "id": "echocode.summarizeClass",
+    "title": "Summarize Class",
+    "keywords": ["summarize class", "explain class"]
+  },
+  {
+    "id": "echocode.summarizeProgram",
+    "title": "Summarize Program",
+    "keywords": ["summarize program", "explain program", "summarize code"]
+  },
+  {
+    "id": "echocode.jumpToNextFunction",
+    "title": "Next Function",
+    "keywords": ["next function", "go down", "move down"]
+  },
+  {
+    "id": "echocode.jumpToPreviousFunction",
+    "title": "Previous Function",
+    "keywords": ["previous function", "go up", "move up"]
+  },
+  {
+    "id": "echocode.whereAmI",
+    "title": "Where Am I",
+    "keywords": ["where am i", "what function", "current scope"]
+  },
+  {
+    "id": "echocode.increaseSpeechSpeed",
+    "title": "Increase Speech Speed",
+    "keywords": ["increase speed", "faster"]
+  },
+  {
+    "id": "echocode.decreaseSpeechSpeed",
+    "title": "Decrease Speech Speed",
+    "keywords": ["decrease speed", "slower"]
+  },
+  {
+    "id": "echocode.stopSpeech",
+    "title": "Stop Speech",
+    "keywords": ["stop speaking", "stop speech", "silence"]
+  },
+  {
+    "id": "echocode.readCurrentLine",
+    "title": "Read Current Line",
+    "keywords": ["read line", "read current line"]
+  },
+  {
+    "id": "echocode.describeCurrentLine",
+    "title": "Describe Current Line",
+    "keywords": ["describe line", "explain line"]
+  },
+  {
+    "id": "echocode.toggleCharacterReadOut",
+    "title": "Toggle Character Reader",
+    "keywords": ["toggle character", "character mode"]
+  },
+  {
+    "id": "echocode.loadAssignmentFile",
+    "title": "Load Assignment File",
+    "keywords": ["load assignment", "open assignment"]
+  },
+  {
+    "id": "echocode.readNextTask",
+    "title": "Read Next Task",
+    "keywords": ["next task", "read task"]
+  },
+  {
+    "id": "echocode.markTaskComplete",
+    "title": "Mark Task Complete",
+    "keywords": ["mark complete", "task done"]
+  },
+  {
+    "id": "echocode.createFolder",
+    "title": "Create New Folder",
+    "keywords": ["create folder", "new folder", "make folder"]
+  },
+  {
+    "id": "echocode.createFile",
+    "title": "Create New File",
+    "keywords": ["create file", "new file", "make file"]
+  },
+  {
+    "id": "echocode.navigateToNextFile",
+    "title": "Next File",
+    "keywords": ["next file", "go to next file"]
+  },
+  {
+    "id": "echocode.moveToNextFolder",
+    "title": "Next Folder",
+    "keywords": ["next folder", "go to next folder"]
+  },
+  {
+    "id": "echocode.moveToPreviousFolder",
+    "title": "Previous Folder",
+    "keywords": ["previous folder", "go back folder"]
+  },
+  {
+    "id": "echocode.copyFileNameForImport",
+    "title": "Copy File Name for Import",
+    "keywords": ["copy import", "copy file name"]
+  },
+  {
+    "id": "echocode.pasteImportAtCursor",
+    "title": "Paste Import at Cursor",
+    "keywords": ["paste import", "insert import"]
+  },
+  {
+    "id": "echocode.openChat",
+    "title": "Open EchoCode Tutor",
+    "keywords": ["open chat", "tutor", "assistant"]
+  },
+  {
+    "id": "echocode.hotkeyGuide",
+    "title": "Hotkey Guide",
+    "keywords": ["hotkey guide", "help menu", "keyboard help"]
+  }
+]

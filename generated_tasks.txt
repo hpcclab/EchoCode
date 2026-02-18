@@ -1,8 +1,0 @@
-Task 1: Define a function named `add(a, b)` that returns the sum of `a` and `b`.
-Task 2: Define a function named `subtract(a, b)` that returns the result of `a - b`.
-Task 3: Define a function named `multiply(a, b)` that returns the result of `a * b`.
-Task 4: Define a function named `divide(a, b)` that returns `a / b` or a warning if `b` is 0.
-Task 5: Create a list of number pairs, e.g., `[(1, 2), (3, 4)]`.
-Task 6: Loop through each pair in the list.
-Task 7: Call the `add()`, `subtract()`, `multiply()`, and `divide()` functions with the pair as arguments.
-Task 8: Print the result of each operation in a readable format.

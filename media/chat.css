@@ -133,3 +133,8 @@ button.active {
 #loading-indicator.visible, #listening-indicator.visible {
     display: inline-block;
 }
+
+#echocode-mic-btn.listening {
+  outline: 2px solid;
+  filter: brightness(1.15);
+}

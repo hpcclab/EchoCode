@@ -23,6 +23,8 @@ class EchoCodeChatViewProvider {
     this.outputChannel = outputChannel;
     this._view = null;
     this._isListening = false;
+
+    this._currentWebview = null;
     this.conversationHistory = []; // [{ user, response }]
   }
 
@@ -32,22 +34,72 @@ class EchoCodeChatViewProvider {
       enableScripts: true,
       localResourceRoots: [this.context.extensionUri],
     };
-    webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
 
+    this._currentWebview = webviewView.webview;
+    webviewView.onDidDispose(() => {
+      this._currentWebview = null;
+    });
+
+    // Set the initial HTML content
+    webviewView.webview.html = this._getHtmlForWebview(webviewView.webview);
+    // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(
       async (message) => {
-        try {
-          switch (message.type) {
-            case "userInput":
-              await this.handleUserMessage(message.text || "");
-              break;
-            case "startVoiceRecognition":
-              await this.startVoiceRecognition();
-              break;
+        this.outputChannel.appendLine(`Received message from webview: ${message.type}`);
+        if (message.type === "userInput") {
+          await this.handleUserMessage(message.text);
+        }
+        else if (message.type === "executeVoiceCommand") {
+          const transcript = message.text || "";
+          const { tryExecuteVoiceCommand } = require("../../extension");
+          const outputChannel = this.outputChannel;
+          const result = await tryExecuteVoiceCommand(transcript, outputChannel);
+          if (result.handled) {
+            this._currentWebview.postMessage({
+              type: "response",
+              text: `✅ Executed command: ${result.command}`
+            });
           }
-        } catch (err) {
-          this.outputChannel.appendLine(`Chat message error: ${err?.message || err}`);
-          this._safePost({ type: "responseError", error: String(err?.message || err) });
+          else {
+            await this.handleUserMessage(transcript);
+          }
+        }
+        else if (message.type === "startVoiceInput") {
+          await vscode.commands.executeCommand("echocode._voiceStart");
+        }
+        else if (message.type === "stopVoiceInput") {
+          if (this._currentWebview) {
+            this._currentWebview.postMessage({ type: "voiceStopping" });
+          }
+          const result = await vscode.commands.executeCommand("echocode._voiceStop");
+          if (this._currentWebview) {
+            if (result && result.ok) {
+              this._currentWebview.postMessage({ type: "voiceRecognitionResult", text: result.text || "" });
+
+              // Try to execute a voice-mapped command before Copilot ===
+              const { tryExecuteVoiceCommand } = require("../../extension");
+              const outputChannel = this.outputChannel;
+              const voiceResult = await tryExecuteVoiceCommand(transcript, outputChannel);
+
+              if (voiceResult.handled) {
+                // Voice command recognized and executed — stop here
+                this._currentWebview.postMessage({
+                  type: "response",
+                  text: `Executed command: ${voiceResult.command}`
+                });
+                return; // do NOT fall through to Copilot
+              }
+
+              // else: fall through to normal Copilot behavior
+              await this.handleUserMessage(result.text || "");
+
+            } else {
+              this._currentWebview.postMessage({
+                type: "voiceRecognitionError",
+                error: result?.error || "Unknown error",
+              });
+            }
+          }
         }
       },
       undefined,
@@ -68,8 +120,15 @@ class EchoCodeChatViewProvider {
     this._isListening = true;
     this._safePost({ type: "voiceListeningStarted" });
     try {
-      const text = await performVoiceRecognition();
-      this._safePost({ type: "voiceRecognitionResult", text });
+      const recognizedText = await performVoiceRecognition();
+
+      if (recognizedText && this._view) {
+        // Send the recognized text to the webview to display in the input field
+        this._view.webview.postMessage({
+          type: "voiceRecognitionResult",
+          text: recognizedText,
+        });
+      }
     } catch (error) {
       this._safePost({ type: "voiceRecognitionError", error: String(error?.message || error) });
     } finally {
@@ -149,12 +208,22 @@ class EchoCodeChatViewProvider {
   }
 
   startVoiceInput() {
-    if (!this._view) {
-      vscode.window.showInformationMessage("Open the EchoCode Tutor view to use voice input.");
-      this.outputChannel.appendLine("Voice input invoked without active view.");
-      return;
+    if (this._view && this._currentWebview) {
+      this._currentWebview.postMessage({ type: "startVoiceInput" });
+    } else {
+      vscode.window.showInformationMessage("Please open the EchoCode Tutor view to use voice input.");
+      this.outputChannel.appendLine("Voice input command invoked with no active chat view.");
     }
     this.startVoiceRecognition();
+  }
+
+  setRecordingState(isRecording) {
+    if (this._view && this._currentWebview) {
+      this._currentWebview.postMessage({
+        type: "updateRecordingState",
+        recording: isRecording
+      });
+    }
   }
 
   // --- Webview HTML/JS/CSS skeleton ---

@@ -38,7 +38,7 @@ function getSpeechSpeed() {
 
 // Speak a message aloud
 function speakMessage(message) {
-  return new Promise((resolve, reject) => {
+  return new Promise((resolve) => {
     if (isSpeaking) {
       stopSpeaking();
     }
@@ -47,21 +47,46 @@ function speakMessage(message) {
 
     // Get the configured voice from settings
     const config = vscode.workspace.getConfiguration("echocode");
-    const voice = config.get("voice") || null; // Use default if not specified
+    let voice = config.get("voice") || null;
 
-    // Use say.js to speak the message with the configured voice
-    say.speak(message, voice, speechSpeed, (err) => {
+    // AUTO-DETECT BETTER VOICES
+    if (!voice) {
+      const platform = process.platform;
+      if (platform === "darwin") {
+        // macOS: 'Samantha' is a high quality default, or 'Alex'.
+        // Passing null often defaults to user's system pref, which is usually good.
+        voice = null;
+      } else if (platform === "win32") {
+        // Windows: Try forcing 'Microsoft Zira Desktop' (US English Female)
+        // or 'Microsoft David Desktop' (US English Male) if available.
+        // Otherwise, leaving it null uses the robotic default SAPI voice.
+        voice = "Microsoft Zira Desktop";
+      }
+    }
+
+    try {
+      // Use say.js to speak the message with the configured voice
+      say.speak(message, voice, speechSpeed, (err) => {
+        isSpeaking = false;
+        currentSpeechProcess = null;
+        if (err) {
+          console.warn("[EchoCode] say.speak error", err);
+        }
+        resolve();
+      });
+
+      // Store the speech process
+      currentSpeechProcess = say;
+    } catch (err) {
+      // Gracefully degrade when TTS backend is unavailable (e.g., headless CI, missing 'say')
+      console.warn(
+        "[EchoCode] TTS unavailable; continuing without speech",
+        err
+      );
       isSpeaking = false;
       currentSpeechProcess = null;
-      if (err) {
-        reject(err);
-      } else {
-        resolve();
-      }
-    });
-
-    // Store the speech process
-    currentSpeechProcess = say;
+      resolve();
+    }
   });
 }
 

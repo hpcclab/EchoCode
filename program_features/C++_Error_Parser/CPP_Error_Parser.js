@@ -143,6 +143,7 @@ function compileCurrentCppFile(currentFilePath) {
     if (process.platform === "win32") {
       outputFileName += ".exe";
     }
+    // On macOS/Linux, the output file has no extension, which is handled correctly by the else/default case implied here
 
     // Use system temp directory to avoid triggering workspace file watchers
     const outputFilePath = path.join(os.tmpdir(), outputFileName);

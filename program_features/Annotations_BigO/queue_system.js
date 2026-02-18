@@ -53,7 +53,7 @@ class Queue {
   }
 
   async playSound() {
-    const soundFilePath = path.resolve(__dirname, "../../audio_pings/ping1.wav"); // Updated path to the .wav file
+    const soundFilePath = path.resolve(__dirname, "../../audio_pings/ping1.wav");
     console.log("Attempting to play sound from:", soundFilePath);
 
     try {

@@ -1,0 +1,58 @@
+{
+  "python": [
+    {
+      "pattern": "while True:",
+      "message": "Infinite loops like 'while True' can be dangerous. Consider checking a specific condition instead."
+    },
+    {
+      "pattern": "except:",
+      "message": "A bare 'except:' catches all errors, including system exits. It's better to catch specific exceptions like 'except ValueError:'."
+    },
+    {
+      "pattern": "== None",
+      "message": "Comparisons to None should verify identity, not equality. Use 'if x is None:' instead."
+    },
+    {
+      "pattern": "open(",
+      "message": "Error Prevention: When opening files, use the 'with open(...)' style. This acts as a Context Manager that ensures the file closes automatically, even if your code crashes."
+    },
+    {
+      "pattern": "type(",
+      "message": "Best Practice: Avoid verifying types with 'type(x) =='. Use 'isinstance(x, class)' instead, as it correctly handles inheritance."
+    },
+    {
+      "pattern": "assert ",
+      "message": "Warning: Do not use 'assert' for critical logic. It can be disabled by Python optimization flags. Use standard if-statements and raise Exceptions instead."
+    }
+  ],
+  "cpp": [
+    {
+      "pattern": "using namespace std;",
+      "message": "Best Practice: Using 'namespace std' globally can cause naming conflicts in larger projects. It is safer to use 'std::cout' or specific using declarations."
+    },
+    {
+      "pattern": "goto ",
+      "message": "Style: The 'goto' statement makes code execution hard to follow (spaghetti code). Try rewriting logic using loops or functions."
+    },
+    {
+      "pattern": "malloc(",
+      "message": "Error Prevention: In C++, 'new' is preferred over 'malloc' because it ensures Class constructors are called properly."
+    },
+    {
+      "pattern": "#define",
+      "message": "Best Practice: Consider using 'const' or 'constexpr' variables instead of macros. Macros ignore scope rules and can cause confusing bugs."
+    },
+    {
+      "pattern": "void main",
+      "message": "Syntax Error: 'void main' is non-standard C++. The main function must always return an integer. Use 'int main' and return 0."
+    },
+    {
+      "pattern": "NULL",
+      "message": "Best Practice: In modern C++ (C++11+), use 'nullptr' instead of 'NULL'. It is type-safe and prevents accidental conversion to integers."
+    },
+    {
+      "pattern": "std::endl",
+      "message": "Performance: Using 'std::endl' forces the output buffer to flush every time, which is very slow in loops. Use '\\n' for a new line instead."
+    }
+  ]
+}

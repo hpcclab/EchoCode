@@ -1,11 +1,14 @@
 const vscode = require("vscode");
-const Queue = require("./queue_system"); // Import the Queue system
+const Queue = require("./queue_system");
 const {
   speakMessage,
-} = require("../../Core/program_settings/speech_settings/speechHandler"); // Import the speakMessage function
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 const { annotationQueue } = require("./annotations");
 
-const bigOQueue = new Queue(); // Queue for Big O notation problems
+const bigOQueue = new Queue();
+
+// Track lines we have already analyzed locally so we don't ask AI about them
+let analyzedLines = new Set();
 
 const ANNOTATION_PROMPT = `
 You are a Big O complexity analyzer. For each code pattern that causes performance issues, provide a single concise sentence. Just one sentence. that explains the issue and suggests an improvement. Format each suggestion as a single JSON object without any formatting:
@@ -14,31 +17,174 @@ You are a Big O complexity analyzer. For each code pattern that causes performan
 `;
 
 /**
- * Analyzes the code for Big O problems using Copilot or a language model.
+ * ENTRY POINT: Analyzes the code for Big O problems using Hybrid (Local + AI) approach.
  */
 async function analyzeBigO(editor) {
   const document = editor.document;
+  analyzedLines.clear(); // Reset tracking
 
-  // Detect loops in the Python file
+  // Temporary array to hold all findings so we can sort them later
+  let collectedIssues = [];
+
+  // 1. Run Local Static Analysis (Logic-based)
+  // We pass collectedIssues so it can add findings there instead of the queue directly
+  const localIssuesCount = checkLocalBigORules(editor, collectedIssues);
+
+  if (localIssuesCount > 0) {
+    vscode.window.showInformationMessage(
+      `Detected ${localIssuesCount} Big O issues via static analysis.`
+    );
+  }
+
+  // 2. Identify remaining loops that need AI analysis
   const loops = detectLoops(document);
+  const remainingLoops = loops.filter(
+    (loop) => !analyzedLines.has(loop.startLine)
+  );
 
-  if (loops.length === 0) {
-    vscode.window.showInformationMessage("No loops detected in the file.");
+  // If no loops need AI, just finalize the local issues
+  if (remainingLoops.length === 0) {
+    finalizeQueue(collectedIssues); // Sort and enqueue headers
+
+    if (localIssuesCount === 0) {
+      vscode.window.showInformationMessage("No loops detected in the file.");
+    } else {
+      vscode.window.showInformationMessage("Analysis complete (Local only).");
+    }
     return;
   }
 
   vscode.window.showInformationMessage(
-    `Detected ${loops.length} loop(s). Analyzing for potential O(N) issues...`
+    `Analyzing ${remainingLoops.length} remaining complex loop(s) with AI...`
   );
 
-  // Analyze the detected loops
-  await analyzeLoops(editor, loops);
+  // 3. Analyze the remaining, complex loops with AI
+  // Pass collectedIssues so AI can append to it
+  await analyzeLoops(editor, remainingLoops, collectedIssues);
+
+  // 4. Finally, sort everything and put it in the queue
+  finalizeQueue(collectedIssues);
+
+  vscode.window.showInformationMessage("Big O Analysis Complete.");
+}
+
+/**
+ * Sorts issues by line number and adds them to the Queues
+ */
+function finalizeQueue(issues) {
+  // Sort by line number ascending
+  issues.sort((a, b) => a.line - b.line);
+
+  // Add to queues
+  issues.forEach((item) => {
+    annotationQueue.enqueue(item);
+    bigOQueue.enqueue(item);
+  });
+}
+
+/**
+ * NEW: Checks for common Big O pitfalls locally without AI
+ */
+function checkLocalBigORules(editor, collectedIssues) {
+  const document = editor.document;
+  const lines = document.getText().split("\n");
+  let issuesFound = 0;
+
+  // Stack to track loop indentation levels: { indent: number, line: number }
+  let loopStack = [];
+
+  for (let i = 0; i < lines.length; i++) {
+    const lineText = lines[i];
+    const trimmed = lineText.trim();
+    const currentIndent = lineText.search(/\S|$/); // Find number of spaces
+    const lineNumber = i + 1; // 1-based line number for display
+
+    if (trimmed === "" || trimmed.startsWith("#")) continue;
+
+    // 1. POP stack if we exited a loop (indentation is less than or equal to last loop)
+    while (
+      loopStack.length > 0 &&
+      currentIndent <= loopStack[loopStack.length - 1].indent
+    ) {
+      loopStack.pop();
+    }
+
+    const isLoop = trimmed.startsWith("for ") || trimmed.startsWith("while ");
+
+    if (isLoop) {
+      // 2. CHECK: Nested Loops (O(N^2))
+      if (loopStack.length > 0) {
+        const message =
+          "O(N²) Detected: Nested loop found. Consider optimizing logic to avoid nesting.";
+        addBigOIssue(editor, lineNumber, message, collectedIssues);
+        issuesFound++;
+      }
+      // Push specific loop to stack
+      loopStack.push({ indent: currentIndent, line: lineNumber });
+    } else if (loopStack.length > 0) {
+      // We are INSIDE a loop. Check for expensive operations.
+
+      // 3. CHECK: Linear operations inside loop (O(N^2))
+      if (
+        trimmed.includes(".count(") ||
+        trimmed.includes(".index(") ||
+        trimmed.includes(".remove(")
+      ) {
+        const message =
+          "O(N²) Detected: Calling .count(), .index(), or .remove() inside a loop causes a linear scan every iteration.";
+        addBigOIssue(editor, lineNumber, message, collectedIssues);
+        issuesFound++;
+      }
+
+      // 4. CHECK: Membership test in list (O(N^2))
+      // Heuristic: "something in something" prevents flagging "for x in y"
+      if (
+        trimmed.includes(" in ") &&
+        !trimmed.startsWith("for ") &&
+        !trimmed.startsWith("if ")
+      ) {
+        // This is a weak check, but effective for things like "if x in my_list:"
+        if (trimmed.match(/if\s+.+\s+in\s+/)) {
+          const message =
+            "Potential O(N²): Checking 'in' list inside a loop is slow. Use a set() for O(1) lookups.";
+          addBigOIssue(editor, lineNumber, message, collectedIssues);
+          issuesFound++;
+        }
+      }
+
+      // 5. CHECK: Sorting inside loop (O(N^2 log N))
+      if (trimmed.includes(".sort(") || trimmed.includes("sorted(")) {
+        const message =
+          "Major Inefficiency: Sorting inside a loop is extremely expensive (O(N² log N)). Sort outside the loop.";
+        addBigOIssue(editor, lineNumber, message, collectedIssues);
+        issuesFound++;
+      }
+    }
+  }
+
+  return issuesFound;
+}
+
+/**
+ * Helper to add issue to collection and apply decoration
+ */
+function addBigOIssue(editor, line, suggestion, collectedIssues) {
+  // Mark line as handled so AI ignores it
+  analyzedLines.add(line);
+
+  // Apply decoration immediately so user sees it
+  applyDecoration(editor, line, suggestion);
+
+  // Add to temporary collection (DO NOT Enqueue yet)
+  collectedIssues.push({ line, suggestion });
+
+  console.log(`[Local BigO] Added issue at line ${line}: ${suggestion}`);
 }
 
 /**
  * Parses the chat response and applies decorations.
  */
-async function parseChatResponse(chatResponse, textEditor) {
+async function parseChatResponse(chatResponse, textEditor, collectedIssues) {
   let accumulatedResponse = "";
   for await (const fragment of chatResponse.text) {
     accumulatedResponse += fragment;
@@ -49,37 +195,21 @@ async function parseChatResponse(chatResponse, textEditor) {
         const annotations = JSON.parse(cleanResponse(accumulatedResponse));
 
         annotations.forEach((annotation) => {
-          const line = annotation.line; // Use the line number provided by the AI
+          const line = annotation.line;
 
-          // Debugging log to verify the line number
-          console.log(
-            `Annotation line: ${line}, Suggestion: ${annotation.suggestion}`
-          );
+          // Skip if we already found an issue here locally
+          if (analyzedLines.has(line)) return;
 
-          // Apply decoration at the correct line
+          // Apply decoration immediately
           applyDecoration(textEditor, line, annotation.suggestion);
 
-          // Enqueue the annotation for playback
-          annotationQueue.enqueue({
+          // Add to temporary collection (DO NOT Enqueue yet)
+          collectedIssues.push({
             line: line,
             suggestion: annotation.suggestion,
           });
 
-          // Enqueue the Big O problem into the bigOQueue
-          bigOQueue.enqueue({
-            line: line,
-            suggestion: annotation.suggestion,
-          });
-
-          console.log(
-            `Annotation added to bigOQueue: Line ${line}, Suggestion: ${annotation.suggestion}`
-          );
-
-          // Enqueue a specific annotation for optimization
-          annotationQueue.enqueue({
-            line: line,
-            suggestion: "Optimize this loop for better performance.",
-          });
+          analyzedLines.add(line); // Mark as handled
         });
 
         accumulatedResponse = "";
@@ -148,7 +278,7 @@ function applyDecoration(editor, line, suggestion) {
 }
 
 /**
- * Detects loops in the Python file and identifies potential inefficiencies.
+ * Detects loops in the Python file.
  */
 function detectLoops(document) {
   const loops = [];
@@ -156,38 +286,40 @@ function detectLoops(document) {
 
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i].trim();
-
-    // Detect `for` and `while` loops
     if (line.startsWith("for ") || line.startsWith("while ")) {
-      loops.push({ startLine: i + 1, code: line }); // Use 1-based line numbers
+      loops.push({ startLine: i + 1, code: line });
     }
   }
-
-  console.log("Detected loops:", loops); // Debugging log
   return loops;
 }
 
 /**
  * Analyzes loops for potential O(N) inefficiencies using Copilot.
  */
-async function analyzeLoops(editor, loops) {
+async function analyzeLoops(editor, loops, collectedIssues) {
   const document = editor.document;
 
   for (const loop of loops) {
     const { startLine, code } = loop;
 
-    // Prepare the prompt for Copilot
+    // PREVENT DUPLICATES: Check if this line was already handled by local Check
+    if (analyzedLines.has(startLine)) {
+      console.log(
+        `Skipping AI analysis for line ${startLine} (handled locally).`
+      );
+      continue;
+    }
+
     const prompt = `
       You are a code analysis assistant. Analyze the following Python loop and identify any potential O(N) inefficiencies. The code includes line numbers. Use these line numbers when identifying inefficiencies. Provide suggestions in JSON format, with each suggestion containing the line number and a brief explanation of the issue. Do not include any additional formatting like \`\`\`json or \`\`\`. Use the following format:
       [
         { "line": <line_number>, "suggestion": "<description of the inefficiency>" }
       ]
-      Here is the code:
+      Here is the code context:
       Line ${startLine}: ${code}
     `;
 
     try {
-      // Select the Copilot model
       const [model] = await vscode.lm.selectChatModels({
         vendor: "copilot",
         family: "gpt-4o",
@@ -200,7 +332,6 @@ async function analyzeLoops(editor, loops) {
         return;
       }
 
-      // Send the prompt to Copilot
       const messages = [new vscode.LanguageModelChatMessage(0, prompt)];
       const chatResponse = await model.sendRequest(
         messages,
@@ -208,69 +339,42 @@ async function analyzeLoops(editor, loops) {
         new vscode.CancellationTokenSource().token
       );
 
-      // Parse and handle the Copilot response
-      await parseChatResponse(chatResponse, editor);
+      await parseChatResponse(chatResponse, editor, collectedIssues);
     } catch (error) {
-      vscode.window.showErrorMessage(
-        `Failed to analyze loop starting at line ${startLine}: ${error.message}`
-      );
       console.error("Error analyzing loop:", error);
     }
   }
 }
 
-/**
- * Command to iterate over the Big O queue and speak the problems.
- */
 function iterateBigOQueue() {
   if (!bigOQueue.isEmpty()) {
     const nextProblem = bigOQueue.dequeue();
     const message = `Big O problem on line ${nextProblem.line}: ${nextProblem.suggestion}`;
-
-    // Display the message in an information popup
     vscode.window.showInformationMessage(message);
-
-    // Speak the message
     speakMessage(message);
   } else {
-    const noMoreProblemsMessage = "No more Big O problems to read.";
-
-    // Display the message in an information popup
+    const noMoreProblemsMessage = "No more Big O problems.";
     vscode.window.showInformationMessage(noMoreProblemsMessage);
-
-    // Speak the message
     speakMessage(noMoreProblemsMessage);
   }
 }
 
-/**
- * Command to read over the entire Big O queue and speak the problems.
- */
 async function readEntireBigOQueue() {
   if (!bigOQueue.isEmpty()) {
-    const queueCopy = [...bigOQueue.items]; // Copy the queue to avoid modifying it
+    const queueCopy = [...bigOQueue.items];
     for (const problem of queueCopy) {
       const message = `Big O problem on line ${problem.line}: ${problem.suggestion}`;
-
-      // Display the message in an information popup
       vscode.window.showInformationMessage(message);
-
-      // Speak the message
       await speakMessage(message);
-
-      // Add a small delay between messages for better readability
       await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   } else {
-    const noProblemsMessage = "The Big O queue is empty.";
+    const noProblemsMessage = "No Big O problems detected.";
     vscode.window.showInformationMessage(noProblemsMessage);
     await speakMessage(noProblemsMessage);
   }
 }
 
-/**
- * Registers the Big O analysis commands.
- */
 function registerBigOCommand(context) {
   const analyzeBigOCommand = vscode.commands.registerCommand(
     "code-tutor.analyzeBigO",
@@ -299,11 +403,7 @@ function registerBigOCommand(context) {
       if (!annotationQueue.isEmpty()) {
         const nextAnnotation = annotationQueue.dequeue();
         const message = `Annotation on line ${nextAnnotation.line}: ${nextAnnotation.suggestion}`;
-
-        // Display the message in an information popup
         vscode.window.showInformationMessage(message);
-
-        // Speak the message
         await speakMessage(message);
       } else {
         vscode.window.showInformationMessage("No more annotations to read.");
@@ -323,7 +423,7 @@ function registerBigOCommand(context) {
     analyzeBigOCommand,
     iterateBigOCommand,
     readNextAnnotationCommand,
-    readEntireBigOQueueCommand // Register the new command
+    readEntireBigOQueueCommand
   );
 }
 

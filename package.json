@@ -2,7 +2,7 @@
   "name": "echo-code",
   "displayName": "Echo Code",
   "description": "AI-assisted speech, chat, and summaries for any language; Python lint-on-save + C++ support.",
-  "version": "2.0",
+  "version": "2.1.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Team-1-4910-Edward/EchoCode-Capstone-Repo.git"
@@ -41,9 +41,7 @@
   ],
   "main": "./extension.js",
   "extensionDependencies": [
-    "ms-python.python",
-    "ms-vscode.cpptools",
-    "github.copilot"
+    "ms-python.python"
   ],
   "contributes": {
     "commands": [
@@ -199,6 +197,16 @@
       {
         "command": "echocode.checkPythonErrors",
         "title": "EchoCode: Check Python Errors"
+      },
+      {
+        "command": "echocode.selectMicrophone",
+        "title": "EchoCode: Select Microphone",
+        "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.toggleVoice",
+        "title": "EchoCode: Toggle Voice Input",
+        "category": "EchoCode Voice"
       }
     ],
     "configuration": {
@@ -206,8 +214,8 @@
       "properties": {
         "echocode.voice": {
           "type": "string",
-          "default": "Microsoft Zira Desktop",
-          "description": "Voice name for text-to-speech (e.g., 'Microsoft Zira Desktop', 'Alex', etc.). Leave blank for system default."
+          "default": "",
+          "description": "Voice name for text-to-speech. Leave blank for system default."
         },
         "echocode.rate": {
           "type": "number",
@@ -265,6 +273,11 @@
       {
         "command": "echocode.startVoiceInput",
         "key": "ctrl+alt+v"
+      },
+      {
+        "command": "echocode.toggleVoice",
+        "key": "ctrl+alt+space",
+        "when": "editorTextFocus"
       },
       {
         "command": "echocode.openChat",
@@ -452,10 +465,15 @@
   "dependencies": {
     "@vscode/codicons": "^0.0.33",
     "axios": "^1.8.3",
-    "dotenv": "^16.4.7",
+    "dotenv": "^16.6.1",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.3",
     "mammoth": "^1.9.0",
+    "mic": "^2.1.2",
+    "openai": "^5.20.0",
     "pdf-parse": "^1.1.1",
     "say": "^0.16.0",
-    "sound-play": "^1.1.0"
+    "sound-play": "^1.1.0",
+    "uuid": "^13.0.0"
   }
 }
