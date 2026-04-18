@@ -1,5 +1,6 @@
 const vscode = require("vscode");
-const Queue = require("./queue_system");
+const { guard } = require("../../Core/program_settings/guard");
+const Queue = require("./queue_system"); // Import the Queue system
 const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
@@ -378,45 +379,48 @@ async function readEntireBigOQueue() {
 function registerBigOCommand(context) {
   const analyzeBigOCommand = vscode.commands.registerCommand(
     "code-tutor.analyzeBigO",
-    () => {
+    guard("code-tutor.analyzeBigO", async () => {
       const editor = vscode.window.activeTextEditor;
       if (editor && editor.document.languageId === "python") {
-        analyzeBigO(editor);
+        await analyzeBigO(editor);
       } else {
         vscode.window.showWarningMessage(
           "Please open a Python file to analyze Big O practices."
         );
       }
-    }
+    })
   );
 
   const iterateBigOCommand = vscode.commands.registerCommand(
     "code-tutor.iterateBigOQueue",
-    () => {
+    guard("code-tutor.iterateBigOQueue", () => {
       iterateBigOQueue();
-    }
+    })
   );
 
+  // (Optional) If you also want this blocked in Student mode,
+  // add "echocode.readNextAnnotation" to STUDENT_LOCKED_COMMANDS
   const readNextAnnotationCommand = vscode.commands.registerCommand(
     "echocode.readNextAnnotation",
-    async () => {
+    guard("echocode.readNextAnnotation", async () => {
       if (!annotationQueue.isEmpty()) {
         const nextAnnotation = annotationQueue.dequeue();
         const message = `Annotation on line ${nextAnnotation.line}: ${nextAnnotation.suggestion}`;
+
         vscode.window.showInformationMessage(message);
         await speakMessage(message);
       } else {
         vscode.window.showInformationMessage("No more annotations to read.");
         await speakMessage("No more annotations to read.");
       }
-    }
+    })
   );
 
   const readEntireBigOQueueCommand = vscode.commands.registerCommand(
     "code-tutor.readEntireBigOQueue",
-    async () => {
+    guard("code-tutor.readEntireBigOQueue", async () => {
       await readEntireBigOQueue();
-    }
+    })
   );
 
   context.subscriptions.push(

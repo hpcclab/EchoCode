@@ -6,6 +6,8 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 ---
 
 ## **Features**
+- **Student/Developer Mode**
+  Allows the user to switch from a developer mode to a student mode where some features are locked.
 
 - **Automatic Python Error Detection**  
   Automatically detects errors using Pylint when a Python file is saved.
@@ -91,7 +93,7 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 | `Ctrl+Alt+[`     | `echocode.moveToNextFolder`                                                    | Navigates to the next folder in the workspace 🆕                                                            |
 | `Ctrl+Alt+]`     | `echocode.moveToPreviousFolder`                                                | Navigates to the previous folder in the workspace 🆕                                                        |
 | `Ctrl+Alt+G`     | `echocode.compileAndParseCpp` / `echocode checkPythonErrors`                   | Compiles C++ or checks Python syntax, reading errors and fixes aloud 🆕                                     |
-
+| `Ctrl+Alt+9`     | `echocode.StudentAndDevMode` / `echocode StudentDevMode`                       | Switches mode depending on the users preference 
 ---
 
 ## **Installation & Requirements**

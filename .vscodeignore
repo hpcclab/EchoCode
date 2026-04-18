@@ -19,6 +19,14 @@ test/
 **/*.map
 **/.vscode-test.*
 
+**/*.map
+**/.vscode-test.*
+
+# 🚀 Ignore Python virtual environments
+.venv/
+venv/
+env/
+
 # 🚀 Ignore unnecessary config files
 **/jsconfig.json
 **/eslint.config.mjs

@@ -1,3 +1,4 @@
+const { guard } = require("../../Core/program_settings/guard");
 const vscode = require("vscode");
 const fs = require("fs");
 const path = require("path");
@@ -271,30 +272,33 @@ function markTaskComplete() {
 }
 
 // Register all assignment tracker commands
+// Register all assignment tracker commands
 function registerAssignmentTrackerCommands(context) {
   const loadAssignmentFileDisposable = vscode.commands.registerCommand(
     "echocode.loadAssignmentFile",
-    loadAssignmentFile
+    guard("echocode.loadAssignmentFile", loadAssignmentFile)
   );
 
+  // If you ALSO want to block rescan (it uses AI), wrap it too:
   const rescanUserCodeDisposable = vscode.commands.registerCommand(
     "echocode.rescanUserCode",
-    rescanUserCode
+    guard("echocode.rescanUserCode", rescanUserCode)
   );
 
+  // If you want this blocked as well, wrap it too (it reveals assignment steps):
   const readNextSequentialTaskDisposable = vscode.commands.registerCommand(
     "echocode.readNextSequentialTask",
-    readNextSequentialTask
+    guard("echocode.readNextSequentialTask", readNextSequentialTask)
   );
 
   const readNextTaskDisposable = vscode.commands.registerCommand(
     "echocode.readNextTask",
-    readNextTask
+    guard("echocode.readNextTask", readNextTask)
   );
 
   const markTaskCompleteDisposable = vscode.commands.registerCommand(
     "echocode.markTaskComplete",
-    markTaskComplete
+    guard("echocode.markTaskComplete", markTaskComplete)
   );
 
   context.subscriptions.push(

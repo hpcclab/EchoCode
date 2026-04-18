@@ -11,6 +11,7 @@ async function showHotkeyGuide() {
         Press 5 to hear navigation hotkeys.
         Press 6 to hear time complexity hotkeys.
         Press 7 to hear scope detection hotkeys.
+        Press 8 to hear File and Folder hotkeys.
         Press F1 to repeat this guide.
     `;
 
@@ -29,6 +30,9 @@ async function showHotkeyGuide() {
                 Ctrl + Alt + U: Increase speech speed.
                 Ctrl + Alt + D: Decrease speech speed.
                 Ctrl + Alt + X: Stop speech playback.
+                Ctrl + Alt + 9: Switch between student mode and developer mode.
+                Ctrl + Alt + Z: Set guidance level or verbosity.
+                Ctrl + Alt + Space: Start or stop speech-to-text and execute voice commands.
             `);
       break;
     case "2":
@@ -79,6 +83,17 @@ async function showHotkeyGuide() {
                 Ctrl + Alt + Space W: Detect the scope that the cursor is in and read it. 
             `);
       break;
+    case "8":
+      await speakMessage(`
+                File and Folder Hotkeys:
+                Ctrl + Alt + ;: Create new file.
+                Ctrl + Alt + F: Create new folder.
+                Ctrl + Alt + P: Navigate to next file.
+                Ctrl + Alt + Open bracket: Move to next folder.
+                Ctrl + Alt + Close bracket: Move to previous folder.
+            `);
+      break;
+
     case "f1":
     case "F1":
       vscode.commands.executeCommand("echocode.readHotkeyGuide");

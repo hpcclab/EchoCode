@@ -50,18 +50,21 @@ class EchoCodeChatViewProvider {
           await this.handleUserMessage(message.text);
         }
         else if (message.type === "executeVoiceCommand") {
-          const transcript = message.text || "";
           const { tryExecuteVoiceCommand } = require("../../extension");
           const outputChannel = this.outputChannel;
-          const result = await tryExecuteVoiceCommand(transcript, outputChannel);
-          if (result.handled) {
+          // FIX: Use 'message.text' instead of 'transcript'
+          const textToExecute = message.text || ""; 
+          const result = await tryExecuteVoiceCommand(textToExecute, outputChannel);
+          
+          if (result && result.handled) {
             this._currentWebview.postMessage({
               type: "response",
               text: `✅ Executed command: ${result.command}`
             });
           }
           else {
-            await this.handleUserMessage(transcript);
+            // FIX: Use 'message.text' here too
+            await this.handleUserMessage(textToExecute);
           }
         }
         else if (message.type === "startVoiceInput") {
@@ -172,8 +175,10 @@ class EchoCodeChatViewProvider {
     }
     messages.push(vscode.LanguageModelChatMessage.User(userInput));
 
-    // Select Copilot chat model
-    const [model] = await vscode.lm.selectChatModels({ vendor: "copilot", family: "gpt-4o" });
+    // FIX: Select ANY copilot model, do not hardcode 'gpt-4o' family
+    const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
+    const model = models[0];
+
     if (!model) {
       this._safePost({ type: "response", text: "No language model available. Please enable GitHub Copilot." });
       this.outputChannel.appendLine("No chat model available.");
@@ -202,7 +207,6 @@ class EchoCodeChatViewProvider {
       const msg = `Error getting response: ${error?.message || error}`;
       this.outputChannel.appendLine(msg);
       this._safePost({ type: "responseError", error: msg });
-    } finally {
       this._safePost({ type: "responseLoading", started: false });
     }
   }

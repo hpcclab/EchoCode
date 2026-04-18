@@ -53,7 +53,6 @@ function listAudioDevices(outputChannel) {
           const line = lines[i].trim();
 
           // Regex checking: Look for lines ending in "(audio)"
-          // Example: [dshow @ ...] "Microphone Array" (audio) or just: "Microphone Array" (audio)
           const audioMatch = line.match(/"([^"]+)"\s+\(audio\)$/);
           if (audioMatch) {
             const deviceName = audioMatch[1];
@@ -63,7 +62,7 @@ function listAudioDevices(outputChannel) {
             continue;
           }
 
-          // Legacy section-based fallback (if headers exist)
+          // Legacy section-based fallback
           if (line.includes("DirectShow audio devices")) {
             isAudioSection = true;
             continue;
@@ -88,37 +87,15 @@ function listAudioDevices(outputChannel) {
       // --- macOS Parsing (AVFoundation) ---
       else if (isMac) {
         lines.forEach((line) => {
-          // 1. Detect Section Headers
-          // AVFoundation output typically looks like: 
-          // [AVFoundation indev @ 0x...] AVFoundation video devices:
-          // [AVFoundation indev @ 0x...] [0] FaceTime HD Camera
-          // [AVFoundation indev @ 0x...] AVFoundation audio devices:
-          // [AVFoundation indev @ 0x...] [0] MacBook Pro Microphone
-
-          if (line.includes("AVFoundation video devices")) {
+          if (line.includes("AVFoundation video devices"))
             isAudioSection = false;
-            return; // Skip the header line itself
-          }
-          if (line.includes("AVFoundation audio devices")) {
+          if (line.includes("AVFoundation audio devices"))
             isAudioSection = true;
-            return; // Skip the header line itself
-          }
 
-          // 2. Parse Devices (only if inside audio section)
           if (isAudioSection) {
-            // Match lines like: [AVFoundation...] [1] Microphone Name
-            const match = line.match(/\[(\d+)\]\s+(.+)$/);
-
-            // Ensuring no log lines are matched
+            const match = line.match(/\[\d+\]\s+(.+)$/);
             if (match && !line.includes("AVFoundation")) {
-              // Handles raw output if ffmpeg output format varies
-              deviceMatches.push(match[2].trim());
-            } else if (line.includes("AVFoundation") && match) {
-              // Strict matching to avoid log lines
-              const strictMatch = line.match(/\[\d+\]\s+([^\[\]]+)$/);
-              if (strictMatch) {
-                deviceMatches.push(strictMatch[1].trim());
-              }
+              deviceMatches.push(match[1].trim());
             }
           }
         });
@@ -182,10 +159,6 @@ async function selectMicrophone(context) {
       vscode.window.showInformationMessage(`Microphone set to: ${manualName}`);
     }
   } else if (selected) {
-    // For Mac, if they picked a name, we might ideally match it to an index,
-    // but often using the name fails in ffmpeg mac unless mapped.
-    // For now, we save the name. Windows uses names, Mac often needs ":Index".
-    // If usage fails on Mac with names, we default to ":0" in startRecording.
     await context.globalState.update("echoCodeMicrophone", selected);
     vscode.window.showInformationMessage(`Microphone set to: ${selected}`);
   }
@@ -209,7 +182,9 @@ async function startRecording(outputChannel, context) {
   if (isWin) {
     if (micName === "default") {
       outputChannel.appendLine(`[Voice] Error: No microphone found.`);
-      vscode.window.showErrorMessage("EchoCode: No microphone found. Please check your audio settings.");
+      vscode.window.showErrorMessage(
+        "EchoCode: No microphone found. Please check your audio settings."
+      );
       return false;
     } else {
       outputChannel.appendLine(`[Voice] Using Microphone: "${micName}"`);
@@ -231,16 +206,11 @@ async function startRecording(outputChannel, context) {
   else if (isMac) {
     // On Mac, ":0" is usually the default selected input device in System Settings
     // If micName is "default", use ":0".
-    // If micName is a specific device name, AVFoundation sometimes accepts names like ":Built-in Microphone" or needs index.
-    // Safest generic start is usually mapping index 0.
-
     let devInput = ":0";
     if (micName !== "default" && micName.startsWith(":")) {
-      devInput = micName; // User manually entered ":1" etc
+      devInput = micName;
     }
-
     outputChannel.appendLine(`[Voice] Using AVFoundation input: "${devInput}"`);
-
     ffmpegArgs = [
       "-f",
       "avfoundation",
@@ -259,7 +229,6 @@ async function startRecording(outputChannel, context) {
     `[ffmpeg] Spawning with args: ${ffmpegArgs.join(" ")}`
   );
 
-  // CRITICAL: Stdio must be 'pipe' for stdin to work (so we can send 'q')
   const rec = spawn(ffmpegPath, ffmpegArgs, {
     stdio: ["pipe", "pipe", "pipe"],
   });
@@ -325,7 +294,6 @@ function stopAndTranscribe(outputChannel, globalState) {
       outputChannel.appendLine("[Voice] Note: Could not send 'q' to ffmpeg.");
     }
 
-    // Process kill fallback
     const killTimeout = setTimeout(() => {
       if (current && current.rec) {
         outputChannel.appendLine("[Voice] Force killing ffmpeg...");
@@ -354,12 +322,17 @@ function stopAndTranscribe(outputChannel, globalState) {
       return reject(new Error("Recording too short/empty."));
     }
 
+    // Use Python Local Whisper instead of API
     const pythonPath = globalState
       ? globalState.get("echoCodePythonPath")
-      : "python"; // Default if not found
+      : "python";
 
     runLocalWhisper(tmpWav, outputChannel, pythonPath).then(resolve, reject);
   });
+}
+
+function isRecording() {
+  return current !== null && !current.stopped;
 }
 
 function runLocalWhisper(tmpWav, outputChannel, pythonCommand) {
@@ -375,9 +348,7 @@ function runLocalWhisper(tmpWav, outputChannel, pythonCommand) {
 
     let transcript = "";
 
-    py.stdout.on("data", (data) => {
-      transcript += data.toString();
-    });
+    py.stdout.on("data", (data) => (transcript += data.toString()));
 
     py.stderr.on("data", (data) => {
       outputChannel.appendLine(`[Whisper Log] ${data.toString()}`);
@@ -389,8 +360,7 @@ function runLocalWhisper(tmpWav, outputChannel, pythonCommand) {
       if (code !== 0) {
         return reject(new Error(`Whisper process exited with code ${code}`));
       }
-      const clean = transcript.trim();
-      resolve(clean);
+      resolve(transcript.trim());
     });
 
     py.on("error", (err) => {
@@ -400,10 +370,35 @@ function runLocalWhisper(tmpWav, outputChannel, pythonCommand) {
 }
 
 /**
- * Check if recording is in progress
+ * Adapter function to maintain compatibility if 'recordAndTranscribe' called elsewhere
+ * This simulates "Mic ON" -> "Wait" -> "Mic OFF" in one command if necessary.
  */
-function isRecording() {
-  return current && !current.stopped;
+async function recordAndTranscribe(apiKey, outputChannel, opts = {}) {
+  // Note: apiKey ignored since we use local whisper in this merged version
+  // If you need API support, we can add a toggle.
+
+  // 1. Start
+  const started = await startRecording(outputChannel, {
+    globalState: { get: () => null, update: () => null },
+  }); // mocked context for manual calls
+  if (!started) return null;
+
+  // 2. Wait duration
+  const ms = Number(opts.durationMs ?? 5000);
+  await new Promise((r) => setTimeout(r, ms));
+
+  // 3. Stop
+  return await stopAndTranscribe(outputChannel, null);
 }
 
-module.exports = { startRecording, stopAndTranscribe, selectMicrophone, isRecording };
+function isRecording() {
+  return current !== null && !current.stopped;
+}
+
+module.exports = {
+  startRecording,
+  stopAndTranscribe,
+  selectMicrophone,
+  recordAndTranscribe,
+  isRecording,
+};

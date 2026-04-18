@@ -26,6 +26,13 @@ Thumbs.db
 # Morgan is using this file for reference
 *-messy.js
 
+# Coverage artifacts
+.nyc_output/
+coverage/
+
+# Logs and temporary files
+*.log
+*.tmp
 # Ignore environment variable files
 .env
 
@@ -33,3 +40,4 @@ Thumbs.db
 echocode-venv/
 
 TestFile1.cpp
+Core/program_settings/program_settings/external_commands.json

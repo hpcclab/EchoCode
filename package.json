@@ -10,7 +10,7 @@
   "icon": "images/icon.png",
   "publisher": "EchoCode",
   "engines": {
-    "vscode": "^1.99.1"
+    "vscode": "^1.105.0"
   },
   "categories": [
     "Other",
@@ -30,14 +30,16 @@
     "onCommand:echocode.summarizeClass",
     "onCommand:echocode.summarizeFunction",
     "onCommand:echocode.summarizeProgram",
-    "onCommand:echocode.startVoiceInput",
+    "onCommand:echocode.selectMicrophone",
     "onCommand:echocode.loadAssignmentFile",
     "onCommand:echocode.increaseSpeechSpeed",
     "onCommand:echocode.decreaseSpeechSpeed",
     "onCommand:echocode.rescanUserCode",
     "onCommand:echocode.readNextSequentialTask",
     "onCommand:echocode.whereAmI",
-    "onCommand:echocode.compileAndParseCpp"
+    "onCommand:echocode.compileAndParseCpp",
+    "onCommand:echocode.setGuidanceLevel",
+    "onCommand:echocode.cycleGuidanceLevel"
   ],
   "main": "./extension.js",
   "extensionDependencies": [
@@ -45,6 +47,10 @@
   ],
   "contributes": {
     "commands": [
+      {
+        "command": "echocode.toggleMode",
+        "title": "EchoCode: Toggle Student/Dev Mode"
+      },
       {
         "command": "echocode.readHotkeyGuide",
         "title": "EchoCode: Read Hotkey Guide"
@@ -85,10 +91,6 @@
       {
         "command": "echocode.openChat",
         "title": "Open EchoCode Tutor Chat"
-      },
-      {
-        "command": "echocode.startVoiceInput",
-        "title": "Start Voice Input"
       },
       {
         "command": "echocode.loadAssignmentFile",
@@ -133,6 +135,14 @@
       {
         "command": "echocode.moveToNextFolder",
         "title": "Move to Next Folder"
+      },
+      {
+        "command": "echocode.switchToStudentMode",
+        "title": "EchoCode: Switch to Student Mode"
+      },
+      {
+        "command": "echocode.switchToDevMode",
+        "title": "EchoCode: Switch to Developer Mode"
       },
       {
         "command": "echocode.moveToPreviousFolder",
@@ -207,11 +217,48 @@
         "command": "echocode.toggleVoice",
         "title": "EchoCode: Toggle Voice Input",
         "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.voiceCode",
+        "title": "EchoCode: Voice to Code",
+        "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.voiceCommand",
+        "title": "EchoCode: Voice to Command",
+        "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.voiceChat",
+        "title": "EchoCode: Voice to Chat",
+        "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.cycleVoiceMode",
+        "title": "EchoCode: Cycle Voice Mode",
+        "category": "EchoCode Voice"
+      },
+      {
+        "command": "echocode.setGuidanceLevel",
+        "title": "EchoCode: Set Guidance Level"
+      },
+      {
+        "command": "echocode.cycleGuidanceLevel",
+        "title": "EchoCode: Cycle Guidance Level"
       }
     ],
     "configuration": {
       "title": "EchoCode",
       "properties": {
+        "echocode.mode": {
+          "type": "string",
+          "enum": [
+            "student",
+            "dev"
+          ],
+          "default": "student",
+          "description": "Student mode locks restricted features. Dev mode enables everything."
+        },
         "echocode.voice": {
           "type": "string",
           "default": "",
@@ -221,10 +268,30 @@
           "type": "number",
           "default": 1,
           "description": "Speech rate for text-to-speech (0.5 = slow, 1.0 = normal, 1.5 = fast)."
+        },
+        "echocode.guidanceLevel": {
+          "type": "string",
+          "default": "balanced",
+          "enum": [
+            "guided",
+            "balanced",
+            "concise"
+          ],
+          "enumDescriptions": [
+            "Step-by-step explanations with minimal jargon.",
+            "Balanced explanations with brief rules and a couple options.",
+            "Concise, technical output with the raw error included."
+          ],
+          "description": "Controls how much detail EchoCode provides when explaining errors."
         }
       }
     },
     "keybindings": [
+      {
+        "command": "echocode.toggleMode",
+        "key": "ctrl+alt+9",
+        "when": "true"
+      },
       {
         "key": "f1",
         "command": "echocode.readHotkeyGuide",
@@ -232,18 +299,15 @@
       },
       {
         "command": "echocode.speakNextAnnotation",
-        "key": "ctrl+alt+s",
-        "when": "editorTextFocus"
+        "key": "ctrl+alt+s"
       },
       {
         "command": "echocode.annotate",
-        "key": "ctrl+alt+a",
-        "when": "editorTextFocus"
+        "key": "ctrl+alt+a"
       },
       {
         "command": "echocode.readAllAnnotations",
-        "key": "ctrl+alt+q",
-        "when": "editorTextFocus"
+        "key": "ctrl+alt+q"
       },
       {
         "command": "echocode.jumpToNextFunction",
@@ -258,21 +322,17 @@
       {
         "command": "echocode.summarizeClass",
         "key": "ctrl+alt+e c",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "echocode.summarizeFunction",
         "key": "ctrl+alt+e f",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "echocode.summarizeProgram",
         "key": "ctrl+alt+e p",
-        "when": "editorTextFocus"
-      },
-      {
-        "command": "echocode.startVoiceInput",
-        "key": "ctrl+alt+v"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "echocode.toggleVoice",
@@ -280,14 +340,36 @@
         "when": "editorTextFocus"
       },
       {
+        "command": "echocode.toggleVoice",
+        "key": "ctrl+alt+space",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.voiceCode",
+        "key": "ctrl+alt+shift+c",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.voiceCommand",
+        "key": "ctrl+alt+shift+v"
+      },
+      {
+        "command": "echocode.voiceChat",
+        "key": "ctrl+alt+shift+t"
+      },
+      {
+        "command": "echocode.cycleVoiceMode",
+        "key": "ctrl+alt+'"
+      },
+      {
         "command": "echocode.openChat",
         "key": "ctrl+alt+c",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "code-tutor.analyzeBigO",
         "key": "ctrl+alt+n",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "echocode.whereAmI",
@@ -297,11 +379,12 @@
       {
         "command": "code-tutor.iterateBigOQueue",
         "key": "ctrl+alt+b",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "code-tutor.readEntireBigOQueue",
-        "key": "ctrl+alt+h"
+        "key": "ctrl+alt+h",
+        "when": "echocode:isDev"
       },
       {
         "key": "ctrl+alt+o",
@@ -376,7 +459,7 @@
       {
         "command": "echocode.describeCurrentLine",
         "key": "ctrl+alt+k",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "command": "echocode.toggleCharacterReadOut",
@@ -386,22 +469,32 @@
       {
         "key": "ctrl+alt+i",
         "command": "echocode.copyFileNameForImport",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "key": "ctrl+shift+i",
         "command": "echocode.pasteImportAtCursor",
-        "when": "editorTextFocus"
+        "when": "editorTextFocus && echocode:isDev"
       },
       {
         "key": "ctrl+alt+g",
         "command": "echocode.compileAndParseCpp",
-        "when": "editorTextFocus && editorLangId == 'cpp'"
+        "when": "editorTextFocus && editorLangId == 'cpp' && echocode:isDev"
       },
       {
         "key": "ctrl+alt+g",
         "command": "echocode.checkPythonErrors",
-        "when": "editorTextFocus && editorLangId == 'python'"
+        "when": "editorTextFocus && editorLangId == 'python' && echocode:isDev"
+      },
+      {
+        "command": "echocode.setGuidanceLevel",
+        "key": "ctrl+alt+shift+z",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "echocode.cycleGuidanceLevel",
+        "key": "ctrl+alt+z",
+        "when": "editorTextFocus"
       }
     ],
     "viewsContainers": {
@@ -426,15 +519,8 @@
       "editor/title": [
         {
           "command": "echocode.annotate",
+          "when": "echocode:isDev",
           "group": "navigation"
-        }
-      ],
-      "view/title": [
-        {
-          "command": "echocode.startVoiceInput",
-          "when": "view == echocode.chatView",
-          "group": "navigation",
-          "icon": "$(comment)"
         }
       ]
     }
@@ -444,21 +530,25 @@
     "vscode:prepublish": "npm run compile",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
-    "pretest": "npm run compile && npm run lint",
+    "pretest": "npm run compile",
     "lint": "eslint",
-    "test": "vscode-test"
+    "test": "node --loader ./test/alias-loader.mjs ./node_modules/mocha/bin/_mocha --require ts-node/register --require test/setup.mjs --recursive test/**/*.test.ts --timeout 10000",
+    "int-test": "npm run test"
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
     "@stylistic/eslint-plugin": "^2.13.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.17.30",
-    "@types/vscode": "^1.99.1",
+    "@types/vscode": "^1.105.0",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.5.2",
+    "chai": "^6.2.0",
     "eslint": "^9.24.0",
     "glob": "^10.3.10",
-    "mocha": "^10.2.0",
+    "mocha": "^10.8.2",
+    "nyc": "^17.1.0",
+    "ts-node": "^10.9.2",
     "typescript": "^5.8.3",
     "typescript-eslint": "^8.29.1"
   },

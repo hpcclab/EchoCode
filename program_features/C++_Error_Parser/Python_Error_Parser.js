@@ -4,6 +4,11 @@ const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
 
+const {
+  formatHelpByGuidance,
+} = require("../../Core/program_settings/guide_settings/guidanceLevel");
+
+
 // Function to parse terminal output for Python errors
 function parsePythonErrors(terminalOutput) {
   const errorPatterns = [
@@ -82,7 +87,7 @@ function parsePythonErrors(terminalOutput) {
   return errors;
 }
 
-// Function to analyze Python execution/compilation errors
+// Function to analyze Python execution/compilation errors (Guidance-aware)
 function analyzePythonExecution(command) {
   exec(command, (error, stdout, stderr) => {
     if (error) {
@@ -94,46 +99,54 @@ function analyzePythonExecution(command) {
         console.log(errorMessage);
         speakMessage(errorMessage);
         console.log(stderr);
-      } else {
-        console.log("Python Errors Found:");
-        let speechOutput = "Python Errors Found. ";
+        return;
+      }
 
-        errors.forEach((err) => {
-          // Get the full filename for the console (e.g., "script.py")
-          const fileName = path.basename(err.file);
+      console.log("Python Errors Found:");
 
-          // For speech, remove the extension so it reads the name naturally (e.g., "script")
-          // This prevents it from spelling out "s-c-r-i-p-t" or saying "dot p y"
-          const spokenFileName = path.basename(
-            err.file,
-            path.extname(err.file)
-          );
+      // Keep the intro short so it doesn't get annoying
+      let speechOutput = `Python errors found. ${errors.length}. `;
 
-          const errorLocation = `In file ${fileName}, `;
-          const spokenErrorLocation = `In file ${spokenFileName}, `;
+      errors.forEach((err) => {
+        // Console: keep full file name for clarity
+        const fileName = path.basename(err.file);
 
-          const errorLine = `Line ${err.line}: ${err.error}.`;
-          const explanation = `Explanation: ${err.explanation}.`;
-          const fix = `Potential Fix: ${err.fix}.`;
+        // Speech: remove extension for better TTS
+        const spokenFileName = path.basename(err.file, path.extname(err.file));
 
-          console.log(errorLocation + errorLine);
-          console.log(explanation);
-          console.log(fix);
-          console.log("---");
+        // Build pieces for guidance formatting
+        const where = `In file ${spokenFileName}, line ${err.line}`;
+        const summary = `${err.error}`; // ex: "SyntaxError: invalid syntax"
+        const raw = `In ${fileName}, line ${err.line}: ${err.error}`;
 
-          // Use the cleaner spokenFileName for the audio output
-          speechOutput += `${spokenErrorLocation} ${errorLine} ${explanation} ${fix} `;
+        // Guidance-aware message
+        const formatted = formatHelpByGuidance({
+          where,
+          summary,
+          raw,
+          ruleHint: err.explanation,
+          suggestions: [err.fix],
         });
 
-        speakMessage(speechOutput);
-      }
-    } else {
-      const successMessage = "No syntax or runtime errors found.";
-      console.log(successMessage);
-      speakMessage(successMessage);
+        // Logs stay detailed (useful for debugging)
+        console.log(`In file ${fileName}, Line ${err.line}: ${err.error}.`);
+        console.log(`Explanation: ${err.explanation}.`);
+        console.log(`Potential Fix: ${err.fix}.`);
+        console.log("---");
+
+        speechOutput += `${formatted} `;
+      });
+
+      speakMessage(speechOutput);
+      return;
     }
+
+    const successMessage = "No syntax or runtime errors found.";
+    console.log(successMessage);
+    speakMessage(successMessage);
   });
 }
+
 
 // Function to determine the current Python file and check it
 function checkCurrentPythonFile(currentFilePath) {
