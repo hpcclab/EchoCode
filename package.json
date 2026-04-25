@@ -2,7 +2,7 @@
   "name": "echo-code",
   "displayName": "Echo Code",
   "description": "AI-assisted speech, chat, and summaries for any language; Python lint-on-save + C++ support.",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/Team-1-4910-Edward/EchoCode-Capstone-Repo.git"
