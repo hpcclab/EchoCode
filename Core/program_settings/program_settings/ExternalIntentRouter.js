@@ -37,32 +37,16 @@ function generateKeywords(commandId) {
     .replace(/^echocode\./, "");
 
   // Split on dots, camelCase, and capitalize boundaries
-  let words = stripped
+  const words = stripped
     .replace(/([a-z])([A-Z])/g, "$1 $2") // camelCase -> camel Case
     .replace(/[.\-_]/g, " ") // dots/dashes/underscores -> space
     .toLowerCase()
     .trim();
 
-  // Natural Language adjustment: Move trailing verbs to the front
-  // e.g., "terminal new" -> "new terminal", "sidebar toggle" -> "toggle sidebar"
-  const actionVerbs = new Set([
-    "new", "add", "create", "delete", "remove",
-    "toggle", "open", "close", "show", "hide",
-    "focus", "clear", "start", "stop", "run"
-  ]);
-
-  let parts = words.split(" ");
-  const lastWord = parts[parts.length - 1];
-
-  if (parts.length > 1 && actionVerbs.has(lastWord)) {
-    parts.pop();
-    parts.unshift(lastWord);
-    words = parts.join(" ");
-  }
-
   const keywords = [words];
 
   // Also add shortened version (first 2 words) if long enough
+  const parts = words.split(" ");
   if (parts.length > 2) {
     keywords.push(parts.slice(0, 2).join(" "));
   }

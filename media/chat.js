@@ -123,7 +123,6 @@
 
             case 'responseComplete':
                 currentAssistantMessage = null;
-                resetMicUi();
                 break;
 
             case 'responseLoading':
@@ -142,7 +141,6 @@
                     currentAssistantMessage.parentElement.classList.add('error');
                     currentAssistantMessage = null;
                 }
-                resetMicUi();
                 break;
 
             case 'voiceStopping':
@@ -161,7 +159,9 @@
                 vscode.postMessage({ type: "executeVoiceCommand", text: transcript });
 
                 // Reset UI state
-                resetMicUi();
+                voiceButton.classList.remove('active');
+                listeningIndicator.classList.add('hidden');
+                listeningIndicator.classList.remove('visible');
                 userInput.placeholder = 'Ask a question about your code...';
                 break;
 

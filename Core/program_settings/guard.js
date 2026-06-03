@@ -14,8 +14,13 @@ const STUDENT_LOCKED_COMMANDS = new Set([
   "echocode.summarizeFunction",
   "echocode.summarizeProgram",
 
-
-  
+  // Annotations
+  "echocode.annotate",
+  "echocode.speakNextAnnotation",
+  "echocode.readAllAnnotations",
+  "code-tutor.Annotate",
+  "code-tutor.speakNextAnnotation",
+  "code-tutor.readAllAnnotation",
 
   // Big-O (LOCK in student mode)
   "code-tutor.analyzeBigO",

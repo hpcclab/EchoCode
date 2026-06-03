@@ -207,6 +207,7 @@ class EchoCodeChatViewProvider {
       const msg = `Error getting response: ${error?.message || error}`;
       this.outputChannel.appendLine(msg);
       this._safePost({ type: "responseError", error: msg });
+    } finally {
       this._safePost({ type: "responseLoading", started: false });
     }
   }
