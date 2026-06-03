@@ -14,6 +14,27 @@ async function executeCommand(id, ...args) {
   return await handler(...args);
 }
 
+export class Position {
+  constructor(line, character) {
+    this.line = line;
+    this.character = character;
+  }
+}
+
+export class Selection {
+  constructor(anchor, active) {
+    this.anchor = anchor;
+    this.active = active;
+  }
+}
+
+export class Range {
+  constructor(startLine, startCharacter, endLine, endCharacter) {
+    this.start = new Position(startLine, startCharacter);
+    this.end = new Position(endLine, endCharacter);
+  }
+}
+
 // ----- VS Code API exports (ESM top-level) -----
 export const commands = { registerCommand, getCommands, executeCommand };
 
@@ -29,13 +50,17 @@ export const window = {
 };
 
 export const workspace = {
-  getConfiguration: () => ({ get: (_key, fallback) => fallback ?? true, update: async () => {} }),
+  getConfiguration: () => ({
+    get: (_key, fallback) => fallback ?? true,
+    update: async () => {},
+  }),
   onDidChangeConfiguration: () => ({ dispose: () => {} }),
 };
 
 export const env = {
   clipboard: {
-    writeText: async (t) => console.log(`[VSCodeMock] clipboard.writeText: ${t}`),
+    writeText: async (t) =>
+      console.log(`[VSCodeMock] clipboard.writeText: ${t}`),
     readText: async () => "",
   },
 };
@@ -65,8 +90,19 @@ export const copilot = {
 };
 
 // Build a global namespace for any code using require('vscode')
-globalThis.vscode = { commands, window, workspace, env, __createMockContext };
+globalThis.vscode = {
+  commands,
+  window,
+  workspace,
+  env,
+  Position,
+  Selection,
+  Range,
+  __createMockContext,
+};
 globalThis.tts = tts;
 globalThis.copilot = copilot;
 
-console.log("[VSCodeMock] Initialized with ESM-shaped exports and command registry.");
+console.log(
+  "[VSCodeMock] Initialized with ESM-shaped exports and command registry.",
+);

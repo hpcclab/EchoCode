@@ -1,6 +1,4 @@
 const vscode = require("vscode");
-const path = require("path");
-const fs = require("fs");
 require("dotenv").config();
 const DependencyManager = require("./program_features/Voice/dependencyManager");
 
@@ -18,213 +16,21 @@ const {
 } = require("./program_features/Voice/whisperService");
 
 const {
-  generateCodeFromVoice,
-} = require("./Core/program_settings/program_settings/AIrequest");
-
-// Helper to map VS Code language IDs to friendly names for LLM
-function getFriendlyLanguageName(languageId) {
-  const map = {
-    cpp: "C++",
-    c: "C",
-    csharp: "C#",
-    javascript: "JavaScript",
-    typescript: "TypeScript",
-    python: "Python",
-    java: "Java",
-    html: "HTML",
-    css: "CSS",
-    php: "PHP",
-    ruby: "Ruby",
-    go: "Go",
-    rust: "Rust",
-    swift: "Swift",
-    kotlin: "Kotlin",
-    sql: "SQL",
-    r: "R",
-    shellscript: "Shell Script",
-    powershell: "PowerShell",
-    json: "JSON",
-    xml: "XML",
-    markdown: "Markdown",
-    plaintext: "Pseudocode", // Fallback for plain text
-    bat: "Batch file",
-    clojure: "Clojure",
-    coffeescript: "CoffeeScript",
-    dockerfile: "Dockerfile",
-    fsharp: "F#",
-    groovy: "Groovy",
-    handlebars: "Handlebars",
-    ini: "Ini",
-    lua: "Lua",
-    makefile: "Makefile",
-    "objective-c": "Objective-C",
-    perl: "Perl",
-    r: "R",
-    scss: "SCSS",
-    vb: "Visual Basic",
-    yaml: "YAML",
-  };
-  return map[languageId] || languageId; // Return mapped name or original ID if not found
-}
-
-async function tryExecuteVoiceCommand(transcript, outputChannel) {
-  try {
-    const cleaned = transcript.toLowerCase().trim();
-
-    // 1. Guard Clause: Ignore empty or error messages from whisper
-    if (!cleaned || cleaned.includes("no speech detected")) {
-      outputChannel.appendLine(
-        `[Voice Intent] Ignored empty/error input: "${transcript}"`
-      );
-      return { handled: true }; // Treated as handled so we don't spam errors
-    }
-
-    const commandsPath = path.join(
-      __dirname,
-      "Core/program_settings/program_settings/voice_commands.json"
-    );
-    const commands = JSON.parse(fs.readFileSync(commandsPath, "utf-8"));
-
-   const { getMode } = require("./Core/program_settings/mode");
-const { STUDENT_LOCKED_COMMANDS } = require("./Core/program_settings/guard");
-const { speakMessage } = require("./Core/program_settings/speech_settings/speechHandler");
-
-for (const cmd of commands) {
-  if (cmd.keywords.some((k) => cleaned.includes(k))) {
-    const currentMode = getMode();
-
-    if (currentMode !== "dev" && STUDENT_LOCKED_COMMANDS.has(cmd.id)) {
-      await speakMessage("That command is disabled in student mode.");
-      return { handled: true };
-    }
-
-    await vscode.commands.executeCommand(cmd.id);
-    outputChannel.appendLine(`[Voice Command] Matched: ${cmd.id}`);
-    return { handled: true, command: cmd.id };
-  }
-}
-
-    // Priority 2: External/user-defined commands (NEW — two lines)
-    if (externalCmd) {
-  const currentMode = getMode();
-
-  if (currentMode === "student" && STUDENT_LOCKED_COMMANDS.includes(externalCmd.id)) {
-    await speakMessage("That command is disabled in student mode.");
-    return { handled: true };
-  }
-
-  await vscode.commands.executeCommand(externalCmd.id);
-      vscode.window.showInformationMessage(`✅ External: ${externalCmd.title}`);
-      outputChannel.appendLine(
-        `[Voice Command] External Matched: ${externalCmd.id}`
-      );
-      return { handled: true, command: externalCmd.id };
-    }
-
-    // no match — pass to Copilot for Code Generation
-    const editor = vscode.window.activeTextEditor;
-
-    // 3. Check for specific "Question" keywords to route to Chat/Audio instead of Code Gen
-    //    If it starts with "What", "How", "Why", "Explain", "Describe", "Does" -> likely a question.
-    const questionKeywords = [
-      "what",
-      "how",
-      "why",
-      "explain",
-      "describe",
-      "does",
-      "is ",
-    ];
-    const isQuestion = questionKeywords.some((q) => cleaned.startsWith(q));
-
-    if (isQuestion) {
-      outputChannel.appendLine(
-        `[Voice Intent] Detected Question: "${transcript}". Routing to Chat/Audio (Default).`
-      );
-      // Return handled: false so it falls through to other handlers (like chat/audio responder) if they exist,
-      return { handled: false };
-    }
-
-    // 4. Otherwise, assume "Code Generation" intent (Action)
-    outputChannel.appendLine(
-      `[Voice Intent] No strict command match for: ${transcript}. Attempting Code Generation...`
-    );
-
-    if (editor) {
-      try {
-        const rawLangId = editor.document.languageId;
-        const friendlyLang = getFriendlyLanguageName(rawLangId);
-
-        vscode.window.showInformationMessage(
-          `EchoCode: Generating ${friendlyLang} code...`
-        );
-        outputChannel.appendLine(
-          `[Voice Generation] Detected Language: ${friendlyLang} (ID: ${rawLangId})`
-        );
-
-        // --- Indentation Logic ---
-        const position = editor.selection.active;
-        const lineText = editor.document.lineAt(position.line).text;
-        const indentationMatch = lineText.match(/^\s*/);
-        const currentIndentation = indentationMatch ? indentationMatch[0] : "";
-
-        // --- Context Window Logic ---
-        // Capture 50 lines before and 20 lines after the cursor to give the AI context
-        const startLine = Math.max(0, position.line - 50);
-        const endLine = Math.min(
-          editor.document.lineCount - 1,
-          position.line + 20
-        );
-        const contextRange = new vscode.Range(
-          startLine,
-          0,
-          endLine,
-          editor.document.lineAt(endLine).text.length
-        );
-        const contextCode = editor.document.getText(contextRange);
-
-        const generatedCode = await generateCodeFromVoice(
-          transcript,
-          friendlyLang, // Pass the friendly name
-          currentIndentation,
-          contextCode // Pass the surrounding code
-        );
-
-        if (generatedCode) {
-          await editor.edit((editBuilder) => {
-            editBuilder.insert(position, generatedCode);
-          });
-          outputChannel.appendLine(
-            `[Voice Generation] Inserted code for: ${transcript}`
-          );
-          outputChannel.appendLine(
-            `[Voice Generation Output]:\n${generatedCode}`
-          );
-          await speakMessage(`Here is the code I generated: ${generatedCode}`);
-          return { handled: true, command: "generateCode" };
-        }
-      } catch (genErr) {
-        outputChannel.appendLine(`[Voice Generation Error] ${genErr.message}`);
-        vscode.window.showErrorMessage(
-          `EchoCode Generation Fail: ${genErr.message}`
-        );
-      }
-    }
-
-    return { handled: false };
-  } catch (err) {
-    outputChannel.appendLine(`[Voice Intent Err or] ${err.message}`);
-    vscode.window.showErrorMessage(
-      `EchoCode Voice Command Error: ${err.message}`
-    );
-    return { handled: false };
-  }
-}
+  getFriendlyLanguageName,
+  tryExecuteVoiceCommand,
+} = require("./program_features/Voice/voiceCommandRouter");
 
 //student/dev mode system
 const { announceMode } = require("./Core/program_settings/modeAudio");
-const { refreshModeContext, onModeChange, getMode } = require("./Core/program_settings/mode");
-const { guard, STUDENT_LOCKED_COMMANDS } = require("./Core/program_settings/guard");
+const {
+  refreshModeContext,
+  onModeChange,
+  getMode,
+} = require("./Core/program_settings/mode");
+const {
+  guard,
+  STUDENT_LOCKED_COMMANDS,
+} = require("./Core/program_settings/guard");
 
 // Python (optional adapter)
 const { ensurePylintInstalled } = require("./Language/Python/pylintHandler");
@@ -328,7 +134,7 @@ async function ensureCopilotActivated(channel) {
 
   if (!copilotExtension) {
     channel.appendLine(
-      "[EchoCode] Warning: GitHub Copilot / Copilot Chat extension not found. AI features will be unavailable."
+      "[EchoCode] Warning: GitHub Copilot / Copilot Chat extension not found. AI features will be unavailable.",
     );
     return null;
   }
@@ -346,75 +152,75 @@ async function activate(context) {
   outputChannel.appendLine("[EchoCode] Activated");
 
   // Initialize student/dev mode context
-const initialMode = await refreshModeContext();
-announceMode(initialMode, outputChannel);
-  
+  const initialMode = await refreshModeContext();
+  announceMode(initialMode, outputChannel);
+
   context.subscriptions.push(
     onModeChange(async () => {
-  const mode = await refreshModeContext();
-  outputChannel.appendLine(`[EchoCode] Mode changed: ${mode}`);
-  announceMode(mode, outputChannel);
-})
+      const mode = await refreshModeContext();
+      outputChannel.appendLine(`[EchoCode] Mode changed: ${mode}`);
+      announceMode(mode, outputChannel);
+    }),
   );
 
   // Toggle Student/Dev mode command
-const toggleModeCommand = vscode.commands.registerCommand(
-  "echocode.toggleMode",
-  async () => {
-    const currentMode = getMode();
-    const newMode = currentMode === "student" ? "dev" : "student";
+  const toggleModeCommand = vscode.commands.registerCommand(
+    "echocode.toggleMode",
+    async () => {
+      const currentMode = getMode();
+      const newMode = currentMode === "student" ? "dev" : "student";
 
-    await vscode.workspace
-      .getConfiguration("echocode")
-      .update("mode", newMode, vscode.ConfigurationTarget.Global);
+      await vscode.workspace
+        .getConfiguration("echocode")
+        .update("mode", newMode, vscode.ConfigurationTarget.Global);
 
-    await refreshModeContext();
+      await refreshModeContext();
 
-    vscode.window.showInformationMessage(
-      `EchoCode switched to ${newMode.toUpperCase()} mode`
-    );
+      vscode.window.showInformationMessage(
+        `EchoCode switched to ${newMode.toUpperCase()} mode`,
+      );
 
-    outputChannel.appendLine(`[EchoCode] Mode toggled to: ${newMode}`);
-  }
-);
-const switchToStudentModeCommand = vscode.commands.registerCommand(
-  "echocode.switchToStudentMode",
-  async () => {
-    await vscode.workspace
-      .getConfiguration("echocode")
-      .update("mode", "student", vscode.ConfigurationTarget.Global);
+      outputChannel.appendLine(`[EchoCode] Mode toggled to: ${newMode}`);
+    },
+  );
+  const switchToStudentModeCommand = vscode.commands.registerCommand(
+    "echocode.switchToStudentMode",
+    async () => {
+      await vscode.workspace
+        .getConfiguration("echocode")
+        .update("mode", "student", vscode.ConfigurationTarget.Global);
 
-    await refreshModeContext();
+      await refreshModeContext();
 
-    vscode.window.showInformationMessage("EchoCode switched to STUDENT mode");
-    outputChannel.appendLine("[EchoCode] Mode switched to: student");
-    announceMode("student", outputChannel);
-  }
-);
+      vscode.window.showInformationMessage("EchoCode switched to STUDENT mode");
+      outputChannel.appendLine("[EchoCode] Mode switched to: student");
+      announceMode("student", outputChannel);
+    },
+  );
 
-const switchToDevModeCommand = vscode.commands.registerCommand(
-  "echocode.switchToDevMode",
-  async () => {
-    await vscode.workspace
-      .getConfiguration("echocode")
-      .update("mode", "dev", vscode.ConfigurationTarget.Global);
+  const switchToDevModeCommand = vscode.commands.registerCommand(
+    "echocode.switchToDevMode",
+    async () => {
+      await vscode.workspace
+        .getConfiguration("echocode")
+        .update("mode", "dev", vscode.ConfigurationTarget.Global);
 
-    await refreshModeContext();
+      await refreshModeContext();
 
-    vscode.window.showInformationMessage("EchoCode switched to DEV mode");
-    outputChannel.appendLine("[EchoCode] Mode switched to: dev");
-    announceMode("dev", outputChannel);
-  }
-);
+      vscode.window.showInformationMessage("EchoCode switched to DEV mode");
+      outputChannel.appendLine("[EchoCode] Mode switched to: dev");
+      announceMode("dev", outputChannel);
+    },
+  );
 
-context.subscriptions.push(
-  switchToStudentModeCommand,
-  switchToDevModeCommand
-);
+  context.subscriptions.push(
+    switchToStudentModeCommand,
+    switchToDevModeCommand,
+  );
 
-context.subscriptions.push(toggleModeCommand);
-// Ensure Copilot (stable, chat, or nightly) is available for AI features
-await ensureCopilotActivated(outputChannel);
+  context.subscriptions.push(toggleModeCommand);
+  // Ensure Copilot (stable, chat, or nightly) is available for AI features
+  await ensureCopilotActivated(outputChannel);
 
   // --- DEPENDENCY CHECK START ---
   // This runs once on startup and ensures the venv exists
@@ -439,15 +245,15 @@ await ensureCopilotActivated(outputChannel);
   // Build external command registry on activation (non-blocking)
   buildExternalCommandRegistry().catch((err) =>
     outputChannel.appendLine(
-      `[ExternalIntentRouter] Registry build failed: ${err.message}`
-    )
+      `[ExternalIntentRouter] Registry build failed: ${err.message}`,
+    ),
   );
 
   // start recording (no transcript yet)
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode._voiceStart", async () => {
       startRecording(outputChannel, context);
-    })
+    }),
   );
 
   // ADD THIS — _voiceStop was never registered
@@ -456,21 +262,21 @@ await ensureCopilotActivated(outputChannel);
       try {
         const text = await stopAndTranscribe(
           outputChannel,
-          context.globalState
+          context.globalState,
         );
         return { ok: true, text };
       } catch (err) {
         outputChannel.appendLine(`[Voice Stop Error] ${err.message}`);
         return { ok: false, text: "", error: err.message };
       }
-    })
+    }),
   );
 
   // New command to change microphone manually
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.selectMicrophone", async () => {
       await selectMicrophone(context);
-    })
+    }),
   );
 
   // --- MACRO 1: Voice to CODE only ---
@@ -481,21 +287,21 @@ await ensureCopilotActivated(outputChannel);
         try {
           const text = await stopAndTranscribe(
             outputChannel,
-            context.globalState
+            context.globalState,
           );
           if (!text || text.includes("no speech detected")) return;
           const editor = vscode.window.activeTextEditor;
           if (!editor) {
             vscode.window.showErrorMessage(
-              "EchoCode: Open a file to generate code."
+              "EchoCode: Open a file to generate code.",
             );
             return;
           }
           const friendlyLang = getFriendlyLanguageName(
-            editor.document.languageId
+            editor.document.languageId,
           );
           vscode.window.showInformationMessage(
-            `EchoCode: Generating ${friendlyLang} code...`
+            `EchoCode: Generating ${friendlyLang} code...`,
           );
           const position = editor.selection.active;
           const indentation = (editor.document
@@ -504,21 +310,21 @@ await ensureCopilotActivated(outputChannel);
           const startLine = Math.max(0, position.line - 50);
           const endLine = Math.min(
             editor.document.lineCount - 1,
-            position.line + 20
+            position.line + 20,
           );
           const contextCode = editor.document.getText(
             new vscode.Range(
               startLine,
               0,
               endLine,
-              editor.document.lineAt(endLine).text.length
-            )
+              editor.document.lineAt(endLine).text.length,
+            ),
           );
           const generatedCode = await generateCodeFromVoice(
             text,
             friendlyLang,
             indentation,
-            contextCode
+            contextCode,
           );
           if (generatedCode) {
             await editor.edit((eb) => eb.insert(position, generatedCode));
@@ -526,14 +332,14 @@ await ensureCopilotActivated(outputChannel);
           }
         } catch (err) {
           vscode.window.showErrorMessage(
-            `EchoCode Generation Fail: ${err.message}`
+            `EchoCode Generation Fail: ${err.message}`,
           );
         }
       } else {
         await speakMessage("Coding mode. Listening.");
         startRecording(outputChannel, context);
       }
-    })
+    }),
   );
 
   // --- MACRO 2: Voice to COMMAND only ---
@@ -544,57 +350,26 @@ await ensureCopilotActivated(outputChannel);
         try {
           const text = await stopAndTranscribe(
             outputChannel,
-            context.globalState
+            context.globalState,
           );
-          if (!text || text.includes("no speech detected")) return;
-          const cleaned = text.toLowerCase().trim();
-
-          // Priority 1: EchoCode internal commands
-          const commandsPath = path.join(
-            __dirname,
-            "Core/program_settings/program_settings/voice_commands.json"
-          );
-         const internalCommands = JSON.parse(
-  fs.readFileSync(commandsPath, "utf-8")
-);
-for (const cmd of internalCommands) {
-  if (cmd.keywords.some((k) => cleaned.includes(k))) {
-    const currentMode = getMode();
-
-    if (currentMode !== "dev" && STUDENT_LOCKED_COMMANDS.has(cmd.id)) {
-      await speakMessage("That command is disabled in student mode.");
-      return;
-    }
-
-    await vscode.commands.executeCommand(cmd.id);
-    return;
-  }
-}
-          
-
-          // Priority 2: External/user-defined commands
-          const externalCmd = matchExternalCommand(cleaned);
-          if (externalCmd) {
-            await vscode.commands.executeCommand(externalCmd.id);
-            vscode.window.showInformationMessage(
-              `✅ External: ${externalCmd.title}`
-            );
+          const voiceResult = await tryExecuteVoiceCommand(text, outputChannel);
+          if (voiceResult.handled) {
             return;
           }
 
           vscode.window.showInformationMessage(
-            `No command found for: "${text}"`
+            `No command found for: "${text}"`,
           );
         } catch (err) {
           vscode.window.showErrorMessage(
-            `EchoCode Command Fail: ${err.message}`
+            `EchoCode Command Fail: ${err.message}`,
           );
         }
       } else {
         await speakMessage("Command mode. Listening.");
         startRecording(outputChannel, context);
       }
-    })
+    }),
   );
 
   // --- MACRO 3: Voice to CHAT only ---
@@ -605,7 +380,7 @@ for (const cmd of internalCommands) {
         try {
           const text = await stopAndTranscribe(
             outputChannel,
-            context.globalState
+            context.globalState,
           );
           if (!text || text.includes("no speech detected")) return;
           await vscode.commands.executeCommand("echocode.openChat");
@@ -619,7 +394,7 @@ for (const cmd of internalCommands) {
         await speakMessage("Chat mode. Listening.");
         startRecording(outputChannel, context);
       }
-    })
+    }),
   );
 
   // --- CYCLE VOICE MODE (Ctrl+Alt+') ---
@@ -631,7 +406,7 @@ for (const cmd of internalCommands) {
 
       vscode.window.showInformationMessage(`EchoCode Voice Mode: ${label}`);
       await speakMessage(`Voice mode set to ${label}.`);
-    })
+    }),
   );
 
   // Toggle Voice Command (Smart Router)
@@ -644,11 +419,16 @@ for (const cmd of internalCommands) {
         // Announce processing (don't await to avoid blocking stop)
         speakMessage("Processing");
 
-        const result = await vscode.commands.executeCommand("echocode._voiceStop");
+        const result = await vscode.commands.executeCommand(
+          "echocode._voiceStop",
+        );
 
         if (result && result.ok && result.text) {
           // Attempt to execute as a voice command first
-          const voiceResult = await tryExecuteVoiceCommand(result.text, outputChannel);
+          const voiceResult = await tryExecuteVoiceCommand(
+            result.text,
+            outputChannel,
+          );
 
           if (!voiceResult.handled) {
             // Fallback: Send to Chat Tutor
@@ -665,7 +445,7 @@ for (const cmd of internalCommands) {
         await speakMessage("Listening");
         await vscode.commands.executeCommand("echocode._voiceStart");
       }
-    })
+    }),
   );
 
   registerBigOCommand(context);
@@ -688,39 +468,38 @@ for (const cmd of internalCommands) {
 
   // Register C++ compilation command
   const compileCppCommand = vscode.commands.registerCommand(
-  "echocode.compileAndParseCpp",
-  guard("echocode.compileAndParseCpp", () => {
-    const editor = vscode.window.activeTextEditor;
-    if (editor && editor.document.languageId === "cpp") {
-      compileCurrentCppFile(editor.document.uri.fsPath);
-    } else {
-      vscode.window.showInformationMessage(
-        "This command is only available for C++ files."
-      );
-    }
-  })
-);
-context.subscriptions.push(compileCppCommand);
+    "echocode.compileAndParseCpp",
+    guard("echocode.compileAndParseCpp", () => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor && editor.document.languageId === "cpp") {
+        compileCurrentCppFile(editor.document.uri.fsPath);
+      } else {
+        vscode.window.showInformationMessage(
+          "This command is only available for C++ files.",
+        );
+      }
+    }),
+  );
+  context.subscriptions.push(compileCppCommand);
 
   // Register Python error checking command
   const checkPythonCommand = vscode.commands.registerCommand(
-  "echocode.checkPythonErrors",
-  guard("echocode.checkPythonErrors", () => {
-    const editor = vscode.window.activeTextEditor;
-    if (editor && editor.document.languageId === "python") {
-      checkCurrentPythonFile(editor.document.uri.fsPath);
-    } else {
-      vscode.window.showInformationMessage(
-        "This command is only available for Python files."
-      );
-    }
-  })
-);
-context.subscriptions.push(checkPythonCommand);
-
+    "echocode.checkPythonErrors",
+    guard("echocode.checkPythonErrors", () => {
+      const editor = vscode.window.activeTextEditor;
+      if (editor && editor.document.languageId === "python") {
+        checkCurrentPythonFile(editor.document.uri.fsPath);
+      } else {
+        vscode.window.showInformationMessage(
+          "This command is only available for Python files.",
+        );
+      }
+    }),
+  );
+  context.subscriptions.push(checkPythonCommand);
 
   outputChannel.appendLine(
-    "Commands registered: echocode.readErrors, echocode.annotate, echocode.speakNextAnnotation, echocode.readAllAnnotations, echocode.summarizeClass, echocode.summarizeFunction, echocode.jumpToNextFunction, echocode.jumpToPreviousFunction, echocode.openChat, echocode.startVoiceInput, echocode.loadAssignmentFile, echocode.rescanUserCode, echocode.readNextSequentialTask, echocode.increaseSpeechSpeed, echocode.decreaseSpeechSpeed, echocode.moveToNextFolder, echocode.moveToPreviousFolder"
+    "Commands registered: echocode.readErrors, echocode.annotate, echocode.speakNextAnnotation, echocode.readAllAnnotations, echocode.summarizeClass, echocode.summarizeFunction, echocode.jumpToNextFunction, echocode.jumpToPreviousFunction, echocode.openChat, echocode.startVoiceInput, echocode.loadAssignmentFile, echocode.rescanUserCode, echocode.readNextSequentialTask, echocode.increaseSpeechSpeed, echocode.decreaseSpeechSpeed, echocode.moveToNextFolder, echocode.moveToPreviousFolder",
   );
 
   // Guidance level commands - for controlling how verbose/guided the AI responses are across features that use AI (summarizer, big O, annotations, what's this)
@@ -746,7 +525,7 @@ context.subscriptions.push(checkPythonCommand);
             detail: "Technical, raw error included",
           },
         ],
-        { placeHolder: "Choose EchoCode Guidance Level" }
+        { placeHolder: "Choose EchoCode Guidance Level" },
       );
 
       if (!pick) return;
@@ -756,9 +535,9 @@ context.subscriptions.push(checkPythonCommand);
         .update("guidanceLevel", pick.value, vscode.ConfigurationTarget.Global);
 
       vscode.window.showInformationMessage(
-        `EchoCode guidance level set to ${pick.label}.`
+        `EchoCode guidance level set to ${pick.label}.`,
       );
-    }
+    },
   );
 
   // Optional: command to cycle through guidance levels quickly
@@ -781,15 +560,15 @@ context.subscriptions.push(checkPythonCommand);
       await config.update(
         "guidanceLevel",
         next,
-        vscode.ConfigurationTarget.Global
+        vscode.ConfigurationTarget.Global,
       );
 
       const label =
         next === "guided"
           ? "Guided"
           : next === "balanced"
-          ? "Balanced"
-          : "Concise";
+            ? "Balanced"
+            : "Concise";
 
       vscode.window.showInformationMessage(`EchoCode guidance level: ${label}`);
 
@@ -803,7 +582,7 @@ context.subscriptions.push(checkPythonCommand);
       } catch (_) {
         // If TTS unavailable, silently ignore
       }
-    }
+    },
   );
 
   context.subscriptions.push(cycleGuidanceLevelCommand);
@@ -816,7 +595,7 @@ context.subscriptions.push(checkPythonCommand);
   // Listen for workspace folder changes and reinitialize the folder list
   vscode.workspace.onDidChangeWorkspaceFolders(() => {
     outputChannel.appendLine(
-      "Workspace folders changed. Reinitializing folder list..."
+      "Workspace folders changed. Reinitializing folder list...",
     );
     initializeFolderList();
   });

@@ -1,0 +1,320 @@
+import * as vscode from "vscode";
+
+type RegisterFn = (id: string, handler: (...args: any[]) => any) => void;
+
+type StaticCommandDefinition = {
+  id: string;
+  testMessage: string;
+  liveMessage: string;
+};
+
+function logAndShow(message: string): void {
+  vscode.window.showInformationMessage(message);
+  console.log(message);
+}
+
+function getModeMessage(
+  isTest: boolean,
+  testMessage: string,
+  liveMessage: string,
+): string {
+  return isTest ? testMessage : liveMessage;
+}
+
+function registerStaticCommands(
+  register: RegisterFn,
+  isTest: boolean,
+  definitions: StaticCommandDefinition[],
+): void {
+  for (const definition of definitions) {
+    register(definition.id, () => {
+      logAndShow(
+        getModeMessage(isTest, definition.testMessage, definition.liveMessage),
+      );
+    });
+  }
+}
+
+function getActiveEditor(): vscode.TextEditor | undefined {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    vscode.window.showErrorMessage("No active editor");
+  }
+
+  return editor;
+}
+
+function updateSelection(
+  editor: vscode.TextEditor,
+  targetLine: number,
+  isTest: boolean,
+): void {
+  if (isTest) {
+    const mockEditor = editor as vscode.TextEditor & {
+      selection: { active: { line: number } };
+    };
+    mockEditor.selection.active.line = targetLine;
+    return;
+  }
+
+  const position = new vscode.Position(targetLine, 0);
+  editor.selection = new vscode.Selection(position, position);
+}
+
+function navigateToFunction(direction: 1 | -1, isTest: boolean): void {
+  const editor = vscode.window.activeTextEditor;
+  if (!editor) {
+    return;
+  }
+
+  const currentLine = editor.selection.active.line;
+  const document = editor.document;
+  let targetLine = currentLine + direction;
+
+  while (targetLine >= 0 && targetLine < document.lineCount) {
+    const text = document.lineAt(targetLine).text.trim();
+    if (text.startsWith("def ")) {
+      updateSelection(editor, targetLine, isTest);
+      logAndShow(
+        getModeMessage(
+          isTest,
+          `[Test Navigation] Jumped to ${text}`,
+          `Navigated to ${text}`,
+        ),
+      );
+      return;
+    }
+
+    targetLine += direction;
+  }
+
+  logAndShow(
+    getModeMessage(
+      isTest,
+      direction > 0
+        ? "[Test Navigation] No next function"
+        : "[Test Navigation] No previous function",
+      direction > 0 ? "No next function found." : "No previous function found.",
+    ),
+  );
+}
+
+function registerEditorCommands(register: RegisterFn, isTest: boolean): void {
+  register("echocode.readCurrentLine", () => {
+    const editor = getActiveEditor();
+    if (!editor) {
+      return;
+    }
+
+    const line = editor.selection.active.line;
+    const text = editor.document.lineAt(line).text;
+    const prefix = isTest ? "[Test Line]" : "Current line:";
+    logAndShow(`${prefix} ${text}`);
+  });
+
+  register("echocode.describeCurrentLine", () => {
+    const editor = getActiveEditor();
+    if (!editor) {
+      return;
+    }
+
+    const line = editor.selection.active.line;
+    const text = editor.document.lineAt(line).text;
+    logAndShow(
+      getModeMessage(
+        isTest,
+        `[Test Describe] ${text}`,
+        `Describing current line: ${text}`,
+      ),
+    );
+  });
+
+  register("echocode.jumpToNextFunction", () => {
+    navigateToFunction(1, isTest);
+  });
+
+  register("echocode.jumpToPreviousFunction", () => {
+    navigateToFunction(-1, isTest);
+  });
+}
+
+export function registerExtensionCommands(
+  context: vscode.ExtensionContext,
+  isTest: boolean,
+): void {
+  const register: RegisterFn = (id, handler) => {
+    context.subscriptions.push(vscode.commands.registerCommand(id, handler));
+  };
+
+  register("echolint.helloWorld", () => {
+    const message = isTest
+      ? "[Test] Hello World simulated!"
+      : "Hello World from EchoLint!";
+    vscode.window.showInformationMessage(message);
+  });
+
+  registerEditorCommands(register, isTest);
+
+  registerStaticCommands(register, isTest, [
+    {
+      id: "echocode.increaseSpeechSpeed",
+      testMessage: "[Test] Increase speech speed",
+      liveMessage: "Increasing speech speed.",
+    },
+    {
+      id: "echocode.decreaseSpeechSpeed",
+      testMessage: "[Test] Decrease speech speed",
+      liveMessage: "Decreasing speech speed.",
+    },
+    {
+      id: "echocode.stopSpeech",
+      testMessage: "[Test] Stop speech",
+      liveMessage: "Stopping speech.",
+    },
+    {
+      id: "echocode.summarizeClass",
+      testMessage: "[Test] Summarize current class",
+      liveMessage: "Summarizing current class (placeholder).",
+    },
+    {
+      id: "echocode.summarizeFunction",
+      testMessage: "[Test] Summarize current function",
+      liveMessage: "Summarizing current function (placeholder).",
+    },
+    {
+      id: "echocode.summarizeProgram",
+      testMessage: "[Test] Summarize current program",
+      liveMessage: "Summarizing current program (placeholder).",
+    },
+    {
+      id: "echocode.whereAmI",
+      testMessage: "[Test] Where am I",
+      liveMessage: "Describing current scope (placeholder).",
+    },
+    {
+      id: "echocode.annotate",
+      testMessage: "[Test] Toggle annotations",
+      liveMessage: "Toggling EchoCode annotations (placeholder).",
+    },
+    {
+      id: "echocode.readAllAnnotations",
+      testMessage: "[Test] Read all annotations",
+      liveMessage: "Reading all annotations aloud (placeholder).",
+    },
+    {
+      id: "echocode.speakNextAnnotation",
+      testMessage: "[Test] Speak next annotation",
+      liveMessage: "Speaking next annotation (placeholder).",
+    },
+    {
+      id: "code-tutor.analyzeBigO",
+      testMessage: "[Test] Analyze Big O",
+      liveMessage: "Analyzing Big O (placeholder).",
+    },
+    {
+      id: "code-tutor.iterateBigOQueue",
+      testMessage: "[Test] Read next Big O recommendation",
+      liveMessage: "Reading next Big O recommendation (placeholder).",
+    },
+    {
+      id: "code-tutor.readEntireBigOQueue",
+      testMessage: "[Test] Read all Big O recommendations",
+      liveMessage: "Reading all Big O recommendations (placeholder).",
+    },
+    {
+      id: "echocode.loadAssignmentFile",
+      testMessage: "[Test] Load assignment file",
+      liveMessage: "Loading assignment file (placeholder).",
+    },
+    {
+      id: "echocode.rescanUserCode",
+      testMessage: "[Test] Rescan user code for completed tasks",
+      liveMessage: "Rescanning code for completed tasks (placeholder).",
+    },
+    {
+      id: "echocode.readNextSequentialTask",
+      testMessage: "[Test] Read next sequential task",
+      liveMessage: "Reading next sequential task (placeholder).",
+    },
+    {
+      id: "echocode.readNextTask",
+      testMessage: "[Test] Read next task",
+      liveMessage: "Reading next task (placeholder).",
+    },
+    {
+      id: "echocode.markTaskComplete",
+      testMessage: "[Test] Mark task complete",
+      liveMessage: "Marking task as complete (placeholder).",
+    },
+    {
+      id: "echocode.createFile",
+      testMessage: "[Test] Create file",
+      liveMessage: "Creating new file (placeholder).",
+    },
+    {
+      id: "echocode.createFolder",
+      testMessage: "[Test] Create folder",
+      liveMessage: "Creating new folder (placeholder).",
+    },
+    {
+      id: "echocode.navigateToNextFile",
+      testMessage: "[Test] Navigate to next file",
+      liveMessage: "Navigating to next file (placeholder).",
+    },
+    {
+      id: "echocode.initializeFolderList",
+      testMessage: "[Test] Initialize folder list",
+      liveMessage: "Initializing folder list (placeholder).",
+    },
+    {
+      id: "echocode.moveToNextFolder",
+      testMessage: "[Test] Move to next folder",
+      liveMessage: "Moving to next folder (placeholder).",
+    },
+    {
+      id: "echocode.moveToPreviousFolder",
+      testMessage: "[Test] Move to previous folder",
+      liveMessage: "Moving to previous folder (placeholder).",
+    },
+    {
+      id: "echocode.navigateFilesInCurrentFolder",
+      testMessage: "[Test] Navigate files in folder",
+      liveMessage: "Navigating files in current folder (placeholder).",
+    },
+    {
+      id: "echocode.toggleCharacterReadOut",
+      testMessage: "[Test] Toggle character read-out",
+      liveMessage: "Toggling character read-out (placeholder).",
+    },
+    {
+      id: "echocode.copyFileNameForImport",
+      testMessage: "[Test] Copy file name for import",
+      liveMessage: "Copying file name for import (placeholder).",
+    },
+    {
+      id: "echocode.pasteImportAtCursor",
+      testMessage: "[Test] Paste import statement",
+      liveMessage: "Pasting import statement at cursor (placeholder).",
+    },
+    {
+      id: "echocode.readHotkeyGuide",
+      testMessage: "[Test] Read hotkey guide",
+      liveMessage: "Reading EchoCode hotkey guide (placeholder).",
+    },
+    {
+      id: "echocode.readErrors",
+      testMessage: "[Test] Read Python errors",
+      liveMessage: "Reading Python errors aloud (placeholder).",
+    },
+    {
+      id: "echocode.openChat",
+      testMessage: "[Test] Open EchoCode chat",
+      liveMessage: "Opening EchoCode Tutor chat (placeholder).",
+    },
+    {
+      id: "echocode.startVoiceInput",
+      testMessage: "[Test] Start voice input",
+      liveMessage: "Starting voice input (placeholder).",
+    },
+  ]);
+}
