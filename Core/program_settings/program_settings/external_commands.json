@@ -17860,10 +17860,10 @@
     ]
   },
   {
-    "id": "changeEditorIndentation10",
-    "title": "changeEditorIndentation10",
+    "id": "changeEditorIndentation2",
+    "title": "changeEditorIndentation2",
     "keywords": [
-      "change editor indentation10",
+      "change editor indentation2",
       "change editor"
     ]
   },
@@ -18207,14 +18207,6 @@
     ]
   },
   {
-    "id": "workbench.action.chat.pickAgentSession",
-    "title": "workbench.action.chat.pickAgentSession",
-    "keywords": [
-      "chat pick agent session",
-      "chat pick"
-    ]
-  },
-  {
     "id": "workbench.explorer.openEditorsView.open",
     "title": "workbench.explorer.openEditorsView.open",
     "keywords": [
@@ -18260,14 +18252,6 @@
     "keywords": [
       "workbench explorer file view reset view location",
       "workbench explorer"
-    ]
-  },
-  {
-    "id": "editor.action.inlineSuggest.renameSymbol",
-    "title": "editor.action.inlineSuggest.renameSymbol",
-    "keywords": [
-      "inline suggest rename symbol",
-      "inline suggest"
     ]
   },
   {
@@ -18391,6 +18375,22 @@
     ]
   },
   {
+    "id": "workbench.view.extension.package-explorer.resetViewContainerLocation",
+    "title": "workbench.view.extension.package-explorer.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension package explorer reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.package-explorer",
+    "title": "workbench.view.extension.package-explorer",
+    "keywords": [
+      "workbench view extension package explorer",
+      "workbench view"
+    ]
+  },
+  {
     "id": "workbench.view.extension.copilot-chat.resetViewContainerLocation",
     "title": "workbench.view.extension.copilot-chat.resetViewContainerLocation",
     "keywords": [
@@ -18423,6 +18423,118 @@
     ]
   },
   {
+    "id": "workbench.view.extension.github-actions.resetViewContainerLocation",
+    "title": "workbench.view.extension.github-actions.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension github actions reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.github-actions",
+    "title": "workbench.view.extension.github-actions",
+    "keywords": [
+      "workbench view extension github actions",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.github-pull-requests.resetViewContainerLocation",
+    "title": "workbench.view.extension.github-pull-requests.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension github pull requests reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.github-pull-requests",
+    "title": "workbench.view.extension.github-pull-requests",
+    "keywords": [
+      "workbench view extension github pull requests",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.github-pull-request.resetViewContainerLocation",
+    "title": "workbench.view.extension.github-pull-request.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension github pull request reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.github-pull-request",
+    "title": "workbench.view.extension.github-pull-request",
+    "keywords": [
+      "workbench view extension github pull request",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-duo.resetViewContainerLocation",
+    "title": "workbench.view.extension.gitlab-duo.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension gitlab duo reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-duo",
+    "title": "workbench.view.extension.gitlab-duo",
+    "keywords": [
+      "workbench view extension gitlab duo",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-workflow.resetViewContainerLocation",
+    "title": "workbench.view.extension.gitlab-workflow.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension gitlab workflow reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-workflow",
+    "title": "workbench.view.extension.gitlab-workflow",
+    "keywords": [
+      "workbench view extension gitlab workflow",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-agent-platform.resetViewContainerLocation",
+    "title": "workbench.view.extension.gitlab-agent-platform.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension gitlab agent platform reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-agent-platform",
+    "title": "workbench.view.extension.gitlab-agent-platform",
+    "keywords": [
+      "workbench view extension gitlab agent platform",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-agent-platform-next.resetViewContainerLocation",
+    "title": "workbench.view.extension.gitlab-agent-platform-next.resetViewContainerLocation",
+    "keywords": [
+      "workbench view extension gitlab agent platform next reset view container location",
+      "workbench view"
+    ]
+  },
+  {
+    "id": "workbench.view.extension.gitlab-agent-platform-next",
+    "title": "workbench.view.extension.gitlab-agent-platform-next",
+    "keywords": [
+      "workbench view extension gitlab agent platform next",
+      "workbench view"
+    ]
+  },
+  {
     "id": "workbench.view.extension.containersView.resetViewContainerLocation",
     "title": "workbench.view.extension.containersView.resetViewContainerLocation",
     "keywords": [
@@ -18439,66 +18551,34 @@
     ]
   },
   {
-    "id": "workbench.view.extension.dataworkspace.resetViewContainerLocation",
-    "title": "workbench.view.extension.dataworkspace.resetViewContainerLocation",
+    "id": "workbench.view.extension.jupyter.resetViewContainerLocation",
+    "title": "workbench.view.extension.jupyter.resetViewContainerLocation",
     "keywords": [
-      "workbench view extension dataworkspace reset view container location",
+      "workbench view extension jupyter reset view container location",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.dataworkspace",
-    "title": "workbench.view.extension.dataworkspace",
+    "id": "workbench.view.extension.jupyter",
+    "title": "workbench.view.extension.jupyter",
     "keywords": [
-      "workbench view extension dataworkspace",
+      "workbench view extension jupyter",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.objectExplorer.resetViewContainerLocation",
-    "title": "workbench.view.extension.objectExplorer.resetViewContainerLocation",
+    "id": "workbench.view.extension.jupyter-variables.resetViewContainerLocation",
+    "title": "workbench.view.extension.jupyter-variables.resetViewContainerLocation",
     "keywords": [
-      "workbench view extension object explorer reset view container location",
+      "workbench view extension jupyter variables reset view container location",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.objectExplorer",
-    "title": "workbench.view.extension.objectExplorer",
+    "id": "workbench.view.extension.jupyter-variables",
+    "title": "workbench.view.extension.jupyter-variables",
     "keywords": [
-      "workbench view extension object explorer",
-      "workbench view"
-    ]
-  },
-  {
-    "id": "workbench.view.extension.queryResult.resetViewContainerLocation",
-    "title": "workbench.view.extension.queryResult.resetViewContainerLocation",
-    "keywords": [
-      "workbench view extension query result reset view container location",
-      "workbench view"
-    ]
-  },
-  {
-    "id": "workbench.view.extension.queryResult",
-    "title": "workbench.view.extension.queryResult",
-    "keywords": [
-      "workbench view extension query result",
-      "workbench view"
-    ]
-  },
-  {
-    "id": "workbench.view.extension.python.resetViewContainerLocation",
-    "title": "workbench.view.extension.python.resetViewContainerLocation",
-    "keywords": [
-      "workbench view extension python reset view container location",
-      "workbench view"
-    ]
-  },
-  {
-    "id": "workbench.view.extension.python",
-    "title": "workbench.view.extension.python",
-    "keywords": [
-      "workbench view extension python",
+      "workbench view extension jupyter variables",
       "workbench view"
     ]
   },
@@ -18519,50 +18599,50 @@
     ]
   },
   {
-    "id": "workbench.view.extension.azureJavaMigrationExplorer.resetViewContainerLocation",
-    "title": "workbench.view.extension.azureJavaMigrationExplorer.resetViewContainerLocation",
+    "id": "workbench.view.extension.makefile__viewContainer.resetViewContainerLocation",
+    "title": "workbench.view.extension.makefile__viewContainer.resetViewContainerLocation",
     "keywords": [
-      "workbench view extension azure java migration explorer reset view container location",
+      "workbench view extension makefile  view container reset view container location",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.azureJavaMigrationExplorer",
-    "title": "workbench.view.extension.azureJavaMigrationExplorer",
+    "id": "workbench.view.extension.makefile__viewContainer",
+    "title": "workbench.view.extension.makefile__viewContainer",
     "keywords": [
-      "workbench view extension azure java migration explorer",
+      "workbench view extension makefile  view container",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.gradleContainerView.resetViewContainerLocation",
-    "title": "workbench.view.extension.gradleContainerView.resetViewContainerLocation",
+    "id": "workbench.view.extension.liveshare.resetViewContainerLocation",
+    "title": "workbench.view.extension.liveshare.resetViewContainerLocation",
     "keywords": [
-      "workbench view extension gradle container view reset view container location",
+      "workbench view extension liveshare reset view container location",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.gradleContainerView",
-    "title": "workbench.view.extension.gradleContainerView",
+    "id": "workbench.view.extension.liveshare",
+    "title": "workbench.view.extension.liveshare",
     "keywords": [
-      "workbench view extension gradle container view",
+      "workbench view extension liveshare",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.javaupgrade.resetViewContainerLocation",
-    "title": "workbench.view.extension.javaupgrade.resetViewContainerLocation",
+    "id": "workbench.view.extension.rustSyntaxTreeContainer.resetViewContainerLocation",
+    "title": "workbench.view.extension.rustSyntaxTreeContainer.resetViewContainerLocation",
     "keywords": [
-      "workbench view extension javaupgrade reset view container location",
+      "workbench view extension rust syntax tree container reset view container location",
       "workbench view"
     ]
   },
   {
-    "id": "workbench.view.extension.javaupgrade",
-    "title": "workbench.view.extension.javaupgrade",
+    "id": "workbench.view.extension.rustSyntaxTreeContainer",
+    "title": "workbench.view.extension.rustSyntaxTreeContainer",
     "keywords": [
-      "workbench view extension javaupgrade",
+      "workbench view extension rust syntax tree container",
       "workbench view"
     ]
   },
@@ -18701,6 +18781,54 @@
     ]
   },
   {
+    "id": "workspaceEnvironments.open",
+    "title": "workspaceEnvironments.open",
+    "keywords": [
+      "workspace environments open",
+      "workspace environments"
+    ]
+  },
+  {
+    "id": "workspaceEnvironments.focus",
+    "title": "workspaceEnvironments.focus",
+    "keywords": [
+      "workspace environments focus",
+      "workspace environments"
+    ]
+  },
+  {
+    "id": "workspaceEnvironments.resetViewLocation",
+    "title": "workspaceEnvironments.resetViewLocation",
+    "keywords": [
+      "workspace environments reset view location",
+      "workspace environments"
+    ]
+  },
+  {
+    "id": "pythonEnvironments.open",
+    "title": "pythonEnvironments.open",
+    "keywords": [
+      "python environments open",
+      "python environments"
+    ]
+  },
+  {
+    "id": "pythonEnvironments.focus",
+    "title": "pythonEnvironments.focus",
+    "keywords": [
+      "python environments focus",
+      "python environments"
+    ]
+  },
+  {
+    "id": "pythonEnvironments.resetViewLocation",
+    "title": "pythonEnvironments.resetViewLocation",
+    "keywords": [
+      "python environments reset view location",
+      "python environments"
+    ]
+  },
+  {
     "id": "copilot-chat.open",
     "title": "copilot-chat.open",
     "keywords": [
@@ -18746,6 +18874,526 @@
     "keywords": [
       "context inspector reset view location",
       "context inspector"
+    ]
+  },
+  {
+    "id": "github-actions.current-branch.open",
+    "title": "github-actions.current-branch.open",
+    "keywords": [
+      "github actions current branch open",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.current-branch.focus",
+    "title": "github-actions.current-branch.focus",
+    "keywords": [
+      "github actions current branch focus",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.current-branch.resetViewLocation",
+    "title": "github-actions.current-branch.resetViewLocation",
+    "keywords": [
+      "github actions current branch reset view location",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.workflows.open",
+    "title": "github-actions.workflows.open",
+    "keywords": [
+      "github actions workflows open",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.workflows.focus",
+    "title": "github-actions.workflows.focus",
+    "keywords": [
+      "github actions workflows focus",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.workflows.resetViewLocation",
+    "title": "github-actions.workflows.resetViewLocation",
+    "keywords": [
+      "github actions workflows reset view location",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.settings.open",
+    "title": "github-actions.settings.open",
+    "keywords": [
+      "github actions settings open",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.settings.focus",
+    "title": "github-actions.settings.focus",
+    "keywords": [
+      "github actions settings focus",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.settings.resetViewLocation",
+    "title": "github-actions.settings.resetViewLocation",
+    "keywords": [
+      "github actions settings reset view location",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.empty-view.open",
+    "title": "github-actions.empty-view.open",
+    "keywords": [
+      "github actions empty view open",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.empty-view.focus",
+    "title": "github-actions.empty-view.focus",
+    "keywords": [
+      "github actions empty view focus",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.empty-view.resetViewLocation",
+    "title": "github-actions.empty-view.resetViewLocation",
+    "keywords": [
+      "github actions empty view reset view location",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github:login.open",
+    "title": "github:login.open",
+    "keywords": [
+      "github:login open"
+    ]
+  },
+  {
+    "id": "github:login.focus",
+    "title": "github:login.focus",
+    "keywords": [
+      "github:login focus"
+    ]
+  },
+  {
+    "id": "github:login.resetViewLocation",
+    "title": "github:login.resetViewLocation",
+    "keywords": [
+      "github:login reset view location",
+      "github:login reset"
+    ]
+  },
+  {
+    "id": "pr:github.open",
+    "title": "pr:github.open",
+    "keywords": [
+      "pr:github open"
+    ]
+  },
+  {
+    "id": "pr:github.focus",
+    "title": "pr:github.focus",
+    "keywords": [
+      "pr:github focus"
+    ]
+  },
+  {
+    "id": "pr:github.resetViewLocation",
+    "title": "pr:github.resetViewLocation",
+    "keywords": [
+      "pr:github reset view location",
+      "pr:github reset"
+    ]
+  },
+  {
+    "id": "issues:github.open",
+    "title": "issues:github.open",
+    "keywords": [
+      "issues:github open"
+    ]
+  },
+  {
+    "id": "issues:github.focus",
+    "title": "issues:github.focus",
+    "keywords": [
+      "issues:github focus"
+    ]
+  },
+  {
+    "id": "issues:github.resetViewLocation",
+    "title": "issues:github.resetViewLocation",
+    "keywords": [
+      "issues:github reset view location",
+      "issues:github reset"
+    ]
+  },
+  {
+    "id": "notifications:github.open",
+    "title": "notifications:github.open",
+    "keywords": [
+      "notifications:github open"
+    ]
+  },
+  {
+    "id": "notifications:github.focus",
+    "title": "notifications:github.focus",
+    "keywords": [
+      "notifications:github focus"
+    ]
+  },
+  {
+    "id": "notifications:github.resetViewLocation",
+    "title": "notifications:github.resetViewLocation",
+    "keywords": [
+      "notifications:github reset view location",
+      "notifications:github reset"
+    ]
+  },
+  {
+    "id": "github:conflictResolution.open",
+    "title": "github:conflictResolution.open",
+    "keywords": [
+      "github:conflict resolution open",
+      "github:conflict resolution"
+    ]
+  },
+  {
+    "id": "github:conflictResolution.focus",
+    "title": "github:conflictResolution.focus",
+    "keywords": [
+      "github:conflict resolution focus",
+      "github:conflict resolution"
+    ]
+  },
+  {
+    "id": "github:conflictResolution.resetViewLocation",
+    "title": "github:conflictResolution.resetViewLocation",
+    "keywords": [
+      "github:conflict resolution reset view location",
+      "github:conflict resolution"
+    ]
+  },
+  {
+    "id": "github:createPullRequestWebview.open",
+    "title": "github:createPullRequestWebview.open",
+    "keywords": [
+      "github:create pull request webview open",
+      "github:create pull"
+    ]
+  },
+  {
+    "id": "github:createPullRequestWebview.focus",
+    "title": "github:createPullRequestWebview.focus",
+    "keywords": [
+      "github:create pull request webview focus",
+      "github:create pull"
+    ]
+  },
+  {
+    "id": "github:createPullRequestWebview.resetViewLocation",
+    "title": "github:createPullRequestWebview.resetViewLocation",
+    "keywords": [
+      "github:create pull request webview reset view location",
+      "github:create pull"
+    ]
+  },
+  {
+    "id": "github:compareChangesFiles.open",
+    "title": "github:compareChangesFiles.open",
+    "keywords": [
+      "github:compare changes files open",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "github:compareChangesFiles.focus",
+    "title": "github:compareChangesFiles.focus",
+    "keywords": [
+      "github:compare changes files focus",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "github:compareChangesFiles.resetViewLocation",
+    "title": "github:compareChangesFiles.resetViewLocation",
+    "keywords": [
+      "github:compare changes files reset view location",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "github:compareChangesCommits.open",
+    "title": "github:compareChangesCommits.open",
+    "keywords": [
+      "github:compare changes commits open",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "github:compareChangesCommits.focus",
+    "title": "github:compareChangesCommits.focus",
+    "keywords": [
+      "github:compare changes commits focus",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "github:compareChangesCommits.resetViewLocation",
+    "title": "github:compareChangesCommits.resetViewLocation",
+    "keywords": [
+      "github:compare changes commits reset view location",
+      "github:compare changes"
+    ]
+  },
+  {
+    "id": "prStatus:github.open",
+    "title": "prStatus:github.open",
+    "keywords": [
+      "pr status:github open",
+      "pr status:github"
+    ]
+  },
+  {
+    "id": "prStatus:github.focus",
+    "title": "prStatus:github.focus",
+    "keywords": [
+      "pr status:github focus",
+      "pr status:github"
+    ]
+  },
+  {
+    "id": "prStatus:github.resetViewLocation",
+    "title": "prStatus:github.resetViewLocation",
+    "keywords": [
+      "pr status:github reset view location",
+      "pr status:github"
+    ]
+  },
+  {
+    "id": "github:activePullRequest.open",
+    "title": "github:activePullRequest.open",
+    "keywords": [
+      "github:active pull request open",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "github:activePullRequest.focus",
+    "title": "github:activePullRequest.focus",
+    "keywords": [
+      "github:active pull request focus",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "github:activePullRequest.resetViewLocation",
+    "title": "github:activePullRequest.resetViewLocation",
+    "keywords": [
+      "github:active pull request reset view location",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "github:activePullRequest:welcome.open",
+    "title": "github:activePullRequest:welcome.open",
+    "keywords": [
+      "github:active pull request:welcome open",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "github:activePullRequest:welcome.focus",
+    "title": "github:activePullRequest:welcome.focus",
+    "keywords": [
+      "github:active pull request:welcome focus",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "github:activePullRequest:welcome.resetViewLocation",
+    "title": "github:activePullRequest:welcome.resetViewLocation",
+    "keywords": [
+      "github:active pull request:welcome reset view location",
+      "github:active pull"
+    ]
+  },
+  {
+    "id": "issuesAndMrs.open",
+    "title": "issuesAndMrs.open",
+    "keywords": [
+      "issues and mrs open",
+      "issues and"
+    ]
+  },
+  {
+    "id": "issuesAndMrs.focus",
+    "title": "issuesAndMrs.focus",
+    "keywords": [
+      "issues and mrs focus",
+      "issues and"
+    ]
+  },
+  {
+    "id": "issuesAndMrs.resetViewLocation",
+    "title": "issuesAndMrs.resetViewLocation",
+    "keywords": [
+      "issues and mrs reset view location",
+      "issues and"
+    ]
+  },
+  {
+    "id": "remoteSecurityScanning.open",
+    "title": "remoteSecurityScanning.open",
+    "keywords": [
+      "remote security scanning open",
+      "remote security"
+    ]
+  },
+  {
+    "id": "remoteSecurityScanning.focus",
+    "title": "remoteSecurityScanning.focus",
+    "keywords": [
+      "remote security scanning focus",
+      "remote security"
+    ]
+  },
+  {
+    "id": "remoteSecurityScanning.resetViewLocation",
+    "title": "remoteSecurityScanning.resetViewLocation",
+    "keywords": [
+      "remote security scanning reset view location",
+      "remote security"
+    ]
+  },
+  {
+    "id": "currentBranchInfo.open",
+    "title": "currentBranchInfo.open",
+    "keywords": [
+      "current branch info open",
+      "current branch"
+    ]
+  },
+  {
+    "id": "currentBranchInfo.focus",
+    "title": "currentBranchInfo.focus",
+    "keywords": [
+      "current branch info focus",
+      "current branch"
+    ]
+  },
+  {
+    "id": "currentBranchInfo.resetViewLocation",
+    "title": "currentBranchInfo.resetViewLocation",
+    "keywords": [
+      "current branch info reset view location",
+      "current branch"
+    ]
+  },
+  {
+    "id": "gl.chatView.open",
+    "title": "gl.chatView.open",
+    "keywords": [
+      "gl chat view open",
+      "gl chat"
+    ]
+  },
+  {
+    "id": "gl.chatView.focus",
+    "title": "gl.chatView.focus",
+    "keywords": [
+      "gl chat view focus",
+      "gl chat"
+    ]
+  },
+  {
+    "id": "gl.chatView.resetViewLocation",
+    "title": "gl.chatView.resetViewLocation",
+    "keywords": [
+      "gl chat view reset view location",
+      "gl chat"
+    ]
+  },
+  {
+    "id": "gl.webview.duo-chat-v2.open",
+    "title": "gl.webview.duo-chat-v2.open",
+    "keywords": [
+      "gl webview duo chat v2 open",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.duo-chat-v2.focus",
+    "title": "gl.webview.duo-chat-v2.focus",
+    "keywords": [
+      "gl webview duo chat v2 focus",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.duo-chat-v2.resetViewLocation",
+    "title": "gl.webview.duo-chat-v2.resetViewLocation",
+    "keywords": [
+      "gl webview duo chat v2 reset view location",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.agentic-tabs.open",
+    "title": "gl.webview.agentic-tabs.open",
+    "keywords": [
+      "gl webview agentic tabs open",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.agentic-tabs.focus",
+    "title": "gl.webview.agentic-tabs.focus",
+    "keywords": [
+      "gl webview agentic tabs focus",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.agentic-tabs.resetViewLocation",
+    "title": "gl.webview.agentic-tabs.resetViewLocation",
+    "keywords": [
+      "gl webview agentic tabs reset view location",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.root.duoAgentPlatform.open",
+    "title": "gl.webview.root.duoAgentPlatform.open",
+    "keywords": [
+      "gl webview root duo agent platform open",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.root.duoAgentPlatform.focus",
+    "title": "gl.webview.root.duoAgentPlatform.focus",
+    "keywords": [
+      "gl webview root duo agent platform focus",
+      "gl webview"
+    ]
+  },
+  {
+    "id": "gl.webview.root.duoAgentPlatform.resetViewLocation",
+    "title": "gl.webview.root.duoAgentPlatform.resetViewLocation",
+    "keywords": [
+      "gl webview root duo agent platform reset view location",
+      "gl webview"
     ]
   },
   {
@@ -18917,147 +19565,51 @@
     ]
   },
   {
-    "id": "dataworkspace.views.main.open",
-    "title": "dataworkspace.views.main.open",
+    "id": "jupyterViewVariables.open",
+    "title": "jupyterViewVariables.open",
     "keywords": [
-      "dataworkspace views main open",
-      "dataworkspace views"
+      "jupyter view variables open",
+      "jupyter view"
     ]
   },
   {
-    "id": "dataworkspace.views.main.focus",
-    "title": "dataworkspace.views.main.focus",
+    "id": "jupyterViewVariables.focus",
+    "title": "jupyterViewVariables.focus",
     "keywords": [
-      "dataworkspace views main focus",
-      "dataworkspace views"
+      "jupyter view variables focus",
+      "jupyter view"
     ]
   },
   {
-    "id": "dataworkspace.views.main.resetViewLocation",
-    "title": "dataworkspace.views.main.resetViewLocation",
+    "id": "jupyterViewVariables.resetViewLocation",
+    "title": "jupyterViewVariables.resetViewLocation",
     "keywords": [
-      "dataworkspace views main reset view location",
-      "dataworkspace views"
+      "jupyter view variables reset view location",
+      "jupyter view"
     ]
   },
   {
-    "id": "queryResult.open",
-    "title": "queryResult.open",
+    "id": "cell-tag.open",
+    "title": "cell-tag.open",
     "keywords": [
-      "query result open",
-      "query result"
+      "cell tag open",
+      "cell tag"
     ]
   },
   {
-    "id": "queryResult.focus",
-    "title": "queryResult.focus",
+    "id": "cell-tag.focus",
+    "title": "cell-tag.focus",
     "keywords": [
-      "query result focus",
-      "query result"
+      "cell tag focus",
+      "cell tag"
     ]
   },
   {
-    "id": "queryResult.resetViewLocation",
-    "title": "queryResult.resetViewLocation",
+    "id": "cell-tag.resetViewLocation",
+    "title": "cell-tag.resetViewLocation",
     "keywords": [
-      "query result reset view location",
-      "query result"
-    ]
-  },
-  {
-    "id": "objectExplorer.open",
-    "title": "objectExplorer.open",
-    "keywords": [
-      "object explorer open",
-      "object explorer"
-    ]
-  },
-  {
-    "id": "objectExplorer.focus",
-    "title": "objectExplorer.focus",
-    "keywords": [
-      "object explorer focus",
-      "object explorer"
-    ]
-  },
-  {
-    "id": "objectExplorer.resetViewLocation",
-    "title": "objectExplorer.resetViewLocation",
-    "keywords": [
-      "object explorer reset view location",
-      "object explorer"
-    ]
-  },
-  {
-    "id": "queryHistory.open",
-    "title": "queryHistory.open",
-    "keywords": [
-      "query history open",
-      "query history"
-    ]
-  },
-  {
-    "id": "queryHistory.focus",
-    "title": "queryHistory.focus",
-    "keywords": [
-      "query history focus",
-      "query history"
-    ]
-  },
-  {
-    "id": "queryHistory.resetViewLocation",
-    "title": "queryHistory.resetViewLocation",
-    "keywords": [
-      "query history reset view location",
-      "query history"
-    ]
-  },
-  {
-    "id": "python-projects.open",
-    "title": "python-projects.open",
-    "keywords": [
-      "python projects open",
-      "python projects"
-    ]
-  },
-  {
-    "id": "python-projects.focus",
-    "title": "python-projects.focus",
-    "keywords": [
-      "python projects focus",
-      "python projects"
-    ]
-  },
-  {
-    "id": "python-projects.resetViewLocation",
-    "title": "python-projects.resetViewLocation",
-    "keywords": [
-      "python projects reset view location",
-      "python projects"
-    ]
-  },
-  {
-    "id": "env-managers.open",
-    "title": "env-managers.open",
-    "keywords": [
-      "env managers open",
-      "env managers"
-    ]
-  },
-  {
-    "id": "env-managers.focus",
-    "title": "env-managers.focus",
-    "keywords": [
-      "env managers focus",
-      "env managers"
-    ]
-  },
-  {
-    "id": "env-managers.resetViewLocation",
-    "title": "env-managers.resetViewLocation",
-    "keywords": [
-      "env managers reset view location",
-      "env managers"
+      "cell tag reset view location",
+      "cell tag"
     ]
   },
   {
@@ -19205,6 +19757,30 @@
     ]
   },
   {
+    "id": "makefile.outline.open",
+    "title": "makefile.outline.open",
+    "keywords": [
+      "makefile outline open",
+      "makefile outline"
+    ]
+  },
+  {
+    "id": "makefile.outline.focus",
+    "title": "makefile.outline.focus",
+    "keywords": [
+      "makefile outline focus",
+      "makefile outline"
+    ]
+  },
+  {
+    "id": "makefile.outline.resetViewLocation",
+    "title": "makefile.outline.resetViewLocation",
+    "keywords": [
+      "makefile outline reset view location",
+      "makefile outline"
+    ]
+  },
+  {
     "id": "remoteTargets.open",
     "title": "remoteTargets.open",
     "keywords": [
@@ -19229,291 +19805,219 @@
     ]
   },
   {
-    "id": "lldb.loadedModules.open",
-    "title": "lldb.loadedModules.open",
+    "id": "remoteHub.views.workspaceRepositories.open",
+    "title": "remoteHub.views.workspaceRepositories.open",
     "keywords": [
-      "lldb loaded modules open",
-      "lldb loaded"
+      "remote hub views workspace repositories open",
+      "remote hub"
     ]
   },
   {
-    "id": "lldb.loadedModules.focus",
-    "title": "lldb.loadedModules.focus",
+    "id": "remoteHub.views.workspaceRepositories.focus",
+    "title": "remoteHub.views.workspaceRepositories.focus",
     "keywords": [
-      "lldb loaded modules focus",
-      "lldb loaded"
+      "remote hub views workspace repositories focus",
+      "remote hub"
     ]
   },
   {
-    "id": "lldb.loadedModules.resetViewLocation",
-    "title": "lldb.loadedModules.resetViewLocation",
+    "id": "remoteHub.views.workspaceRepositories.resetViewLocation",
+    "title": "remoteHub.views.workspaceRepositories.resetViewLocation",
     "keywords": [
-      "lldb loaded modules reset view location",
-      "lldb loaded"
+      "remote hub views workspace repositories reset view location",
+      "remote hub"
     ]
   },
   {
-    "id": "lldb.excludedCallers.open",
-    "title": "lldb.excludedCallers.open",
+    "id": "liveshare.session.open",
+    "title": "liveshare.session.open",
     "keywords": [
-      "lldb excluded callers open",
-      "lldb excluded"
+      "liveshare session open",
+      "liveshare session"
     ]
   },
   {
-    "id": "lldb.excludedCallers.focus",
-    "title": "lldb.excludedCallers.focus",
+    "id": "liveshare.session.focus",
+    "title": "liveshare.session.focus",
     "keywords": [
-      "lldb excluded callers focus",
-      "lldb excluded"
+      "liveshare session focus",
+      "liveshare session"
     ]
   },
   {
-    "id": "lldb.excludedCallers.resetViewLocation",
-    "title": "lldb.excludedCallers.resetViewLocation",
+    "id": "liveshare.session.resetViewLocation",
+    "title": "liveshare.session.resetViewLocation",
     "keywords": [
-      "lldb excluded callers reset view location",
-      "lldb excluded"
+      "liveshare session reset view location",
+      "liveshare session"
     ]
   },
   {
-    "id": "migrate.java.quickStartWelcomeView.open",
-    "title": "migrate.java.quickStartWelcomeView.open",
+    "id": "liveshare.help.open",
+    "title": "liveshare.help.open",
     "keywords": [
-      "migrate java quick start welcome view open",
-      "migrate java"
+      "liveshare help open",
+      "liveshare help"
     ]
   },
   {
-    "id": "migrate.java.quickStartWelcomeView.focus",
-    "title": "migrate.java.quickStartWelcomeView.focus",
+    "id": "liveshare.help.focus",
+    "title": "liveshare.help.focus",
     "keywords": [
-      "migrate java quick start welcome view focus",
-      "migrate java"
+      "liveshare help focus",
+      "liveshare help"
     ]
   },
   {
-    "id": "migrate.java.quickStartWelcomeView.resetViewLocation",
-    "title": "migrate.java.quickStartWelcomeView.resetViewLocation",
+    "id": "liveshare.help.resetViewLocation",
+    "title": "liveshare.help.resetViewLocation",
     "keywords": [
-      "migrate java quick start welcome view reset view location",
-      "migrate java"
+      "liveshare help reset view location",
+      "liveshare help"
     ]
   },
   {
-    "id": "migrate.java.formulaTreeView.open",
-    "title": "migrate.java.formulaTreeView.open",
+    "id": "liveshare.devtools.open",
+    "title": "liveshare.devtools.open",
     "keywords": [
-      "migrate java formula tree view open",
-      "migrate java"
+      "liveshare devtools open",
+      "liveshare devtools"
     ]
   },
   {
-    "id": "migrate.java.formulaTreeView.focus",
-    "title": "migrate.java.formulaTreeView.focus",
+    "id": "liveshare.devtools.focus",
+    "title": "liveshare.devtools.focus",
     "keywords": [
-      "migrate java formula tree view focus",
-      "migrate java"
+      "liveshare devtools focus",
+      "liveshare devtools"
     ]
   },
   {
-    "id": "migrate.java.formulaTreeView.resetViewLocation",
-    "title": "migrate.java.formulaTreeView.resetViewLocation",
+    "id": "liveshare.devtools.resetViewLocation",
+    "title": "liveshare.devtools.resetViewLocation",
     "keywords": [
-      "migrate java formula tree view reset view location",
-      "migrate java"
+      "liveshare devtools reset view location",
+      "liveshare devtools"
     ]
   },
   {
-    "id": "migrate.java.helpFeedbackView.open",
-    "title": "migrate.java.helpFeedbackView.open",
+    "id": "liveshare.session.explorer.open",
+    "title": "liveshare.session.explorer.open",
     "keywords": [
-      "migrate java help feedback view open",
-      "migrate java"
+      "liveshare session explorer open",
+      "liveshare session"
     ]
   },
   {
-    "id": "migrate.java.helpFeedbackView.focus",
-    "title": "migrate.java.helpFeedbackView.focus",
+    "id": "liveshare.session.explorer.focus",
+    "title": "liveshare.session.explorer.focus",
     "keywords": [
-      "migrate java help feedback view focus",
-      "migrate java"
+      "liveshare session explorer focus",
+      "liveshare session"
     ]
   },
   {
-    "id": "migrate.java.helpFeedbackView.resetViewLocation",
-    "title": "migrate.java.helpFeedbackView.resetViewLocation",
+    "id": "liveshare.session.explorer.resetViewLocation",
+    "title": "liveshare.session.explorer.resetViewLocation",
     "keywords": [
-      "migrate java help feedback view reset view location",
-      "migrate java"
+      "liveshare session explorer reset view location",
+      "liveshare session"
     ]
   },
   {
-    "id": "gradleTasksView.open",
-    "title": "gradleTasksView.open",
+    "id": "foundProjects.open",
+    "title": "foundProjects.open",
     "keywords": [
-      "gradle tasks view open",
-      "gradle tasks"
+      "found projects open",
+      "found projects"
     ]
   },
   {
-    "id": "gradleTasksView.focus",
-    "title": "gradleTasksView.focus",
+    "id": "foundProjects.focus",
+    "title": "foundProjects.focus",
     "keywords": [
-      "gradle tasks view focus",
-      "gradle tasks"
+      "found projects focus",
+      "found projects"
     ]
   },
   {
-    "id": "gradleTasksView.resetViewLocation",
-    "title": "gradleTasksView.resetViewLocation",
+    "id": "foundProjects.resetViewLocation",
+    "title": "foundProjects.resetViewLocation",
     "keywords": [
-      "gradle tasks view reset view location",
-      "gradle tasks"
+      "found projects reset view location",
+      "found projects"
     ]
   },
   {
-    "id": "gradleDefaultProjectsView.open",
-    "title": "gradleDefaultProjectsView.open",
+    "id": "run-config.open",
+    "title": "run-config.open",
     "keywords": [
-      "gradle default projects view open",
-      "gradle default"
+      "run config open",
+      "run config"
     ]
   },
   {
-    "id": "gradleDefaultProjectsView.focus",
-    "title": "gradleDefaultProjectsView.focus",
+    "id": "run-config.focus",
+    "title": "run-config.focus",
     "keywords": [
-      "gradle default projects view focus",
-      "gradle default"
+      "run config focus",
+      "run config"
     ]
   },
   {
-    "id": "gradleDefaultProjectsView.resetViewLocation",
-    "title": "gradleDefaultProjectsView.resetViewLocation",
+    "id": "run-config.resetViewLocation",
+    "title": "run-config.resetViewLocation",
     "keywords": [
-      "gradle default projects view reset view location",
-      "gradle default"
+      "run config reset view location",
+      "run config"
     ]
   },
   {
-    "id": "recentTasksView.open",
-    "title": "recentTasksView.open",
+    "id": "rustDependencies.open",
+    "title": "rustDependencies.open",
     "keywords": [
-      "recent tasks view open",
-      "recent tasks"
+      "rust dependencies open",
+      "rust dependencies"
     ]
   },
   {
-    "id": "recentTasksView.focus",
-    "title": "recentTasksView.focus",
+    "id": "rustDependencies.focus",
+    "title": "rustDependencies.focus",
     "keywords": [
-      "recent tasks view focus",
-      "recent tasks"
+      "rust dependencies focus",
+      "rust dependencies"
     ]
   },
   {
-    "id": "recentTasksView.resetViewLocation",
-    "title": "recentTasksView.resetViewLocation",
+    "id": "rustDependencies.resetViewLocation",
+    "title": "rustDependencies.resetViewLocation",
     "keywords": [
-      "recent tasks view reset view location",
-      "recent tasks"
+      "rust dependencies reset view location",
+      "rust dependencies"
     ]
   },
   {
-    "id": "gradleDaemonsView.open",
-    "title": "gradleDaemonsView.open",
+    "id": "rustSyntaxTree.open",
+    "title": "rustSyntaxTree.open",
     "keywords": [
-      "gradle daemons view open",
-      "gradle daemons"
+      "rust syntax tree open",
+      "rust syntax"
     ]
   },
   {
-    "id": "gradleDaemonsView.focus",
-    "title": "gradleDaemonsView.focus",
+    "id": "rustSyntaxTree.focus",
+    "title": "rustSyntaxTree.focus",
     "keywords": [
-      "gradle daemons view focus",
-      "gradle daemons"
+      "rust syntax tree focus",
+      "rust syntax"
     ]
   },
   {
-    "id": "gradleDaemonsView.resetViewLocation",
-    "title": "gradleDaemonsView.resetViewLocation",
+    "id": "rustSyntaxTree.resetViewLocation",
+    "title": "rustSyntaxTree.resetViewLocation",
     "keywords": [
-      "gradle daemons view reset view location",
-      "gradle daemons"
-    ]
-  },
-  {
-    "id": "javaProjectExplorer.open",
-    "title": "javaProjectExplorer.open",
-    "keywords": [
-      "java project explorer open",
-      "java project"
-    ]
-  },
-  {
-    "id": "javaProjectExplorer.focus",
-    "title": "javaProjectExplorer.focus",
-    "keywords": [
-      "java project explorer focus",
-      "java project"
-    ]
-  },
-  {
-    "id": "javaProjectExplorer.resetViewLocation",
-    "title": "javaProjectExplorer.resetViewLocation",
-    "keywords": [
-      "java project explorer reset view location",
-      "java project"
-    ]
-  },
-  {
-    "id": "javaupgradeEntry.open",
-    "title": "javaupgradeEntry.open",
-    "keywords": [
-      "javaupgrade entry open",
-      "javaupgrade entry"
-    ]
-  },
-  {
-    "id": "javaupgradeEntry.focus",
-    "title": "javaupgradeEntry.focus",
-    "keywords": [
-      "javaupgrade entry focus",
-      "javaupgrade entry"
-    ]
-  },
-  {
-    "id": "javaupgradeEntry.resetViewLocation",
-    "title": "javaupgradeEntry.resetViewLocation",
-    "keywords": [
-      "javaupgrade entry reset view location",
-      "javaupgrade entry"
-    ]
-  },
-  {
-    "id": "mavenProjects.open",
-    "title": "mavenProjects.open",
-    "keywords": [
-      "maven projects open",
-      "maven projects"
-    ]
-  },
-  {
-    "id": "mavenProjects.focus",
-    "title": "mavenProjects.focus",
-    "keywords": [
-      "maven projects focus",
-      "maven projects"
-    ]
-  },
-  {
-    "id": "mavenProjects.resetViewLocation",
-    "title": "mavenProjects.resetViewLocation",
-    "keywords": [
-      "maven projects reset view location",
-      "maven projects"
+      "rust syntax tree reset view location",
+      "rust syntax"
     ]
   },
   {
@@ -19629,6 +20133,22 @@
     ]
   },
   {
+    "id": "workbench.debug.breakPointsView.toggleVisibility",
+    "title": "workbench.debug.breakPointsView.toggleVisibility",
+    "keywords": [
+      "workbench debug break points view toggle visibility",
+      "workbench debug"
+    ]
+  },
+  {
+    "id": "workbench.debug.breakPointsView.removeView",
+    "title": "workbench.debug.breakPointsView.removeView",
+    "keywords": [
+      "workbench debug break points view remove view",
+      "workbench debug"
+    ]
+  },
+  {
     "id": "workbench.panel.chat.view.copilot.toggleVisibility",
     "title": "workbench.panel.chat.view.copilot.toggleVisibility",
     "keywords": [
@@ -19690,6 +20210,102 @@
     "keywords": [
       "terminal remove view",
       "terminal remove"
+    ]
+  },
+  {
+    "id": "workspaceEnvironments.toggleVisibility",
+    "title": "workspaceEnvironments.toggleVisibility",
+    "keywords": [
+      "workspace environments toggle visibility",
+      "workspace environments"
+    ]
+  },
+  {
+    "id": "workspaceEnvironments.removeView",
+    "title": "workspaceEnvironments.removeView",
+    "keywords": [
+      "workspace environments remove view",
+      "workspace environments"
+    ]
+  },
+  {
+    "id": "pythonEnvironments.toggleVisibility",
+    "title": "pythonEnvironments.toggleVisibility",
+    "keywords": [
+      "python environments toggle visibility",
+      "python environments"
+    ]
+  },
+  {
+    "id": "pythonEnvironments.removeView",
+    "title": "pythonEnvironments.removeView",
+    "keywords": [
+      "python environments remove view",
+      "python environments"
+    ]
+  },
+  {
+    "id": "github-actions.empty-view.toggleVisibility",
+    "title": "github-actions.empty-view.toggleVisibility",
+    "keywords": [
+      "github actions empty view toggle visibility",
+      "github actions"
+    ]
+  },
+  {
+    "id": "github-actions.empty-view.removeView",
+    "title": "github-actions.empty-view.removeView",
+    "keywords": [
+      "github actions empty view remove view",
+      "github actions"
+    ]
+  },
+  {
+    "id": "pr:github.toggleVisibility",
+    "title": "pr:github.toggleVisibility",
+    "keywords": [
+      "pr:github toggle visibility",
+      "pr:github toggle"
+    ]
+  },
+  {
+    "id": "pr:github.removeView",
+    "title": "pr:github.removeView",
+    "keywords": [
+      "pr:github remove view",
+      "pr:github remove"
+    ]
+  },
+  {
+    "id": "issues:github.toggleVisibility",
+    "title": "issues:github.toggleVisibility",
+    "keywords": [
+      "issues:github toggle visibility",
+      "issues:github toggle"
+    ]
+  },
+  {
+    "id": "issues:github.removeView",
+    "title": "issues:github.removeView",
+    "keywords": [
+      "issues:github remove view",
+      "issues:github remove"
+    ]
+  },
+  {
+    "id": "notifications:github.toggleVisibility",
+    "title": "notifications:github.toggleVisibility",
+    "keywords": [
+      "notifications:github toggle visibility",
+      "notifications:github toggle"
+    ]
+  },
+  {
+    "id": "notifications:github.removeView",
+    "title": "notifications:github.removeView",
+    "keywords": [
+      "notifications:github remove view",
+      "notifications:github remove"
     ]
   },
   {
@@ -19805,115 +20421,19 @@
     ]
   },
   {
-    "id": "dataworkspace.views.main.toggleVisibility",
-    "title": "dataworkspace.views.main.toggleVisibility",
+    "id": "liveshare.session.toggleVisibility",
+    "title": "liveshare.session.toggleVisibility",
     "keywords": [
-      "dataworkspace views main toggle visibility",
-      "dataworkspace views"
+      "liveshare session toggle visibility",
+      "liveshare session"
     ]
   },
   {
-    "id": "dataworkspace.views.main.removeView",
-    "title": "dataworkspace.views.main.removeView",
+    "id": "liveshare.session.removeView",
+    "title": "liveshare.session.removeView",
     "keywords": [
-      "dataworkspace views main remove view",
-      "dataworkspace views"
-    ]
-  },
-  {
-    "id": "objectExplorer.toggleVisibility",
-    "title": "objectExplorer.toggleVisibility",
-    "keywords": [
-      "object explorer toggle visibility",
-      "object explorer"
-    ]
-  },
-  {
-    "id": "objectExplorer.removeView",
-    "title": "objectExplorer.removeView",
-    "keywords": [
-      "object explorer remove view",
-      "object explorer"
-    ]
-  },
-  {
-    "id": "queryHistory.toggleVisibility",
-    "title": "queryHistory.toggleVisibility",
-    "keywords": [
-      "query history toggle visibility",
-      "query history"
-    ]
-  },
-  {
-    "id": "queryHistory.removeView",
-    "title": "queryHistory.removeView",
-    "keywords": [
-      "query history remove view",
-      "query history"
-    ]
-  },
-  {
-    "id": "queryResult.toggleVisibility",
-    "title": "queryResult.toggleVisibility",
-    "keywords": [
-      "query result toggle visibility",
-      "query result"
-    ]
-  },
-  {
-    "id": "queryResult.removeView",
-    "title": "queryResult.removeView",
-    "keywords": [
-      "query result remove view",
-      "query result"
-    ]
-  },
-  {
-    "id": "migrate.java.quickStartWelcomeView.toggleVisibility",
-    "title": "migrate.java.quickStartWelcomeView.toggleVisibility",
-    "keywords": [
-      "migrate java quick start welcome view toggle visibility",
-      "migrate java"
-    ]
-  },
-  {
-    "id": "migrate.java.quickStartWelcomeView.removeView",
-    "title": "migrate.java.quickStartWelcomeView.removeView",
-    "keywords": [
-      "migrate java quick start welcome view remove view",
-      "migrate java"
-    ]
-  },
-  {
-    "id": "migrate.java.formulaTreeView.toggleVisibility",
-    "title": "migrate.java.formulaTreeView.toggleVisibility",
-    "keywords": [
-      "migrate java formula tree view toggle visibility",
-      "migrate java"
-    ]
-  },
-  {
-    "id": "migrate.java.formulaTreeView.removeView",
-    "title": "migrate.java.formulaTreeView.removeView",
-    "keywords": [
-      "migrate java formula tree view remove view",
-      "migrate java"
-    ]
-  },
-  {
-    "id": "migrate.java.helpFeedbackView.toggleVisibility",
-    "title": "migrate.java.helpFeedbackView.toggleVisibility",
-    "keywords": [
-      "migrate java help feedback view toggle visibility",
-      "migrate java"
-    ]
-  },
-  {
-    "id": "migrate.java.helpFeedbackView.removeView",
-    "title": "migrate.java.helpFeedbackView.removeView",
-    "keywords": [
-      "migrate java help feedback view remove view",
-      "migrate java"
+      "liveshare session remove view",
+      "liveshare session"
     ]
   },
   {
@@ -20047,6 +20567,30 @@
     "keywords": [
       "tasks open workspace file tasks",
       "tasks open"
+    ]
+  },
+  {
+    "id": "workbench.panel.repl.view.toggleVisibility",
+    "title": "workbench.panel.repl.view.toggleVisibility",
+    "keywords": [
+      "workbench panel repl view toggle visibility",
+      "workbench panel"
+    ]
+  },
+  {
+    "id": "workbench.panel.repl.view.removeView",
+    "title": "workbench.panel.repl.view.removeView",
+    "keywords": [
+      "workbench panel repl view remove view",
+      "workbench panel"
+    ]
+  },
+  {
+    "id": "editor.action.inlineSuggest.renameSymbol",
+    "title": "editor.action.inlineSuggest.renameSymbol",
+    "keywords": [
+      "inline suggest rename symbol",
+      "inline suggest"
     ]
   },
   {
@@ -21640,11 +22184,531 @@
     ]
   },
   {
+    "id": "workbench.views.extensions.installed.toggleVisibility",
+    "title": "workbench.views.extensions.installed.toggleVisibility",
+    "keywords": [
+      "workbench views extensions installed toggle visibility",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.extensions.installed.removeView",
+    "title": "workbench.views.extensions.installed.removeView",
+    "keywords": [
+      "workbench views extensions installed remove view",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "extensions.recommendedList.toggleVisibility",
+    "title": "extensions.recommendedList.toggleVisibility",
+    "keywords": [
+      "extensions recommended list toggle visibility",
+      "extensions recommended"
+    ]
+  },
+  {
+    "id": "extensions.recommendedList.removeView",
+    "title": "extensions.recommendedList.removeView",
+    "keywords": [
+      "extensions recommended list remove view",
+      "extensions recommended"
+    ]
+  },
+  {
+    "id": "workbench.views.extensions.enabled.toggleVisibility",
+    "title": "workbench.views.extensions.enabled.toggleVisibility",
+    "keywords": [
+      "workbench views extensions enabled toggle visibility",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.extensions.enabled.removeView",
+    "title": "workbench.views.extensions.enabled.removeView",
+    "keywords": [
+      "workbench views extensions enabled remove view",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.mcp.default.welcomeView.toggleVisibility",
+    "title": "workbench.views.mcp.default.welcomeView.toggleVisibility",
+    "keywords": [
+      "workbench views mcp default welcome view toggle visibility",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.mcp.default.welcomeView.removeView",
+    "title": "workbench.views.mcp.default.welcomeView.removeView",
+    "keywords": [
+      "workbench views mcp default welcome view remove view",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.extensions.disabled.toggleVisibility",
+    "title": "workbench.views.extensions.disabled.toggleVisibility",
+    "keywords": [
+      "workbench views extensions disabled toggle visibility",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.extensions.disabled.removeView",
+    "title": "workbench.views.extensions.disabled.removeView",
+    "keywords": [
+      "workbench views extensions disabled remove view",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.agentPlugins.default.marketplace.toggleVisibility",
+    "title": "workbench.views.agentPlugins.default.marketplace.toggleVisibility",
+    "keywords": [
+      "workbench views agent plugins default marketplace toggle visibility",
+      "workbench views"
+    ]
+  },
+  {
+    "id": "workbench.views.agentPlugins.default.marketplace.removeView",
+    "title": "workbench.views.agentPlugins.default.marketplace.removeView",
+    "keywords": [
+      "workbench views agent plugins default marketplace remove view",
+      "workbench views"
+    ]
+  },
+  {
     "id": "workbench.action.showWindowLog",
     "title": "workbench.action.showWindowLog",
     "keywords": [
       "show window log",
       "show window"
+    ]
+  },
+  {
+    "id": "rainbow-csv.CSVLint",
+    "title": "rainbow-csv.CSVLint",
+    "keywords": [
+      "rainbow csv csvlint",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.RBQL",
+    "title": "rainbow-csv.RBQL",
+    "keywords": [
+      "rainbow csv rbql",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SetHeaderLine",
+    "title": "rainbow-csv.SetHeaderLine",
+    "keywords": [
+      "rainbow csv set header line",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SetCommentPrefix",
+    "title": "rainbow-csv.SetCommentPrefix",
+    "keywords": [
+      "rainbow csv set comment prefix",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SetVirtualHeader",
+    "title": "rainbow-csv.SetVirtualHeader",
+    "keywords": [
+      "rainbow csv set virtual header",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SetJoinTableName",
+    "title": "rainbow-csv.SetJoinTableName",
+    "keywords": [
+      "rainbow csv set join table name",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ColumnEditBefore",
+    "title": "rainbow-csv.ColumnEditBefore",
+    "keywords": [
+      "rainbow csv column edit before",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ColumnEditAfter",
+    "title": "rainbow-csv.ColumnEditAfter",
+    "keywords": [
+      "rainbow csv column edit after",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ColumnEditSelect",
+    "title": "rainbow-csv.ColumnEditSelect",
+    "keywords": [
+      "rainbow csv column edit select",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.RainbowSeparator",
+    "title": "rainbow-csv.RainbowSeparator",
+    "keywords": [
+      "rainbow csv rainbow separator",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.RainbowSeparatorOff",
+    "title": "rainbow-csv.RainbowSeparatorOff",
+    "keywords": [
+      "rainbow csv rainbow separator off",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.RainbowSeparatorOn",
+    "title": "rainbow-csv.RainbowSeparatorOn",
+    "keywords": [
+      "rainbow csv rainbow separator on",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SampleHead",
+    "title": "rainbow-csv.SampleHead",
+    "keywords": [
+      "rainbow csv sample head",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.SampleTail",
+    "title": "rainbow-csv.SampleTail",
+    "keywords": [
+      "rainbow csv sample tail",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.Align",
+    "title": "rainbow-csv.Align",
+    "keywords": [
+      "rainbow csv align",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.VirtualAlign",
+    "title": "rainbow-csv.VirtualAlign",
+    "keywords": [
+      "rainbow csv virtual align",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.Shrink",
+    "title": "rainbow-csv.Shrink",
+    "keywords": [
+      "rainbow csv shrink",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.VirtualShrink",
+    "title": "rainbow-csv.VirtualShrink",
+    "keywords": [
+      "rainbow csv virtual shrink",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.CopyBack",
+    "title": "rainbow-csv.CopyBack",
+    "keywords": [
+      "rainbow csv copy back",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ToggleRowBackground",
+    "title": "rainbow-csv.ToggleRowBackground",
+    "keywords": [
+      "rainbow csv toggle row background",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ToggleColumnTracking",
+    "title": "rainbow-csv.ToggleColumnTracking",
+    "keywords": [
+      "rainbow csv toggle column tracking",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.ExcelCopy",
+    "title": "rainbow-csv.ExcelCopy",
+    "keywords": [
+      "rainbow csv excel copy",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.MarkdownCopy",
+    "title": "rainbow-csv.MarkdownCopy",
+    "keywords": [
+      "rainbow csv markdown copy",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.InternalTest",
+    "title": "rainbow-csv.InternalTest",
+    "keywords": [
+      "rainbow csv internal test",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "rainbow-csv.GoToColumn",
+    "title": "rainbow-csv.GoToColumn",
+    "keywords": [
+      "rainbow csv go to column",
+      "rainbow csv"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.updateImageSize",
+    "title": "editor.emmet.action.updateImageSize",
+    "keywords": [
+      "editor emmet action update image size",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.wrapWithAbbreviation",
+    "title": "editor.emmet.action.wrapWithAbbreviation",
+    "keywords": [
+      "editor emmet action wrap with abbreviation",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "emmet.expandAbbreviation",
+    "title": "emmet.expandAbbreviation",
+    "keywords": [
+      "emmet expand abbreviation",
+      "emmet expand"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.removeTag",
+    "title": "editor.emmet.action.removeTag",
+    "keywords": [
+      "editor emmet action remove tag",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.updateTag",
+    "title": "editor.emmet.action.updateTag",
+    "keywords": [
+      "editor emmet action update tag",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.matchTag",
+    "title": "editor.emmet.action.matchTag",
+    "keywords": [
+      "editor emmet action match tag",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.balanceOut",
+    "title": "editor.emmet.action.balanceOut",
+    "keywords": [
+      "editor emmet action balance out",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.balanceIn",
+    "title": "editor.emmet.action.balanceIn",
+    "keywords": [
+      "editor emmet action balance in",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.splitJoinTag",
+    "title": "editor.emmet.action.splitJoinTag",
+    "keywords": [
+      "editor emmet action split join tag",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.mergeLines",
+    "title": "editor.emmet.action.mergeLines",
+    "keywords": [
+      "editor emmet action merge lines",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.toggleComment",
+    "title": "editor.emmet.action.toggleComment",
+    "keywords": [
+      "editor emmet action toggle comment",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.nextEditPoint",
+    "title": "editor.emmet.action.nextEditPoint",
+    "keywords": [
+      "editor emmet action next edit point",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.prevEditPoint",
+    "title": "editor.emmet.action.prevEditPoint",
+    "keywords": [
+      "editor emmet action prev edit point",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.selectNextItem",
+    "title": "editor.emmet.action.selectNextItem",
+    "keywords": [
+      "editor emmet action select next item",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.selectPrevItem",
+    "title": "editor.emmet.action.selectPrevItem",
+    "keywords": [
+      "editor emmet action select prev item",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.evaluateMathExpression",
+    "title": "editor.emmet.action.evaluateMathExpression",
+    "keywords": [
+      "editor emmet action evaluate math expression",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.incrementNumberByOneTenth",
+    "title": "editor.emmet.action.incrementNumberByOneTenth",
+    "keywords": [
+      "editor emmet action increment number by one tenth",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.incrementNumberByOne",
+    "title": "editor.emmet.action.incrementNumberByOne",
+    "keywords": [
+      "editor emmet action increment number by one",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.incrementNumberByTen",
+    "title": "editor.emmet.action.incrementNumberByTen",
+    "keywords": [
+      "editor emmet action increment number by ten",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.decrementNumberByOneTenth",
+    "title": "editor.emmet.action.decrementNumberByOneTenth",
+    "keywords": [
+      "editor emmet action decrement number by one tenth",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.decrementNumberByOne",
+    "title": "editor.emmet.action.decrementNumberByOne",
+    "keywords": [
+      "editor emmet action decrement number by one",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.decrementNumberByTen",
+    "title": "editor.emmet.action.decrementNumberByTen",
+    "keywords": [
+      "editor emmet action decrement number by ten",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "editor.emmet.action.reflectCSSValue",
+    "title": "editor.emmet.action.reflectCSSValue",
+    "keywords": [
+      "editor emmet action reflect cssvalue",
+      "editor emmet"
+    ]
+  },
+  {
+    "id": "workbench.action.showEmmetCommands",
+    "title": "workbench.action.showEmmetCommands",
+    "keywords": [
+      "show emmet commands",
+      "show emmet"
+    ]
+  },
+  {
+    "id": "pythonIndent.newlineAndIndent",
+    "title": "pythonIndent.newlineAndIndent",
+    "keywords": [
+      "python indent newline and indent",
+      "python indent"
+    ]
+  },
+  {
+    "id": "python.configureTests",
+    "title": "python.configureTests",
+    "keywords": [
+      "python configure tests",
+      "python configure"
+    ]
+  },
+  {
+    "id": "python.copilotSetupTests",
+    "title": "python.copilotSetupTests",
+    "keywords": [
+      "python copilot setup tests",
+      "python copilot"
+    ]
+  },
+  {
+    "id": "python.copyTestId",
+    "title": "python.copyTestId",
+    "keywords": [
+      "python copy test id",
+      "python copy"
     ]
   },
   {
@@ -21688,6 +22752,14 @@
     ]
   },
   {
+    "id": "workbench.action.output.show.ptyhost",
+    "title": "workbench.action.output.show.ptyhost",
+    "keywords": [
+      "output show ptyhost",
+      "output show"
+    ]
+  },
+  {
     "id": "workbench.action.output.show.shared",
     "title": "workbench.action.output.show.shared",
     "keywords": [
@@ -21704,14 +22776,6 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.ptyhost",
-    "title": "workbench.action.output.show.ptyhost",
-    "keywords": [
-      "output show ptyhost",
-      "output show"
-    ]
-  },
-  {
     "id": "workbench.action.output.show.rendererLog",
     "title": "workbench.action.output.show.rendererLog",
     "keywords": [
@@ -21724,6 +22788,14 @@
     "title": "workbench.action.output.show.terminal",
     "keywords": [
       "output show terminal",
+      "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.exthost",
+    "title": "workbench.action.output.show.exthost",
+    "keywords": [
+      "output show exthost",
       "output show"
     ]
   },
@@ -21985,38 +23057,6 @@
     "keywords": [
       "~remote forwarded ports remove view",
       "~remote forwarded"
-    ]
-  },
-  {
-    "id": "workbench.action.terminal.newWithProfile",
-    "title": "workbench.action.terminal.newWithProfile",
-    "keywords": [
-      "terminal new with profile",
-      "terminal new"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.exthost",
-    "title": "workbench.action.output.show.exthost",
-    "keywords": [
-      "output show exthost",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.panel.repl.view.toggleVisibility",
-    "title": "workbench.panel.repl.view.toggleVisibility",
-    "keywords": [
-      "workbench panel repl view toggle visibility",
-      "workbench panel"
-    ]
-  },
-  {
-    "id": "workbench.panel.repl.view.removeView",
-    "title": "workbench.panel.repl.view.removeView",
-    "keywords": [
-      "workbench panel repl view remove view",
-      "workbench panel"
     ]
   },
   {
@@ -22445,6 +23485,22 @@
     ]
   },
   {
+    "id": "jupyter.listPipPackages",
+    "title": "jupyter.listPipPackages",
+    "keywords": [
+      "jupyter list pip packages",
+      "jupyter list"
+    ]
+  },
+  {
+    "id": "jupyter.listVariables",
+    "title": "jupyter.listVariables",
+    "keywords": [
+      "jupyter list variables",
+      "jupyter list"
+    ]
+  },
+  {
     "id": "workbench.editSessions.actions.signIn",
     "title": "workbench.editSessions.actions.signIn",
     "keywords": [
@@ -22565,6 +23621,691 @@
     ]
   },
   {
+    "id": "jupyter.refreshDataViewer",
+    "title": "jupyter.refreshDataViewer",
+    "keywords": [
+      "jupyter refresh data viewer",
+      "jupyter refresh"
+    ]
+  },
+  {
+    "id": "jupyter.reloadVSCode",
+    "title": "jupyter.reloadVSCode",
+    "keywords": [
+      "jupyter reload vscode",
+      "jupyter reload"
+    ]
+  },
+  {
+    "id": "jupyter.runInDedicatedExtensionHost",
+    "title": "jupyter.runInDedicatedExtensionHost",
+    "keywords": [
+      "jupyter run in dedicated extension host",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.filterKernels",
+    "title": "jupyter.filterKernels",
+    "keywords": [
+      "jupyter filter kernels",
+      "jupyter filter"
+    ]
+  },
+  {
+    "id": "jupyter.clearSavedJupyterUris",
+    "title": "jupyter.clearSavedJupyterUris",
+    "keywords": [
+      "jupyter clear saved jupyter uris",
+      "jupyter clear"
+    ]
+  },
+  {
+    "id": "jupyter.selectJupyterInterpreter",
+    "title": "jupyter.selectJupyterInterpreter",
+    "keywords": [
+      "jupyter select jupyter interpreter",
+      "jupyter select"
+    ]
+  },
+  {
+    "id": "jupyter.kernel.selectLocalKernelSpec",
+    "title": "jupyter.kernel.selectLocalKernelSpec",
+    "keywords": [
+      "jupyter kernel select local kernel spec",
+      "jupyter kernel"
+    ]
+  },
+  {
+    "id": "jupyter.kernel.selectLocalPythonEnvironment",
+    "title": "jupyter.kernel.selectLocalPythonEnvironment",
+    "keywords": [
+      "jupyter kernel select local python environment",
+      "jupyter kernel"
+    ]
+  },
+  {
+    "id": "jupyter.kernel.selectJupyterServerKernel",
+    "title": "jupyter.kernel.selectJupyterServerKernel",
+    "keywords": [
+      "jupyter kernel select jupyter server kernel",
+      "jupyter kernel"
+    ]
+  },
+  {
+    "id": "jupyter.createPythonEnvAndSelectController",
+    "title": "jupyter.createPythonEnvAndSelectController",
+    "keywords": [
+      "jupyter create python env and select controller",
+      "jupyter create"
+    ]
+  },
+  {
+    "id": "jupyter.notebookeditor.removeallcells",
+    "title": "jupyter.notebookeditor.removeallcells",
+    "keywords": [
+      "jupyter notebookeditor removeallcells",
+      "jupyter notebookeditor"
+    ]
+  },
+  {
+    "id": "jupyter.notebookeditor.runallcells",
+    "title": "jupyter.notebookeditor.runallcells",
+    "keywords": [
+      "jupyter notebookeditor runallcells",
+      "jupyter notebookeditor"
+    ]
+  },
+  {
+    "id": "jupyter.notebookeditor.addcellbelow",
+    "title": "jupyter.notebookeditor.addcellbelow",
+    "keywords": [
+      "jupyter notebookeditor addcellbelow",
+      "jupyter notebookeditor"
+    ]
+  },
+  {
+    "id": "jupyter.restartkernelandrunuptoselectedcell",
+    "title": "jupyter.restartkernelandrunuptoselectedcell",
+    "keywords": [
+      "jupyter restartkernelandrunuptoselectedcell"
+    ]
+  },
+  {
+    "id": "jupyter.restartkernel",
+    "title": "jupyter.restartkernel",
+    "keywords": [
+      "jupyter restartkernel"
+    ]
+  },
+  {
+    "id": "jupyter.interruptkernel",
+    "title": "jupyter.interruptkernel",
+    "keywords": [
+      "jupyter interruptkernel"
+    ]
+  },
+  {
+    "id": "jupyter.restartkernelandrunallcells",
+    "title": "jupyter.restartkernelandrunallcells",
+    "keywords": [
+      "jupyter restartkernelandrunallcells"
+    ]
+  },
+  {
+    "id": "jupyter.installPythonExtensionViaKernelPicker",
+    "title": "jupyter.installPythonExtensionViaKernelPicker",
+    "keywords": [
+      "jupyter install python extension via kernel picker",
+      "jupyter install"
+    ]
+  },
+  {
+    "id": "jupyter.installPythonViaKernelPicker",
+    "title": "jupyter.installPythonViaKernelPicker",
+    "keywords": [
+      "jupyter install python via kernel picker",
+      "jupyter install"
+    ]
+  },
+  {
+    "id": "jupyter.runByLine",
+    "title": "jupyter.runByLine",
+    "keywords": [
+      "jupyter run by line",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.runByLineNext",
+    "title": "jupyter.runByLineNext",
+    "keywords": [
+      "jupyter run by line next",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.runByLineStop",
+    "title": "jupyter.runByLineStop",
+    "keywords": [
+      "jupyter run by line stop",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.runAndDebugCell",
+    "title": "jupyter.runAndDebugCell",
+    "keywords": [
+      "jupyter run and debug cell",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.runallcells",
+    "title": "jupyter.runallcells",
+    "keywords": [
+      "jupyter runallcells"
+    ]
+  },
+  {
+    "id": "jupyter.runcell",
+    "title": "jupyter.runcell",
+    "keywords": [
+      "jupyter runcell"
+    ]
+  },
+  {
+    "id": "jupyter.runcurrentcell",
+    "title": "jupyter.runcurrentcell",
+    "keywords": [
+      "jupyter runcurrentcell"
+    ]
+  },
+  {
+    "id": "jupyter.runcurrentcelladvance",
+    "title": "jupyter.runcurrentcelladvance",
+    "keywords": [
+      "jupyter runcurrentcelladvance"
+    ]
+  },
+  {
+    "id": "jupyter.execSelectionInteractive",
+    "title": "jupyter.execSelectionInteractive",
+    "keywords": [
+      "jupyter exec selection interactive",
+      "jupyter exec"
+    ]
+  },
+  {
+    "id": "jupyter.runallcellsabove",
+    "title": "jupyter.runallcellsabove",
+    "keywords": [
+      "jupyter runallcellsabove"
+    ]
+  },
+  {
+    "id": "jupyter.runcellandallbelow",
+    "title": "jupyter.runcellandallbelow",
+    "keywords": [
+      "jupyter runcellandallbelow"
+    ]
+  },
+  {
+    "id": "jupyter.runallcellsabove.palette",
+    "title": "jupyter.runallcellsabove.palette",
+    "keywords": [
+      "jupyter runallcellsabove palette",
+      "jupyter runallcellsabove"
+    ]
+  },
+  {
+    "id": "jupyter.runcurrentcellandallbelow.palette",
+    "title": "jupyter.runcurrentcellandallbelow.palette",
+    "keywords": [
+      "jupyter runcurrentcellandallbelow palette",
+      "jupyter runcurrentcellandallbelow"
+    ]
+  },
+  {
+    "id": "jupyter.runcurrentcellandaddbelow",
+    "title": "jupyter.runcurrentcellandaddbelow",
+    "keywords": [
+      "jupyter runcurrentcellandaddbelow"
+    ]
+  },
+  {
+    "id": "jupyter.debugcell",
+    "title": "jupyter.debugcell",
+    "keywords": [
+      "jupyter debugcell"
+    ]
+  },
+  {
+    "id": "jupyter.debugstepover",
+    "title": "jupyter.debugstepover",
+    "keywords": [
+      "jupyter debugstepover"
+    ]
+  },
+  {
+    "id": "jupyter.debugcontinue",
+    "title": "jupyter.debugcontinue",
+    "keywords": [
+      "jupyter debugcontinue"
+    ]
+  },
+  {
+    "id": "jupyter.debugstop",
+    "title": "jupyter.debugstop",
+    "keywords": [
+      "jupyter debugstop"
+    ]
+  },
+  {
+    "id": "jupyter.debugcurrentcell.palette",
+    "title": "jupyter.debugcurrentcell.palette",
+    "keywords": [
+      "jupyter debugcurrentcell palette",
+      "jupyter debugcurrentcell"
+    ]
+  },
+  {
+    "id": "jupyter.openVariableView",
+    "title": "jupyter.openVariableView",
+    "keywords": [
+      "jupyter open variable view",
+      "jupyter open"
+    ]
+  },
+  {
+    "id": "jupyter.openOutlineView",
+    "title": "jupyter.openOutlineView",
+    "keywords": [
+      "jupyter open outline view",
+      "jupyter open"
+    ]
+  },
+  {
+    "id": "jupyter.runtoline",
+    "title": "jupyter.runtoline",
+    "keywords": [
+      "jupyter runtoline"
+    ]
+  },
+  {
+    "id": "jupyter.runfromline",
+    "title": "jupyter.runfromline",
+    "keywords": [
+      "jupyter runfromline"
+    ]
+  },
+  {
+    "id": "jupyter.runFileInteractive",
+    "title": "jupyter.runFileInteractive",
+    "keywords": [
+      "jupyter run file interactive",
+      "jupyter run"
+    ]
+  },
+  {
+    "id": "jupyter.debugFileInteractive",
+    "title": "jupyter.debugFileInteractive",
+    "keywords": [
+      "jupyter debug file interactive",
+      "jupyter debug"
+    ]
+  },
+  {
+    "id": "jupyter.insertCellBelowPosition",
+    "title": "jupyter.insertCellBelowPosition",
+    "keywords": [
+      "jupyter insert cell below position",
+      "jupyter insert"
+    ]
+  },
+  {
+    "id": "jupyter.insertCellBelow",
+    "title": "jupyter.insertCellBelow",
+    "keywords": [
+      "jupyter insert cell below",
+      "jupyter insert"
+    ]
+  },
+  {
+    "id": "jupyter.insertCellAbove",
+    "title": "jupyter.insertCellAbove",
+    "keywords": [
+      "jupyter insert cell above",
+      "jupyter insert"
+    ]
+  },
+  {
+    "id": "jupyter.deleteCells",
+    "title": "jupyter.deleteCells",
+    "keywords": [
+      "jupyter delete cells",
+      "jupyter delete"
+    ]
+  },
+  {
+    "id": "jupyter.selectCell",
+    "title": "jupyter.selectCell",
+    "keywords": [
+      "jupyter select cell",
+      "jupyter select"
+    ]
+  },
+  {
+    "id": "jupyter.selectCellContents",
+    "title": "jupyter.selectCellContents",
+    "keywords": [
+      "jupyter select cell contents",
+      "jupyter select"
+    ]
+  },
+  {
+    "id": "jupyter.extendSelectionByCellAbove",
+    "title": "jupyter.extendSelectionByCellAbove",
+    "keywords": [
+      "jupyter extend selection by cell above",
+      "jupyter extend"
+    ]
+  },
+  {
+    "id": "jupyter.extendSelectionByCellBelow",
+    "title": "jupyter.extendSelectionByCellBelow",
+    "keywords": [
+      "jupyter extend selection by cell below",
+      "jupyter extend"
+    ]
+  },
+  {
+    "id": "jupyter.moveCellsUp",
+    "title": "jupyter.moveCellsUp",
+    "keywords": [
+      "jupyter move cells up",
+      "jupyter move"
+    ]
+  },
+  {
+    "id": "jupyter.moveCellsDown",
+    "title": "jupyter.moveCellsDown",
+    "keywords": [
+      "jupyter move cells down",
+      "jupyter move"
+    ]
+  },
+  {
+    "id": "jupyter.changeCellToMarkdown",
+    "title": "jupyter.changeCellToMarkdown",
+    "keywords": [
+      "jupyter change cell to markdown",
+      "jupyter change"
+    ]
+  },
+  {
+    "id": "jupyter.changeCellToCode",
+    "title": "jupyter.changeCellToCode",
+    "keywords": [
+      "jupyter change cell to code",
+      "jupyter change"
+    ]
+  },
+  {
+    "id": "jupyter.gotoNextCellInFile",
+    "title": "jupyter.gotoNextCellInFile",
+    "keywords": [
+      "jupyter goto next cell in file",
+      "jupyter goto"
+    ]
+  },
+  {
+    "id": "jupyter.gotoPrevCellInFile",
+    "title": "jupyter.gotoPrevCellInFile",
+    "keywords": [
+      "jupyter goto prev cell in file",
+      "jupyter goto"
+    ]
+  },
+  {
+    "id": "jupyter.addcellbelow",
+    "title": "jupyter.addcellbelow",
+    "keywords": [
+      "jupyter addcellbelow"
+    ]
+  },
+  {
+    "id": "jupyter.createnewnotebook",
+    "title": "jupyter.createnewnotebook",
+    "keywords": [
+      "jupyter createnewnotebook"
+    ]
+  },
+  {
+    "id": "jupyter.latestExtension",
+    "title": "jupyter.latestExtension",
+    "keywords": [
+      "jupyter latest extension",
+      "jupyter latest"
+    ]
+  },
+  {
+    "id": "jupyter.enableLoadingWidgetScriptsFromThirdPartySource",
+    "title": "jupyter.enableLoadingWidgetScriptsFromThirdPartySource",
+    "keywords": [
+      "jupyter enable loading widget scripts from third party source",
+      "jupyter enable"
+    ]
+  },
+  {
+    "id": "jupyter.createnewinteractive",
+    "title": "jupyter.createnewinteractive",
+    "keywords": [
+      "jupyter createnewinteractive"
+    ]
+  },
+  {
+    "id": "jupyter.importnotebookfile",
+    "title": "jupyter.importnotebookfile",
+    "keywords": [
+      "jupyter importnotebookfile"
+    ]
+  },
+  {
+    "id": "jupyter.exportfileasnotebook",
+    "title": "jupyter.exportfileasnotebook",
+    "keywords": [
+      "jupyter exportfileasnotebook"
+    ]
+  },
+  {
+    "id": "jupyter.expandallcells",
+    "title": "jupyter.expandallcells",
+    "keywords": [
+      "jupyter expandallcells"
+    ]
+  },
+  {
+    "id": "jupyter.collapseallcells",
+    "title": "jupyter.collapseallcells",
+    "keywords": [
+      "jupyter collapseallcells"
+    ]
+  },
+  {
+    "id": "jupyter.interactive.exportasnotebook",
+    "title": "jupyter.interactive.exportasnotebook",
+    "keywords": [
+      "jupyter interactive exportasnotebook",
+      "jupyter interactive"
+    ]
+  },
+  {
+    "id": "jupyter.interactive.exportas",
+    "title": "jupyter.interactive.exportas",
+    "keywords": [
+      "jupyter interactive exportas",
+      "jupyter interactive"
+    ]
+  },
+  {
+    "id": "jupyter.scrolltocell",
+    "title": "jupyter.scrolltocell",
+    "keywords": [
+      "jupyter scrolltocell"
+    ]
+  },
+  {
+    "id": "jupyter.interactive.clearAllCells",
+    "title": "jupyter.interactive.clearAllCells",
+    "keywords": [
+      "jupyter interactive clear all cells",
+      "jupyter interactive"
+    ]
+  },
+  {
+    "id": "jupyter.interactive.goToCode",
+    "title": "jupyter.interactive.goToCode",
+    "keywords": [
+      "jupyter interactive go to code",
+      "jupyter interactive"
+    ]
+  },
+  {
+    "id": "jupyter.interactive.copyCell",
+    "title": "jupyter.interactive.copyCell",
+    "keywords": [
+      "jupyter interactive copy cell",
+      "jupyter interactive"
+    ]
+  },
+  {
+    "id": "jupyter.viewOutput",
+    "title": "jupyter.viewOutput",
+    "keywords": [
+      "jupyter view output",
+      "jupyter view"
+    ]
+  },
+  {
+    "id": "jupyter.selectjupyteruri",
+    "title": "jupyter.selectjupyteruri",
+    "keywords": [
+      "jupyter selectjupyteruri"
+    ]
+  },
+  {
+    "id": "jupyter.exportAsPythonScript",
+    "title": "jupyter.exportAsPythonScript",
+    "keywords": [
+      "jupyter export as python script",
+      "jupyter export"
+    ]
+  },
+  {
+    "id": "jupyter.exportToHTML",
+    "title": "jupyter.exportToHTML",
+    "keywords": [
+      "jupyter export to html",
+      "jupyter export"
+    ]
+  },
+  {
+    "id": "jupyter.exportToPDF",
+    "title": "jupyter.exportToPDF",
+    "keywords": [
+      "jupyter export to pdf",
+      "jupyter export"
+    ]
+  },
+  {
+    "id": "jupyter.export",
+    "title": "jupyter.export",
+    "keywords": [
+      "jupyter export"
+    ]
+  },
+  {
+    "id": "jupyter.notebookeditor.export",
+    "title": "jupyter.notebookeditor.export",
+    "keywords": [
+      "jupyter notebookeditor export",
+      "jupyter notebookeditor"
+    ]
+  },
+  {
+    "id": "jupyter.continueEditSessionInCodespace",
+    "title": "jupyter.continueEditSessionInCodespace",
+    "keywords": [
+      "jupyter continue edit session in codespace",
+      "jupyter continue"
+    ]
+  },
+  {
+    "id": "dataScience.ClearUserProviderJupyterServerCache",
+    "title": "dataScience.ClearUserProviderJupyterServerCache",
+    "keywords": [
+      "data science clear user provider jupyter server cache",
+      "data science"
+    ]
+  },
+  {
+    "id": "jupyter.getUsedAzMLServerHandles",
+    "title": "jupyter.getUsedAzMLServerHandles",
+    "keywords": [
+      "jupyter get used az mlserver handles",
+      "jupyter get"
+    ]
+  },
+  {
+    "id": "jupyter.manageAccessToKernels",
+    "title": "jupyter.manageAccessToKernels",
+    "keywords": [
+      "jupyter manage access to kernels",
+      "jupyter manage"
+    ]
+  },
+  {
+    "id": "jupyter.showDataViewer",
+    "title": "jupyter.showDataViewer",
+    "keywords": [
+      "jupyter show data viewer",
+      "jupyter show"
+    ]
+  },
+  {
+    "id": "jupyter.showJupyterDataViewer",
+    "title": "jupyter.showJupyterDataViewer",
+    "keywords": [
+      "jupyter show jupyter data viewer",
+      "jupyter show"
+    ]
+  },
+  {
+    "id": "autoDocstring.generateDocstring",
+    "title": "autoDocstring.generateDocstring",
+    "keywords": [
+      "auto docstring generate docstring",
+      "auto docstring"
+    ]
+  },
+  {
+    "id": "makefile.outline.toggleVisibility",
+    "title": "makefile.outline.toggleVisibility",
+    "keywords": [
+      "makefile outline toggle visibility",
+      "makefile outline"
+    ]
+  },
+  {
+    "id": "makefile.outline.removeView",
+    "title": "makefile.outline.removeView",
+    "keywords": [
+      "makefile outline remove view",
+      "makefile outline"
+    ]
+  },
+  {
     "id": "workbench.extensions.action.openExtensionsFolder",
     "title": "workbench.extensions.action.openExtensionsFolder",
     "keywords": [
@@ -22677,645 +24418,6 @@
     ]
   },
   {
-    "id": "workbench.extensions.installMissingDependencies",
-    "title": "workbench.extensions.installMissingDependencies",
-    "keywords": [
-      "workbench extensions install missing dependencies",
-      "workbench extensions"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-azure-java",
-    "title": "workbench.action.chat.openmodernize-azure-java",
-    "keywords": [
-      "chat openmodernize azure java",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-java-assessment",
-    "title": "workbench.action.chat.openmodernize-java-assessment",
-    "keywords": [
-      "chat openmodernize java assessment",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-azure-dotnet",
-    "title": "workbench.action.chat.openmodernize-azure-dotnet",
-    "keywords": [
-      "chat openmodernize azure dotnet",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-java-upgrade",
-    "title": "workbench.action.chat.openmodernize-java-upgrade",
-    "keywords": [
-      "chat openmodernize java upgrade",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-java-security",
-    "title": "workbench.action.chat.openmodernize-java-security",
-    "keywords": [
-      "chat openmodernize java security",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-rearchitecture",
-    "title": "workbench.action.chat.openmodernize-rearchitecture",
-    "keywords": [
-      "chat openmodernize rearchitecture",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.openmodernize-java",
-    "title": "workbench.action.chat.openmodernize-java",
-    "keywords": [
-      "chat openmodernize java",
-      "chat openmodernize"
-    ]
-  },
-  {
-    "id": "chat.installRecommendation.openai.chatgpt.codex",
-    "title": "chat.installRecommendation.openai.chatgpt.codex",
-    "keywords": [
-      "chat install recommendation openai chatgpt codex",
-      "chat install"
-    ]
-  },
-  {
-    "id": "chat.installRecommendation.github.copilot-chat.cli",
-    "title": "chat.installRecommendation.github.copilot-chat.cli",
-    "keywords": [
-      "chat install recommendation github copilot chat cli",
-      "chat install"
-    ]
-  },
-  {
-    "id": "chat.installRecommendation.github.copilot-chat.cloud",
-    "title": "chat.installRecommendation.github.copilot-chat.cloud",
-    "keywords": [
-      "chat install recommendation github copilot chat cloud",
-      "chat install"
-    ]
-  },
-  {
-    "id": "workbench.action.toggleLockedScrolling",
-    "title": "workbench.action.toggleLockedScrolling",
-    "keywords": [
-      "toggle locked scrolling",
-      "toggle locked"
-    ]
-  },
-  {
-    "id": "workbench.action.holdLockedScrolling",
-    "title": "workbench.action.holdLockedScrolling",
-    "keywords": [
-      "hold locked scrolling",
-      "hold locked"
-    ]
-  },
-  {
-    "id": "workbench.action.configureLocale",
-    "title": "workbench.action.configureLocale",
-    "keywords": [
-      "configure locale"
-    ]
-  },
-  {
-    "id": "workbench.action.clearLocalePreference",
-    "title": "workbench.action.clearLocalePreference",
-    "keywords": [
-      "clear locale preference",
-      "clear locale"
-    ]
-  },
-  {
-    "id": "workbench.action.extensionHostProfiler.stop",
-    "title": "workbench.action.extensionHostProfiler.stop",
-    "keywords": [
-      "extension host profiler stop",
-      "extension host"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.updateImageSize",
-    "title": "editor.emmet.action.updateImageSize",
-    "keywords": [
-      "editor emmet action update image size",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.wrapWithAbbreviation",
-    "title": "editor.emmet.action.wrapWithAbbreviation",
-    "keywords": [
-      "editor emmet action wrap with abbreviation",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "emmet.expandAbbreviation",
-    "title": "emmet.expandAbbreviation",
-    "keywords": [
-      "emmet expand abbreviation",
-      "emmet expand"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.removeTag",
-    "title": "editor.emmet.action.removeTag",
-    "keywords": [
-      "editor emmet action remove tag",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.updateTag",
-    "title": "editor.emmet.action.updateTag",
-    "keywords": [
-      "editor emmet action update tag",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.matchTag",
-    "title": "editor.emmet.action.matchTag",
-    "keywords": [
-      "editor emmet action match tag",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.balanceOut",
-    "title": "editor.emmet.action.balanceOut",
-    "keywords": [
-      "editor emmet action balance out",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.balanceIn",
-    "title": "editor.emmet.action.balanceIn",
-    "keywords": [
-      "editor emmet action balance in",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.splitJoinTag",
-    "title": "editor.emmet.action.splitJoinTag",
-    "keywords": [
-      "editor emmet action split join tag",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.mergeLines",
-    "title": "editor.emmet.action.mergeLines",
-    "keywords": [
-      "editor emmet action merge lines",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.toggleComment",
-    "title": "editor.emmet.action.toggleComment",
-    "keywords": [
-      "editor emmet action toggle comment",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.nextEditPoint",
-    "title": "editor.emmet.action.nextEditPoint",
-    "keywords": [
-      "editor emmet action next edit point",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.prevEditPoint",
-    "title": "editor.emmet.action.prevEditPoint",
-    "keywords": [
-      "editor emmet action prev edit point",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.selectNextItem",
-    "title": "editor.emmet.action.selectNextItem",
-    "keywords": [
-      "editor emmet action select next item",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.selectPrevItem",
-    "title": "editor.emmet.action.selectPrevItem",
-    "keywords": [
-      "editor emmet action select prev item",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.evaluateMathExpression",
-    "title": "editor.emmet.action.evaluateMathExpression",
-    "keywords": [
-      "editor emmet action evaluate math expression",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.incrementNumberByOneTenth",
-    "title": "editor.emmet.action.incrementNumberByOneTenth",
-    "keywords": [
-      "editor emmet action increment number by one tenth",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.incrementNumberByOne",
-    "title": "editor.emmet.action.incrementNumberByOne",
-    "keywords": [
-      "editor emmet action increment number by one",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.incrementNumberByTen",
-    "title": "editor.emmet.action.incrementNumberByTen",
-    "keywords": [
-      "editor emmet action increment number by ten",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.decrementNumberByOneTenth",
-    "title": "editor.emmet.action.decrementNumberByOneTenth",
-    "keywords": [
-      "editor emmet action decrement number by one tenth",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.decrementNumberByOne",
-    "title": "editor.emmet.action.decrementNumberByOne",
-    "keywords": [
-      "editor emmet action decrement number by one",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.decrementNumberByTen",
-    "title": "editor.emmet.action.decrementNumberByTen",
-    "keywords": [
-      "editor emmet action decrement number by ten",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "editor.emmet.action.reflectCSSValue",
-    "title": "editor.emmet.action.reflectCSSValue",
-    "keywords": [
-      "editor emmet action reflect cssvalue",
-      "editor emmet"
-    ]
-  },
-  {
-    "id": "workbench.action.showEmmetCommands",
-    "title": "workbench.action.showEmmetCommands",
-    "keywords": [
-      "show emmet commands",
-      "show emmet"
-    ]
-  },
-  {
-    "id": "python.configureTests",
-    "title": "python.configureTests",
-    "keywords": [
-      "python configure tests",
-      "python configure"
-    ]
-  },
-  {
-    "id": "python.copilotSetupTests",
-    "title": "python.copilotSetupTests",
-    "keywords": [
-      "python copilot setup tests",
-      "python copilot"
-    ]
-  },
-  {
-    "id": "python.copyTestId",
-    "title": "python.copyTestId",
-    "keywords": [
-      "python copy test id",
-      "python copy"
-    ]
-  },
-  {
-    "id": "python-envs.terminal.revertStartupScriptChanges",
-    "title": "python-envs.terminal.revertStartupScriptChanges",
-    "keywords": [
-      "python envs terminal revert startup script changes",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.viewLogs",
-    "title": "python-envs.viewLogs",
-    "keywords": [
-      "python envs view logs",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.refreshAllManagers",
-    "title": "python-envs.refreshAllManagers",
-    "keywords": [
-      "python envs refresh all managers",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.searchSettings",
-    "title": "python-envs.searchSettings",
-    "keywords": [
-      "python envs search settings",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.refreshPackages",
-    "title": "python-envs.refreshPackages",
-    "keywords": [
-      "python envs refresh packages",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.create",
-    "title": "python-envs.create",
-    "keywords": [
-      "python envs create",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.createAny",
-    "title": "python-envs.createAny",
-    "keywords": [
-      "python envs create any",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.remove",
-    "title": "python-envs.remove",
-    "keywords": [
-      "python envs remove",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.packages",
-    "title": "python-envs.packages",
-    "keywords": [
-      "python envs packages",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.uninstallPackage",
-    "title": "python-envs.uninstallPackage",
-    "keywords": [
-      "python envs uninstall package",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.set",
-    "title": "python-envs.set",
-    "keywords": [
-      "python envs set",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.setEnv",
-    "title": "python-envs.setEnv",
-    "keywords": [
-      "python envs set env",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.setEnvSelected",
-    "title": "python-envs.setEnvSelected",
-    "keywords": [
-      "python envs set env selected",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.setEnvManager",
-    "title": "python-envs.setEnvManager",
-    "keywords": [
-      "python envs set env manager",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.setPkgManager",
-    "title": "python-envs.setPkgManager",
-    "keywords": [
-      "python envs set pkg manager",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.addPythonProject",
-    "title": "python-envs.addPythonProject",
-    "keywords": [
-      "python envs add python project",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.addPythonProjectGivenResource",
-    "title": "python-envs.addPythonProjectGivenResource",
-    "keywords": [
-      "python envs add python project given resource",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.removePythonProject",
-    "title": "python-envs.removePythonProject",
-    "keywords": [
-      "python envs remove python project",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.clearCache",
-    "title": "python-envs.clearCache",
-    "keywords": [
-      "python envs clear cache",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.runInTerminal",
-    "title": "python-envs.runInTerminal",
-    "keywords": [
-      "python envs run in terminal",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.runInDedicatedTerminal",
-    "title": "python-envs.runInDedicatedTerminal",
-    "keywords": [
-      "python envs run in dedicated terminal",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.runAsTask",
-    "title": "python-envs.runAsTask",
-    "keywords": [
-      "python envs run as task",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.createTerminal",
-    "title": "python-envs.createTerminal",
-    "keywords": [
-      "python envs create terminal",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.copyEnvPath",
-    "title": "python-envs.copyEnvPath",
-    "keywords": [
-      "python envs copy env path",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.copyEnvPathCopied",
-    "title": "python-envs.copyEnvPathCopied",
-    "keywords": [
-      "python envs copy env path copied",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.copyProjectPath",
-    "title": "python-envs.copyProjectPath",
-    "keywords": [
-      "python envs copy project path",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.copyProjectPathCopied",
-    "title": "python-envs.copyProjectPathCopied",
-    "keywords": [
-      "python envs copy project path copied",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.revealProjectInExplorer",
-    "title": "python-envs.revealProjectInExplorer",
-    "keywords": [
-      "python envs reveal project in explorer",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.revealEnvInManagerView",
-    "title": "python-envs.revealEnvInManagerView",
-    "keywords": [
-      "python envs reveal env in manager view",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.terminal.activate",
-    "title": "python-envs.terminal.activate",
-    "keywords": [
-      "python envs terminal activate",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.terminal.deactivate",
-    "title": "python-envs.terminal.deactivate",
-    "keywords": [
-      "python envs terminal deactivate",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.createNewProjectFromTemplate",
-    "title": "python-envs.createNewProjectFromTemplate",
-    "keywords": [
-      "python envs create new project from template",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.reportIssue",
-    "title": "python-envs.reportIssue",
-    "keywords": [
-      "python envs report issue",
-      "python envs"
-    ]
-  },
-  {
-    "id": "python-envs.runPetInTerminal",
-    "title": "python-envs.runPetInTerminal",
-    "keywords": [
-      "python envs run pet in terminal",
-      "python envs"
-    ]
-  },
-  {
-    "id": "vsintellicode.completionItemSelected",
-    "title": "vsintellicode.completionItemSelected",
-    "keywords": [
-      "vsintellicode completion item selected",
-      "vsintellicode completion"
-    ]
-  },
-  {
-    "id": "terminal.integrated.suggest.clearCachedGlobals",
-    "title": "terminal.integrated.suggest.clearCachedGlobals",
-    "keywords": [
-      "terminal integrated suggest clear cached globals",
-      "terminal integrated"
-    ]
-  },
-  {
-    "id": "git-base.api.getRemoteSources",
-    "title": "git-base.api.getRemoteSources",
-    "keywords": [
-      "git base api get remote sources",
-      "git base"
-    ]
-  },
-  {
     "id": "python.viewOutput",
     "title": "python.viewOutput",
     "keywords": [
@@ -23324,34 +24426,18 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.extension-output-VisualStudioExptTeam.intellicode-api-usage-examples-#1-IntelliCode API Examples",
-    "title": "workbench.action.output.show.extension-output-VisualStudioExptTeam.intellicode-api-usage-examples-#1-IntelliCode API Examples",
-    "keywords": [
-      "output show extension output visual studio expt team intellicode api usage examples #1 intelli code api examples",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-VisualStudioExptTeam.vscodeintellicode-#1-VS IntelliCode",
-    "title": "workbench.action.output.show.extension-output-VisualStudioExptTeam.vscodeintellicode-#1-VS IntelliCode",
-    "keywords": [
-      "output show extension output visual studio expt team vscodeintellicode #1 vs intelli code",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-VisualStudioExptTeam.intellicode-api-usage-examples-#2-API Usage Examples LSP",
-    "title": "workbench.action.output.show.extension-output-VisualStudioExptTeam.intellicode-api-usage-examples-#2-API Usage Examples LSP",
-    "keywords": [
-      "output show extension output visual studio expt team intellicode api usage examples #2 api usage examples lsp",
-      "output show"
-    ]
-  },
-  {
     "id": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
     "title": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
     "keywords": [
       "output show vscode github authentication git hub authentication log",
+      "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
+    "title": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
+    "keywords": [
+      "output show mechatroner rainbow csv rainbow csv debug channel log",
       "output show"
     ]
   },
@@ -23372,19 +24458,35 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
-    "title": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
+    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
+    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
     "keywords": [
-      "output show git hub copilot chat git hub copilot chat log",
+      "output show extension output ms toolsai jupyter #1 jupyter",
       "output show"
     ]
   },
   {
-    "id": "workbench.action.output.show.ms-python.vscode-python-envs.Python Environments.log",
-    "title": "workbench.action.output.show.ms-python.vscode-python-envs.Python Environments.log",
+    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
+    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
     "keywords": [
-      "output show ms python vscode python envs python environments log",
+      "output show extension output ms toolsai jupyter #2 jupyter server console",
       "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
+    "title": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
+    "keywords": [
+      "output show extension output njpwerner autodocstring #1 auto docstring",
+      "output show"
+    ]
+  },
+  {
+    "id": "terminal.integrated.suggest.clearCachedGlobals",
+    "title": "terminal.integrated.suggest.clearCachedGlobals",
+    "keywords": [
+      "terminal integrated suggest clear cached globals",
+      "terminal integrated"
     ]
   },
   {
@@ -23836,10 +24938,289 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.vscode.git.Git.log",
-    "title": "workbench.action.output.show.vscode.git.Git.log",
+    "id": "debugpy.viewOutput",
+    "title": "debugpy.viewOutput",
     "keywords": [
-      "output show vscode git git log",
+      "debugpy view output",
+      "debugpy view"
+    ]
+  },
+  {
+    "id": "python.getDebugpyPackagePath",
+    "title": "python.getDebugpyPackagePath",
+    "keywords": [
+      "python get debugpy package path",
+      "python get"
+    ]
+  },
+  {
+    "id": "debugpy.reportIssue",
+    "title": "debugpy.reportIssue",
+    "keywords": [
+      "debugpy report issue",
+      "debugpy report"
+    ]
+  },
+  {
+    "id": "debugpy.debugInTerminal",
+    "title": "debugpy.debugInTerminal",
+    "keywords": [
+      "debugpy debug in terminal",
+      "debugpy debug"
+    ]
+  },
+  {
+    "id": "debugpy.debugUsingLaunchConfig",
+    "title": "debugpy.debugUsingLaunchConfig",
+    "keywords": [
+      "debugpy debug using launch config",
+      "debugpy debug"
+    ]
+  },
+  {
+    "id": "debugpy.clearCacheAndReload",
+    "title": "debugpy.clearCacheAndReload",
+    "keywords": [
+      "debugpy clear cache and reload",
+      "debugpy clear"
+    ]
+  },
+  {
+    "id": "debugpy.pickLocalProcess",
+    "title": "debugpy.pickLocalProcess",
+    "keywords": [
+      "debugpy pick local process",
+      "debugpy pick"
+    ]
+  },
+  {
+    "id": "debugpy.pickArgs",
+    "title": "debugpy.pickArgs",
+    "keywords": [
+      "debugpy pick args",
+      "debugpy pick"
+    ]
+  },
+  {
+    "id": "debugpy.SelectAndInsertDebugConfiguration",
+    "title": "debugpy.SelectAndInsertDebugConfiguration",
+    "keywords": [
+      "debugpy select and insert debug configuration",
+      "debugpy select"
+    ]
+  },
+  {
+    "id": "workbench.action.terminal.newWithProfile",
+    "title": "workbench.action.terminal.newWithProfile",
+    "keywords": [
+      "terminal new with profile",
+      "terminal new"
+    ]
+  },
+  {
+    "id": "git-base.api.getRemoteSources",
+    "title": "git-base.api.getRemoteSources",
+    "keywords": [
+      "git base api get remote sources",
+      "git base"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
+    "title": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
+    "keywords": [
+      "output show extension output formulahendry auto rename tag #1 auto rename tag",
+      "output show"
+    ]
+  },
+  {
+    "id": "streamdeck.reconnectToServer",
+    "title": "streamdeck.reconnectToServer",
+    "keywords": [
+      "streamdeck reconnect to server",
+      "streamdeck reconnect"
+    ]
+  },
+  {
+    "id": "streamdeck.activateSession",
+    "title": "streamdeck.activateSession",
+    "keywords": [
+      "streamdeck activate session",
+      "streamdeck activate"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
+    "title": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
+    "keywords": [
+      "output show extension output nicollasr vscode streamdeck #1 stream deck",
+      "output show"
+    ]
+  },
+  {
+    "id": "todohighlight.toggleHighlight",
+    "title": "todohighlight.toggleHighlight",
+    "keywords": [
+      "todohighlight toggle highlight",
+      "todohighlight toggle"
+    ]
+  },
+  {
+    "id": "todohighlight.listAnnotations",
+    "title": "todohighlight.listAnnotations",
+    "keywords": [
+      "todohighlight list annotations",
+      "todohighlight list"
+    ]
+  },
+  {
+    "id": "todohighlight.showOutputChannel",
+    "title": "todohighlight.showOutputChannel",
+    "keywords": [
+      "todohighlight show output channel",
+      "todohighlight show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
+    "title": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
+    "keywords": [
+      "output show extension output wayou vscode todo highlight #1 todo highlight",
+      "output show"
+    ]
+  },
+  {
+    "id": "python.getRecommendedEnvironment",
+    "title": "python.getRecommendedEnvironment",
+    "keywords": [
+      "python get recommended environment",
+      "python get"
+    ]
+  },
+  {
+    "id": "python.analysis.restartLanguageServer",
+    "title": "python.analysis.restartLanguageServer",
+    "keywords": [
+      "python analysis restart language server",
+      "python analysis"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.ms-python.python.Python Language Server.log",
+    "title": "workbench.action.output.show.ms-python.python.Python Language Server.log",
+    "keywords": [
+      "output show ms python python python language server log",
+      "output show"
+    ]
+  },
+  {
+    "id": "pylance.generateDocumentation",
+    "title": "pylance.generateDocumentation",
+    "keywords": [
+      "pylance generate documentation",
+      "pylance generate"
+    ]
+  },
+  {
+    "id": "pylance.addSummaryAsDocstringAndDismissTooltip",
+    "title": "pylance.addSummaryAsDocstringAndDismissTooltip",
+    "keywords": [
+      "pylance add summary as docstring and dismiss tooltip",
+      "pylance add"
+    ]
+  },
+  {
+    "id": "pylance.registerNotebookStartupCommands",
+    "title": "pylance.registerNotebookStartupCommands",
+    "keywords": [
+      "pylance register notebook startup commands",
+      "pylance register"
+    ]
+  },
+  {
+    "id": "python.viewLanguageServerOutput",
+    "title": "python.viewLanguageServerOutput",
+    "keywords": [
+      "python view language server output",
+      "python view"
+    ]
+  },
+  {
+    "id": "workbench.extensions.installMissingDependencies",
+    "title": "workbench.extensions.installMissingDependencies",
+    "keywords": [
+      "workbench extensions install missing dependencies",
+      "workbench extensions"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.openai.chatgpt.codex",
+    "title": "chat.installRecommendation.openai.chatgpt.codex",
+    "keywords": [
+      "chat install recommendation openai chatgpt codex",
+      "chat install"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.github.copilot-chat.cli",
+    "title": "chat.installRecommendation.github.copilot-chat.cli",
+    "keywords": [
+      "chat install recommendation github copilot chat cli",
+      "chat install"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.github.copilot-chat.cloud",
+    "title": "chat.installRecommendation.github.copilot-chat.cloud",
+    "keywords": [
+      "chat install recommendation github copilot chat cloud",
+      "chat install"
+    ]
+  },
+  {
+    "id": "workbench.action.toggleLockedScrolling",
+    "title": "workbench.action.toggleLockedScrolling",
+    "keywords": [
+      "toggle locked scrolling",
+      "toggle locked"
+    ]
+  },
+  {
+    "id": "workbench.action.holdLockedScrolling",
+    "title": "workbench.action.holdLockedScrolling",
+    "keywords": [
+      "hold locked scrolling",
+      "hold locked"
+    ]
+  },
+  {
+    "id": "workbench.action.configureLocale",
+    "title": "workbench.action.configureLocale",
+    "keywords": [
+      "configure locale"
+    ]
+  },
+  {
+    "id": "workbench.action.clearLocalePreference",
+    "title": "workbench.action.clearLocalePreference",
+    "keywords": [
+      "clear locale preference",
+      "clear locale"
+    ]
+  },
+  {
+    "id": "workbench.action.extensionHostProfiler.stop",
+    "title": "workbench.action.extensionHostProfiler.stop",
+    "keywords": [
+      "extension host profiler stop",
+      "extension host"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.ms-python.debugpy.Python Debugger.log",
+    "title": "workbench.action.output.show.ms-python.debugpy.Python Debugger.log",
+    "keywords": [
+      "output show ms python debugpy python debugger log",
       "output show"
     ]
   },
@@ -24604,94 +25985,6 @@
     ]
   },
   {
-    "id": "agentSessions.filter.toggleExclude:local.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:local.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:local agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:claude-code.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:claude-code.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:claude code agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:copilotcli.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:copilotcli.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:copilotcli agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:copilot-cloud-agent.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:copilot-cloud-agent.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:copilot cloud agent agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:1.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:1.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:1 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:2.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:2.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:2 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:3.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:3.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:3 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:0.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:0.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:0 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeArchived.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeArchived.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude archived agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeRead.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeRead.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude read agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.resetExcludes.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.resetExcludes.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter reset excludes agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
     "id": "github.copilot.chat.otel.flush",
     "title": "github.copilot.chat.otel.flush",
     "keywords": [
@@ -24708,27 +26001,321 @@
     ]
   },
   {
-    "id": "gaia_hover.show_call_summary_document",
-    "title": "gaia_hover.show_call_summary_document",
+    "id": "workbench.action.output.show.vscode.git.Git.log",
+    "title": "workbench.action.output.show.vscode.git.Git.log",
     "keywords": [
-      "gaia hover show call summary document",
-      "gaia hover"
+      "output show vscode git git log",
+      "output show"
     ]
   },
   {
-    "id": "gaia_feedback.submit_feedback",
-    "title": "gaia_feedback.submit_feedback",
+    "id": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
+    "title": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
     "keywords": [
-      "gaia feedback submit feedback",
-      "gaia feedback"
+      "output show git hub copilot chat git hub copilot chat log",
+      "output show"
     ]
   },
   {
-    "id": "gaia.copyExample",
-    "title": "gaia.copyExample",
+    "id": "workbench.action.output.show.vscode.github.GitHub.log",
+    "title": "workbench.action.output.show.vscode.github.GitHub.log",
     "keywords": [
-      "gaia copy example",
-      "gaia copy"
+      "output show vscode github git hub log",
+      "output show"
+    ]
+  },
+  {
+    "id": "pyright.createtypestub",
+    "title": "pyright.createtypestub",
+    "keywords": [
+      "pyright createtypestub"
+    ]
+  },
+  {
+    "id": "pyright.organizeimports",
+    "title": "pyright.organizeimports",
+    "keywords": [
+      "pyright organizeimports"
+    ]
+  },
+  {
+    "id": "pyright.dumpFileDebugInfo",
+    "title": "pyright.dumpFileDebugInfo",
+    "keywords": [
+      "pyright dump file debug info",
+      "pyright dump"
+    ]
+  },
+  {
+    "id": "python.createTypeStub",
+    "title": "python.createTypeStub",
+    "keywords": [
+      "python create type stub",
+      "python create"
+    ]
+  },
+  {
+    "id": "python.orderImports",
+    "title": "python.orderImports",
+    "keywords": [
+      "python order imports",
+      "python order"
+    ]
+  },
+  {
+    "id": "python.addOptionalForParam",
+    "title": "python.addOptionalForParam",
+    "keywords": [
+      "python add optional for param",
+      "python add"
+    ]
+  },
+  {
+    "id": "python.removeUnusedImport",
+    "title": "python.removeUnusedImport",
+    "keywords": [
+      "python remove unused import",
+      "python remove"
+    ]
+  },
+  {
+    "id": "python.addImport",
+    "title": "python.addImport",
+    "keywords": [
+      "python add import",
+      "python add"
+    ]
+  },
+  {
+    "id": "pylance.diagnosticRefactor",
+    "title": "pylance.diagnosticRefactor",
+    "keywords": [
+      "pylance diagnostic refactor",
+      "pylance diagnostic"
+    ]
+  },
+  {
+    "id": "pylance.changeSpelling",
+    "title": "pylance.changeSpelling",
+    "keywords": [
+      "pylance change spelling",
+      "pylance change"
+    ]
+  },
+  {
+    "id": "pylance.extractMethod",
+    "title": "pylance.extractMethod",
+    "keywords": [
+      "pylance extract method",
+      "pylance extract"
+    ]
+  },
+  {
+    "id": "pylance.extractVariable",
+    "title": "pylance.extractVariable",
+    "keywords": [
+      "pylance extract variable",
+      "pylance extract"
+    ]
+  },
+  {
+    "id": "pylance.completionAccepted",
+    "title": "pylance.completionAccepted",
+    "keywords": [
+      "pylance completion accepted",
+      "pylance completion"
+    ]
+  },
+  {
+    "id": "pylance.executedClientCommand",
+    "title": "pylance.executedClientCommand",
+    "keywords": [
+      "pylance executed client command",
+      "pylance executed"
+    ]
+  },
+  {
+    "id": "pylance.moveSymbol",
+    "title": "pylance.moveSymbol",
+    "keywords": [
+      "pylance move symbol",
+      "pylance move"
+    ]
+  },
+  {
+    "id": "pylance.getSourceFiles",
+    "title": "pylance.getSourceFiles",
+    "keywords": [
+      "pylance get source files",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.getAutoImports",
+    "title": "pylance.getAutoImports",
+    "keywords": [
+      "pylance get auto imports",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.convertImportFormat",
+    "title": "pylance.convertImportFormat",
+    "keywords": [
+      "pylance convert import format",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.convertImportStar",
+    "title": "pylance.convertImportStar",
+    "keywords": [
+      "pylance convert import star",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.convertImportToModule",
+    "title": "pylance.convertImportToModule",
+    "keywords": [
+      "pylance convert import to module",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.addTypeAnnotation",
+    "title": "pylance.addTypeAnnotation",
+    "keywords": [
+      "pylance add type annotation",
+      "pylance add"
+    ]
+  },
+  {
+    "id": "pylance.inheritAllDecorators",
+    "title": "pylance.inheritAllDecorators",
+    "keywords": [
+      "pylance inherit all decorators",
+      "pylance inherit"
+    ]
+  },
+  {
+    "id": "pylance.addToExtraPathsInConfig",
+    "title": "pylance.addToExtraPathsInConfig",
+    "keywords": [
+      "pylance add to extra paths in config",
+      "pylance add"
+    ]
+  },
+  {
+    "id": "pylance.fixAll",
+    "title": "pylance.fixAll",
+    "keywords": [
+      "pylance fix all",
+      "pylance fix"
+    ]
+  },
+  {
+    "id": "pylance.pytest.addAllFixtureTypeAnnotations",
+    "title": "pylance.pytest.addAllFixtureTypeAnnotations",
+    "keywords": [
+      "pylance pytest add all fixture type annotations",
+      "pylance pytest"
+    ]
+  },
+  {
+    "id": "pylance.pytest.addFixtureTypeAnnotation",
+    "title": "pylance.pytest.addFixtureTypeAnnotation",
+    "keywords": [
+      "pylance pytest add fixture type annotation",
+      "pylance pytest"
+    ]
+  },
+  {
+    "id": "pylance.indexing.clearPersistedIndices",
+    "title": "pylance.indexing.clearPersistedIndices",
+    "keywords": [
+      "pylance indexing clear persisted indices",
+      "pylance indexing"
+    ]
+  },
+  {
+    "id": "pylance.profiling.start",
+    "title": "pylance.profiling.start",
+    "keywords": [
+      "pylance profiling start",
+      "pylance profiling"
+    ]
+  },
+  {
+    "id": "pylance.profiling.stop",
+    "title": "pylance.profiling.stop",
+    "keywords": [
+      "pylance profiling stop",
+      "pylance profiling"
+    ]
+  },
+  {
+    "id": "pylance.logging.start",
+    "title": "pylance.logging.start",
+    "keywords": [
+      "pylance logging start",
+      "pylance logging"
+    ]
+  },
+  {
+    "id": "pylance.logging.stop",
+    "title": "pylance.logging.stop",
+    "keywords": [
+      "pylance logging stop",
+      "pylance logging"
+    ]
+  },
+  {
+    "id": "pylance.implementAllAbstractClasses",
+    "title": "pylance.implementAllAbstractClasses",
+    "keywords": [
+      "pylance implement all abstract classes",
+      "pylance implement"
+    ]
+  },
+  {
+    "id": "pylance.implementAllAbstractClassesWithCopilot",
+    "title": "pylance.implementAllAbstractClassesWithCopilot",
+    "keywords": [
+      "pylance implement all abstract classes with copilot",
+      "pylance implement"
+    ]
+  },
+  {
+    "id": "pylance.getAllDocstringRanges",
+    "title": "pylance.getAllDocstringRanges",
+    "keywords": [
+      "pylance get all docstring ranges",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.server.runCurrentFileInSandbox",
+    "title": "pylance.server.runCurrentFileInSandbox",
+    "keywords": [
+      "pylance server run current file in sandbox",
+      "pylance server"
+    ]
+  },
+  {
+    "id": "pylance.pluginCommand",
+    "title": "pylance.pluginCommand",
+    "keywords": [
+      "pylance plugin command",
+      "pylance plugin"
+    ]
+  },
+  {
+    "id": "pylance.renameShadowedStdlib",
+    "title": "pylance.renameShadowedStdlib",
+    "keywords": [
+      "pylance rename shadowed stdlib",
+      "pylance rename"
     ]
   },
   {
@@ -26286,90 +27873,10 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
-    "title": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "id": "workbench.action.output.show.extension-output-rvest.vs-code-prettier-eslint-#1-Prettier Eslint",
+    "title": "workbench.action.output.show.extension-output-rvest.vs-code-prettier-eslint-#1-Prettier Eslint",
     "keywords": [
-      "output show extension output echo code echo code #1 echo code",
-      "output show"
-    ]
-  },
-  {
-    "id": "debugpy.viewOutput",
-    "title": "debugpy.viewOutput",
-    "keywords": [
-      "debugpy view output",
-      "debugpy view"
-    ]
-  },
-  {
-    "id": "python.getDebugpyPackagePath",
-    "title": "python.getDebugpyPackagePath",
-    "keywords": [
-      "python get debugpy package path",
-      "python get"
-    ]
-  },
-  {
-    "id": "debugpy.reportIssue",
-    "title": "debugpy.reportIssue",
-    "keywords": [
-      "debugpy report issue",
-      "debugpy report"
-    ]
-  },
-  {
-    "id": "debugpy.debugInTerminal",
-    "title": "debugpy.debugInTerminal",
-    "keywords": [
-      "debugpy debug in terminal",
-      "debugpy debug"
-    ]
-  },
-  {
-    "id": "debugpy.debugUsingLaunchConfig",
-    "title": "debugpy.debugUsingLaunchConfig",
-    "keywords": [
-      "debugpy debug using launch config",
-      "debugpy debug"
-    ]
-  },
-  {
-    "id": "debugpy.clearCacheAndReload",
-    "title": "debugpy.clearCacheAndReload",
-    "keywords": [
-      "debugpy clear cache and reload",
-      "debugpy clear"
-    ]
-  },
-  {
-    "id": "debugpy.pickLocalProcess",
-    "title": "debugpy.pickLocalProcess",
-    "keywords": [
-      "debugpy pick local process",
-      "debugpy pick"
-    ]
-  },
-  {
-    "id": "debugpy.pickArgs",
-    "title": "debugpy.pickArgs",
-    "keywords": [
-      "debugpy pick args",
-      "debugpy pick"
-    ]
-  },
-  {
-    "id": "debugpy.SelectAndInsertDebugConfiguration",
-    "title": "debugpy.SelectAndInsertDebugConfiguration",
-    "keywords": [
-      "debugpy select and insert debug configuration",
-      "debugpy select"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-vadimcn.vscode-lldb-#1-LLDB",
-    "title": "workbench.action.output.show.extension-output-vadimcn.vscode-lldb-#1-LLDB",
-    "keywords": [
-      "output show extension output vadimcn vscode lldb #1 lldb",
+      "output show extension output rvest vs code prettier eslint #1 prettier eslint",
       "output show"
     ]
   },
@@ -26462,6 +27969,22 @@
     ]
   },
   {
+    "id": "vscode-html-css.validate",
+    "title": "vscode-html-css.validate",
+    "keywords": [
+      "vscode html css validate",
+      "vscode html"
+    ]
+  },
+  {
+    "id": "vscode-html-css.clear",
+    "title": "vscode-html-css.clear",
+    "keywords": [
+      "vscode html css clear",
+      "vscode html"
+    ]
+  },
+  {
     "id": "code-runner.run",
     "title": "code-runner.run",
     "keywords": [
@@ -26502,224 +28025,155 @@
     ]
   },
   {
-    "id": "lldb.diagnose",
-    "title": "lldb.diagnose",
+    "id": "github.api.preloadPullRequest",
+    "title": "github.api.preloadPullRequest",
     "keywords": [
-      "lldb diagnose"
+      "github api preload pull request",
+      "github api"
     ]
   },
   {
-    "id": "lldb.getCargoLaunchConfigs",
-    "title": "lldb.getCargoLaunchConfigs",
+    "id": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#1-GitLab",
+    "title": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#1-GitLab",
     "keywords": [
-      "lldb get cargo launch configs",
-      "lldb get"
-    ]
-  },
-  {
-    "id": "lldb.pickMyProcess",
-    "title": "lldb.pickMyProcess",
-    "keywords": [
-      "lldb pick my process",
-      "lldb pick"
-    ]
-  },
-  {
-    "id": "lldb.pickProcess",
-    "title": "lldb.pickProcess",
-    "keywords": [
-      "lldb pick process",
-      "lldb pick"
-    ]
-  },
-  {
-    "id": "lldb.attach",
-    "title": "lldb.attach",
-    "keywords": [
-      "lldb attach"
-    ]
-  },
-  {
-    "id": "lldb.alternateBackend",
-    "title": "lldb.alternateBackend",
-    "keywords": [
-      "lldb alternate backend",
-      "lldb alternate"
-    ]
-  },
-  {
-    "id": "lldb.commandPrompt",
-    "title": "lldb.commandPrompt",
-    "keywords": [
-      "lldb command prompt",
-      "lldb command"
-    ]
-  },
-  {
-    "id": "lldb.symbols",
-    "title": "lldb.symbols",
-    "keywords": [
-      "lldb symbols"
-    ]
-  },
-  {
-    "id": "lldb.viewMemory",
-    "title": "lldb.viewMemory",
-    "keywords": [
-      "lldb view memory",
-      "lldb view"
-    ]
-  },
-  {
-    "id": "lldb.changeDisplaySettings",
-    "title": "lldb.changeDisplaySettings",
-    "keywords": [
-      "lldb change display settings",
-      "lldb change"
-    ]
-  },
-  {
-    "id": "lldb.toggleConsoleMode",
-    "title": "lldb.toggleConsoleMode",
-    "keywords": [
-      "lldb toggle console mode",
-      "lldb toggle"
-    ]
-  },
-  {
-    "id": "lldb.showDisassembly",
-    "title": "lldb.showDisassembly",
-    "keywords": [
-      "lldb show disassembly",
-      "lldb show"
-    ]
-  },
-  {
-    "id": "lldb.toggleDisassembly",
-    "title": "lldb.toggleDisassembly",
-    "keywords": [
-      "lldb toggle disassembly",
-      "lldb toggle"
-    ]
-  },
-  {
-    "id": "lldb.displayFormat",
-    "title": "lldb.displayFormat",
-    "keywords": [
-      "lldb display format",
-      "lldb display"
-    ]
-  },
-  {
-    "id": "lldb.toggleDerefPointers",
-    "title": "lldb.toggleDerefPointers",
-    "keywords": [
-      "lldb toggle deref pointers",
-      "lldb toggle"
-    ]
-  },
-  {
-    "id": "lldb.modules.copyValue",
-    "title": "lldb.modules.copyValue",
-    "keywords": [
-      "lldb modules copy value",
-      "lldb modules"
-    ]
-  },
-  {
-    "id": "lldb.excludedCallers.add",
-    "title": "lldb.excludedCallers.add",
-    "keywords": [
-      "lldb excluded callers add",
-      "lldb excluded"
-    ]
-  },
-  {
-    "id": "lldb.excludedCallers.remove",
-    "title": "lldb.excludedCallers.remove",
-    "keywords": [
-      "lldb excluded callers remove",
-      "lldb excluded"
-    ]
-  },
-  {
-    "id": "lldb.excludedCallers.removeAll",
-    "title": "lldb.excludedCallers.removeAll",
-    "keywords": [
-      "lldb excluded callers remove all",
-      "lldb excluded"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.vscode.github.GitHub.log",
-    "title": "workbench.action.output.show.vscode.github.GitHub.log",
-    "keywords": [
-      "output show vscode github git hub log",
+      "output show extension output git lab gitlab workflow #1 git lab",
       "output show"
     ]
   },
   {
-    "id": "workbench.action.output.show.ms-python.debugpy.Python Debugger.log",
-    "title": "workbench.action.output.show.ms-python.debugpy.Python Debugger.log",
+    "id": "prettier-sql-vscode.format-selection",
+    "title": "prettier-sql-vscode.format-selection",
     "keywords": [
-      "output show ms python debugpy python debugger log",
+      "prettier sql vscode format selection",
+      "prettier sql"
+    ]
+  },
+  {
+    "id": "extension.liveServer.goOnline",
+    "title": "extension.liveServer.goOnline",
+    "keywords": [
+      "live server go online",
+      "live server"
+    ]
+  },
+  {
+    "id": "extension.liveServer.goOffline",
+    "title": "extension.liveServer.goOffline",
+    "keywords": [
+      "live server go offline",
+      "live server"
+    ]
+  },
+  {
+    "id": "extension.liveServer.changeWorkspace",
+    "title": "extension.liveServer.changeWorkspace",
+    "keywords": [
+      "live server change workspace",
+      "live server"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "title": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "keywords": [
+      "output show extension output echo code echo code #1 echo code",
       "output show"
     ]
   },
   {
-    "id": "python.getRecommendedEnvironment",
-    "title": "python.getRecommendedEnvironment",
+    "id": "oneDarkPro.showChangelog",
+    "title": "oneDarkPro.showChangelog",
     "keywords": [
-      "python get recommended environment",
-      "python get"
+      "one dark pro show changelog",
+      "one dark"
     ]
   },
   {
-    "id": "python.analysis.restartLanguageServer",
-    "title": "python.analysis.restartLanguageServer",
+    "id": "oneDarkPro.setVivid",
+    "title": "oneDarkPro.setVivid",
     "keywords": [
-      "python analysis restart language server",
-      "python analysis"
+      "one dark pro set vivid",
+      "one dark"
     ]
   },
   {
-    "id": "workbench.action.output.show.ms-python.python.Python Language Server.log",
-    "title": "workbench.action.output.show.ms-python.python.Python Language Server.log",
+    "id": "oneDarkPro.cancelVivid",
+    "title": "oneDarkPro.cancelVivid",
     "keywords": [
-      "output show ms python python python language server log",
+      "one dark pro cancel vivid",
+      "one dark"
+    ]
+  },
+  {
+    "id": "oneDarkPro.setItalic",
+    "title": "oneDarkPro.setItalic",
+    "keywords": [
+      "one dark pro set italic",
+      "one dark"
+    ]
+  },
+  {
+    "id": "oneDarkPro.cancelItalic",
+    "title": "oneDarkPro.cancelItalic",
+    "keywords": [
+      "one dark pro cancel italic",
+      "one dark"
+    ]
+  },
+  {
+    "id": "oneDarkPro.setBold",
+    "title": "oneDarkPro.setBold",
+    "keywords": [
+      "one dark pro set bold",
+      "one dark"
+    ]
+  },
+  {
+    "id": "oneDarkPro.cancelBold",
+    "title": "oneDarkPro.cancelBold",
+    "keywords": [
+      "one dark pro cancel bold",
+      "one dark"
+    ]
+  },
+  {
+    "id": "issuesAndMrs.toggleVisibility",
+    "title": "issuesAndMrs.toggleVisibility",
+    "keywords": [
+      "issues and mrs toggle visibility",
+      "issues and"
+    ]
+  },
+  {
+    "id": "issuesAndMrs.removeView",
+    "title": "issuesAndMrs.removeView",
+    "keywords": [
+      "issues and mrs remove view",
+      "issues and"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
+    "title": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
+    "keywords": [
+      "output show extension output esbenp prettier vscode #1 prettier",
       "output show"
     ]
   },
   {
-    "id": "pylance.generateDocumentation",
-    "title": "pylance.generateDocumentation",
+    "id": "workbench.action.output.show.GitHub.vscode-pull-request-github.GitHub Pull Request.log",
+    "title": "workbench.action.output.show.GitHub.vscode-pull-request-github.GitHub Pull Request.log",
     "keywords": [
-      "pylance generate documentation",
-      "pylance generate"
+      "output show git hub vscode pull request github git hub pull request log",
+      "output show"
     ]
   },
   {
-    "id": "pylance.addSummaryAsDocstringAndDismissTooltip",
-    "title": "pylance.addSummaryAsDocstringAndDismissTooltip",
+    "id": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#2-GitLab Language Server",
+    "title": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#2-GitLab Language Server",
     "keywords": [
-      "pylance add summary as docstring and dismiss tooltip",
-      "pylance add"
-    ]
-  },
-  {
-    "id": "pylance.registerNotebookStartupCommands",
-    "title": "pylance.registerNotebookStartupCommands",
-    "keywords": [
-      "pylance register notebook startup commands",
-      "pylance register"
-    ]
-  },
-  {
-    "id": "python.viewLanguageServerOutput",
-    "title": "python.viewLanguageServerOutput",
-    "keywords": [
-      "python view language server output",
-      "python view"
+      "output show extension output git lab gitlab workflow #2 git lab language server",
+      "output show"
     ]
   },
   {
@@ -27320,14 +28774,6 @@
     "keywords": [
       "github copilot nes capture expected submit",
       "github copilot"
-    ]
-  },
-  {
-    "id": "codereferencing.showOutputPane2",
-    "title": "codereferencing.showOutputPane2",
-    "keywords": [
-      "codereferencing show output pane2",
-      "codereferencing show"
     ]
   },
   {
