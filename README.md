@@ -6,6 +6,7 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 ---
 
 ## **Features**
+
 - **Student/Developer Mode**
   Allows the user to switch from a developer mode to a student mode where some features are locked.
 
@@ -26,7 +27,6 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 
 - **AI Code Tutoring Annotations**  
   Provides inline annotations explaining **common coding mistakes** and suggesting improvements.
-
   - functions for generating big O(n) annotations
 
 - **Interactive Chat Tutor**  
@@ -42,7 +42,6 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
   Use **Ctrl+Alt+Up/Down Arrow** to navigate between function definitions, with automatic speech announcing the current function.
 - **Assignment Tracker System**  
   Allows blind users to upload `.txt`, `.pdf`, or `.docx` assignment files and uses AI to extract clear task lists:
-
   - Tasks are read aloud one-by-one.
   - Tasks can be marked complete with a hotkey.
   - Tasks are saved to a file and displayed in the output panel.
@@ -93,7 +92,8 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 | `Ctrl+Alt+[`     | `echocode.moveToNextFolder`                                                    | Navigates to the next folder in the workspace 🆕                                                            |
 | `Ctrl+Alt+]`     | `echocode.moveToPreviousFolder`                                                | Navigates to the previous folder in the workspace 🆕                                                        |
 | `Ctrl+Alt+G`     | `echocode.compileAndParseCpp` / `echocode checkPythonErrors`                   | Compiles C++ or checks Python syntax, reading errors and fixes aloud 🆕                                     |
-| `Ctrl+Alt+9`     | `echocode.StudentAndDevMode` / `echocode StudentDevMode`                       | Switches mode depending on the users preference 
+| `Ctrl+Alt+9`     | `echocode.StudentAndDevMode` / `echocode StudentDevMode`                       | Switches mode depending on the users preference                                                             |
+
 ---
 
 ## **Installation & Requirements**
@@ -113,6 +113,11 @@ Before using Echo Code, ensure the following are installed:
 ---
 
 ## **How to Use**
+
+## **Development Note**
+
+- Keep [extension.js](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/extension.js) and [src/extension.ts](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/src/extension.ts) thin. They should register commands and wire startup only.
+- Put large functions and feature logic in the matching feature module under [Core](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/Core), [program_features](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/program_features), [navigation_features](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/navigation_features), or [Language](d:/Coding/Bender-Bot/EchoCode-Capstone-Repo/Language), then call those functions from the extension entrypoint.
 
 ### **Navigating Functions**
 
