@@ -47,7 +47,7 @@ async function createFolder() {
 
   // Announce the folder creation
   vscode.window.showInformationMessage(
-    `Folder "${folderName}" has been created.`
+    `Folder "${folderName}" has been created.`,
   );
   await speakMessage(`Folder "${folderName}" has been created.`);
 }
@@ -58,10 +58,11 @@ async function createFolder() {
 function registerFolderCreatorCommand(context) {
   const createFolderCommand = vscode.commands.registerCommand(
     "echocode.createFolder",
-    createFolder
+    createFolder,
   );
 
   context.subscriptions.push(createFolderCommand);
+  return createFolderCommand;
 }
 
 module.exports = { registerFolderCreatorCommand };

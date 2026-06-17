@@ -146,7 +146,7 @@
         "title": "EchoCode: Switch to Student Mode"
       },
       {
-      "command": "echocode.switchToDevMode",
+        "command": "echocode.switchToDevMode",
         "title": "EchoCode: Switch to Developer Mode"
       },
       {
@@ -288,6 +288,78 @@
             "Concise, technical output with the raw error included."
           ],
           "description": "Controls how much detail EchoCode provides when explaining errors."
+        },
+        "echocode.featureImplementation.annotationsBigO": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for Annotations_BigO. User files are loaded from program_features/Annotations_BigO/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.assignmentTracker": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for Assignment_Tracker. User files are loaded from program_features/Assignment_Tracker/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.errorParser": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for C++_Error_Parser. User files are loaded from program_features/C++_Error_Parser/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.chatBot": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for ChatBot. User files are loaded from program_features/ChatBot/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.fileConnector": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for FileConnector. User files are loaded from program_features/FileConnector/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.folderFileCreator": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for Folder_File_Creator. User files are loaded from program_features/Folder_File_Creator/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.voice": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for Voice. User files are loaded from program_features/Voice/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.featureImplementation.whatIsThis": {
+          "type": "string",
+          "default": "builtin",
+          "enum": [
+            "builtin",
+            "user"
+          ],
+          "description": "Select built-in or user implementation for WhatIsThis. User files are loaded from program_features/WhatIsThis/UserImplementation/ and changes are auto-reloaded."
         }
       }
     },

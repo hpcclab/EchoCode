@@ -103,10 +103,11 @@ function stopListeningForChanges() {
 function registerCharacterReadOutCommand(context) {
   const toggleCommand = vscode.commands.registerCommand(
     "echocode.toggleCharacterReadOut",
-    toggleCharacterReadOut
+    toggleCharacterReadOut,
   );
 
   context.subscriptions.push(toggleCommand);
+  return toggleCommand;
 }
 
 module.exports = { registerCharacterReadOutCommand };

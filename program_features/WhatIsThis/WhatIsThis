@@ -1,7 +1,7 @@
 const vscode = require("vscode");
 const {
   speakMessage,
-} = require('../../Core/program_settings/speech_settings/speechHandler');
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 
 /**
  * Reads the content of the current line and speaks it aloud.
@@ -33,10 +33,11 @@ function registerReadCurrentLineCommand(context) {
     "echocode.readCurrentLine",
     async () => {
       await readCurrentLine();
-    }
+    },
   );
 
   context.subscriptions.push(readCurrentLineCommand);
+  return readCurrentLineCommand;
 }
 
 module.exports = { registerReadCurrentLineCommand };

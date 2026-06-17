@@ -1,0 +1,10 @@
+const builtIn = require("../WhatIsThis");
+
+function registerReadCurrentLineCommand(context) {
+  // Customize behavior here before/after built-in registration.
+  return builtIn.registerReadCurrentLineCommand(context);
+}
+
+module.exports = {
+  registerReadCurrentLineCommand,
+};
