@@ -20,7 +20,9 @@ let annotationsVisible = false;
 // Guidance-aware prompt
 // -------------------------
 function getGuidanceLevel() {
-  return vscode.workspace.getConfiguration("echocode").get("guidanceLevel", "balanced");
+  return vscode.workspace
+    .getConfiguration("echocode")
+    .get("guidanceLevel", "balanced");
 }
 
 function buildAnnotationPrompt() {
@@ -34,11 +36,11 @@ function buildAnnotationPrompt() {
 - Provide exactly 2 short, actionable steps in "steps".
 - Leave "why" empty OR keep it extremely short (optional).`
       : level === "balanced"
-      ? `BALANCED MODE:
+        ? `BALANCED MODE:
 - Provide "summary" as 1 sentence.
 - Provide "why" as 1 short sentence (reason).
 - Provide exactly 1 step in "steps".`
-      : `CONCISE MODE:
+        : `CONCISE MODE:
 - Provide ONLY "summary" as 1 sentence.
 - Set "why" to an empty string.
 - Set "steps" to an empty array.`;
@@ -73,7 +75,7 @@ function getEntireFileWithLineNumbers(textEditor) {
 function loadAnnotationSettings() {
   const settingsPath = path.join(
     __dirname,
-    "../../Core/program_settings/JSON_files/Annotation_Settings.json"
+    "../../Core/program_settings/JSON_files/Annotation_Settings.json",
   );
   try {
     if (fs.existsSync(settingsPath)) {
@@ -103,7 +105,7 @@ function checkLocalRules(textEditor, outputChannel) {
   else if (langId === "cpp") rules = settings.cpp || [];
   else {
     outputChannel.appendLine(
-      `Language '${langId}' not supported for local checks.`
+      `Language '${langId}' not supported for local checks.`,
     );
     return false;
   }
@@ -130,7 +132,6 @@ function checkLocalRules(textEditor, outputChannel) {
 
   return foundLocalIssues;
 }
-
 
 // Robust streamed JSON object extractor (handles arrays in "steps")
 function extractJsonObjectsFromStream(streamText) {
@@ -178,11 +179,15 @@ function extractJsonObjectsFromStream(streamText) {
 
   // Return found objects + leftover tail (for next fragments)
   const lastCompleteEnd =
-    objs.length > 0 ? streamText.lastIndexOf(objs[objs.length - 1]) + objs[objs.length - 1].length : 0;
+    objs.length > 0
+      ? streamText.lastIndexOf(objs[objs.length - 1]) +
+        objs[objs.length - 1].length
+      : 0;
 
   return {
     objects: objs,
-    leftover: lastCompleteEnd > 0 ? streamText.slice(lastCompleteEnd) : streamText,
+    leftover:
+      lastCompleteEnd > 0 ? streamText.slice(lastCompleteEnd) : streamText,
   };
 }
 
@@ -197,10 +202,12 @@ function applyDecoration(editor, line, suggestionText) {
   const lineLength = editor.document.lineAt(line - 1).text.length;
   const range = new vscode.Range(
     new vscode.Position(line - 1, lineLength),
-    new vscode.Position(line - 1, lineLength)
+    new vscode.Position(line - 1, lineLength),
   );
 
-  editor.setDecorations(decorationType, [{ range, hoverMessage: suggestionText }]);
+  editor.setDecorations(decorationType, [
+    { range, hoverMessage: suggestionText },
+  ]);
 
   activeDecorations.push({ decorationType, editor });
 }
@@ -286,23 +293,23 @@ function registerAnnotationCommands(context, outputChannel) {
 
         if (foundLocalIssues) {
           outputChannel.appendLine(
-            `Local rules found ${annotatedLines.size} issue(s). Proceeding to AI check...`
+            `Local rules found ${annotatedLines.size} issue(s). Proceeding to AI check...`,
           );
         } else {
           outputChannel.appendLine(
-            "No local issues found. Proceeding to AI check..."
+            "No local issues found. Proceeding to AI check...",
           );
         }
 
         // Step 2: Always query AI (it will skip lines already annotated)
         // REMOVED the early return - AI check now always runs
         outputChannel.appendLine(
-          "Step 2: Querying AI for additional suggestions..."
+          "Step 2: Querying AI for additional suggestions...",
         );
         const codeWithLineNumbers = getEntireFileWithLineNumbers(textEditor);
 
         const statusBarMessage = vscode.window.setStatusBarMessage(
-          "$(loading~spin) EchoCode is analyzing your file with AI..."
+          "$(loading~spin) EchoCode is analyzing your file with AI...",
         );
 
         const [model] = await vscode.lm.selectChatModels({
@@ -317,47 +324,52 @@ function registerAnnotationCommands(context, outputChannel) {
           if (foundLocalIssues) {
             annotationsVisible = true;
             vscode.window.showInformationMessage(
-              "Local annotations applied. AI unavailable - please ensure Copilot is enabled."
+              "Local annotations applied. AI unavailable - please ensure Copilot is enabled.",
             );
           } else {
             vscode.window.showErrorMessage(
-              "No language model available. Please ensure Copilot is enabled."
+              "No language model available. Please ensure Copilot is enabled.",
             );
           }
           outputChannel.appendLine("No language model available");
           return;
         }
 
-
         const messages = [
           new vscode.LanguageModelChatMessage(0, buildAnnotationPrompt()),
           new vscode.LanguageModelChatMessage(0, codeWithLineNumbers),
         ];
 
-
         const chatResponse = await model.sendRequest(
           messages,
           {},
-          new vscode.CancellationTokenSource().token
+          new vscode.CancellationTokenSource().token,
         );
 
         await parseChatResponse(chatResponse, textEditor);
         annotationsVisible = true;
 
         statusBarMessage.dispose();
-        vscode.window.setStatusBarMessage("EchoCode finished analyzing your code", 3000);
+        vscode.window.setStatusBarMessage(
+          "EchoCode finished analyzing your code",
+          3000,
+        );
         outputChannel.appendLine("Annotations applied successfully");
       } catch (error) {
         outputChannel.appendLine("Error in annotate command: " + error.message);
-        vscode.window.showErrorMessage("Failed to annotate code: " + error.message);
+        vscode.window.showErrorMessage(
+          "Failed to annotate code: " + error.message,
+        );
       }
-    }
+    },
   );
 
   const speakNextAnnotationCommand = vscode.commands.registerCommand(
     "echocode.speakNextAnnotation",
     async () => {
-      outputChannel.appendLine("echocode.speakNextAnnotation command triggered");
+      outputChannel.appendLine(
+        "echocode.speakNextAnnotation command triggered",
+      );
 
       if (!annotationQueue.isEmpty()) {
         const next = annotationQueue.dequeue();
@@ -371,13 +383,15 @@ function registerAnnotationCommands(context, outputChannel) {
           suggestions: next.steps || [],
         });
 
-        vscode.window.showInformationMessage(`Annotation ready (line ${next.line})`);
+        vscode.window.showInformationMessage(
+          `Annotation ready (line ${next.line})`,
+        );
         await speakMessage(spoken);
       } else {
         vscode.window.showInformationMessage("No more annotations to read.");
         await speakMessage("No more annotations to read.");
       }
-    }
+    },
   );
 
   const readAllAnnotationsCommand = vscode.commands.registerCommand(
@@ -387,7 +401,9 @@ function registerAnnotationCommands(context, outputChannel) {
 
       const annotations = annotationQueue.items;
       if (annotations.length === 0) {
-        vscode.window.showInformationMessage("No annotations available to read.");
+        vscode.window.showInformationMessage(
+          "No annotations available to read.",
+        );
         return;
       }
 
@@ -402,14 +418,17 @@ function registerAnnotationCommands(context, outputChannel) {
 
         await speakMessage(spoken);
       }
-    }
+    },
   );
 
-  context.subscriptions.push(
+  const disposable = vscode.Disposable.from(
     annotateCommand,
     speakNextAnnotationCommand,
-    readAllAnnotationsCommand
+    readAllAnnotationsCommand,
   );
+
+  context.subscriptions.push(disposable);
+  return disposable;
 }
 
 module.exports = {

@@ -33,14 +33,14 @@ async function analyzeBigO(editor) {
 
   if (localIssuesCount > 0) {
     vscode.window.showInformationMessage(
-      `Detected ${localIssuesCount} Big O issues via static analysis.`
+      `Detected ${localIssuesCount} Big O issues via static analysis.`,
     );
   }
 
   // 2. Identify remaining loops that need AI analysis
   const loops = detectLoops(document);
   const remainingLoops = loops.filter(
-    (loop) => !analyzedLines.has(loop.startLine)
+    (loop) => !analyzedLines.has(loop.startLine),
   );
 
   // If no loops need AI, just finalize the local issues
@@ -56,7 +56,7 @@ async function analyzeBigO(editor) {
   }
 
   vscode.window.showInformationMessage(
-    `Analyzing ${remainingLoops.length} remaining complex loop(s) with AI...`
+    `Analyzing ${remainingLoops.length} remaining complex loop(s) with AI...`,
   );
 
   // 3. Analyze the remaining, complex loops with AI
@@ -250,7 +250,7 @@ function applyDecoration(editor, line, suggestion) {
   const lineText = lineObj.text.trim();
   if (lineText.startsWith("#") || lineText === "") {
     console.warn(
-      `Skipping annotation on line ${line}: Line is a comment or empty.`
+      `Skipping annotation on line ${line}: Line is a comment or empty.`,
     );
     return;
   }
@@ -269,7 +269,7 @@ function applyDecoration(editor, line, suggestion) {
   // Create a range at the end of the line
   const range = new vscode.Range(
     new vscode.Position(line - 1, lineLength),
-    new vscode.Position(line - 1, lineLength)
+    new vscode.Position(line - 1, lineLength),
   );
 
   // Apply the decoration with hover message for the full suggestion
@@ -306,7 +306,7 @@ async function analyzeLoops(editor, loops, collectedIssues) {
     // PREVENT DUPLICATES: Check if this line was already handled by local Check
     if (analyzedLines.has(startLine)) {
       console.log(
-        `Skipping AI analysis for line ${startLine} (handled locally).`
+        `Skipping AI analysis for line ${startLine} (handled locally).`,
       );
       continue;
     }
@@ -328,7 +328,7 @@ async function analyzeLoops(editor, loops, collectedIssues) {
 
       if (!model) {
         vscode.window.showErrorMessage(
-          "No language model available. Please ensure Copilot is enabled."
+          "No language model available. Please ensure Copilot is enabled.",
         );
         return;
       }
@@ -337,7 +337,7 @@ async function analyzeLoops(editor, loops, collectedIssues) {
       const chatResponse = await model.sendRequest(
         messages,
         {},
-        new vscode.CancellationTokenSource().token
+        new vscode.CancellationTokenSource().token,
       );
 
       await parseChatResponse(chatResponse, editor, collectedIssues);
@@ -385,17 +385,17 @@ function registerBigOCommand(context) {
         await analyzeBigO(editor);
       } else {
         vscode.window.showWarningMessage(
-          "Please open a Python file to analyze Big O practices."
+          "Please open a Python file to analyze Big O practices.",
         );
       }
-    })
+    }),
   );
 
   const iterateBigOCommand = vscode.commands.registerCommand(
     "code-tutor.iterateBigOQueue",
     guard("code-tutor.iterateBigOQueue", () => {
       iterateBigOQueue();
-    })
+    }),
   );
 
   // (Optional) If you also want this blocked in Student mode,
@@ -413,22 +413,25 @@ function registerBigOCommand(context) {
         vscode.window.showInformationMessage("No more annotations to read.");
         await speakMessage("No more annotations to read.");
       }
-    })
+    }),
   );
 
   const readEntireBigOQueueCommand = vscode.commands.registerCommand(
     "code-tutor.readEntireBigOQueue",
     guard("code-tutor.readEntireBigOQueue", async () => {
       await readEntireBigOQueue();
-    })
+    }),
   );
 
-  context.subscriptions.push(
+  const disposable = vscode.Disposable.from(
     analyzeBigOCommand,
     iterateBigOCommand,
     readNextAnnotationCommand,
-    readEntireBigOQueueCommand
+    readEntireBigOQueueCommand,
   );
+
+  context.subscriptions.push(disposable);
+  return disposable;
 }
 
 module.exports = {

@@ -54,11 +54,11 @@ async function loadAssignmentFile() {
 
     const outputPath = path.join(
       vscode.workspace.rootPath || __dirname,
-      "generated_tasks.txt"
+      "generated_tasks.txt",
     );
     fs.writeFileSync(
       outputPath,
-      taskList.map((t, i) => `Task ${i + 1}: ${t}`).join("\n")
+      taskList.map((t, i) => `Task ${i + 1}: ${t}`).join("\n"),
     );
     vscode.window.showInformationMessage(`Task list saved to ${outputPath}`);
 
@@ -84,7 +84,7 @@ async function parseTasksWithAI(text) {
     });
     if (!model) {
       vscode.window.showErrorMessage(
-        "Copilot model not available. Using fallback parser."
+        "Copilot model not available. Using fallback parser.",
       );
       return parseTasksFromText(text);
     }
@@ -92,7 +92,7 @@ async function parseTasksWithAI(text) {
     const messages = [
       new vscode.LanguageModelChatMessage(
         0,
-        "You are helping a blind beginner Python student. Extract only the concrete steps required to complete the coding assignment below. Each step should be short and clear -- under 15 words. Format each step as a bullet point like '- [ ] Define a function named add().'"
+        "You are helping a blind beginner Python student. Extract only the concrete steps required to complete the coding assignment below. Each step should be short and clear -- under 15 words. Format each step as a bullet point like '- [ ] Define a function named add().'",
       ),
       new vscode.LanguageModelChatMessage(0, text),
     ];
@@ -100,7 +100,7 @@ async function parseTasksWithAI(text) {
     const response = await model.sendRequest(
       messages,
       {},
-      new vscode.CancellationTokenSource().token
+      new vscode.CancellationTokenSource().token,
     );
 
     let result = "";
@@ -128,7 +128,7 @@ function parseTasksFromText(text) {
 
   speakMessage(`Loaded ${taskList.length} tasks from the assignment.`);
   vscode.window.showInformationMessage(
-    `Assignment loaded with ${taskList.length} tasks.`
+    `Assignment loaded with ${taskList.length} tasks.`,
   );
 }
 
@@ -183,11 +183,11 @@ async function rescanUserCode() {
     const messages = [
       new vscode.LanguageModelChatMessage(
         0,
-        `You are helping a blind beginner Python student. \nCompare this assignment list to the student's code. \nRespond only with the task numbers that are already complete.`
+        `You are helping a blind beginner Python student. \nCompare this assignment list to the student's code. \nRespond only with the task numbers that are already complete.`,
       ),
       new vscode.LanguageModelChatMessage(
         0,
-        `Assignment Tasks:\n${assignmentText}`
+        `Assignment Tasks:\n${assignmentText}`,
       ),
       new vscode.LanguageModelChatMessage(0, `User's Code:\n${userCode}`),
     ];
@@ -195,7 +195,7 @@ async function rescanUserCode() {
     const response = await model.sendRequest(
       messages,
       {},
-      new vscode.CancellationTokenSource().token
+      new vscode.CancellationTokenSource().token,
     );
 
     let result = "";
@@ -224,7 +224,7 @@ function updateCompletedTasksFromAI(responseText) {
   }
 
   speakMessage(
-    `Updated task completion based on your code. ${completedTasks.size} tasks completed.`
+    `Updated task completion based on your code. ${completedTasks.size} tasks completed.`,
   );
 }
 
@@ -276,38 +276,41 @@ function markTaskComplete() {
 function registerAssignmentTrackerCommands(context) {
   const loadAssignmentFileDisposable = vscode.commands.registerCommand(
     "echocode.loadAssignmentFile",
-    guard("echocode.loadAssignmentFile", loadAssignmentFile)
+    guard("echocode.loadAssignmentFile", loadAssignmentFile),
   );
 
   // If you ALSO want to block rescan (it uses AI), wrap it too:
   const rescanUserCodeDisposable = vscode.commands.registerCommand(
     "echocode.rescanUserCode",
-    guard("echocode.rescanUserCode", rescanUserCode)
+    guard("echocode.rescanUserCode", rescanUserCode),
   );
 
   // If you want this blocked as well, wrap it too (it reveals assignment steps):
   const readNextSequentialTaskDisposable = vscode.commands.registerCommand(
     "echocode.readNextSequentialTask",
-    guard("echocode.readNextSequentialTask", readNextSequentialTask)
+    guard("echocode.readNextSequentialTask", readNextSequentialTask),
   );
 
   const readNextTaskDisposable = vscode.commands.registerCommand(
     "echocode.readNextTask",
-    guard("echocode.readNextTask", readNextTask)
+    guard("echocode.readNextTask", readNextTask),
   );
 
   const markTaskCompleteDisposable = vscode.commands.registerCommand(
     "echocode.markTaskComplete",
-    guard("echocode.markTaskComplete", markTaskComplete)
+    guard("echocode.markTaskComplete", markTaskComplete),
   );
 
-  context.subscriptions.push(
+  const disposable = vscode.Disposable.from(
     loadAssignmentFileDisposable,
     rescanUserCodeDisposable,
     readNextSequentialTaskDisposable,
     readNextTaskDisposable,
-    markTaskCompleteDisposable
+    markTaskCompleteDisposable,
   );
+
+  context.subscriptions.push(disposable);
+  return disposable;
 }
 
 module.exports = {

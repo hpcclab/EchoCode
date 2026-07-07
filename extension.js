@@ -1,24 +1,16 @@
 const vscode = require("vscode");
 require("dotenv").config();
-const DependencyManager = require("./program_features/Voice/dependencyManager");
+const {
+  loadProgramFeatureModule,
+  resolveClassExport,
+  clearFeatureRequireCache,
+} = require("./program_features/featureImplementationLoader");
 
 // Ensure this is the ONLY time ExternalIntentRouter is required in the whole file
 const {
   matchExternalCommand,
   buildExternalCommandRegistry,
 } = require("./Core/program_settings/program_settings/ExternalIntentRouter");
-
-const {
-  startRecording,
-  stopAndTranscribe,
-  selectMicrophone,
-  isRecording,
-} = require("./program_features/Voice/whisperService");
-
-const {
-  getFriendlyLanguageName,
-  tryExecuteVoiceCommand,
-} = require("./program_features/Voice/voiceCommandRouter");
 
 //student/dev mode system
 const { announceMode } = require("./Core/program_settings/modeAudio");
@@ -39,7 +31,7 @@ const {
   registerErrorHandlingCommands,
 } = require("./Language/Python/errorHandler");
 const {
-  checkCurrentPythonFile,
+  checkCurrentPythonFile: builtInCheckCurrentPythonFile,
 } = require("./program_features/C++_Error_Parser/Python_Error_Parser");
 
 // Speech (core)
@@ -58,9 +50,6 @@ const {
 const {
   registerHotkeyGuideCommand,
 } = require("./Core/program_settings/guide_settings/hotkeyGuide");
-const {
-  registerChatCommands,
-} = require("./program_features/ChatBot/chat_tutor");
 
 // Navigation + “What’s this”
 const {
@@ -68,53 +57,233 @@ const {
 } = require("./navigation_features/navigationHandler");
 const { registerWhereAmICommand } = require("./navigation_features/whereAmI");
 const {
-  registerFileCreatorCommand,
-} = require("./program_features/Folder_File_Creator/FileCreator");
-const {
-  registerFolderCreatorCommand,
-} = require("./program_features/Folder_File_Creator/FolderCreator");
-const {
   registerFileNavigatorCommand,
 } = require("./navigation_features/Folder_File_Navigator/file_navigator");
 const {
   initializeFolderList,
   registerFolderNavigatorCommands,
 } = require("./navigation_features/Folder_File_Navigator/folder_navigator");
-const {
-  registerReadCurrentLineCommand,
-} = require("./program_features/WhatIsThis/WhatIsThis");
-const {
-  registerDescribeCurrentLineCommand,
-} = require("./program_features/WhatIsThis/DescribeThis");
-const {
-  registerCharacterReadOutCommand,
-} = require("./program_features/WhatIsThis/CharacterReadOut");
-
-const {
-  compileCurrentCppFile,
-} = require("./program_features/C++_Error_Parser/CPP_Error_Parser");
-
-const {
-  connectFile,
-  handleCopyFileNameCommand,
-  handlePasteImportCommand,
-  registerFileConnectorCommands,
-} = require("./program_features/FileConnector/File_Connector");
-
-// Big-O + Annotations
-const {
-  registerBigOCommand,
-} = require("./program_features/Annotations_BigO/bigOAnalysis");
-const {
-  registerAnnotationCommands,
-} = require("./program_features/Annotations_BigO/annotations");
-
-// Assignment tracker
-const {
-  registerAssignmentTrackerCommands,
-} = require("./program_features/Assignment_Tracker/assignmentTracker");
 
 let outputChannel;
+let tryExecuteVoiceCommand = async () => ({ handled: false });
+
+const FEATURE_FOLDER_MAP = {
+  annotationsBigO: "Annotations_BigO",
+  assignmentTracker: "Assignment_Tracker",
+  errorParser: "C++_Error_Parser",
+  chatBot: "ChatBot",
+  fileConnector: "FileConnector",
+  folderFileCreator: "Folder_File_Creator",
+  voice: "Voice",
+  whatIsThis: "WhatIsThis",
+};
+
+const RELOADABLE_FEATURE_KEYS = Object.keys(FEATURE_FOLDER_MAP);
+
+function loadFeatureImplementations(channel) {
+  const voiceDependencyModule = loadProgramFeatureModule({
+    featureKey: "voice",
+    featureFolder: "Voice",
+    moduleFile: "dependencyManager.js",
+    outputChannel: channel,
+  });
+
+  const whisperServiceModule = loadProgramFeatureModule({
+    featureKey: "voice",
+    featureFolder: "Voice",
+    moduleFile: "whisperService.js",
+    requiredExports: [
+      "startRecording",
+      "stopAndTranscribe",
+      "selectMicrophone",
+      "isRecording",
+    ],
+    outputChannel: channel,
+  });
+
+  const voiceCommandRouterModule = loadProgramFeatureModule({
+    featureKey: "voice",
+    featureFolder: "Voice",
+    moduleFile: "voiceCommandRouter.js",
+    requiredExports: ["getFriendlyLanguageName", "tryExecuteVoiceCommand"],
+    outputChannel: channel,
+  });
+
+  const chatModule = loadProgramFeatureModule({
+    featureKey: "chatBot",
+    featureFolder: "ChatBot",
+    moduleFile: "Chat_Tutor.js",
+    requiredExports: ["registerChatCommands"],
+    outputChannel: channel,
+  });
+
+  const fileConnectorModule = loadProgramFeatureModule({
+    featureKey: "fileConnector",
+    featureFolder: "FileConnector",
+    moduleFile: "File_Connector.js",
+    requiredExports: ["registerFileConnectorCommands"],
+    outputChannel: channel,
+  });
+
+  const bigOModule = loadProgramFeatureModule({
+    featureKey: "annotationsBigO",
+    featureFolder: "Annotations_BigO",
+    moduleFile: "bigOAnalysis.js",
+    requiredExports: ["registerBigOCommand"],
+    outputChannel: channel,
+  });
+
+  const annotationsModule = loadProgramFeatureModule({
+    featureKey: "annotationsBigO",
+    featureFolder: "Annotations_BigO",
+    moduleFile: "annotations.js",
+    requiredExports: ["registerAnnotationCommands"],
+    outputChannel: channel,
+  });
+
+  const assignmentModule = loadProgramFeatureModule({
+    featureKey: "assignmentTracker",
+    featureFolder: "Assignment_Tracker",
+    moduleFile: "assignmentTracker.js",
+    requiredExports: ["registerAssignmentTrackerCommands"],
+    outputChannel: channel,
+  });
+
+  const cppParserModule = loadProgramFeatureModule({
+    featureKey: "errorParser",
+    featureFolder: "C++_Error_Parser",
+    moduleFile: "CPP_Error_Parser.js",
+    requiredExports: ["compileCurrentCppFile"],
+    outputChannel: channel,
+  });
+
+  const pythonParserModule = loadProgramFeatureModule({
+    featureKey: "errorParser",
+    featureFolder: "C++_Error_Parser",
+    moduleFile: "Python_Error_Parser.js",
+    requiredExports: ["checkCurrentPythonFile"],
+    outputChannel: channel,
+  });
+
+  const fileCreatorModule = loadProgramFeatureModule({
+    featureKey: "folderFileCreator",
+    featureFolder: "Folder_File_Creator",
+    moduleFile: "FileCreator.js",
+    requiredExports: ["registerFileCreatorCommand"],
+    outputChannel: channel,
+  });
+
+  const folderCreatorModule = loadProgramFeatureModule({
+    featureKey: "folderFileCreator",
+    featureFolder: "Folder_File_Creator",
+    moduleFile: "FolderCreator.js",
+    requiredExports: ["registerFolderCreatorCommand"],
+    outputChannel: channel,
+  });
+
+  const whatIsThisModule = loadProgramFeatureModule({
+    featureKey: "whatIsThis",
+    featureFolder: "WhatIsThis",
+    moduleFile: "WhatIsThis",
+    requiredExports: ["registerReadCurrentLineCommand"],
+    outputChannel: channel,
+  });
+
+  const describeThisModule = loadProgramFeatureModule({
+    featureKey: "whatIsThis",
+    featureFolder: "WhatIsThis",
+    moduleFile: "DescribeThis.js",
+    requiredExports: ["registerDescribeCurrentLineCommand"],
+    outputChannel: channel,
+  });
+
+  const characterReadOutModule = loadProgramFeatureModule({
+    featureKey: "whatIsThis",
+    featureFolder: "WhatIsThis",
+    moduleFile: "CharacterReadOut.js",
+    requiredExports: ["registerCharacterReadOutCommand"],
+    outputChannel: channel,
+  });
+
+  const dependencyManagerCtor =
+    resolveClassExport(voiceDependencyModule, "DependencyManager") ||
+    resolveClassExport(
+      require("./program_features/Voice/dependencyManager"),
+      "DependencyManager",
+    );
+
+  return {
+    DependencyManager: dependencyManagerCtor,
+    startRecording: whisperServiceModule.startRecording,
+    stopAndTranscribe: whisperServiceModule.stopAndTranscribe,
+    selectMicrophone: whisperServiceModule.selectMicrophone,
+    isRecording: whisperServiceModule.isRecording,
+    getFriendlyLanguageName: voiceCommandRouterModule.getFriendlyLanguageName,
+    tryExecuteVoiceCommand: voiceCommandRouterModule.tryExecuteVoiceCommand,
+    registerChatCommands: chatModule.registerChatCommands,
+    registerFileConnectorCommands:
+      fileConnectorModule.registerFileConnectorCommands,
+    registerBigOCommand: bigOModule.registerBigOCommand,
+    registerAnnotationCommands: annotationsModule.registerAnnotationCommands,
+    registerAssignmentTrackerCommands:
+      assignmentModule.registerAssignmentTrackerCommands,
+    compileCurrentCppFile: cppParserModule.compileCurrentCppFile,
+    checkCurrentPythonFile:
+      pythonParserModule.checkCurrentPythonFile ||
+      builtInCheckCurrentPythonFile,
+    registerFileCreatorCommand: fileCreatorModule.registerFileCreatorCommand,
+    registerFolderCreatorCommand:
+      folderCreatorModule.registerFolderCreatorCommand,
+    registerReadCurrentLineCommand:
+      whatIsThisModule.registerReadCurrentLineCommand,
+    registerDescribeCurrentLineCommand:
+      describeThisModule.registerDescribeCurrentLineCommand,
+    registerCharacterReadOutCommand:
+      characterReadOutModule.registerCharacterReadOutCommand,
+  };
+}
+
+function toDisposable(value) {
+  if (!value) return null;
+
+  if (typeof value.dispose === "function") {
+    return value;
+  }
+
+  if (Array.isArray(value)) {
+    const valid = value.filter(
+      (item) => item && typeof item.dispose === "function",
+    );
+    if (valid.length > 0) {
+      return vscode.Disposable.from(...valid);
+    }
+  }
+
+  return null;
+}
+
+function registerUserImplementationWatchers(context, onFeatureChanged) {
+  const watchers = [];
+
+  for (const [featureKey, featureFolder] of Object.entries(
+    FEATURE_FOLDER_MAP,
+  )) {
+    const watcher = vscode.workspace.createFileSystemWatcher(
+      `**/program_features/${featureFolder}/UserImplementation/**`,
+    );
+
+    const triggerReload = () => onFeatureChanged(featureKey);
+    watcher.onDidChange(triggerReload);
+    watcher.onDidCreate(triggerReload);
+    watcher.onDidDelete(triggerReload);
+
+    watchers.push(watcher);
+  }
+
+  const disposable = vscode.Disposable.from(...watchers);
+  context.subscriptions.push(disposable);
+  return disposable;
+}
 
 // Voice mode cycle: 0 = Chat, 1 = Code, 2 = Command
 const VOICE_MODES = ["chat", "code", "command"];
@@ -150,6 +319,130 @@ async function ensureCopilotActivated(channel) {
 async function activate(context) {
   outputChannel = vscode.window.createOutputChannel("EchoCode");
   outputChannel.appendLine("[EchoCode] Activated");
+
+  let featureImplementations = loadFeatureImplementations(outputChannel);
+  tryExecuteVoiceCommand =
+    featureImplementations.tryExecuteVoiceCommand ||
+    (async () => ({ handled: false }));
+  const featureDisposables = new Map();
+  let chatProvider = null;
+
+  const setFeatureDisposable = (featureKey, disposableValue) => {
+    const previous = featureDisposables.get(featureKey);
+    if (previous && typeof previous.dispose === "function") {
+      previous.dispose();
+    }
+
+    const disposable = toDisposable(disposableValue);
+    if (disposable) {
+      featureDisposables.set(featureKey, disposable);
+      context.subscriptions.push(disposable);
+    } else {
+      featureDisposables.delete(featureKey);
+    }
+  };
+
+  const registerFeatureCommands = (featureKey) => {
+    switch (featureKey) {
+      case "annotationsBigO": {
+        const d1 = featureImplementations.registerBigOCommand(context);
+        const d2 = featureImplementations.registerAnnotationCommands(
+          context,
+          outputChannel,
+        );
+        return vscode.Disposable.from(...[d1, d2].filter(Boolean));
+      }
+      case "assignmentTracker":
+        return featureImplementations.registerAssignmentTrackerCommands(
+          context,
+        );
+      case "chatBot": {
+        const registration = featureImplementations.registerChatCommands(
+          context,
+          outputChannel,
+        );
+        if (
+          registration &&
+          typeof registration === "object" &&
+          "provider" in registration
+        ) {
+          chatProvider = registration.provider || null;
+          return registration.disposable || null;
+        }
+
+        chatProvider = registration || null;
+        return null;
+      }
+      case "fileConnector":
+        return featureImplementations.registerFileConnectorCommands(
+          context,
+          vscode,
+        );
+      case "folderFileCreator": {
+        const d1 = featureImplementations.registerFileCreatorCommand(context);
+        const d2 = featureImplementations.registerFolderCreatorCommand(context);
+        return vscode.Disposable.from(...[d1, d2].filter(Boolean));
+      }
+      case "whatIsThis": {
+        const d1 =
+          featureImplementations.registerReadCurrentLineCommand(context);
+        const d2 =
+          featureImplementations.registerDescribeCurrentLineCommand(context);
+        const d3 =
+          featureImplementations.registerCharacterReadOutCommand(context);
+        return vscode.Disposable.from(...[d1, d2, d3].filter(Boolean));
+      }
+      default:
+        return null;
+    }
+  };
+
+  const reloadFeatureImplementation = async (featureKey, reason = "change") => {
+    const featureFolder = FEATURE_FOLDER_MAP[featureKey];
+    if (!featureFolder) {
+      return;
+    }
+
+    try {
+      clearFeatureRequireCache(featureFolder);
+      featureImplementations = loadFeatureImplementations(outputChannel);
+      tryExecuteVoiceCommand = featureImplementations.tryExecuteVoiceCommand;
+
+      if (
+        featureKey === "voice" &&
+        typeof featureImplementations.DependencyManager === "function"
+      ) {
+        const depManager = new featureImplementations.DependencyManager(
+          context,
+          outputChannel,
+        );
+        depManager.ensureDependencies().catch((err) => {
+          outputChannel.appendLine(`[Dependency Error] ${err.message}`);
+        });
+      }
+
+      if (
+        [
+          "annotationsBigO",
+          "assignmentTracker",
+          "chatBot",
+          "fileConnector",
+          "folderFileCreator",
+          "whatIsThis",
+        ].includes(featureKey)
+      ) {
+        setFeatureDisposable(featureKey, registerFeatureCommands(featureKey));
+      }
+
+      outputChannel.appendLine(
+        `[Feature Loader] Reloaded ${featureKey} implementation (${reason}).`,
+      );
+    } catch (error) {
+      outputChannel.appendLine(
+        `[Feature Loader] Failed to reload ${featureKey}: ${error.message}`,
+      );
+    }
+  };
 
   // Initialize student/dev mode context
   const initialMode = await refreshModeContext();
@@ -224,12 +517,21 @@ async function activate(context) {
 
   // --- DEPENDENCY CHECK START ---
   // This runs once on startup and ensures the venv exists
-  const depManager = new DependencyManager(context, outputChannel);
-  // We don't await this blocking if we want faster startup,
-  // but for safety we await to ensure python is ready before first voice command
-  depManager.ensureDependencies().catch((err) => {
-    outputChannel.appendLine(`[Dependency Error] ${err.message}`);
-  });
+  if (typeof featureImplementations.DependencyManager === "function") {
+    const depManager = new featureImplementations.DependencyManager(
+      context,
+      outputChannel,
+    );
+    // We don't await this blocking if we want faster startup,
+    // but for safety we await to ensure python is ready before first voice command
+    depManager.ensureDependencies().catch((err) => {
+      outputChannel.appendLine(`[Dependency Error] ${err.message}`);
+    });
+  } else {
+    outputChannel.appendLine(
+      "[Feature Loader] Voice dependency manager is invalid. Skipping dependency bootstrap.",
+    );
+  }
   // --- DEPENDENCY CHECK END ---
 
   // Speech prefs
@@ -240,7 +542,18 @@ async function activate(context) {
   registerSpeechCommands(context, outputChannel);
   registerSummarizerCommands(context, outputChannel);
   registerHotkeyGuideCommand(context);
-  const chatProvider = registerChatCommands(context, outputChannel);
+
+  // Register commands from configurable feature modules.
+  [
+    "chatBot",
+    "annotationsBigO",
+    "assignmentTracker",
+    "folderFileCreator",
+    "whatIsThis",
+    "fileConnector",
+  ].forEach((featureKey) => {
+    setFeatureDisposable(featureKey, registerFeatureCommands(featureKey));
+  });
 
   // Build external command registry on activation (non-blocking)
   buildExternalCommandRegistry().catch((err) =>
@@ -252,7 +565,7 @@ async function activate(context) {
   // start recording (no transcript yet)
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode._voiceStart", async () => {
-      startRecording(outputChannel, context);
+      featureImplementations.startRecording(outputChannel, context);
     }),
   );
 
@@ -260,7 +573,7 @@ async function activate(context) {
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode._voiceStop", async () => {
       try {
-        const text = await stopAndTranscribe(
+        const text = await featureImplementations.stopAndTranscribe(
           outputChannel,
           context.globalState,
         );
@@ -275,17 +588,17 @@ async function activate(context) {
   // New command to change microphone manually
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.selectMicrophone", async () => {
-      await selectMicrophone(context);
+      await featureImplementations.selectMicrophone(context);
     }),
   );
 
   // --- MACRO 1: Voice to CODE only ---
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.voiceCode", async () => {
-      if (isRecording()) {
+      if (featureImplementations.isRecording()) {
         speakMessage("Processing");
         try {
-          const text = await stopAndTranscribe(
+          const text = await featureImplementations.stopAndTranscribe(
             outputChannel,
             context.globalState,
           );
@@ -297,7 +610,7 @@ async function activate(context) {
             );
             return;
           }
-          const friendlyLang = getFriendlyLanguageName(
+          const friendlyLang = featureImplementations.getFriendlyLanguageName(
             editor.document.languageId,
           );
           vscode.window.showInformationMessage(
@@ -337,7 +650,7 @@ async function activate(context) {
         }
       } else {
         await speakMessage("Coding mode. Listening.");
-        startRecording(outputChannel, context);
+        featureImplementations.startRecording(outputChannel, context);
       }
     }),
   );
@@ -345,10 +658,10 @@ async function activate(context) {
   // --- MACRO 2: Voice to COMMAND only ---
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.voiceCommand", async () => {
-      if (isRecording()) {
+      if (featureImplementations.isRecording()) {
         speakMessage("Processing");
         try {
-          const text = await stopAndTranscribe(
+          const text = await featureImplementations.stopAndTranscribe(
             outputChannel,
             context.globalState,
           );
@@ -367,7 +680,7 @@ async function activate(context) {
         }
       } else {
         await speakMessage("Command mode. Listening.");
-        startRecording(outputChannel, context);
+        featureImplementations.startRecording(outputChannel, context);
       }
     }),
   );
@@ -375,10 +688,10 @@ async function activate(context) {
   // --- MACRO 3: Voice to CHAT only ---
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.voiceChat", async () => {
-      if (isRecording()) {
+      if (featureImplementations.isRecording()) {
         speakMessage("Processing");
         try {
-          const text = await stopAndTranscribe(
+          const text = await featureImplementations.stopAndTranscribe(
             outputChannel,
             context.globalState,
           );
@@ -392,7 +705,7 @@ async function activate(context) {
         }
       } else {
         await speakMessage("Chat mode. Listening.");
-        startRecording(outputChannel, context);
+        featureImplementations.startRecording(outputChannel, context);
       }
     }),
   );
@@ -412,7 +725,7 @@ async function activate(context) {
   // Toggle Voice Command (Smart Router)
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.toggleVoice", async () => {
-      if (isRecording()) {
+      if (featureImplementations.isRecording()) {
         // Sync UI: Stop immediately
         if (chatProvider) chatProvider.setRecordingState(false);
 
@@ -448,23 +761,10 @@ async function activate(context) {
     }),
   );
 
-  registerBigOCommand(context);
-  registerAnnotationCommands(context, outputChannel);
-  registerAssignmentTrackerCommands(context);
   registerWhereAmICommand(context);
   registerMoveCursor(context);
-  registerFileCreatorCommand(context);
-  registerFolderCreatorCommand(context);
   registerFileNavigatorCommand(context);
   registerFolderNavigatorCommands(context);
-
-  // What is this commands
-  registerReadCurrentLineCommand(context);
-  registerDescribeCurrentLineCommand(context);
-  registerCharacterReadOutCommand(context);
-
-  // Register file connector commands
-  registerFileConnectorCommands(context, vscode);
 
   // Register C++ compilation command
   const compileCppCommand = vscode.commands.registerCommand(
@@ -472,7 +772,9 @@ async function activate(context) {
     guard("echocode.compileAndParseCpp", () => {
       const editor = vscode.window.activeTextEditor;
       if (editor && editor.document.languageId === "cpp") {
-        compileCurrentCppFile(editor.document.uri.fsPath);
+        featureImplementations.compileCurrentCppFile(
+          editor.document.uri.fsPath,
+        );
       } else {
         vscode.window.showInformationMessage(
           "This command is only available for C++ files.",
@@ -488,7 +790,9 @@ async function activate(context) {
     guard("echocode.checkPythonErrors", () => {
       const editor = vscode.window.activeTextEditor;
       if (editor && editor.document.languageId === "python") {
-        checkCurrentPythonFile(editor.document.uri.fsPath);
+        featureImplementations.checkCurrentPythonFile(
+          editor.document.uri.fsPath,
+        );
       } else {
         vscode.window.showInformationMessage(
           "This command is only available for Python files.",
@@ -497,6 +801,40 @@ async function activate(context) {
     }),
   );
   context.subscriptions.push(checkPythonCommand);
+
+  const reloadTimers = new Map();
+  const scheduleFeatureReload = (featureKey, reason) => {
+    const existingTimer = reloadTimers.get(featureKey);
+    if (existingTimer) {
+      clearTimeout(existingTimer);
+    }
+
+    const timer = setTimeout(() => {
+      reloadTimers.delete(featureKey);
+      reloadFeatureImplementation(featureKey, reason);
+    }, 150);
+
+    reloadTimers.set(featureKey, timer);
+  };
+
+  const watcherDisposable = registerUserImplementationWatchers(
+    context,
+    (featureKey) => {
+      scheduleFeatureReload(featureKey, "user implementation file changed");
+    },
+  );
+  context.subscriptions.push(watcherDisposable);
+
+  context.subscriptions.push(
+    vscode.workspace.onDidChangeConfiguration((event) => {
+      for (const featureKey of RELOADABLE_FEATURE_KEYS) {
+        const settingKey = `echocode.featureImplementation.${featureKey}`;
+        if (event.affectsConfiguration(settingKey)) {
+          scheduleFeatureReload(featureKey, "configuration changed");
+        }
+      }
+    }),
+  );
 
   outputChannel.appendLine(
     "Commands registered: echocode.readErrors, echocode.annotate, echocode.speakNextAnnotation, echocode.readAllAnnotations, echocode.summarizeClass, echocode.summarizeFunction, echocode.jumpToNextFunction, echocode.jumpToPreviousFunction, echocode.openChat, echocode.startVoiceInput, echocode.loadAssignmentFile, echocode.rescanUserCode, echocode.readNextSequentialTask, echocode.increaseSpeechSpeed, echocode.decreaseSpeechSpeed, echocode.moveToNextFolder, echocode.moveToPreviousFolder",
@@ -608,4 +946,12 @@ function deactivate() {
   }
 }
 
-module.exports = { activate, deactivate, tryExecuteVoiceCommand };
+async function executeVoiceCommand(...args) {
+  return tryExecuteVoiceCommand(...args);
+}
+
+module.exports = {
+  activate,
+  deactivate,
+  tryExecuteVoiceCommand: executeVoiceCommand,
+};

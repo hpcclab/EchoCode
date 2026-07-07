@@ -61,10 +61,11 @@ async function createFile() {
 function registerFileCreatorCommand(context) {
   const createFileCommand = vscode.commands.registerCommand(
     "echocode.createFile",
-    createFile
+    createFile,
   );
 
   context.subscriptions.push(createFileCommand);
+  return createFileCommand;
 }
 
 module.exports = { registerFileCreatorCommand };

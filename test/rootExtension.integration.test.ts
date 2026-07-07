@@ -43,12 +43,15 @@ function createVscodeHarness() {
   const originalCreateOutputChannel = globalVscode.window.createOutputChannel;
   const originalQuickPick = globalVscode.window.showQuickPick;
   const originalGetConfiguration = globalVscode.workspace.getConfiguration;
+  const originalCreateFileSystemWatcher =
+    globalVscode.workspace.createFileSystemWatcher;
   const originalOnDidChangeConfiguration =
     globalVscode.workspace.onDidChangeConfiguration;
   const originalOnDidChangeWorkspaceFolders =
     globalVscode.workspace.onDidChangeWorkspaceFolders;
   const originalExtensions = globalVscode.extensions;
   const originalConfigurationTarget = globalVscode.ConfigurationTarget;
+  const originalDisposable = globalVscode.Disposable;
 
   const workspace = {
     getConfiguration: () => ({
@@ -59,6 +62,12 @@ function createVscodeHarness() {
     }),
     onDidChangeConfiguration: () => ({ dispose: () => {} }),
     onDidChangeWorkspaceFolders: () => ({ dispose: () => {} }),
+    createFileSystemWatcher: () => ({
+      onDidChange: () => ({ dispose: () => {} }),
+      onDidCreate: () => ({ dispose: () => {} }),
+      onDidDelete: () => ({ dispose: () => {} }),
+      dispose: () => {},
+    }),
   };
 
   globalVscode.commands.registerCommand = (
@@ -90,6 +99,8 @@ function createVscodeHarness() {
   globalVscode.window.createOutputChannel = () => output.channel;
   globalVscode.window.showQuickPick = async (items: any[]) => items[0];
   globalVscode.workspace.getConfiguration = workspace.getConfiguration;
+  globalVscode.workspace.createFileSystemWatcher =
+    workspace.createFileSystemWatcher;
   globalVscode.workspace.onDidChangeConfiguration =
     workspace.onDidChangeConfiguration;
   globalVscode.workspace.onDidChangeWorkspaceFolders =
@@ -98,6 +109,17 @@ function createVscodeHarness() {
     getExtension: () => null,
   };
   globalVscode.ConfigurationTarget = { Global: "global" };
+  globalVscode.Disposable = {
+    from: (...disposables: Array<{ dispose?: () => void } | undefined>) => ({
+      dispose: () => {
+        for (const disposable of disposables) {
+          if (disposable && typeof disposable.dispose === "function") {
+            disposable.dispose();
+          }
+        }
+      },
+    }),
+  };
 
   return {
     commandRegistry,
@@ -114,12 +136,15 @@ function createVscodeHarness() {
       globalVscode.window.createOutputChannel = originalCreateOutputChannel;
       globalVscode.window.showQuickPick = originalQuickPick;
       globalVscode.workspace.getConfiguration = originalGetConfiguration;
+      globalVscode.workspace.createFileSystemWatcher =
+        originalCreateFileSystemWatcher;
       globalVscode.workspace.onDidChangeConfiguration =
         originalOnDidChangeConfiguration;
       globalVscode.workspace.onDidChangeWorkspaceFolders =
         originalOnDidChangeWorkspaceFolders;
       globalVscode.extensions = originalExtensions;
       globalVscode.ConfigurationTarget = originalConfigurationTarget;
+      globalVscode.Disposable = originalDisposable;
     },
   };
 }
@@ -262,7 +287,7 @@ function createExtensionStubs(state: {
     "Core/program_settings/guide_settings/hotkeyGuide.js": {
       registerHotkeyGuideCommand: () => {},
     },
-    "program_features/ChatBot/chat_tutor.js": {
+    "program_features/ChatBot/Chat_Tutor.js": {
       registerChatCommands: (context: any) => {
         context.subscriptions.push(
           vscode.commands.registerCommand("echocode.openChat", async () => {}),

@@ -1,6 +1,8 @@
 // program_features/ChatBot/chat_tutor.js
 const vscode = require("vscode");
-const { speakMessage } = require("../../Core/program_settings/speech_settings/speechHandler");
+const {
+  speakMessage,
+} = require("../../Core/program_settings/speech_settings/speechHandler");
 
 // --- Simple mock voice input (kept for dev/demo) ---
 function performVoiceRecognition() {
@@ -45,57 +47,65 @@ class EchoCodeChatViewProvider {
     // Handle messages from the webview
     webviewView.webview.onDidReceiveMessage(
       async (message) => {
-        this.outputChannel.appendLine(`Received message from webview: ${message.type}`);
+        this.outputChannel.appendLine(
+          `Received message from webview: ${message.type}`,
+        );
         if (message.type === "userInput") {
           await this.handleUserMessage(message.text);
-        }
-        else if (message.type === "executeVoiceCommand") {
+        } else if (message.type === "executeVoiceCommand") {
           const { tryExecuteVoiceCommand } = require("../../extension");
           const outputChannel = this.outputChannel;
           // FIX: Use 'message.text' instead of 'transcript'
-          const textToExecute = message.text || ""; 
-          const result = await tryExecuteVoiceCommand(textToExecute, outputChannel);
-          
+          const textToExecute = message.text || "";
+          const result = await tryExecuteVoiceCommand(
+            textToExecute,
+            outputChannel,
+          );
+
           if (result && result.handled) {
             this._currentWebview.postMessage({
               type: "response",
-              text: `✅ Executed command: ${result.command}`
+              text: `✅ Executed command: ${result.command}`,
             });
-          }
-          else {
+          } else {
             // FIX: Use 'message.text' here too
             await this.handleUserMessage(textToExecute);
           }
-        }
-        else if (message.type === "startVoiceInput") {
+        } else if (message.type === "startVoiceInput") {
           await vscode.commands.executeCommand("echocode._voiceStart");
-        }
-        else if (message.type === "stopVoiceInput") {
+        } else if (message.type === "stopVoiceInput") {
           if (this._currentWebview) {
             this._currentWebview.postMessage({ type: "voiceStopping" });
           }
-          const result = await vscode.commands.executeCommand("echocode._voiceStop");
+          const result = await vscode.commands.executeCommand(
+            "echocode._voiceStop",
+          );
           if (this._currentWebview) {
             if (result && result.ok) {
-              this._currentWebview.postMessage({ type: "voiceRecognitionResult", text: result.text || "" });
+              this._currentWebview.postMessage({
+                type: "voiceRecognitionResult",
+                text: result.text || "",
+              });
 
               // Try to execute a voice-mapped command before Copilot ===
               const { tryExecuteVoiceCommand } = require("../../extension");
               const outputChannel = this.outputChannel;
-              const voiceResult = await tryExecuteVoiceCommand(transcript, outputChannel);
+              const voiceResult = await tryExecuteVoiceCommand(
+                transcript,
+                outputChannel,
+              );
 
               if (voiceResult.handled) {
                 // Voice command recognized and executed — stop here
                 this._currentWebview.postMessage({
                   type: "response",
-                  text: `Executed command: ${voiceResult.command}`
+                  text: `Executed command: ${voiceResult.command}`,
                 });
                 return; // do NOT fall through to Copilot
               }
 
               // else: fall through to normal Copilot behavior
               await this.handleUserMessage(result.text || "");
-
             } else {
               this._currentWebview.postMessage({
                 type: "voiceRecognitionError",
@@ -106,7 +116,7 @@ class EchoCodeChatViewProvider {
         }
       },
       undefined,
-      this.context.subscriptions
+      this.context.subscriptions,
     );
   }
 
@@ -133,7 +143,10 @@ class EchoCodeChatViewProvider {
         });
       }
     } catch (error) {
-      this._safePost({ type: "voiceRecognitionError", error: String(error?.message || error) });
+      this._safePost({
+        type: "voiceRecognitionError",
+        error: String(error?.message || error),
+      });
     } finally {
       this._isListening = false;
       this._safePost({ type: "voiceListeningStopped" });
@@ -145,7 +158,10 @@ class EchoCodeChatViewProvider {
     if (!this._view) return;
 
     // Prefer active editor; fall back to any visible editor
-    const editor = vscode.window.activeTextEditor || vscode.window.visibleTextEditors?.[0] || null;
+    const editor =
+      vscode.window.activeTextEditor ||
+      vscode.window.visibleTextEditors?.[0] ||
+      null;
     const lang = editor?.document?.languageId || "unknown";
     let fileContent = "";
 
@@ -153,9 +169,13 @@ class EchoCodeChatViewProvider {
       fileContent = editor.document.getText() || "";
       const MAX = 60000; // prevent overly large context
       if (fileContent.length > MAX) fileContent = fileContent.slice(0, MAX);
-      this.outputChannel.appendLine(`Chat context captured for ${lang} (${fileContent.length} chars).`);
+      this.outputChannel.appendLine(
+        `Chat context captured for ${lang} (${fileContent.length} chars).`,
+      );
     } else {
-      this.outputChannel.appendLine("No editor open; answering without file context.");
+      this.outputChannel.appendLine(
+        "No editor open; answering without file context.",
+      );
     }
 
     // Build system/context prompt
@@ -180,7 +200,10 @@ class EchoCodeChatViewProvider {
     const model = models[0];
 
     if (!model) {
-      this._safePost({ type: "response", text: "No language model available. Please enable GitHub Copilot." });
+      this._safePost({
+        type: "response",
+        text: "No language model available. Please enable GitHub Copilot.",
+      });
       this.outputChannel.appendLine("No chat model available.");
       return;
     }
@@ -198,7 +221,10 @@ class EchoCodeChatViewProvider {
         this._safePost({ type: "responseFragment", text: fragment });
       }
 
-      this.conversationHistory.push({ user: userInput, response: responseText });
+      this.conversationHistory.push({
+        user: userInput,
+        response: responseText,
+      });
       this._safePost({ type: "responseComplete", text: responseText });
       this.outputChannel.appendLine("Chat response: " + responseText);
 
@@ -216,8 +242,12 @@ class EchoCodeChatViewProvider {
     if (this._view && this._currentWebview) {
       this._currentWebview.postMessage({ type: "startVoiceInput" });
     } else {
-      vscode.window.showInformationMessage("Please open the EchoCode Tutor view to use voice input.");
-      this.outputChannel.appendLine("Voice input command invoked with no active chat view.");
+      vscode.window.showInformationMessage(
+        "Please open the EchoCode Tutor view to use voice input.",
+      );
+      this.outputChannel.appendLine(
+        "Voice input command invoked with no active chat view.",
+      );
     }
     this.startVoiceRecognition();
   }
@@ -226,7 +256,7 @@ class EchoCodeChatViewProvider {
     if (this._view && this._currentWebview) {
       this._currentWebview.postMessage({
         type: "updateRecordingState",
-        recording: isRecording
+        recording: isRecording,
       });
     }
   }
@@ -234,10 +264,10 @@ class EchoCodeChatViewProvider {
   // --- Webview HTML/JS/CSS skeleton ---
   _getHtmlForWebview(webview) {
     const styleMainUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this.context.extensionUri, "media", "chat.css")
+      vscode.Uri.joinPath(this.context.extensionUri, "media", "chat.css"),
     );
     const scriptUri = webview.asWebviewUri(
-      vscode.Uri.joinPath(this.context.extensionUri, "media", "chat.js")
+      vscode.Uri.joinPath(this.context.extensionUri, "media", "chat.js"),
     );
     const nonce = getNonce();
 
@@ -282,8 +312,10 @@ class EchoCodeChatViewProvider {
 // --- Utils ---
 function getNonce() {
   let text = "";
-  const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  for (let i = 0; i < 32; i++) text += possible.charAt(Math.floor(Math.random() * possible.length));
+  const possible =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  for (let i = 0; i < 32; i++)
+    text += possible.charAt(Math.floor(Math.random() * possible.length));
   return text;
 }
 
@@ -291,24 +323,34 @@ function getNonce() {
 function registerChatCommands(context, outputChannel) {
   const provider = new EchoCodeChatViewProvider(context, outputChannel);
 
-  context.subscriptions.push(
-    vscode.window.registerWebviewViewProvider("echocode.chatView", provider)
+  const viewProviderDisposable = vscode.window.registerWebviewViewProvider(
+    "echocode.chatView",
+    provider,
   );
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand("echocode.openChat", async () => {
+  const openChatDisposable = vscode.commands.registerCommand(
+    "echocode.openChat",
+    async () => {
       outputChannel.appendLine("echocode.openChat command triggered");
       await vscode.commands.executeCommand("echocode.chatView.focus");
-    })
+    },
   );
 
-  context.subscriptions.push(
-    vscode.commands.registerCommand("echocode.startVoiceInput", () => {
+  const startVoiceInputDisposable = vscode.commands.registerCommand(
+    "echocode.startVoiceInput",
+    () => {
       if (provider) provider.startVoiceInput();
-    })
+    },
   );
 
-  return provider;
+  const disposable = vscode.Disposable.from(
+    viewProviderDisposable,
+    openChatDisposable,
+    startVoiceInputDisposable,
+  );
+
+  context.subscriptions.push(disposable);
+  return { provider, disposable };
 }
 
 module.exports = {

@@ -16,13 +16,13 @@ function _baseFunctionName(name) {
  */
 function _generatePythonImport(sourcePath, functionName) {
   const workspaceFolder = vscode.workspace.getWorkspaceFolder(
-    vscode.Uri.file(sourcePath)
+    vscode.Uri.file(sourcePath),
   );
   if (!workspaceFolder) {
     // Cannot determine absolute path without a workspace
     return `# Could not determine workspace root. Please add manually.\nfrom ${path.basename(
       sourcePath,
-      ".py"
+      ".py",
     )} import ${functionName}`;
   }
 
@@ -225,13 +225,13 @@ function _generateCppImport(
   sourcePath,
   destPath,
   functionName,
-  functionSignature
+  functionSignature,
 ) {
   // First, ensure the header file exists and contains the function declaration
   const headerPath = _ensureCppHeader(
     sourcePath,
     functionName,
-    functionSignature
+    functionSignature,
   );
 
   // Generate relative path from destination to header
@@ -258,7 +258,7 @@ function connectFunction(
   destPath,
   functionName,
   extension,
-  functionSignature
+  functionSignature,
 ) {
   if (extension === ".py") {
     return _generatePythonImport(sourcePath, functionName);
@@ -268,7 +268,7 @@ function connectFunction(
       sourcePath,
       destPath,
       functionName,
-      functionSignature
+      functionSignature,
     );
   }
   if (extension === ".h" && destPath.endsWith(".cpp")) {
@@ -307,141 +307,144 @@ function areExtensionsCompatible(source, dest) {
 }
 
 function registerFileConnectorCommands(context, vscode) {
-  context.subscriptions.push(
-    vscode.commands.registerCommand(
-      "echocode.copyFileNameForImport",
-      async () => {
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-          vscode.window.showWarningMessage("No active editor.");
-          return;
-        }
-
-        const document = editor.document;
-        const position = editor.selection.active;
-        const extension = path.extname(document.uri.fsPath).toLowerCase();
-        const symbols = await vscode.commands.executeCommand(
-          "vscode.executeDocumentSymbolProvider",
-          document.uri
-        );
-
-        if (!symbols || symbols.length === 0) {
-          vscode.window.showWarningMessage("Could not analyze file structure.");
-          return;
-        }
-
-        const funcSymbol = findFunctionAtPosition(symbols, position);
-
-        if (funcSymbol) {
-          copiedSymbol = {
-            filePath: document.uri.fsPath,
-            functionName: funcSymbol.name,
-            extension: extension,
-          };
-
-          // For C++, extract the function signature
-          if (extension === ".cpp") {
-            copiedSymbol.functionSignature = _extractCppFunctionSignature(
-              document.uri.fsPath,
-              funcSymbol.name
-            );
-          }
-
-          const message = `Copied function "${
-            funcSymbol.name
-          }" from ${path.basename(document.uri.fsPath)}`;
-          vscode.window.showInformationMessage(message);
-          await speakMessage(message);
-        } else {
-          const message = "No function found at the current cursor position.";
-          vscode.window.showWarningMessage(message);
-          await speakMessage(message);
-        }
+  const copyCommand = vscode.commands.registerCommand(
+    "echocode.copyFileNameForImport",
+    async () => {
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+        vscode.window.showWarningMessage("No active editor.");
+        return;
       }
-    ),
-    vscode.commands.registerCommand(
-      "echocode.pasteImportAtCursor",
-      async () => {
-        if (!copiedSymbol) {
-          vscode.window.showWarningMessage("No function copied.");
-          return;
-        }
-        const editor = vscode.window.activeTextEditor;
-        if (!editor) {
-          vscode.window.showWarningMessage("No active editor.");
-          return;
-        }
-        const document = editor.document;
-        const destinationFilePath = document.uri.fsPath;
-        const destinationFile = path.basename(destinationFilePath);
-        const sourceFile = path.basename(copiedSymbol.filePath);
 
-        if (!areExtensionsCompatible(sourceFile, destinationFile)) {
-          const errorMsg = `Cannot import from ${sourceFile} into ${destinationFile}: incompatible file types.`;
-          vscode.window.showWarningMessage(errorMsg);
-          await speakMessage(errorMsg);
-          return;
-        }
+      const document = editor.document;
+      const position = editor.selection.active;
+      const extension = path.extname(document.uri.fsPath).toLowerCase();
+      const symbols = await vscode.commands.executeCommand(
+        "vscode.executeDocumentSymbolProvider",
+        document.uri,
+      );
 
-        await editor.edit(async (editBuilder) => {
-          const importStatement = connectFunction(
-            copiedSymbol.filePath,
-            destinationFilePath,
-            copiedSymbol.functionName,
-            copiedSymbol.extension,
-            copiedSymbol.functionSignature
+      if (!symbols || symbols.length === 0) {
+        vscode.window.showWarningMessage("Could not analyze file structure.");
+        return;
+      }
+
+      const funcSymbol = findFunctionAtPosition(symbols, position);
+
+      if (funcSymbol) {
+        copiedSymbol = {
+          filePath: document.uri.fsPath,
+          functionName: funcSymbol.name,
+          extension: extension,
+        };
+
+        // For C++, extract the function signature
+        if (extension === ".cpp") {
+          copiedSymbol.functionSignature = _extractCppFunctionSignature(
+            document.uri.fsPath,
+            funcSymbol.name,
           );
+        }
 
-          // Special handling for Python sys.path
-          if (copiedSymbol.extension === ".py") {
-            const fileContent = document.getText();
-            const lines = fileContent.split("\n");
-            const preambleLines = [
-              "import sys",
-              "import os",
-              "sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))",
-            ];
-
-            // Find and delete any existing preamble lines to avoid duplication
-            for (let i = 0; i < lines.length; i++) {
-              const lineText = lines[i].trim();
-              if (
-                preambleLines.some((preambleLine) =>
-                  lineText.includes(preambleLine.trim())
-                )
-              ) {
-                const range = new vscode.Range(i, 0, i + 1, 0);
-                editBuilder.delete(range);
-              }
-            }
-
-            // Insert the full, correctly-ordered preamble at the top of the file
-            const fullPreamble = preambleLines.join("\n") + "\n\n";
-            editBuilder.insert(new vscode.Position(0, 0), fullPreamble);
-          }
-
-          // For C++, check if include already exists
-          if (copiedSymbol.extension === ".cpp") {
-            const fileContent = document.getText();
-            if (!fileContent.includes(importStatement)) {
-              // Insert at the top of the file with other includes
-              editBuilder.insert(
-                new vscode.Position(0, 0),
-                importStatement + "\n"
-              );
-            }
-          } else {
-            // For Python, insert at cursor
-            editBuilder.insert(editor.selection.active, importStatement + "\n");
-          }
-        });
-
-        const message = `Imported function "${copiedSymbol.functionName}" into ${destinationFile}`;
+        const message = `Copied function "${
+          funcSymbol.name
+        }" from ${path.basename(document.uri.fsPath)}`;
         vscode.window.showInformationMessage(message);
         await speakMessage(message);
+      } else {
+        const message = "No function found at the current cursor position.";
+        vscode.window.showWarningMessage(message);
+        await speakMessage(message);
       }
-    )
+    },
   );
+
+  const pasteCommand = vscode.commands.registerCommand(
+    "echocode.pasteImportAtCursor",
+    async () => {
+      if (!copiedSymbol) {
+        vscode.window.showWarningMessage("No function copied.");
+        return;
+      }
+      const editor = vscode.window.activeTextEditor;
+      if (!editor) {
+        vscode.window.showWarningMessage("No active editor.");
+        return;
+      }
+      const document = editor.document;
+      const destinationFilePath = document.uri.fsPath;
+      const destinationFile = path.basename(destinationFilePath);
+      const sourceFile = path.basename(copiedSymbol.filePath);
+
+      if (!areExtensionsCompatible(sourceFile, destinationFile)) {
+        const errorMsg = `Cannot import from ${sourceFile} into ${destinationFile}: incompatible file types.`;
+        vscode.window.showWarningMessage(errorMsg);
+        await speakMessage(errorMsg);
+        return;
+      }
+
+      await editor.edit(async (editBuilder) => {
+        const importStatement = connectFunction(
+          copiedSymbol.filePath,
+          destinationFilePath,
+          copiedSymbol.functionName,
+          copiedSymbol.extension,
+          copiedSymbol.functionSignature,
+        );
+
+        // Special handling for Python sys.path
+        if (copiedSymbol.extension === ".py") {
+          const fileContent = document.getText();
+          const lines = fileContent.split("\n");
+          const preambleLines = [
+            "import sys",
+            "import os",
+            "sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))",
+          ];
+
+          // Find and delete any existing preamble lines to avoid duplication
+          for (let i = 0; i < lines.length; i++) {
+            const lineText = lines[i].trim();
+            if (
+              preambleLines.some((preambleLine) =>
+                lineText.includes(preambleLine.trim()),
+              )
+            ) {
+              const range = new vscode.Range(i, 0, i + 1, 0);
+              editBuilder.delete(range);
+            }
+          }
+
+          // Insert the full, correctly-ordered preamble at the top of the file
+          const fullPreamble = preambleLines.join("\n") + "\n\n";
+          editBuilder.insert(new vscode.Position(0, 0), fullPreamble);
+        }
+
+        // For C++, check if include already exists
+        if (copiedSymbol.extension === ".cpp") {
+          const fileContent = document.getText();
+          if (!fileContent.includes(importStatement)) {
+            // Insert at the top of the file with other includes
+            editBuilder.insert(
+              new vscode.Position(0, 0),
+              importStatement + "\n",
+            );
+          }
+        } else {
+          // For Python, insert at cursor
+          editBuilder.insert(editor.selection.active, importStatement + "\n");
+        }
+      });
+
+      const message = `Imported function "${copiedSymbol.functionName}" into ${destinationFile}`;
+      vscode.window.showInformationMessage(message);
+      await speakMessage(message);
+    },
+  );
+
+  const disposable = vscode.Disposable.from(copyCommand, pasteCommand);
+  context.subscriptions.push(disposable);
+  return disposable;
 }
 
 module.exports = {

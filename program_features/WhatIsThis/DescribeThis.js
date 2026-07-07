@@ -30,7 +30,7 @@ function describePythonLine(lineText, lineNumber, document) {
 
   // Variable assignment with arithmetic operations
   const arithmeticMatch = trimmed.match(
-    /^(\w+)\s*=\s*(\w+)\s*([\+\-\*\/])\s*(\w+)/
+    /^(\w+)\s*=\s*(\w+)\s*([\+\-\*\/])\s*(\w+)/,
   );
   if (arithmeticMatch) {
     const [, result, left, op, right] = arithmeticMatch;
@@ -175,7 +175,7 @@ async function describeCurrentLine() {
       description = describePythonLine(
         lineText,
         cursorPosition.line,
-        editor.document
+        editor.document,
       );
     }
 
@@ -191,14 +191,14 @@ async function describeCurrentLine() {
       await speakMessage(description);
     } else {
       vscode.window.showInformationMessage(
-        "Could not generate a description for this line."
+        "Could not generate a description for this line.",
       );
       await speakMessage("Could not generate a description for this line.");
     }
   } catch (error) {
     console.error("Error analyzing line:", error);
     vscode.window.showErrorMessage(
-      "An error occurred while analyzing the line."
+      "An error occurred while analyzing the line.",
     );
     await speakMessage("An error occurred while analyzing the line.");
   }
@@ -212,10 +212,11 @@ function registerDescribeCurrentLineCommand(context) {
     "echocode.describeCurrentLine",
     async () => {
       await describeCurrentLine();
-    }
+    },
   );
 
   context.subscriptions.push(describeCurrentLineCommand);
+  return describeCurrentLineCommand;
 }
 
 module.exports = { registerDescribeCurrentLineCommand };
