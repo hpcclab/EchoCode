@@ -321,6 +321,9 @@ async function activate(context) {
   outputChannel.appendLine("[EchoCode] Activated");
 
   let featureImplementations = loadFeatureImplementations(outputChannel);
+  tryExecuteVoiceCommand =
+    featureImplementations.tryExecuteVoiceCommand ||
+    (async () => ({ handled: false }));
   const featureDisposables = new Map();
   let chatProvider = null;
 
