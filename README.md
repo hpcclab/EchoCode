@@ -49,6 +49,9 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 - **Integration with GitHub Copilot**  
   Leverages GitHub Copilot and Copilot Chat for enhanced AI-powered coding assistance.
 
+- **Optional Local Ollama Backend**
+  Switch EchoCode AI features to a local Ollama model globally by enabling `echocode.useLocalOllama`, then set `echocode.ollamaBaseUrl` and `echocode.ollamaModel` in VS Code settings. Whisper speech-to-text remains unchanged.
+
 - **Line Reader**
   Allows the user to see what is put on the line exactly and generate a brief summary that also checks for issues
 

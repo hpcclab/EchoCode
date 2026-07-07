@@ -289,6 +289,21 @@
           ],
           "description": "Controls how much detail EchoCode provides when explaining errors."
         },
+        "echocode.useLocalOllama": {
+          "type": "boolean",
+          "default": false,
+          "description": "Use a local Ollama model instead of GitHub Copilot for EchoCode AI features globally (Whisper speech-to-text is not affected)."
+        },
+        "echocode.ollamaBaseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:11434",
+          "description": "Base URL for your local Ollama server."
+        },
+        "echocode.ollamaModel": {
+          "type": "string",
+          "default": "llama3.2",
+          "description": "Model name to use when local Ollama is enabled (for example: llama3.2, qwen2.5:7b)."
+        },
         "echocode.featureImplementation.annotationsBigO": {
           "type": "string",
           "default": "builtin",

@@ -10,6 +10,9 @@ const {
 const {
   formatHelpByGuidance,
 } = require("../../Core/program_settings/guide_settings/guidanceLevel");
+const {
+  requestTextFromMessages,
+} = require("../../Core/program_settings/program_settings/AIrequest");
 
 let activeDecorations = [];
 const annotatedLines = new Set();
@@ -223,10 +226,16 @@ function clearDecorations() {
 // -------------------------
 // Parse Copilot response
 // -------------------------
-async function parseChatResponse(chatResponse, textEditor) {
+async function parseChatResponse(chatResponseOrText, textEditor) {
   let buffer = "";
 
-  for await (const fragment of chatResponse.text) {
+  const fragments =
+    typeof chatResponseOrText === "string"
+      ? [chatResponseOrText]
+      : chatResponseOrText?.text;
+  if (!fragments) return;
+
+  for await (const fragment of fragments) {
     buffer += fragment;
 
     const { objects, leftover } = extractJsonObjectsFromStream(buffer);
@@ -312,41 +321,15 @@ function registerAnnotationCommands(context, outputChannel) {
           "$(loading~spin) EchoCode is analyzing your file with AI...",
         );
 
-        const [model] = await vscode.lm.selectChatModels({
-          vendor: "copilot",
-          family: "gpt-4o",
-        });
-
-        if (!model) {
-          statusBarMessage.dispose();
-
-          // If AI fails but we have local annotations, still mark as visible
-          if (foundLocalIssues) {
-            annotationsVisible = true;
-            vscode.window.showInformationMessage(
-              "Local annotations applied. AI unavailable - please ensure Copilot is enabled.",
-            );
-          } else {
-            vscode.window.showErrorMessage(
-              "No language model available. Please ensure Copilot is enabled.",
-            );
-          }
-          outputChannel.appendLine("No language model available");
-          return;
-        }
-
-        const messages = [
-          new vscode.LanguageModelChatMessage(0, buildAnnotationPrompt()),
-          new vscode.LanguageModelChatMessage(0, codeWithLineNumbers),
-        ];
-
-        const chatResponse = await model.sendRequest(
-          messages,
-          {},
-          new vscode.CancellationTokenSource().token,
+        const responseText = await requestTextFromMessages(
+          [
+            { role: "system", content: buildAnnotationPrompt() },
+            { role: "user", content: codeWithLineNumbers },
+          ],
+          { cancellationToken: new vscode.CancellationTokenSource().token },
         );
 
-        await parseChatResponse(chatResponse, textEditor);
+        await parseChatResponse(responseText, textEditor);
         annotationsVisible = true;
 
         statusBarMessage.dispose();

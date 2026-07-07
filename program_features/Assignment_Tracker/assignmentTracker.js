@@ -5,6 +5,9 @@ const path = require("path");
 const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
+const {
+  requestTextFromMessages,
+} = require("../../Core/program_settings/program_settings/AIrequest");
 const pdfParse = require("pdf-parse");
 const mammoth = require("mammoth");
 
@@ -78,35 +81,17 @@ async function loadAssignmentFile() {
 
 async function parseTasksWithAI(text) {
   try {
-    const [model] = await vscode.lm.selectChatModels({
-      vendor: "copilot",
-      family: "gpt-4o",
-    });
-    if (!model) {
-      vscode.window.showErrorMessage(
-        "Copilot model not available. Using fallback parser.",
-      );
-      return parseTasksFromText(text);
-    }
-
-    const messages = [
-      new vscode.LanguageModelChatMessage(
-        0,
-        "You are helping a blind beginner Python student. Extract only the concrete steps required to complete the coding assignment below. Each step should be short and clear -- under 15 words. Format each step as a bullet point like '- [ ] Define a function named add().'",
-      ),
-      new vscode.LanguageModelChatMessage(0, text),
-    ];
-
-    const response = await model.sendRequest(
-      messages,
-      {},
-      new vscode.CancellationTokenSource().token,
+    const result = await requestTextFromMessages(
+      [
+        {
+          role: "system",
+          content:
+            "You are helping a blind beginner Python student. Extract only the concrete steps required to complete the coding assignment below. Each step should be short and clear -- under 15 words. Format each step as a bullet point like '- [ ] Define a function named add().'",
+        },
+        { role: "user", content: text },
+      ],
+      { cancellationToken: new vscode.CancellationTokenSource().token },
     );
-
-    let result = "";
-    for await (const chunk of response.text) {
-      result += chunk;
-    }
 
     parseTasksFromText(result);
   } catch (err) {
@@ -167,41 +152,22 @@ async function rescanUserCode() {
   }
 
   try {
-    const [model] = await vscode.lm.selectChatModels({
-      vendor: "copilot",
-      family: "gpt-4o",
-    });
-    if (!model) {
-      vscode.window.showErrorMessage("Copilot model not available.");
-      return;
-    }
-
     const assignmentText = taskList
       .map((task, i) => `Task ${i + 1}: ${task}`)
       .join("\n");
 
-    const messages = [
-      new vscode.LanguageModelChatMessage(
-        0,
-        `You are helping a blind beginner Python student. \nCompare this assignment list to the student's code. \nRespond only with the task numbers that are already complete.`,
-      ),
-      new vscode.LanguageModelChatMessage(
-        0,
-        `Assignment Tasks:\n${assignmentText}`,
-      ),
-      new vscode.LanguageModelChatMessage(0, `User's Code:\n${userCode}`),
-    ];
-
-    const response = await model.sendRequest(
-      messages,
-      {},
-      new vscode.CancellationTokenSource().token,
+    const result = await requestTextFromMessages(
+      [
+        {
+          role: "system",
+          content:
+            "You are helping a blind beginner Python student. Compare this assignment list to the student's code. Respond only with the task numbers that are already complete.",
+        },
+        { role: "user", content: `Assignment Tasks:\n${assignmentText}` },
+        { role: "user", content: `User's Code:\n${userCode}` },
+      ],
+      { cancellationToken: new vscode.CancellationTokenSource().token },
     );
-
-    let result = "";
-    for await (const chunk of response.text) {
-      result += chunk;
-    }
 
     updateCompletedTasksFromAI(result);
   } catch (err) {

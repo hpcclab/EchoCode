@@ -1,4 +1,158 @@
 const vscode = require("vscode");
+const http = require("http");
+const https = require("https");
+
+function getAiSettings() {
+  const config = vscode.workspace.getConfiguration("echocode");
+  return {
+    useLocalOllama: config.get("useLocalOllama", false),
+    ollamaBaseUrl: config.get("ollamaBaseUrl", "http://127.0.0.1:11434"),
+    ollamaModel: config.get("ollamaModel", "llama3.2"),
+  };
+}
+
+function requestJson(url, body) {
+  return new Promise((resolve, reject) => {
+    let parsedUrl;
+    try {
+      parsedUrl = new URL(url);
+    } catch {
+      reject(new Error(`Invalid Ollama URL: ${url}`));
+      return;
+    }
+
+    const isHttps = parsedUrl.protocol === "https:";
+    const transport = isHttps ? https : http;
+    const payload = JSON.stringify(body);
+
+    const req = transport.request(
+      {
+        method: "POST",
+        hostname: parsedUrl.hostname,
+        port: parsedUrl.port || (isHttps ? 443 : 80),
+        path: `${parsedUrl.pathname}${parsedUrl.search}`,
+        headers: {
+          "Content-Type": "application/json",
+          "Content-Length": Buffer.byteLength(payload),
+        },
+      },
+      (res) => {
+        let raw = "";
+        res.setEncoding("utf8");
+        res.on("data", (chunk) => {
+          raw += chunk;
+        });
+        res.on("end", () => {
+          if (
+            !res.statusCode ||
+            res.statusCode < 200 ||
+            res.statusCode >= 300
+          ) {
+            reject(
+              new Error(
+                `Ollama request failed (${res.statusCode || "unknown"}): ${raw || "no response body"}`,
+              ),
+            );
+            return;
+          }
+
+          try {
+            resolve(JSON.parse(raw));
+          } catch {
+            reject(new Error("Ollama returned invalid JSON."));
+          }
+        });
+      },
+    );
+
+    req.on("error", (err) => reject(err));
+    req.write(payload);
+    req.end();
+  });
+}
+
+async function sendOllamaPrompt(prompt, opts = {}) {
+  const settings = getAiSettings();
+  const baseUrl = String(settings.ollamaBaseUrl || "").replace(/\/$/, "");
+  const url = `${baseUrl}/api/generate`;
+
+  const body = {
+    model: settings.ollamaModel,
+    prompt,
+    stream: false,
+    options: {},
+  };
+
+  if (typeof opts.temperature === "number") {
+    body.options.temperature = opts.temperature;
+  }
+
+  const json = await requestJson(url, body);
+  if (!json || typeof json.response !== "string") {
+    throw new Error("Ollama did not return a text response.");
+  }
+
+  return json.response;
+}
+
+function normalizeMessage(message) {
+  if (!message) return null;
+
+  if (typeof message === "string") {
+    return { role: "user", content: message };
+  }
+
+  const role =
+    message.role === "assistant" || message.role === "system"
+      ? message.role
+      : "user";
+  const content = String(message.content ?? "");
+  return { role, content };
+}
+
+function buildOllamaPromptFromMessages(messages) {
+  return messages
+    .map((m) => {
+      if (m.role === "assistant") return `ASSISTANT:\n${m.content}`;
+      if (m.role === "system") return `SYSTEM:\n${m.content}`;
+      return `USER:\n${m.content}`;
+    })
+    .join("\n\n");
+}
+
+async function requestTextFromMessages(rawMessages, opts = {}) {
+  const messages = (rawMessages || []).map(normalizeMessage).filter(Boolean);
+  if (messages.length === 0) {
+    throw new Error("No AI messages were provided.");
+  }
+
+  const settings = getAiSettings();
+
+  if (settings.useLocalOllama) {
+    const prompt = buildOllamaPromptFromMessages(messages);
+    return sendOllamaPrompt(prompt, { temperature: opts.temperature });
+  }
+
+  const model = await selectModel();
+  const lmMessages = messages.map((m) => {
+    if (m.role === "assistant") {
+      return vscode.LanguageModelChatMessage.Assistant(m.content);
+    }
+    return vscode.LanguageModelChatMessage.User(m.content);
+  });
+
+  const chatReq = await model.sendRequest(
+    lmMessages,
+    { temperature: opts.temperature },
+    opts.cancellationToken,
+  );
+
+  let text = "";
+  for await (const fragment of chatReq.text) {
+    text += fragment;
+  }
+  return text;
+}
 
 // Helper to get model safely
 async function selectModel() {
@@ -8,7 +162,7 @@ async function selectModel() {
   // 2. Safety check
   if (!models || models.length === 0) {
     throw new Error(
-      "No Copilot models available. Please check your GitHub Copilot Chat extension."
+      "No Copilot models available. Please check your GitHub Copilot Chat extension.",
     );
   }
 
@@ -22,16 +176,22 @@ async function selectModel() {
 
 async function analyzeAI(code, instructionPrompt) {
   try {
-    const model = await selectModel();
     const combinedPrompt = `${instructionPrompt}\n\nCode to analyze:\n${code}`;
-    const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
+    const settings = getAiSettings();
 
+    if (settings.useLocalOllama) {
+      return await sendOllamaPrompt(combinedPrompt, {});
+    }
+
+    const model = await selectModel();
+    const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
     const chatRequest = await model.sendRequest(messages, {});
 
     let results = "";
     for await (const fragment of chatRequest.text) {
       results += fragment;
     }
+
     return results;
   } catch (err) {
     // Handle off-topic refusals cleanly
@@ -45,21 +205,25 @@ async function analyzeAI(code, instructionPrompt) {
 async function classifyVoiceIntent(transcript, commands, opts = {}) {
   try {
     const temperature = opts.temperature ?? 0.0;
-    const model = await selectModel();
+    const settings = getAiSettings();
 
     // System prompt engineered as User message
     const systemInstruction =
       'Output only JSON like {"command": "<id>"}. Reply ONLY with strict minified JSON.';
 
     const combinedPrompt = `SYSTEM:\n${systemInstruction}\n\nUSER DATA:\n${JSON.stringify(
-      { transcript, commands: commands.map((c) => ({ id: c.id })) }
+      { transcript, commands: commands.map((c) => ({ id: c.id })) },
     )}`;
 
-    const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
-    const chatReq = await model.sendRequest(messages, { temperature });
-
     let text = "";
-    for await (const frag of chatReq.text) text += frag;
+    if (settings.useLocalOllama) {
+      text = await sendOllamaPrompt(combinedPrompt, { temperature });
+    } else {
+      const model = await selectModel();
+      const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
+      const chatReq = await model.sendRequest(messages, { temperature });
+      for await (const frag of chatReq.text) text += frag;
+    }
 
     const match = text.match(/\{[\s\S]*\}/);
     const candidate = match ? match[0] : text;
@@ -74,9 +238,14 @@ async function classifyVoiceIntent(transcript, commands, opts = {}) {
   }
 }
 
-async function generateCodeFromVoice(transcript, languageId, indentation = "", contextCode = "") {
+async function generateCodeFromVoice(
+  transcript,
+  languageId,
+  indentation = "",
+  contextCode = "",
+) {
   try {
-    const model = await selectModel();
+    const settings = getAiSettings();
 
     let systemPrompt = `You are an expert coding assistant. 
     Your task is to convert the user's spoken natural language request into valid ${languageId} code.
@@ -101,16 +270,20 @@ async function generateCodeFromVoice(transcript, languageId, indentation = "", c
     \`\`\``;
     }
 
-    const messages = [
-      vscode.LanguageModelChatMessage.User(systemPrompt),
-      vscode.LanguageModelChatMessage.User(transcript)
-    ];
-
-    const chatReq = await model.sendRequest(messages, { temperature: 0.1 });
-
     let code = "";
-    for await (const fragment of chatReq.text) {
-      code += fragment;
+    if (settings.useLocalOllama) {
+      const localPrompt = `${systemPrompt}\n\nUSER REQUEST:\n${transcript}`;
+      code = await sendOllamaPrompt(localPrompt, { temperature: 0.1 });
+    } else {
+      const model = await selectModel();
+      const messages = [
+        vscode.LanguageModelChatMessage.User(systemPrompt),
+        vscode.LanguageModelChatMessage.User(transcript),
+      ];
+      const chatReq = await model.sendRequest(messages, { temperature: 0.1 });
+      for await (const fragment of chatReq.text) {
+        code += fragment;
+      }
     }
 
     // Cleanup any leaked markdown formatting
@@ -119,14 +292,21 @@ async function generateCodeFromVoice(transcript, languageId, indentation = "", c
       .replace(/```$/, "")
       .trim();
   } catch (err) {
-    if (err.name === 'LanguageModelError' || err instanceof vscode.LanguageModelError) {
+    const settings = getAiSettings();
+    if (
+      !settings.useLocalOllama &&
+      (err.name === "LanguageModelError" ||
+        err instanceof vscode.LanguageModelError)
+    ) {
       throw new Error(`Copilot LM Error: ${err.message}`);
     }
-    throw new Error(`Copilot Error: ${err.message}`);
+    throw new Error(`AI Error: ${err.message}`);
   }
 }
 
 module.exports = {
+  getAiSettings,
+  requestTextFromMessages,
   analyzeAI,
   classifyVoiceIntent,
   generateCodeFromVoice,
