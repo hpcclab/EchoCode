@@ -18218,10 +18218,10 @@
     ]
   },
   {
-    "id": "changeEditorIndentation2",
-    "title": "changeEditorIndentation2",
+    "id": "changeEditorIndentation3",
+    "title": "changeEditorIndentation3",
     "keywords": [
-      "change editor indentation2",
+      "change editor indentation3",
       "change editor"
     ]
   },
@@ -18570,37 +18570,6 @@
     "keywords": [
       "notifications toggle do not disturb mode by source",
       "notifications toggle"
-    ]
-  },
-  {
-    "id": "timeline.refresh",
-    "title": "timeline.refresh",
-    "keywords": [
-      "timeline refresh"
-    ]
-  },
-  {
-    "id": "timeline.toggleFollowActiveEditor",
-    "title": "timeline.toggleFollowActiveEditor",
-    "keywords": [
-      "timeline toggle follow active editor",
-      "timeline toggle"
-    ]
-  },
-  {
-    "id": "timeline.toggleExcludeSource:timeline.localHistory",
-    "title": "timeline.toggleExcludeSource:timeline.localHistory",
-    "keywords": [
-      "timeline toggle exclude source:timeline local history",
-      "timeline toggle"
-    ]
-  },
-  {
-    "id": "workbench.action.chat.pickAgentSession",
-    "title": "workbench.action.chat.pickAgentSession",
-    "keywords": [
-      "chat pick agent session",
-      "chat pick"
     ]
   },
   {
@@ -20874,6 +20843,14 @@
     ]
   },
   {
+    "id": "editor.action.inlineSuggest.renameSymbol",
+    "title": "editor.action.inlineSuggest.renameSymbol",
+    "keywords": [
+      "inline suggest rename symbol",
+      "inline suggest"
+    ]
+  },
+  {
     "id": "workbench.action.terminal.newWithProfile",
     "title": "workbench.action.terminal.newWithProfile",
     "keywords": [
@@ -20996,22 +20973,6 @@
     "keywords": [
       "tasks open workspace file tasks",
       "tasks open"
-    ]
-  },
-  {
-    "id": "workbench.panel.repl.view.toggleVisibility",
-    "title": "workbench.panel.repl.view.toggleVisibility",
-    "keywords": [
-      "workbench panel repl view toggle visibility",
-      "workbench panel"
-    ]
-  },
-  {
-    "id": "workbench.panel.repl.view.removeView",
-    "title": "workbench.panel.repl.view.removeView",
-    "keywords": [
-      "workbench panel repl view remove view",
-      "workbench panel"
     ]
   },
   {
@@ -21802,6 +21763,22 @@
     "keywords": [
       "workbench extensions action manage trusted publishers",
       "workbench extensions"
+    ]
+  },
+  {
+    "id": "workbench.panel.repl.view.toggleVisibility",
+    "title": "workbench.panel.repl.view.toggleVisibility",
+    "keywords": [
+      "workbench panel repl view toggle visibility",
+      "workbench panel"
+    ]
+  },
+  {
+    "id": "workbench.panel.repl.view.removeView",
+    "title": "workbench.panel.repl.view.removeView",
+    "keywords": [
+      "workbench panel repl view remove view",
+      "workbench panel"
     ]
   },
   {
@@ -23003,46 +22980,6 @@
     ]
   },
   {
-    "id": "~remote.forwardedPorts.open",
-    "title": "~remote.forwardedPorts.open",
-    "keywords": [
-      "~remote forwarded ports open",
-      "~remote forwarded"
-    ]
-  },
-  {
-    "id": "~remote.forwardedPorts.focus",
-    "title": "~remote.forwardedPorts.focus",
-    "keywords": [
-      "~remote forwarded ports focus",
-      "~remote forwarded"
-    ]
-  },
-  {
-    "id": "~remote.forwardedPorts.resetViewLocation",
-    "title": "~remote.forwardedPorts.resetViewLocation",
-    "keywords": [
-      "~remote forwarded ports reset view location",
-      "~remote forwarded"
-    ]
-  },
-  {
-    "id": "~remote.forwardedPorts.toggleVisibility",
-    "title": "~remote.forwardedPorts.toggleVisibility",
-    "keywords": [
-      "~remote forwarded ports toggle visibility",
-      "~remote forwarded"
-    ]
-  },
-  {
-    "id": "~remote.forwardedPorts.removeView",
-    "title": "~remote.forwardedPorts.removeView",
-    "keywords": [
-      "~remote forwarded ports remove view",
-      "~remote forwarded"
-    ]
-  },
-  {
     "id": "workbench.action.manageAccounts",
     "title": "workbench.action.manageAccounts",
     "keywords": [
@@ -23094,14 +23031,6 @@
     "title": "workbench.userData.actions.signin",
     "keywords": [
       "workbench user data actions signin",
-      "workbench user"
-    ]
-  },
-  {
-    "id": "workbench.userDataSync.actions.showConflicts",
-    "title": "workbench.userDataSync.actions.showConflicts",
-    "keywords": [
-      "workbench user data sync actions show conflicts",
       "workbench user"
     ]
   },
@@ -23410,6 +23339,54 @@
     ]
   },
   {
+    "id": "~remote.forwardedPorts.open",
+    "title": "~remote.forwardedPorts.open",
+    "keywords": [
+      "~remote forwarded ports open",
+      "~remote forwarded"
+    ]
+  },
+  {
+    "id": "~remote.forwardedPorts.focus",
+    "title": "~remote.forwardedPorts.focus",
+    "keywords": [
+      "~remote forwarded ports focus",
+      "~remote forwarded"
+    ]
+  },
+  {
+    "id": "~remote.forwardedPorts.resetViewLocation",
+    "title": "~remote.forwardedPorts.resetViewLocation",
+    "keywords": [
+      "~remote forwarded ports reset view location",
+      "~remote forwarded"
+    ]
+  },
+  {
+    "id": "~remote.forwardedPorts.toggleVisibility",
+    "title": "~remote.forwardedPorts.toggleVisibility",
+    "keywords": [
+      "~remote forwarded ports toggle visibility",
+      "~remote forwarded"
+    ]
+  },
+  {
+    "id": "~remote.forwardedPorts.removeView",
+    "title": "~remote.forwardedPorts.removeView",
+    "keywords": [
+      "~remote forwarded ports remove view",
+      "~remote forwarded"
+    ]
+  },
+  {
+    "id": "workbench.userDataSync.actions.showConflicts",
+    "title": "workbench.userDataSync.actions.showConflicts",
+    "keywords": [
+      "workbench user data sync actions show conflicts",
+      "workbench user"
+    ]
+  },
+  {
     "id": "workbench.editSessions.actions.signIn",
     "title": "workbench.editSessions.actions.signIn",
     "keywords": [
@@ -23658,74 +23635,27 @@
     ]
   },
   {
-    "id": "chat.installRecommendation.openai.chatgpt.codex",
-    "title": "chat.installRecommendation.openai.chatgpt.codex",
+    "id": "python.configureTests",
+    "title": "python.configureTests",
     "keywords": [
-      "chat install recommendation openai chatgpt codex",
-      "chat install"
+      "python configure tests",
+      "python configure"
     ]
   },
   {
-    "id": "chat.installRecommendation.github.copilot-chat.cli",
-    "title": "chat.installRecommendation.github.copilot-chat.cli",
+    "id": "python.copilotSetupTests",
+    "title": "python.copilotSetupTests",
     "keywords": [
-      "chat install recommendation github copilot chat cli",
-      "chat install"
+      "python copilot setup tests",
+      "python copilot"
     ]
   },
   {
-    "id": "chat.installRecommendation.github.copilot-chat.cloud",
-    "title": "chat.installRecommendation.github.copilot-chat.cloud",
+    "id": "python.copyTestId",
+    "title": "python.copyTestId",
     "keywords": [
-      "chat install recommendation github copilot chat cloud",
-      "chat install"
-    ]
-  },
-  {
-    "id": "workbench.extensions.installMissingDependencies",
-    "title": "workbench.extensions.installMissingDependencies",
-    "keywords": [
-      "workbench extensions install missing dependencies",
-      "workbench extensions"
-    ]
-  },
-  {
-    "id": "workbench.action.toggleLockedScrolling",
-    "title": "workbench.action.toggleLockedScrolling",
-    "keywords": [
-      "toggle locked scrolling",
-      "toggle locked"
-    ]
-  },
-  {
-    "id": "workbench.action.holdLockedScrolling",
-    "title": "workbench.action.holdLockedScrolling",
-    "keywords": [
-      "hold locked scrolling",
-      "hold locked"
-    ]
-  },
-  {
-    "id": "workbench.action.configureLocale",
-    "title": "workbench.action.configureLocale",
-    "keywords": [
-      "configure locale"
-    ]
-  },
-  {
-    "id": "workbench.action.clearLocalePreference",
-    "title": "workbench.action.clearLocalePreference",
-    "keywords": [
-      "clear locale preference",
-      "clear locale"
-    ]
-  },
-  {
-    "id": "workbench.action.extensionHostProfiler.stop",
-    "title": "workbench.action.extensionHostProfiler.stop",
-    "keywords": [
-      "extension host profiler stop",
-      "extension host"
+      "python copy test id",
+      "python copy"
     ]
   },
   {
@@ -24121,1571 +24051,11 @@
     ]
   },
   {
-    "id": "extension.pickNativeProcess",
-    "title": "extension.pickNativeProcess",
-    "keywords": [
-      "pick native process",
-      "pick native"
-    ]
-  },
-  {
-    "id": "extension.pickRemoteNativeProcess",
-    "title": "extension.pickRemoteNativeProcess",
-    "keywords": [
-      "pick remote native process",
-      "pick remote"
-    ]
-  },
-  {
-    "id": "C_Cpp.BuildAndDebugFile",
-    "title": "C_Cpp.BuildAndDebugFile",
-    "keywords": [
-      "c cpp build and debug file",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.BuildAndRunFile",
-    "title": "C_Cpp.BuildAndRunFile",
-    "keywords": [
-      "c cpp build and run file",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.AddDebugConfiguration",
-    "title": "C_Cpp.AddDebugConfiguration",
-    "keywords": [
-      "c cpp add debug configuration",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
-    "title": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
-    "keywords": [
-      "output show vscode github authentication git hub authentication log",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
-    "title": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
-    "keywords": [
-      "output show mechatroner rainbow csv rainbow csv debug channel log",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
-    "title": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
-    "keywords": [
-      "output show git hub copilot chat git hub copilot chat log",
-      "output show"
-    ]
-  },
-  {
-    "id": "git-base.api.getRemoteSources",
-    "title": "git-base.api.getRemoteSources",
-    "keywords": [
-      "git base api get remote sources",
-      "git base"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log",
-    "title": "workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log",
-    "keywords": [
-      "output show vscode microsoft authentication microsoft authentication log",
-      "output show"
-    ]
-  },
-  {
-    "id": "streamdeck.reconnectToServer",
-    "title": "streamdeck.reconnectToServer",
-    "keywords": [
-      "streamdeck reconnect to server",
-      "streamdeck reconnect"
-    ]
-  },
-  {
-    "id": "streamdeck.activateSession",
-    "title": "streamdeck.activateSession",
-    "keywords": [
-      "streamdeck activate session",
-      "streamdeck activate"
-    ]
-  },
-  {
-    "id": "todohighlight.toggleHighlight",
-    "title": "todohighlight.toggleHighlight",
-    "keywords": [
-      "todohighlight toggle highlight",
-      "todohighlight toggle"
-    ]
-  },
-  {
-    "id": "todohighlight.listAnnotations",
-    "title": "todohighlight.listAnnotations",
-    "keywords": [
-      "todohighlight list annotations",
-      "todohighlight list"
-    ]
-  },
-  {
-    "id": "todohighlight.showOutputChannel",
-    "title": "todohighlight.showOutputChannel",
-    "keywords": [
-      "todohighlight show output channel",
-      "todohighlight show"
-    ]
-  },
-  {
-    "id": "C_Cpp.addSshTarget",
-    "title": "C_Cpp.addSshTarget",
-    "keywords": [
-      "c cpp add ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.removeSshTarget",
-    "title": "C_Cpp.removeSshTarget",
-    "keywords": [
-      "c cpp remove ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.refreshCppSshTargetsView",
-    "title": "C_Cpp.refreshCppSshTargetsView",
-    "keywords": [
-      "c cpp refresh cpp ssh targets view",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.setActiveSshTarget",
-    "title": "C_Cpp.setActiveSshTarget",
-    "keywords": [
-      "c cpp set active ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.selectSshTarget",
-    "title": "C_Cpp.selectSshTarget",
-    "keywords": [
-      "c cpp select ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.selectActiveSshTarget",
-    "title": "C_Cpp.selectActiveSshTarget",
-    "keywords": [
-      "c cpp select active ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.activeSshTarget",
-    "title": "C_Cpp.activeSshTarget",
-    "keywords": [
-      "c cpp active ssh target",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.sshTerminal",
-    "title": "C_Cpp.sshTerminal",
-    "keywords": [
-      "c cpp ssh terminal",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-ms-vscode.cpptools-#1-remote-attach",
-    "title": "workbench.action.output.show.extension-output-ms-vscode.cpptools-#1-remote-attach",
-    "keywords": [
-      "output show extension output ms vscode cpptools #1 remote attach",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
-    "title": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
-    "keywords": [
-      "output show extension output formulahendry auto rename tag #1 auto rename tag",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
-    "title": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
-    "keywords": [
-      "output show extension output nicollasr vscode streamdeck #1 stream deck",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
-    "title": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
-    "keywords": [
-      "output show extension output wayou vscode todo highlight #1 todo highlight",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.vscode.git.Git.log",
-    "title": "workbench.action.output.show.vscode.git.Git.log",
-    "keywords": [
-      "output show vscode git git log",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.vscode.github.GitHub.log",
-    "title": "workbench.action.output.show.vscode.github.GitHub.log",
-    "keywords": [
-      "output show vscode github git hub log",
-      "output show"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.attachFile",
-    "title": "github.copilot.chat.attachFile",
-    "keywords": [
-      "github copilot chat attach file",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.attachSelection",
-    "title": "github.copilot.chat.attachSelection",
-    "keywords": [
-      "github copilot chat attach selection",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.extensionState",
-    "title": "github.copilot.debug.extensionState",
-    "keywords": [
-      "github copilot debug extension state",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.triggerPermissiveSignIn",
-    "title": "github.copilot.chat.triggerPermissiveSignIn",
-    "keywords": [
-      "github copilot chat trigger permissive sign in",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.collectDiagnostics",
-    "title": "github.copilot.debug.collectDiagnostics",
-    "keywords": [
-      "github copilot debug collect diagnostics",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.collectDiagnostics.internal",
-    "title": "github.copilot.debug.collectDiagnostics.internal",
-    "keywords": [
-      "github copilot debug collect diagnostics internal",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.showOutputChannel.internal",
-    "title": "github.copilot.debug.showOutputChannel.internal",
-    "keywords": [
-      "github copilot debug show output channel internal",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.togglePowerSaveBlocker",
-    "title": "github.copilot.debug.togglePowerSaveBlocker",
-    "keywords": [
-      "github copilot debug toggle power save blocker",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.refreshToken",
-    "title": "github.copilot.refreshToken",
-    "keywords": [
-      "github copilot refresh token",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.showChatLogView",
-    "title": "github.copilot.debug.showChatLogView",
-    "keywords": [
-      "github copilot debug show chat log view",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.startCopilotDebugCommand",
-    "title": "github.copilot.chat.startCopilotDebugCommand",
-    "keywords": [
-      "github copilot chat start copilot debug command",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.generateSTest",
-    "title": "github.copilot.debug.generateSTest",
-    "keywords": [
-      "github copilot debug generate stest",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.createLaunchJsonFileWithContents",
-    "title": "github.copilot.createLaunchJsonFileWithContents",
-    "keywords": [
-      "github copilot create launch json file with contents",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.startDebugging",
-    "title": "github.copilot.startDebugging",
-    "keywords": [
-      "github copilot start debugging",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.open.walkthrough",
-    "title": "github.copilot.open.walkthrough",
-    "keywords": [
-      "github copilot open walkthrough",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.mcp.viewContext7",
-    "title": "github.copilot.mcp.viewContext7",
-    "keywords": [
-      "github copilot mcp view context7",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.survey.signalUsage",
-    "title": "github.copilot.survey.signalUsage",
-    "keywords": [
-      "github copilot survey signal usage",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.report",
-    "title": "github.copilot.report",
-    "keywords": [
-      "github copilot report",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.showContextInspectorView",
-    "title": "github.copilot.debug.showContextInspectorView",
-    "keywords": [
-      "github copilot debug show context inspector view",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.nes.prepareRename",
-    "title": "github.copilot.nes.prepareRename",
-    "keywords": [
-      "github copilot nes prepare rename",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.nes.postRename",
-    "title": "github.copilot.nes.postRename",
-    "keywords": [
-      "github copilot nes post rename",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.validateNesRename",
-    "title": "github.copilot.debug.validateNesRename",
-    "keywords": [
-      "github copilot debug validate nes rename",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.search.markHelpful",
-    "title": "github.copilot.search.markHelpful",
-    "keywords": [
-      "github copilot search mark helpful",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.search.markUnhelpful",
-    "title": "github.copilot.search.markUnhelpful",
-    "keywords": [
-      "github copilot search mark unhelpful",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.search.feedback",
-    "title": "github.copilot.search.feedback",
-    "keywords": [
-      "github copilot search feedback",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "chat.enableAdditionalUsage",
-    "title": "chat.enableAdditionalUsage",
-    "keywords": [
-      "chat enable additional usage",
-      "chat enable"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.notebook.enableFollowCellExecution",
-    "title": "github.copilot.chat.notebook.enableFollowCellExecution",
-    "keywords": [
-      "github copilot chat notebook enable follow cell execution",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.notebook.disableFollowCellExecution",
-    "title": "github.copilot.chat.notebook.disableFollowCellExecution",
-    "keywords": [
-      "github copilot chat notebook disable follow cell execution",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.buildRemoteWorkspaceIndex",
-    "title": "github.copilot.buildRemoteWorkspaceIndex",
-    "keywords": [
-      "github copilot build remote workspace index",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.enableExternalIngest",
-    "title": "github.copilot.enableExternalIngest",
-    "keywords": [
-      "github copilot enable external ingest",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.deleteExternalIngestWorkspaceIndex",
-    "title": "github.copilot.deleteExternalIngestWorkspaceIndex",
-    "keywords": [
-      "github copilot delete external ingest workspace index",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.debug.collectWorkspaceIndexDiagnostics",
-    "title": "github.copilot.debug.collectWorkspaceIndexDiagnostics",
-    "keywords": [
-      "github copilot debug collect workspace index diagnostics",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.checkoutPullRequestReroute",
-    "title": "github.copilot.chat.checkoutPullRequestReroute",
-    "keywords": [
-      "github copilot chat checkout pull request reroute",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.openPullRequestReroute",
-    "title": "github.copilot.chat.openPullRequestReroute",
-    "keywords": [
-      "github copilot chat open pull request reroute",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.cloudSessions.openRepository",
-    "title": "github.copilot.chat.cloudSessions.openRepository",
-    "keywords": [
-      "github copilot chat cloud sessions open repository",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.cloudSessions.clearCaches",
-    "title": "github.copilot.chat.cloudSessions.clearCaches",
-    "keywords": [
-      "github copilot chat cloud sessions clear caches",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cloud.resetWorkspaceConfirmations",
-    "title": "github.copilot.cloud.resetWorkspaceConfirmations",
-    "keywords": [
-      "github copilot cloud reset workspace confirmations",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cloud.sessions.openInBrowser",
-    "title": "github.copilot.cloud.sessions.openInBrowser",
-    "keywords": [
-      "github copilot cloud sessions open in browser",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cloud.sessions.proxy.closeChatSessionPullRequest",
-    "title": "github.copilot.cloud.sessions.proxy.closeChatSessionPullRequest",
-    "keywords": [
-      "github copilot cloud sessions proxy close chat session pull request",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cloud.sessions.installPRExtension",
-    "title": "github.copilot.cloud.sessions.installPRExtension",
-    "keywords": [
-      "github copilot cloud sessions install prextension",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.copilotCLI.addFileReference",
-    "title": "github.copilot.chat.copilotCLI.addFileReference",
-    "keywords": [
-      "github copilot chat copilot cli add file reference",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.copilotCLI.addSelection",
-    "title": "github.copilot.chat.copilotCLI.addSelection",
-    "keywords": [
-      "github copilot chat copilot cli add selection",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.copilotCLI.acceptDiff",
-    "title": "github.copilot.chat.copilotCLI.acceptDiff",
-    "keywords": [
-      "github copilot chat copilot cli accept diff",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.copilotCLI.rejectDiff",
-    "title": "github.copilot.chat.copilotCLI.rejectDiff",
-    "keywords": [
-      "github copilot chat copilot cli reject diff",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.delete",
-    "title": "github.copilot.cli.sessions.delete",
-    "keywords": [
-      "github copilot cli sessions delete",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "agents.github.copilot.cli.deleteSessions",
-    "title": "agents.github.copilot.cli.deleteSessions",
-    "keywords": [
-      "agents github copilot cli delete sessions",
-      "agents github"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.resumeInTerminal",
-    "title": "github.copilot.cli.sessions.resumeInTerminal",
-    "keywords": [
-      "github copilot cli sessions resume in terminal",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.rename",
-    "title": "github.copilot.cli.sessions.rename",
-    "keywords": [
-      "github copilot cli sessions rename",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.setTitle",
-    "title": "github.copilot.cli.sessions.setTitle",
-    "keywords": [
-      "github copilot cli sessions set title",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.newSession",
-    "title": "github.copilot.cli.newSession",
-    "keywords": [
-      "github copilot cli new session",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.newSessionToSide",
-    "title": "github.copilot.cli.newSessionToSide",
-    "keywords": [
-      "github copilot cli new session to side",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.openInCopilotCLI",
-    "title": "github.copilot.cli.openInCopilotCLI",
-    "keywords": [
-      "github copilot cli open in copilot cli",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.openWorktreeInNewWindow",
-    "title": "github.copilot.cli.sessions.openWorktreeInNewWindow",
-    "keywords": [
-      "github copilot cli sessions open worktree in new window",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.openWorktreeInTerminal",
-    "title": "github.copilot.cli.sessions.openWorktreeInTerminal",
-    "keywords": [
-      "github copilot cli sessions open worktree in terminal",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.copyWorktreeBranchName",
-    "title": "github.copilot.cli.sessions.copyWorktreeBranchName",
-    "keywords": [
-      "github copilot cli sessions copy worktree branch name",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.openRepository",
-    "title": "github.copilot.cli.sessions.openRepository",
-    "keywords": [
-      "github copilot cli sessions open repository",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.applyCopilotCLIAgentSessionChanges",
-    "title": "github.copilot.chat.applyCopilotCLIAgentSessionChanges",
-    "keywords": [
-      "github copilot chat apply copilot cliagent session changes",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply",
-    "title": "github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply",
-    "keywords": [
-      "github copilot chat apply copilot cliagent session changes apply",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge",
-    "title": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge",
-    "keywords": [
-      "github copilot chat merge copilot cliagent session changes merge",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync",
-    "title": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync",
-    "keywords": [
-      "github copilot chat merge copilot cliagent session changes merge and sync",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.refreshChanges",
-    "title": "github.copilot.sessions.refreshChanges",
-    "keywords": [
-      "github copilot sessions refresh changes",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.initializeRepository",
-    "title": "github.copilot.sessions.initializeRepository",
-    "keywords": [
-      "github copilot sessions initialize repository",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.commit",
-    "title": "github.copilot.sessions.commit",
-    "keywords": [
-      "github copilot sessions commit",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.commitAndSync",
-    "title": "github.copilot.sessions.commitAndSync",
-    "keywords": [
-      "github copilot sessions commit and sync",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.sync",
-    "title": "github.copilot.sessions.sync",
-    "keywords": [
-      "github copilot sessions sync",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessions.discardChanges",
-    "title": "github.copilot.sessions.discardChanges",
-    "keywords": [
-      "github copilot sessions discard changes",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR",
-    "title": "github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR",
-    "keywords": [
-      "github copilot chat create pull request copilot cliagent session create pr",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.createDraftPullRequestCopilotCLIAgentSession.createDraftPR",
-    "title": "github.copilot.chat.createDraftPullRequestCopilotCLIAgentSession.createDraftPR",
-    "keywords": [
-      "github copilot chat create draft pull request copilot cliagent session create draft pr",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.commitToWorktree",
-    "title": "github.copilot.cli.sessions.commitToWorktree",
-    "keywords": [
-      "github copilot cli sessions commit to worktree",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.cli.sessions.commitToRepository",
-    "title": "github.copilot.cli.sessions.commitToRepository",
-    "keywords": [
-      "github copilot cli sessions commit to repository",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "copilot.claude.agents",
-    "title": "copilot.claude.agents",
-    "keywords": [
-      "copilot claude agents",
-      "copilot claude"
-    ]
-  },
-  {
-    "id": "copilot.claude.hooks",
-    "title": "copilot.claude.hooks",
-    "keywords": [
-      "copilot claude hooks",
-      "copilot claude"
-    ]
-  },
-  {
-    "id": "copilot.claude.memory",
-    "title": "copilot.claude.memory",
-    "keywords": [
-      "copilot claude memory",
-      "copilot claude"
-    ]
-  },
-  {
-    "id": "github.copilot.claude.sessions.rename",
-    "title": "github.copilot.claude.sessions.rename",
-    "keywords": [
-      "github copilot claude sessions rename",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.claude.sessions.commit",
-    "title": "github.copilot.claude.sessions.commit",
-    "keywords": [
-      "github copilot claude sessions commit",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.claude.sessions.commitAndSync",
-    "title": "github.copilot.claude.sessions.commitAndSync",
-    "keywords": [
-      "github copilot claude sessions commit and sync",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.claude.sessions.sync",
-    "title": "github.copilot.claude.sessions.sync",
-    "keywords": [
-      "github copilot claude sessions sync",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.claude.sessions.initializeRepository",
-    "title": "github.copilot.claude.sessions.initializeRepository",
-    "keywords": [
-      "github copilot claude sessions initialize repository",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.sortByCreated.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.sortByCreated.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter sort by created agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.sortByUpdated.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.sortByUpdated.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter sort by updated agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:local.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:local.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:local agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:claude-code.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:claude-code.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:claude code agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:copilotcli.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:copilotcli.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:copilotcli agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExclude:copilot-cloud-agent.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExclude:copilot-cloud-agent.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude:copilot cloud agent agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:1.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:1.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:1 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:2.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:2.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:2 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:3.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:3.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:3 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeState:0.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeState:0.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude state:0 agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeArchived.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeArchived.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude archived agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.toggleExcludeRead.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.toggleExcludeRead.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter toggle exclude read agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "agentSessions.filter.resetExcludes.agentsessionsviewerfiltersubmenu",
-    "title": "agentSessions.filter.resetExcludes.agentsessionsviewerfiltersubmenu",
-    "keywords": [
-      "agent sessions filter reset excludes agentsessionsviewerfiltersubmenu",
-      "agent sessions"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.otel.flush",
-    "title": "github.copilot.chat.otel.flush",
-    "keywords": [
-      "github copilot chat otel flush",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chat.otel.exportAgentTracesDB",
-    "title": "github.copilot.chat.otel.exportAgentTracesDB",
-    "keywords": [
-      "github copilot chat otel export agent traces db",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessionSync.deleteSessions",
-    "title": "github.copilot.sessionSync.deleteSessions",
-    "keywords": [
-      "github copilot session sync delete sessions",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessionSync.deleteSessionFromCloud",
-    "title": "github.copilot.sessionSync.deleteSessionFromCloud",
-    "keywords": [
-      "github copilot session sync delete session from cloud",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessionSync.suggest",
-    "title": "github.copilot.sessionSync.suggest",
-    "keywords": [
-      "github copilot session sync suggest",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.sessionSync.reindex",
-    "title": "github.copilot.sessionSync.reindex",
-    "keywords": [
-      "github copilot session sync reindex",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "github.copilot.chronicle.reindex",
-    "title": "github.copilot.chronicle.reindex",
-    "keywords": [
-      "github copilot chronicle reindex",
-      "github copilot"
-    ]
-  },
-  {
-    "id": "C_Cpp.SwitchHeaderSource",
-    "title": "C_Cpp.SwitchHeaderSource",
-    "keywords": [
-      "c cpp switch header source",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ResetDatabase",
-    "title": "C_Cpp.ResetDatabase",
-    "keywords": [
-      "c cpp reset database",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.SelectIntelliSenseConfiguration",
-    "title": "C_Cpp.SelectIntelliSenseConfiguration",
-    "keywords": [
-      "c cpp select intelli sense configuration",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.InstallCompiler",
-    "title": "C_Cpp.InstallCompiler",
-    "keywords": [
-      "c cpp install compiler",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ConfigurationSelect",
-    "title": "C_Cpp.ConfigurationSelect",
-    "keywords": [
-      "c cpp configuration select",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ConfigurationProviderSelect",
-    "title": "C_Cpp.ConfigurationProviderSelect",
-    "keywords": [
-      "c cpp configuration provider select",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ConfigurationEditJSON",
-    "title": "C_Cpp.ConfigurationEditJSON",
-    "keywords": [
-      "c cpp configuration edit json",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ConfigurationEditUI",
-    "title": "C_Cpp.ConfigurationEditUI",
-    "keywords": [
-      "c cpp configuration edit ui",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ConfigurationEdit",
-    "title": "C_Cpp.ConfigurationEdit",
-    "keywords": [
-      "c cpp configuration edit",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.AddToIncludePath",
-    "title": "C_Cpp.AddToIncludePath",
-    "keywords": [
-      "c cpp add to include path",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.EnableErrorSquiggles",
-    "title": "C_Cpp.EnableErrorSquiggles",
-    "keywords": [
-      "c cpp enable error squiggles",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.DisableErrorSquiggles",
-    "title": "C_Cpp.DisableErrorSquiggles",
-    "keywords": [
-      "c cpp disable error squiggles",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ToggleDimInactiveRegions",
-    "title": "C_Cpp.ToggleDimInactiveRegions",
-    "keywords": [
-      "c cpp toggle dim inactive regions",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.PauseParsing",
-    "title": "C_Cpp.PauseParsing",
-    "keywords": [
-      "c cpp pause parsing",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ResumeParsing",
-    "title": "C_Cpp.ResumeParsing",
-    "keywords": [
-      "c cpp resume parsing",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.PauseCodeAnalysis",
-    "title": "C_Cpp.PauseCodeAnalysis",
-    "keywords": [
-      "c cpp pause code analysis",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ResumeCodeAnalysis",
-    "title": "C_Cpp.ResumeCodeAnalysis",
-    "keywords": [
-      "c cpp resume code analysis",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.CancelCodeAnalysis",
-    "title": "C_Cpp.CancelCodeAnalysis",
-    "keywords": [
-      "c cpp cancel code analysis",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowActiveCodeAnalysisCommands",
-    "title": "C_Cpp.ShowActiveCodeAnalysisCommands",
-    "keywords": [
-      "c cpp show active code analysis commands",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowIdleCodeAnalysisCommands",
-    "title": "C_Cpp.ShowIdleCodeAnalysisCommands",
-    "keywords": [
-      "c cpp show idle code analysis commands",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowReferencesProgress",
-    "title": "C_Cpp.ShowReferencesProgress",
-    "keywords": [
-      "c cpp show references progress",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.FindAllReferences",
-    "title": "C_Cpp.FindAllReferences",
-    "keywords": [
-      "c cpp find all references",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.GoToDefinition",
-    "title": "C_Cpp.GoToDefinition",
-    "keywords": [
-      "c cpp go to definition",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.PrepareCallHierarchy",
-    "title": "C_Cpp.PrepareCallHierarchy",
-    "keywords": [
-      "c cpp prepare call hierarchy",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.CallHierarchyCallsTo",
-    "title": "C_Cpp.CallHierarchyCallsTo",
-    "keywords": [
-      "c cpp call hierarchy calls to",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.CallHierarchyCallsFrom",
-    "title": "C_Cpp.CallHierarchyCallsFrom",
-    "keywords": [
-      "c cpp call hierarchy calls from",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.TakeSurvey",
-    "title": "C_Cpp.TakeSurvey",
-    "keywords": [
-      "c cpp take survey",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.LogDiagnostics",
-    "title": "C_Cpp.LogDiagnostics",
-    "keywords": [
-      "c cpp log diagnostics",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RescanWorkspace",
-    "title": "C_Cpp.RescanWorkspace",
-    "keywords": [
-      "c cpp rescan workspace",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowReferenceItem",
-    "title": "C_Cpp.ShowReferenceItem",
-    "keywords": [
-      "c cpp show reference item",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.referencesViewGroupByType",
-    "title": "C_Cpp.referencesViewGroupByType",
-    "keywords": [
-      "c cpp references view group by type",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.referencesViewUngroupByType",
-    "title": "C_Cpp.referencesViewUngroupByType",
-    "keywords": [
-      "c cpp references view ungroup by type",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.VcpkgClipboardInstallSuggested",
-    "title": "C_Cpp.VcpkgClipboardInstallSuggested",
-    "keywords": [
-      "c cpp vcpkg clipboard install suggested",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.VcpkgOnlineHelpSuggested",
-    "title": "C_Cpp.VcpkgOnlineHelpSuggested",
-    "keywords": [
-      "c cpp vcpkg online help suggested",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.GenerateEditorConfig",
-    "title": "C_Cpp.GenerateEditorConfig",
-    "keywords": [
-      "c cpp generate editor config",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.GoToNextDirectiveInGroup",
-    "title": "C_Cpp.GoToNextDirectiveInGroup",
-    "keywords": [
-      "c cpp go to next directive in group",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.GoToPrevDirectiveInGroup",
-    "title": "C_Cpp.GoToPrevDirectiveInGroup",
-    "keywords": [
-      "c cpp go to prev directive in group",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RunCodeAnalysisOnActiveFile",
-    "title": "C_Cpp.RunCodeAnalysisOnActiveFile",
-    "keywords": [
-      "c cpp run code analysis on active file",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RunCodeAnalysisOnOpenFiles",
-    "title": "C_Cpp.RunCodeAnalysisOnOpenFiles",
-    "keywords": [
-      "c cpp run code analysis on open files",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RunCodeAnalysisOnAllFiles",
-    "title": "C_Cpp.RunCodeAnalysisOnAllFiles",
-    "keywords": [
-      "c cpp run code analysis on all files",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RemoveCodeAnalysisProblems",
-    "title": "C_Cpp.RemoveCodeAnalysisProblems",
-    "keywords": [
-      "c cpp remove code analysis problems",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RemoveAllCodeAnalysisProblems",
-    "title": "C_Cpp.RemoveAllCodeAnalysisProblems",
-    "keywords": [
-      "c cpp remove all code analysis problems",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.FixThisCodeAnalysisProblem",
-    "title": "C_Cpp.FixThisCodeAnalysisProblem",
-    "keywords": [
-      "c cpp fix this code analysis problem",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.FixAllTypeCodeAnalysisProblems",
-    "title": "C_Cpp.FixAllTypeCodeAnalysisProblems",
-    "keywords": [
-      "c cpp fix all type code analysis problems",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.FixAllCodeAnalysisProblems",
-    "title": "C_Cpp.FixAllCodeAnalysisProblems",
-    "keywords": [
-      "c cpp fix all code analysis problems",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.DisableAllTypeCodeAnalysisProblems",
-    "title": "C_Cpp.DisableAllTypeCodeAnalysisProblems",
-    "keywords": [
-      "c cpp disable all type code analysis problems",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowCodeAnalysisDocumentation",
-    "title": "C_Cpp.ShowCodeAnalysisDocumentation",
-    "keywords": [
-      "c cpp show code analysis documentation",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "cpptools.activeConfigName",
-    "title": "cpptools.activeConfigName",
-    "keywords": [
-      "cpptools active config name",
-      "cpptools active"
-    ]
-  },
-  {
-    "id": "cpptools.activeConfigCustomVariable",
-    "title": "cpptools.activeConfigCustomVariable",
-    "keywords": [
-      "cpptools active config custom variable",
-      "cpptools active"
-    ]
-  },
-  {
-    "id": "cpptools.setActiveConfigName",
-    "title": "cpptools.setActiveConfigName",
-    "keywords": [
-      "cpptools set active config name",
-      "cpptools set"
-    ]
-  },
-  {
-    "id": "cpptools.waitForTagParsing",
-    "title": "cpptools.waitForTagParsing",
-    "keywords": [
-      "cpptools wait for tag parsing",
-      "cpptools wait"
-    ]
-  },
-  {
-    "id": "C_Cpp.RestartIntelliSenseForFile",
-    "title": "C_Cpp.RestartIntelliSenseForFile",
-    "keywords": [
-      "c cpp restart intelli sense for file",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.GenerateDoxygenComment",
-    "title": "C_Cpp.GenerateDoxygenComment",
-    "keywords": [
-      "c cpp generate doxygen comment",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.CreateDeclarationOrDefinition",
-    "title": "C_Cpp.CreateDeclarationOrDefinition",
-    "keywords": [
-      "c cpp create declaration or definition",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.CopyDeclarationOrDefinition",
-    "title": "C_Cpp.CopyDeclarationOrDefinition",
-    "keywords": [
-      "c cpp copy declaration or definition",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.RescanCompilers",
-    "title": "C_Cpp.RescanCompilers",
-    "keywords": [
-      "c cpp rescan compilers",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.AddMissingInclude",
-    "title": "C_Cpp.AddMissingInclude",
-    "keywords": [
-      "c cpp add missing include",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ExtractToFunction",
-    "title": "C_Cpp.ExtractToFunction",
-    "keywords": [
-      "c cpp extract to function",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ExtractToFreeFunction",
-    "title": "C_Cpp.ExtractToFreeFunction",
-    "keywords": [
-      "c cpp extract to free function",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ExtractToMemberFunction",
-    "title": "C_Cpp.ExtractToMemberFunction",
-    "keywords": [
-      "c cpp extract to member function",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ExpandSelection",
-    "title": "C_Cpp.ExpandSelection",
-    "keywords": [
-      "c cpp expand selection",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ShowCopilotHover",
-    "title": "C_Cpp.ShowCopilotHover",
-    "keywords": [
-      "c cpp show copilot hover",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.SetVsDeveloperEnvironment",
-    "title": "C_Cpp.SetVsDeveloperEnvironment",
-    "keywords": [
-      "c cpp set vs developer environment",
-      "c cpp"
-    ]
-  },
-  {
-    "id": "C_Cpp.ClearVsDeveloperEnvironment",
-    "title": "C_Cpp.ClearVsDeveloperEnvironment",
-    "keywords": [
-      "c cpp clear vs developer environment",
-      "c cpp"
-    ]
-  },
-  {
     "id": "pythonIndent.newlineAndIndent",
     "title": "pythonIndent.newlineAndIndent",
     "keywords": [
       "python indent newline and indent",
       "python indent"
-    ]
-  },
-  {
-    "id": "python.configureTests",
-    "title": "python.configureTests",
-    "keywords": [
-      "python configure tests",
-      "python configure"
-    ]
-  },
-  {
-    "id": "python.copilotSetupTests",
-    "title": "python.copilotSetupTests",
-    "keywords": [
-      "python copilot setup tests",
-      "python copilot"
-    ]
-  },
-  {
-    "id": "python.copyTestId",
-    "title": "python.copyTestId",
-    "keywords": [
-      "python copy test id",
-      "python copy"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
-    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
-    "keywords": [
-      "output show extension output ms toolsai jupyter #1 jupyter",
-      "output show"
     ]
   },
   {
@@ -25702,14 +24072,6 @@
     "keywords": [
       "jupyter list variables",
       "jupyter list"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
-    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
-    "keywords": [
-      "output show extension output ms toolsai jupyter #2 jupyter server console",
-      "output show"
     ]
   },
   {
@@ -26382,19 +24744,11 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
-    "title": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
+    "id": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
+    "title": "workbench.action.output.show.vscode.github-authentication.GitHub Authentication.log",
     "keywords": [
-      "output show extension output njpwerner autodocstring #1 auto docstring",
+      "output show vscode github authentication git hub authentication log",
       "output show"
-    ]
-  },
-  {
-    "id": "editor.action.inlineSuggest.renameSymbol",
-    "title": "editor.action.inlineSuggest.renameSymbol",
-    "keywords": [
-      "inline suggest rename symbol",
-      "inline suggest"
     ]
   },
   {
@@ -26414,11 +24768,51 @@
     ]
   },
   {
+    "id": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
+    "title": "workbench.action.output.show.mechatroner.rainbow-csv.rainbow_csv_debug_channel.log",
+    "keywords": [
+      "output show mechatroner rainbow csv rainbow csv debug channel log",
+      "output show"
+    ]
+  },
+  {
     "id": "python.viewOutput",
     "title": "python.viewOutput",
     "keywords": [
       "python view output",
       "python view"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log",
+    "title": "workbench.action.output.show.vscode.microsoft-authentication.Microsoft Authentication.log",
+    "keywords": [
+      "output show vscode microsoft authentication microsoft authentication log",
+      "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
+    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#1-Jupyter",
+    "keywords": [
+      "output show extension output ms toolsai jupyter #1 jupyter",
+      "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
+    "title": "workbench.action.output.show.extension-output-ms-toolsai.jupyter-#2-Jupyter Server Console",
+    "keywords": [
+      "output show extension output ms toolsai jupyter #2 jupyter server console",
+      "output show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
+    "title": "workbench.action.output.show.extension-output-njpwerner.autodocstring-#1-autoDocstring",
+    "keywords": [
+      "output show extension output njpwerner autodocstring #1 auto docstring",
+      "output show"
     ]
   },
   {
@@ -26862,6 +25256,14 @@
     ]
   },
   {
+    "id": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "title": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "keywords": [
+      "output show extension output echo code echo code #1 echo code",
+      "output show"
+    ]
+  },
+  {
     "id": "debugpy.viewOutput",
     "title": "debugpy.viewOutput",
     "keywords": [
@@ -26942,6 +25344,78 @@
     ]
   },
   {
+    "id": "git-base.api.getRemoteSources",
+    "title": "git-base.api.getRemoteSources",
+    "keywords": [
+      "git base api get remote sources",
+      "git base"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
+    "title": "workbench.action.output.show.extension-output-formulahendry.auto-rename-tag-#1-Auto Rename Tag",
+    "keywords": [
+      "output show extension output formulahendry auto rename tag #1 auto rename tag",
+      "output show"
+    ]
+  },
+  {
+    "id": "streamdeck.reconnectToServer",
+    "title": "streamdeck.reconnectToServer",
+    "keywords": [
+      "streamdeck reconnect to server",
+      "streamdeck reconnect"
+    ]
+  },
+  {
+    "id": "streamdeck.activateSession",
+    "title": "streamdeck.activateSession",
+    "keywords": [
+      "streamdeck activate session",
+      "streamdeck activate"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
+    "title": "workbench.action.output.show.extension-output-nicollasr.vscode-streamdeck-#1-Stream Deck",
+    "keywords": [
+      "output show extension output nicollasr vscode streamdeck #1 stream deck",
+      "output show"
+    ]
+  },
+  {
+    "id": "todohighlight.toggleHighlight",
+    "title": "todohighlight.toggleHighlight",
+    "keywords": [
+      "todohighlight toggle highlight",
+      "todohighlight toggle"
+    ]
+  },
+  {
+    "id": "todohighlight.listAnnotations",
+    "title": "todohighlight.listAnnotations",
+    "keywords": [
+      "todohighlight list annotations",
+      "todohighlight list"
+    ]
+  },
+  {
+    "id": "todohighlight.showOutputChannel",
+    "title": "todohighlight.showOutputChannel",
+    "keywords": [
+      "todohighlight show output channel",
+      "todohighlight show"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
+    "title": "workbench.action.output.show.extension-output-wayou.vscode-todo-highlight-#1-TodoHighlight",
+    "keywords": [
+      "output show extension output wayou vscode todo highlight #1 todo highlight",
+      "output show"
+    ]
+  },
+  {
     "id": "python.getRecommendedEnvironment",
     "title": "python.getRecommendedEnvironment",
     "keywords": [
@@ -26995,6 +25469,789 @@
     "keywords": [
       "python view language server output",
       "python view"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.openai.chatgpt.codex",
+    "title": "chat.installRecommendation.openai.chatgpt.codex",
+    "keywords": [
+      "chat install recommendation openai chatgpt codex",
+      "chat install"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.github.copilot-chat.cli",
+    "title": "chat.installRecommendation.github.copilot-chat.cli",
+    "keywords": [
+      "chat install recommendation github copilot chat cli",
+      "chat install"
+    ]
+  },
+  {
+    "id": "chat.installRecommendation.github.copilot-chat.cloud",
+    "title": "chat.installRecommendation.github.copilot-chat.cloud",
+    "keywords": [
+      "chat install recommendation github copilot chat cloud",
+      "chat install"
+    ]
+  },
+  {
+    "id": "workbench.extensions.installMissingDependencies",
+    "title": "workbench.extensions.installMissingDependencies",
+    "keywords": [
+      "workbench extensions install missing dependencies",
+      "workbench extensions"
+    ]
+  },
+  {
+    "id": "workbench.action.toggleLockedScrolling",
+    "title": "workbench.action.toggleLockedScrolling",
+    "keywords": [
+      "toggle locked scrolling",
+      "toggle locked"
+    ]
+  },
+  {
+    "id": "workbench.action.holdLockedScrolling",
+    "title": "workbench.action.holdLockedScrolling",
+    "keywords": [
+      "hold locked scrolling",
+      "hold locked"
+    ]
+  },
+  {
+    "id": "workbench.action.configureLocale",
+    "title": "workbench.action.configureLocale",
+    "keywords": [
+      "configure locale"
+    ]
+  },
+  {
+    "id": "workbench.action.clearLocalePreference",
+    "title": "workbench.action.clearLocalePreference",
+    "keywords": [
+      "clear locale preference",
+      "clear locale"
+    ]
+  },
+  {
+    "id": "workbench.action.extensionHostProfiler.stop",
+    "title": "workbench.action.extensionHostProfiler.stop",
+    "keywords": [
+      "extension host profiler stop",
+      "extension host"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
+    "title": "workbench.action.output.show.GitHub.copilot-chat.GitHub Copilot Chat.log",
+    "keywords": [
+      "output show git hub copilot chat git hub copilot chat log",
+      "output show"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.attachFile",
+    "title": "github.copilot.chat.attachFile",
+    "keywords": [
+      "github copilot chat attach file",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.attachSelection",
+    "title": "github.copilot.chat.attachSelection",
+    "keywords": [
+      "github copilot chat attach selection",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.extensionState",
+    "title": "github.copilot.debug.extensionState",
+    "keywords": [
+      "github copilot debug extension state",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.triggerPermissiveSignIn",
+    "title": "github.copilot.chat.triggerPermissiveSignIn",
+    "keywords": [
+      "github copilot chat trigger permissive sign in",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.collectDiagnostics",
+    "title": "github.copilot.debug.collectDiagnostics",
+    "keywords": [
+      "github copilot debug collect diagnostics",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.collectDiagnostics.internal",
+    "title": "github.copilot.debug.collectDiagnostics.internal",
+    "keywords": [
+      "github copilot debug collect diagnostics internal",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.showOutputChannel.internal",
+    "title": "github.copilot.debug.showOutputChannel.internal",
+    "keywords": [
+      "github copilot debug show output channel internal",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.togglePowerSaveBlocker",
+    "title": "github.copilot.debug.togglePowerSaveBlocker",
+    "keywords": [
+      "github copilot debug toggle power save blocker",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.refreshToken",
+    "title": "github.copilot.refreshToken",
+    "keywords": [
+      "github copilot refresh token",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.showChatLogView",
+    "title": "github.copilot.debug.showChatLogView",
+    "keywords": [
+      "github copilot debug show chat log view",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.startCopilotDebugCommand",
+    "title": "github.copilot.chat.startCopilotDebugCommand",
+    "keywords": [
+      "github copilot chat start copilot debug command",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.generateSTest",
+    "title": "github.copilot.debug.generateSTest",
+    "keywords": [
+      "github copilot debug generate stest",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.createLaunchJsonFileWithContents",
+    "title": "github.copilot.createLaunchJsonFileWithContents",
+    "keywords": [
+      "github copilot create launch json file with contents",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.startDebugging",
+    "title": "github.copilot.startDebugging",
+    "keywords": [
+      "github copilot start debugging",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.open.walkthrough",
+    "title": "github.copilot.open.walkthrough",
+    "keywords": [
+      "github copilot open walkthrough",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.mcp.viewContext7",
+    "title": "github.copilot.mcp.viewContext7",
+    "keywords": [
+      "github copilot mcp view context7",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.survey.signalUsage",
+    "title": "github.copilot.survey.signalUsage",
+    "keywords": [
+      "github copilot survey signal usage",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.report",
+    "title": "github.copilot.report",
+    "keywords": [
+      "github copilot report",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.showContextInspectorView",
+    "title": "github.copilot.debug.showContextInspectorView",
+    "keywords": [
+      "github copilot debug show context inspector view",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.nes.prepareRename",
+    "title": "github.copilot.nes.prepareRename",
+    "keywords": [
+      "github copilot nes prepare rename",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.nes.postRename",
+    "title": "github.copilot.nes.postRename",
+    "keywords": [
+      "github copilot nes post rename",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.validateNesRename",
+    "title": "github.copilot.debug.validateNesRename",
+    "keywords": [
+      "github copilot debug validate nes rename",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.search.markHelpful",
+    "title": "github.copilot.search.markHelpful",
+    "keywords": [
+      "github copilot search mark helpful",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.search.markUnhelpful",
+    "title": "github.copilot.search.markUnhelpful",
+    "keywords": [
+      "github copilot search mark unhelpful",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.search.feedback",
+    "title": "github.copilot.search.feedback",
+    "keywords": [
+      "github copilot search feedback",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "chat.enableAdditionalUsage",
+    "title": "chat.enableAdditionalUsage",
+    "keywords": [
+      "chat enable additional usage",
+      "chat enable"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.notebook.enableFollowCellExecution",
+    "title": "github.copilot.chat.notebook.enableFollowCellExecution",
+    "keywords": [
+      "github copilot chat notebook enable follow cell execution",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.notebook.disableFollowCellExecution",
+    "title": "github.copilot.chat.notebook.disableFollowCellExecution",
+    "keywords": [
+      "github copilot chat notebook disable follow cell execution",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.buildRemoteWorkspaceIndex",
+    "title": "github.copilot.buildRemoteWorkspaceIndex",
+    "keywords": [
+      "github copilot build remote workspace index",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.enableExternalIngest",
+    "title": "github.copilot.enableExternalIngest",
+    "keywords": [
+      "github copilot enable external ingest",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.deleteExternalIngestWorkspaceIndex",
+    "title": "github.copilot.deleteExternalIngestWorkspaceIndex",
+    "keywords": [
+      "github copilot delete external ingest workspace index",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.debug.collectWorkspaceIndexDiagnostics",
+    "title": "github.copilot.debug.collectWorkspaceIndexDiagnostics",
+    "keywords": [
+      "github copilot debug collect workspace index diagnostics",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.checkoutPullRequestReroute",
+    "title": "github.copilot.chat.checkoutPullRequestReroute",
+    "keywords": [
+      "github copilot chat checkout pull request reroute",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.openPullRequestReroute",
+    "title": "github.copilot.chat.openPullRequestReroute",
+    "keywords": [
+      "github copilot chat open pull request reroute",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.cloudSessions.openRepository",
+    "title": "github.copilot.chat.cloudSessions.openRepository",
+    "keywords": [
+      "github copilot chat cloud sessions open repository",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.cloudSessions.clearCaches",
+    "title": "github.copilot.chat.cloudSessions.clearCaches",
+    "keywords": [
+      "github copilot chat cloud sessions clear caches",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cloud.resetWorkspaceConfirmations",
+    "title": "github.copilot.cloud.resetWorkspaceConfirmations",
+    "keywords": [
+      "github copilot cloud reset workspace confirmations",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cloud.sessions.openInBrowser",
+    "title": "github.copilot.cloud.sessions.openInBrowser",
+    "keywords": [
+      "github copilot cloud sessions open in browser",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cloud.sessions.proxy.closeChatSessionPullRequest",
+    "title": "github.copilot.cloud.sessions.proxy.closeChatSessionPullRequest",
+    "keywords": [
+      "github copilot cloud sessions proxy close chat session pull request",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cloud.sessions.installPRExtension",
+    "title": "github.copilot.cloud.sessions.installPRExtension",
+    "keywords": [
+      "github copilot cloud sessions install prextension",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.copilotCLI.addFileReference",
+    "title": "github.copilot.chat.copilotCLI.addFileReference",
+    "keywords": [
+      "github copilot chat copilot cli add file reference",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.copilotCLI.addSelection",
+    "title": "github.copilot.chat.copilotCLI.addSelection",
+    "keywords": [
+      "github copilot chat copilot cli add selection",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.copilotCLI.acceptDiff",
+    "title": "github.copilot.chat.copilotCLI.acceptDiff",
+    "keywords": [
+      "github copilot chat copilot cli accept diff",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.copilotCLI.rejectDiff",
+    "title": "github.copilot.chat.copilotCLI.rejectDiff",
+    "keywords": [
+      "github copilot chat copilot cli reject diff",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.delete",
+    "title": "github.copilot.cli.sessions.delete",
+    "keywords": [
+      "github copilot cli sessions delete",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "agents.github.copilot.cli.deleteSessions",
+    "title": "agents.github.copilot.cli.deleteSessions",
+    "keywords": [
+      "agents github copilot cli delete sessions",
+      "agents github"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.resumeInTerminal",
+    "title": "github.copilot.cli.sessions.resumeInTerminal",
+    "keywords": [
+      "github copilot cli sessions resume in terminal",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.rename",
+    "title": "github.copilot.cli.sessions.rename",
+    "keywords": [
+      "github copilot cli sessions rename",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.setTitle",
+    "title": "github.copilot.cli.sessions.setTitle",
+    "keywords": [
+      "github copilot cli sessions set title",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.newSession",
+    "title": "github.copilot.cli.newSession",
+    "keywords": [
+      "github copilot cli new session",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.newSessionToSide",
+    "title": "github.copilot.cli.newSessionToSide",
+    "keywords": [
+      "github copilot cli new session to side",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.openInCopilotCLI",
+    "title": "github.copilot.cli.openInCopilotCLI",
+    "keywords": [
+      "github copilot cli open in copilot cli",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.openWorktreeInNewWindow",
+    "title": "github.copilot.cli.sessions.openWorktreeInNewWindow",
+    "keywords": [
+      "github copilot cli sessions open worktree in new window",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.openWorktreeInTerminal",
+    "title": "github.copilot.cli.sessions.openWorktreeInTerminal",
+    "keywords": [
+      "github copilot cli sessions open worktree in terminal",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.copyWorktreeBranchName",
+    "title": "github.copilot.cli.sessions.copyWorktreeBranchName",
+    "keywords": [
+      "github copilot cli sessions copy worktree branch name",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.openRepository",
+    "title": "github.copilot.cli.sessions.openRepository",
+    "keywords": [
+      "github copilot cli sessions open repository",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.applyCopilotCLIAgentSessionChanges",
+    "title": "github.copilot.chat.applyCopilotCLIAgentSessionChanges",
+    "keywords": [
+      "github copilot chat apply copilot cliagent session changes",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply",
+    "title": "github.copilot.chat.applyCopilotCLIAgentSessionChanges.apply",
+    "keywords": [
+      "github copilot chat apply copilot cliagent session changes apply",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge",
+    "title": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.merge",
+    "keywords": [
+      "github copilot chat merge copilot cliagent session changes merge",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync",
+    "title": "github.copilot.chat.mergeCopilotCLIAgentSessionChanges.mergeAndSync",
+    "keywords": [
+      "github copilot chat merge copilot cliagent session changes merge and sync",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.refreshChanges",
+    "title": "github.copilot.sessions.refreshChanges",
+    "keywords": [
+      "github copilot sessions refresh changes",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.initializeRepository",
+    "title": "github.copilot.sessions.initializeRepository",
+    "keywords": [
+      "github copilot sessions initialize repository",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.commit",
+    "title": "github.copilot.sessions.commit",
+    "keywords": [
+      "github copilot sessions commit",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.commitAndSync",
+    "title": "github.copilot.sessions.commitAndSync",
+    "keywords": [
+      "github copilot sessions commit and sync",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.sync",
+    "title": "github.copilot.sessions.sync",
+    "keywords": [
+      "github copilot sessions sync",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessions.discardChanges",
+    "title": "github.copilot.sessions.discardChanges",
+    "keywords": [
+      "github copilot sessions discard changes",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR",
+    "title": "github.copilot.chat.createPullRequestCopilotCLIAgentSession.createPR",
+    "keywords": [
+      "github copilot chat create pull request copilot cliagent session create pr",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.createDraftPullRequestCopilotCLIAgentSession.createDraftPR",
+    "title": "github.copilot.chat.createDraftPullRequestCopilotCLIAgentSession.createDraftPR",
+    "keywords": [
+      "github copilot chat create draft pull request copilot cliagent session create draft pr",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.commitToWorktree",
+    "title": "github.copilot.cli.sessions.commitToWorktree",
+    "keywords": [
+      "github copilot cli sessions commit to worktree",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.cli.sessions.commitToRepository",
+    "title": "github.copilot.cli.sessions.commitToRepository",
+    "keywords": [
+      "github copilot cli sessions commit to repository",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "copilot.claude.agents",
+    "title": "copilot.claude.agents",
+    "keywords": [
+      "copilot claude agents",
+      "copilot claude"
+    ]
+  },
+  {
+    "id": "copilot.claude.hooks",
+    "title": "copilot.claude.hooks",
+    "keywords": [
+      "copilot claude hooks",
+      "copilot claude"
+    ]
+  },
+  {
+    "id": "copilot.claude.memory",
+    "title": "copilot.claude.memory",
+    "keywords": [
+      "copilot claude memory",
+      "copilot claude"
+    ]
+  },
+  {
+    "id": "github.copilot.claude.sessions.rename",
+    "title": "github.copilot.claude.sessions.rename",
+    "keywords": [
+      "github copilot claude sessions rename",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.claude.sessions.commit",
+    "title": "github.copilot.claude.sessions.commit",
+    "keywords": [
+      "github copilot claude sessions commit",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.claude.sessions.commitAndSync",
+    "title": "github.copilot.claude.sessions.commitAndSync",
+    "keywords": [
+      "github copilot claude sessions commit and sync",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.claude.sessions.sync",
+    "title": "github.copilot.claude.sessions.sync",
+    "keywords": [
+      "github copilot claude sessions sync",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.claude.sessions.initializeRepository",
+    "title": "github.copilot.claude.sessions.initializeRepository",
+    "keywords": [
+      "github copilot claude sessions initialize repository",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.otel.flush",
+    "title": "github.copilot.chat.otel.flush",
+    "keywords": [
+      "github copilot chat otel flush",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chat.otel.exportAgentTracesDB",
+    "title": "github.copilot.chat.otel.exportAgentTracesDB",
+    "keywords": [
+      "github copilot chat otel export agent traces db",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessionSync.deleteSessions",
+    "title": "github.copilot.sessionSync.deleteSessions",
+    "keywords": [
+      "github copilot session sync delete sessions",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessionSync.deleteSessionFromCloud",
+    "title": "github.copilot.sessionSync.deleteSessionFromCloud",
+    "keywords": [
+      "github copilot session sync delete session from cloud",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessionSync.suggest",
+    "title": "github.copilot.sessionSync.suggest",
+    "keywords": [
+      "github copilot session sync suggest",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.sessionSync.reindex",
+    "title": "github.copilot.sessionSync.reindex",
+    "keywords": [
+      "github copilot session sync reindex",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "github.copilot.chronicle.reindex",
+    "title": "github.copilot.chronicle.reindex",
+    "keywords": [
+      "github copilot chronicle reindex",
+      "github copilot"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.vscode.git.Git.log",
+    "title": "workbench.action.output.show.vscode.git.Git.log",
+    "keywords": [
+      "output show vscode git git log",
+      "output show"
+    ]
+  },
+  {
+    "id": "terminal.integrated.suggest.clearCachedGlobals",
+    "title": "terminal.integrated.suggest.clearCachedGlobals",
+    "keywords": [
+      "terminal integrated suggest clear cached globals",
+      "terminal integrated"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.vscode.github.GitHub.log",
+    "title": "workbench.action.output.show.vscode.github.GitHub.log",
+    "keywords": [
+      "output show vscode github git hub log",
+      "output show"
     ]
   },
   {
@@ -28902,10 +28159,10 @@
     ]
   },
   {
-    "id": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
-    "title": "workbench.action.output.show.extension-output-EchoCode.echo-code-#1-EchoCode",
+    "id": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
+    "title": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
     "keywords": [
-      "output show extension output echo code echo code #1 echo code",
+      "output show extension output esbenp prettier vscode #1 prettier",
       "output show"
     ]
   },
@@ -28914,14 +28171,6 @@
     "title": "workbench.action.output.show.GitHub.vscode-pull-request-github.GitHub Pull Request.log",
     "keywords": [
       "output show git hub vscode pull request github git hub pull request log",
-      "output show"
-    ]
-  },
-  {
-    "id": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
-    "title": "workbench.action.output.show.extension-output-esbenp.prettier-vscode-#1-Prettier",
-    "keywords": [
-      "output show extension output esbenp prettier vscode #1 prettier",
       "output show"
     ]
   },
@@ -28998,14 +28247,6 @@
     ]
   },
   {
-    "id": "formatter/configure/dfl/5c495ce8-029a-499c-a095-72bd02be46db",
-    "title": "formatter/configure/dfl/5c495ce8-029a-499c-a095-72bd02be46db",
-    "keywords": [
-      "formatter/configure/dfl/5c495ce8 029a 499c a095 72bd02be46db",
-      "formatter/configure/dfl/5c495ce8 029a"
-    ]
-  },
-  {
     "id": "prettier.createConfigFile",
     "title": "prettier.createConfigFile",
     "keywords": [
@@ -29030,11 +28271,305 @@
     ]
   },
   {
-    "id": "terminal.integrated.suggest.clearCachedGlobals",
-    "title": "terminal.integrated.suggest.clearCachedGlobals",
+    "id": "pyright.createtypestub",
+    "title": "pyright.createtypestub",
     "keywords": [
-      "terminal integrated suggest clear cached globals",
-      "terminal integrated"
+      "pyright createtypestub"
+    ]
+  },
+  {
+    "id": "pyright.organizeimports",
+    "title": "pyright.organizeimports",
+    "keywords": [
+      "pyright organizeimports"
+    ]
+  },
+  {
+    "id": "pyright.dumpFileDebugInfo",
+    "title": "pyright.dumpFileDebugInfo",
+    "keywords": [
+      "pyright dump file debug info",
+      "pyright dump"
+    ]
+  },
+  {
+    "id": "python.createTypeStub",
+    "title": "python.createTypeStub",
+    "keywords": [
+      "python create type stub",
+      "python create"
+    ]
+  },
+  {
+    "id": "python.orderImports",
+    "title": "python.orderImports",
+    "keywords": [
+      "python order imports",
+      "python order"
+    ]
+  },
+  {
+    "id": "python.addOptionalForParam",
+    "title": "python.addOptionalForParam",
+    "keywords": [
+      "python add optional for param",
+      "python add"
+    ]
+  },
+  {
+    "id": "python.removeUnusedImport",
+    "title": "python.removeUnusedImport",
+    "keywords": [
+      "python remove unused import",
+      "python remove"
+    ]
+  },
+  {
+    "id": "python.addImport",
+    "title": "python.addImport",
+    "keywords": [
+      "python add import",
+      "python add"
+    ]
+  },
+  {
+    "id": "pylance.diagnosticRefactor",
+    "title": "pylance.diagnosticRefactor",
+    "keywords": [
+      "pylance diagnostic refactor",
+      "pylance diagnostic"
+    ]
+  },
+  {
+    "id": "pylance.changeSpelling",
+    "title": "pylance.changeSpelling",
+    "keywords": [
+      "pylance change spelling",
+      "pylance change"
+    ]
+  },
+  {
+    "id": "pylance.extractMethod",
+    "title": "pylance.extractMethod",
+    "keywords": [
+      "pylance extract method",
+      "pylance extract"
+    ]
+  },
+  {
+    "id": "pylance.extractVariable",
+    "title": "pylance.extractVariable",
+    "keywords": [
+      "pylance extract variable",
+      "pylance extract"
+    ]
+  },
+  {
+    "id": "pylance.completionAccepted",
+    "title": "pylance.completionAccepted",
+    "keywords": [
+      "pylance completion accepted",
+      "pylance completion"
+    ]
+  },
+  {
+    "id": "pylance.executedClientCommand",
+    "title": "pylance.executedClientCommand",
+    "keywords": [
+      "pylance executed client command",
+      "pylance executed"
+    ]
+  },
+  {
+    "id": "pylance.moveSymbol",
+    "title": "pylance.moveSymbol",
+    "keywords": [
+      "pylance move symbol",
+      "pylance move"
+    ]
+  },
+  {
+    "id": "pylance.getSourceFiles",
+    "title": "pylance.getSourceFiles",
+    "keywords": [
+      "pylance get source files",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.getAutoImports",
+    "title": "pylance.getAutoImports",
+    "keywords": [
+      "pylance get auto imports",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.convertImportFormat",
+    "title": "pylance.convertImportFormat",
+    "keywords": [
+      "pylance convert import format",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.convertImportStar",
+    "title": "pylance.convertImportStar",
+    "keywords": [
+      "pylance convert import star",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.convertImportToModule",
+    "title": "pylance.convertImportToModule",
+    "keywords": [
+      "pylance convert import to module",
+      "pylance convert"
+    ]
+  },
+  {
+    "id": "pylance.addTypeAnnotation",
+    "title": "pylance.addTypeAnnotation",
+    "keywords": [
+      "pylance add type annotation",
+      "pylance add"
+    ]
+  },
+  {
+    "id": "pylance.inheritAllDecorators",
+    "title": "pylance.inheritAllDecorators",
+    "keywords": [
+      "pylance inherit all decorators",
+      "pylance inherit"
+    ]
+  },
+  {
+    "id": "pylance.addToExtraPathsInConfig",
+    "title": "pylance.addToExtraPathsInConfig",
+    "keywords": [
+      "pylance add to extra paths in config",
+      "pylance add"
+    ]
+  },
+  {
+    "id": "pylance.fixAll",
+    "title": "pylance.fixAll",
+    "keywords": [
+      "pylance fix all",
+      "pylance fix"
+    ]
+  },
+  {
+    "id": "pylance.pytest.addAllFixtureTypeAnnotations",
+    "title": "pylance.pytest.addAllFixtureTypeAnnotations",
+    "keywords": [
+      "pylance pytest add all fixture type annotations",
+      "pylance pytest"
+    ]
+  },
+  {
+    "id": "pylance.pytest.addFixtureTypeAnnotation",
+    "title": "pylance.pytest.addFixtureTypeAnnotation",
+    "keywords": [
+      "pylance pytest add fixture type annotation",
+      "pylance pytest"
+    ]
+  },
+  {
+    "id": "pylance.indexing.clearPersistedIndices",
+    "title": "pylance.indexing.clearPersistedIndices",
+    "keywords": [
+      "pylance indexing clear persisted indices",
+      "pylance indexing"
+    ]
+  },
+  {
+    "id": "pylance.profiling.start",
+    "title": "pylance.profiling.start",
+    "keywords": [
+      "pylance profiling start",
+      "pylance profiling"
+    ]
+  },
+  {
+    "id": "pylance.profiling.stop",
+    "title": "pylance.profiling.stop",
+    "keywords": [
+      "pylance profiling stop",
+      "pylance profiling"
+    ]
+  },
+  {
+    "id": "pylance.logging.start",
+    "title": "pylance.logging.start",
+    "keywords": [
+      "pylance logging start",
+      "pylance logging"
+    ]
+  },
+  {
+    "id": "pylance.logging.stop",
+    "title": "pylance.logging.stop",
+    "keywords": [
+      "pylance logging stop",
+      "pylance logging"
+    ]
+  },
+  {
+    "id": "pylance.implementAllAbstractClasses",
+    "title": "pylance.implementAllAbstractClasses",
+    "keywords": [
+      "pylance implement all abstract classes",
+      "pylance implement"
+    ]
+  },
+  {
+    "id": "pylance.implementAllAbstractClassesWithCopilot",
+    "title": "pylance.implementAllAbstractClassesWithCopilot",
+    "keywords": [
+      "pylance implement all abstract classes with copilot",
+      "pylance implement"
+    ]
+  },
+  {
+    "id": "pylance.getAllDocstringRanges",
+    "title": "pylance.getAllDocstringRanges",
+    "keywords": [
+      "pylance get all docstring ranges",
+      "pylance get"
+    ]
+  },
+  {
+    "id": "pylance.server.runCurrentFileInSandbox",
+    "title": "pylance.server.runCurrentFileInSandbox",
+    "keywords": [
+      "pylance server run current file in sandbox",
+      "pylance server"
+    ]
+  },
+  {
+    "id": "pylance.pluginCommand",
+    "title": "pylance.pluginCommand",
+    "keywords": [
+      "pylance plugin command",
+      "pylance plugin"
+    ]
+  },
+  {
+    "id": "pylance.renameShadowedStdlib",
+    "title": "pylance.renameShadowedStdlib",
+    "keywords": [
+      "pylance rename shadowed stdlib",
+      "pylance rename"
+    ]
+  },
+  {
+    "id": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#2-GitLab Language Server",
+    "title": "workbench.action.output.show.extension-output-GitLab.gitlab-workflow-#2-GitLab Language Server",
+    "keywords": [
+      "output show extension output git lab gitlab workflow #2 git lab language server",
+      "output show"
     ]
   },
   {

@@ -665,7 +665,11 @@ async function activate(context) {
             outputChannel,
             context.globalState,
           );
-          const voiceResult = await tryExecuteVoiceCommand(text, outputChannel);
+          const voiceResult = await tryExecuteVoiceCommand(
+            text,
+            outputChannel,
+            { allowCodeGeneration: false },
+          );
           if (voiceResult.handled) {
             return;
           }
@@ -725,39 +729,18 @@ async function activate(context) {
   // Toggle Voice Command (Smart Router)
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.toggleVoice", async () => {
-      if (featureImplementations.isRecording()) {
-        // Sync UI: Stop immediately
-        if (chatProvider) chatProvider.setRecordingState(false);
+      const activeMode = VOICE_MODES[currentVoiceMode] || "chat";
+      const modeCommandMap = {
+        chat: "echocode.voiceChat",
+        code: "echocode.voiceCode",
+        command: "echocode.voiceCommand",
+      };
+      const targetCommand = modeCommandMap[activeMode] || "echocode.voiceChat";
 
-        // Announce processing (don't await to avoid blocking stop)
-        speakMessage("Processing");
-
-        const result = await vscode.commands.executeCommand(
-          "echocode._voiceStop",
-        );
-
-        if (result && result.ok && result.text) {
-          // Attempt to execute as a voice command first
-          const voiceResult = await tryExecuteVoiceCommand(
-            result.text,
-            outputChannel,
-          );
-
-          if (!voiceResult.handled) {
-            // Fallback: Send to Chat Tutor
-            await vscode.commands.executeCommand("echocode.openChat");
-            if (chatProvider) {
-              await chatProvider.handleUserMessage(result.text);
-            }
-          }
-        }
-      } else {
-        // Sync UI: Start immediately
-        if (chatProvider) chatProvider.setRecordingState(true);
-
-        await speakMessage("Listening");
-        await vscode.commands.executeCommand("echocode._voiceStart");
-      }
+      outputChannel.appendLine(
+        `[Voice Mode] toggleVoice dispatch -> ${activeMode} (${targetCommand})`,
+      );
+      await vscode.commands.executeCommand(targetCommand);
     }),
   );
 

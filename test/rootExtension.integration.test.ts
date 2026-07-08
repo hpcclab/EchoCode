@@ -454,8 +454,10 @@ suite("EchoCode – Root Extension Integration", () => {
 
       await harness.commandRegistry.get("echocode.toggleVoice")?.();
 
-      assert.deepEqual(state.chatProvider.recordingStates, [true]);
-      assert.deepEqual(state.spokenMessages.slice(-1), ["Listening"]);
+      assert.deepEqual(state.chatProvider.recordingStates, []);
+      assert.deepEqual(state.spokenMessages.slice(-1), [
+        "Chat mode. Listening.",
+      ]);
       assert.equal(state.startRecordingCalls.length, 1);
     } finally {
       module.restore();
@@ -463,7 +465,7 @@ suite("EchoCode – Root Extension Integration", () => {
     }
   });
 
-  test("toggleVoice falls back to chat when voice routing does not handle the transcript", async () => {
+  test("toggleVoice in chat mode sends transcript directly to chat provider", async () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({
       isRecording: true,
@@ -478,10 +480,10 @@ suite("EchoCode – Root Extension Integration", () => {
 
       await harness.commandRegistry.get("echocode.toggleVoice")?.();
 
-      assert.deepEqual(state.chatProvider.recordingStates, [false]);
+      assert.deepEqual(state.chatProvider.recordingStates, []);
       assert.ok(state.spokenMessages.includes("Processing"));
       assert.equal(state.stopCalls.length, 1);
-      assert.deepEqual(state.voiceCommands, ["Explain this code"]);
+      assert.deepEqual(state.voiceCommands, []);
       assert.deepEqual(state.chatProvider.handledMessages, [
         "Explain this code",
       ]);
