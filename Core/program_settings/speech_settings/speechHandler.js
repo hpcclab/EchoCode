@@ -65,18 +65,35 @@ function speakMessage(message) {
     }
 
     try {
-      // Use say.js to speak the message with the configured voice
-      say.speak(message, voice, speechSpeed, (err) => {
+      let settled = false;
+      const finish = () => {
+        if (settled) return;
+        settled = true;
         isSpeaking = false;
         currentSpeechProcess = null;
+        resolve();
+      };
+
+      // Use say.js to speak the message with the configured voice
+      const speechProcess = say.speak(message, voice, speechSpeed, (err) => {
         if (err) {
           console.warn("[EchoCode] say.speak error", err);
         }
-        resolve();
+        finish();
       });
 
+      if (speechProcess && typeof speechProcess.on === "function") {
+        speechProcess.on("error", (err) => {
+          console.warn("[EchoCode] say.speak process error", err);
+          finish();
+        });
+      }
+
       // Store the speech process
-      currentSpeechProcess = say;
+      currentSpeechProcess =
+        speechProcess && typeof speechProcess.kill === "function"
+          ? { stop: () => speechProcess.kill() }
+          : say;
     } catch (err) {
       // Gracefully degrade when TTS backend is unavailable (e.g., headless CI, missing 'say')
       console.warn(
@@ -93,7 +110,11 @@ function speakMessage(message) {
 // Stop speaking
 function stopSpeaking() {
   if (isSpeaking && currentSpeechProcess) {
-    currentSpeechProcess.stop();
+    try {
+      currentSpeechProcess.stop();
+    } catch (err) {
+      console.warn("[EchoCode] Failed to stop speech process", err);
+    }
     isSpeaking = false;
     currentSpeechProcess = null;
     return true;
