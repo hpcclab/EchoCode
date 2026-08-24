@@ -25,6 +25,7 @@ suite("EchoCode – Speech Handler", () => {
       ) => {
         const child = new EventEmitter();
         process.nextTick(() => child.emit("error", new Error("spawn festival ENOENT")));
+        // Intentionally skip callback to simulate backends that only emit process errors.
         return child;
       },
       stop: () => {},
