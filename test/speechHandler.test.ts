@@ -39,6 +39,7 @@ suite("EchoCode – Speech Handler", () => {
     delete nodeRequire.cache[speechHandlerModulePath];
 
     let uncaught: Error | undefined;
+    let timeoutHandle: NodeJS.Timeout | undefined;
     const uncaughtHandler = (error: Error) => {
       uncaught = error;
     };
@@ -48,7 +49,9 @@ suite("EchoCode – Speech Handler", () => {
       const speechHandler = nodeRequire(speechHandlerModulePath);
       const resolved = await Promise.race([
         speechHandler.speakMessage("test").then(() => true),
-        new Promise((resolve) => setTimeout(() => resolve(false), 250)),
+        new Promise((resolve) => {
+          timeoutHandle = setTimeout(() => resolve(false), 250);
+        }),
       ]);
       assert.equal(resolved, true, "speakMessage should resolve on process errors");
       await new Promise((resolve) => setImmediate(resolve));
@@ -58,6 +61,9 @@ suite("EchoCode – Speech Handler", () => {
         `Expected no uncaught exception, got: ${uncaught?.message}`,
       );
     } finally {
+      if (timeoutHandle) {
+        clearTimeout(timeoutHandle);
+      }
       process.removeListener("uncaughtException", uncaughtHandler);
       delete nodeRequire.cache[speechHandlerModulePath];
       if (originalSpeechModule) {
