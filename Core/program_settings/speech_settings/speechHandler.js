@@ -90,7 +90,10 @@ function speakMessage(message) {
       }
 
       // Store the speech process
-      currentSpeechProcess = say;
+      currentSpeechProcess =
+        speechProcess && typeof speechProcess.kill === "function"
+          ? { stop: () => speechProcess.kill() }
+          : say;
     } catch (err) {
       // Gracefully degrade when TTS backend is unavailable (e.g., headless CI, missing 'say')
       console.warn(
@@ -107,7 +110,11 @@ function speakMessage(message) {
 // Stop speaking
 function stopSpeaking() {
   if (isSpeaking && currentSpeechProcess) {
-    currentSpeechProcess.stop();
+    try {
+      currentSpeechProcess.stop();
+    } catch (err) {
+      console.warn("[EchoCode] Failed to stop speech process", err);
+    }
     isSpeaking = false;
     currentSpeechProcess = null;
     return true;

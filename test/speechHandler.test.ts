@@ -21,11 +21,10 @@ suite("EchoCode – Speech Handler", () => {
         _message: string,
         _voice: string | null,
         _rate: number,
-        callback: (err?: unknown) => void,
+        _callback: (err?: unknown) => void,
       ) => {
         const child = new EventEmitter();
         process.nextTick(() => child.emit("error", new Error("spawn festival ENOENT")));
-        process.nextTick(() => callback(undefined));
         return child;
       },
       stop: () => {},
@@ -47,7 +46,11 @@ suite("EchoCode – Speech Handler", () => {
 
     try {
       const speechHandler = nodeRequire(speechHandlerModulePath);
-      await speechHandler.speakMessage("test");
+      const resolved = await Promise.race([
+        speechHandler.speakMessage("test").then(() => true),
+        new Promise((resolve) => setTimeout(() => resolve(false), 250)),
+      ]);
+      assert.equal(resolved, true, "speakMessage should resolve on process errors");
       await new Promise((resolve) => setImmediate(resolve));
       assert.equal(
         uncaught,
