@@ -8,10 +8,11 @@ function getAiSettings() {
     useLocalOllama: config.get("useLocalOllama", false),
     ollamaBaseUrl: config.get("ollamaBaseUrl", "http://127.0.0.1:11434"),
     ollamaModel: config.get("ollamaModel", "llama3.2"),
+    copilotModel: config.get("copilotModel", ""),
   };
 }
 
-function requestJson(url, body) {
+function requestJson(url, body, options = {}) {
   return new Promise((resolve, reject) => {
     let parsedUrl;
     try {
@@ -23,18 +24,22 @@ function requestJson(url, body) {
 
     const isHttps = parsedUrl.protocol === "https:";
     const transport = isHttps ? https : http;
-    const payload = JSON.stringify(body);
+    const method = options.method || (body ? "POST" : "GET");
+    const payload = body ? JSON.stringify(body) : null;
+
+    const headers = {};
+    if (payload) {
+      headers["Content-Type"] = "application/json";
+      headers["Content-Length"] = Buffer.byteLength(payload);
+    }
 
     const req = transport.request(
       {
-        method: "POST",
+        method,
         hostname: parsedUrl.hostname,
         port: parsedUrl.port || (isHttps ? 443 : 80),
         path: `${parsedUrl.pathname}${parsedUrl.search}`,
-        headers: {
-          "Content-Type": "application/json",
-          "Content-Length": Buffer.byteLength(payload),
-        },
+        headers,
       },
       (res) => {
         let raw = "";
@@ -65,10 +70,51 @@ function requestJson(url, body) {
       },
     );
 
+    if (options.timeoutMs) {
+      req.setTimeout(options.timeoutMs, () => {
+        req.destroy(
+          new Error(`Request to ${url} timed out after ${options.timeoutMs}ms`),
+        );
+      });
+    }
+
     req.on("error", (err) => reject(err));
-    req.write(payload);
+    if (payload) req.write(payload);
     req.end();
   });
+}
+
+async function listOllamaModels(opts = {}) {
+  const settings = getAiSettings();
+  const baseUrl = String(opts.baseUrl || settings.ollamaBaseUrl || "").replace(
+    /\/$/,
+    "",
+  );
+  const url = `${baseUrl}/api/tags`;
+
+  const json = await requestJson(url, null, {
+    method: "GET",
+    timeoutMs: opts.timeoutMs ?? 3000,
+  });
+
+  if (!json || !Array.isArray(json.models)) {
+    return [];
+  }
+
+  return json.models.map((m) => m && m.name).filter(Boolean);
+}
+
+async function listCopilotModels() {
+  if (!vscode.lm || typeof vscode.lm.selectChatModels !== "function") {
+    return [];
+  }
+
+  const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
+  return (models || []).map((m) => ({
+    id: m.id || m.family || m.name,
+    name: m.name || m.family || m.id,
+    family: m.family || "",
+  }));
 }
 
 async function sendOllamaPrompt(prompt, opts = {}) {
@@ -166,7 +212,18 @@ async function selectModel() {
     );
   }
 
-  // 3. Prefer GPT-4, fallback to default
+  // 3. Prefer the model the user explicitly chose (see aiProviderSetup.js)
+  const settings = getAiSettings();
+  if (settings.copilotModel) {
+    const persisted = models.find(
+      (m) => m.id === settings.copilotModel || m.family === settings.copilotModel,
+    );
+    if (persisted) {
+      return persisted;
+    }
+  }
+
+  // 4. Prefer GPT-4, fallback to default
   let selected = models.find((m) => m.family && m.family.includes("gpt-4"));
   if (!selected) {
     selected = models[0];
@@ -310,4 +367,7 @@ module.exports = {
   analyzeAI,
   classifyVoiceIntent,
   generateCodeFromVoice,
+  selectModel,
+  listOllamaModels,
+  listCopilotModels,
 };

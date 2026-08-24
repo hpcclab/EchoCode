@@ -40,7 +40,9 @@
     "onCommand:echocode.whereAmI",
     "onCommand:echocode.compileAndParseCpp",
     "onCommand:echocode.setGuidanceLevel",
-    "onCommand:echocode.cycleGuidanceLevel"
+    "onCommand:echocode.cycleGuidanceLevel",
+    "onCommand:echocode.selectAIProvider",
+    "onCommand:echocode.checkAIProviderUpdates"
   ],
   "main": "./extension.js",
   "extensionDependencies": [
@@ -250,6 +252,14 @@
       {
         "command": "echocode.cycleGuidanceLevel",
         "title": "EchoCode: Cycle Guidance Level"
+      },
+      {
+        "command": "echocode.selectAIProvider",
+        "title": "EchoCode: Select AI Provider & Model"
+      },
+      {
+        "command": "echocode.checkAIProviderUpdates",
+        "title": "EchoCode: Check for AI Provider/Model Updates"
       }
     ],
     "configuration": {
@@ -303,6 +313,11 @@
           "type": "string",
           "default": "llama3.2",
           "description": "Model name to use when local Ollama is enabled (for example: llama3.2, qwen2.5:7b)."
+        },
+        "echocode.copilotModel": {
+          "type": "string",
+          "default": "",
+          "description": "Copilot model id to prefer when Copilot is the active provider. Leave blank to auto-select. Set via 'EchoCode: Select AI Provider & Model'."
         },
         "echocode.featureImplementation.annotationsBigO": {
           "type": "string",

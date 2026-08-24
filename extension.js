@@ -24,6 +24,13 @@ const {
   STUDENT_LOCKED_COMMANDS,
 } = require("./Core/program_settings/guard");
 
+// AI provider selection (Copilot vs local Ollama) + model auto-detection
+const {
+  initializeAIProviderOnStartup,
+  pickProviderAndModel,
+  checkForProviderUpdates,
+} = require("./Core/program_settings/program_settings/aiProviderSetup");
+
 // Python (optional adapter)
 const { ensurePylintInstalled } = require("./Language/Python/pylintHandler");
 const {
@@ -514,6 +521,31 @@ async function activate(context) {
   context.subscriptions.push(toggleModeCommand);
   // Ensure Copilot (stable, chat, or nightly) is available for AI features
   await ensureCopilotActivated(outputChannel);
+
+  // --- AI PROVIDER SETUP START ---
+  // First activation ever: pop up the Copilot-vs-Ollama + model picker.
+  // Every activation after that: silently recheck availability, since both
+  // Copilot's model lineup and locally installed Ollama models change often.
+  context.subscriptions.push(
+    vscode.commands.registerCommand("echocode.selectAIProvider", async () => {
+      await pickProviderAndModel(context, outputChannel);
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "echocode.checkAIProviderUpdates",
+      async () => {
+        await checkForProviderUpdates(context, outputChannel);
+        vscode.window.showInformationMessage(
+          "EchoCode: AI provider/model check complete.",
+        );
+      },
+    ),
+  );
+  initializeAIProviderOnStartup(context, outputChannel).catch((err) => {
+    outputChannel.appendLine(`[AI Setup] ${err.message}`);
+  });
+  // --- AI PROVIDER SETUP END ---
 
   // --- DEPENDENCY CHECK START ---
   // This runs once on startup and ensures the venv exists
