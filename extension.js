@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const {
   loadProgramFeatureModule,
   resolveClassExport,
