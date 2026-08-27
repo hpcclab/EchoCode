@@ -5,7 +5,7 @@
   "version": "2.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Team-1-4910-Edward/EchoCode-Capstone-Repo.git"
+    "url": "https://github.com/hpcclab/EchoCode.git"
   },
   "icon": "images/icon.png",
   "publisher": "EchoCode",
@@ -660,14 +660,21 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
     "@stylistic/eslint-plugin": "^2.13.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.17.30",
     "@types/vscode": "^1.99.1",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.5.2",
+    "@vscode/vsce": "^3.2.1",
     "eslint": "^9.24.0",
     "mocha": "^10.8.2",
+    "semantic-release": "^24.2.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.29.1"
