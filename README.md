@@ -49,11 +49,16 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 - **Integration with GitHub Copilot**  
   Leverages GitHub Copilot and Copilot Chat for enhanced AI-powered coding assistance.
 
-- **Optional Local Ollama Backend**
-  Switch EchoCode AI features to a local Ollama model globally by enabling `echocode.useLocalOllama`, then set `echocode.ollamaBaseUrl` and `echocode.ollamaModel` in VS Code settings. Whisper speech-to-text remains unchanged.
+- **Bring Your Own Model — API or Local**
+  Every EchoCode AI feature can run through GitHub Copilot, a hosted API (OpenAI, OpenRouter, Groq, Anthropic, or any OpenAI-compatible endpoint such as LM Studio or vLLM), or a local Ollama model. Whisper speech-to-text is unaffected either way. API keys are stored in VS Code's secret storage (your OS keychain), never in `settings.json`.
 
 - **AI Provider Setup Wizard (Auto-Detection)** 🆕  
-  On first launch, EchoCode pops up a quick-pick menu to choose between GitHub Copilot and a local Ollama model. Available Copilot models and locally-installed Ollama models are auto-detected live — no manual typing required. Re-open the picker anytime with `EchoCode: Select AI Provider & Model`, or refresh detection with `EchoCode: Check for AI Provider/Model Updates` (useful since both Copilot's model lineup and your installed Ollama models change over time).
+  On first launch, EchoCode asks whether you want an **API model** or a **local model**, then walks the rest of the way:
+
+  - **API →** GitHub Copilot (auto-detected via `vscode.lm`, no key needed) or another model API. For the latter, pick a preset, confirm the base URL, enter your key, and EchoCode contacts the endpoint to verify it's reachable **before** saving — the model list you pick from is the one the API actually reports.
+  - **Local →** EchoCode scans your Ollama server. If it isn't running, you get a spoken warning and a way back to the API choice instead of a dead end. If it's running but has no models, EchoCode reads your machine's specs (CPU, RAM, and GPU VRAM where detectable), **recommends a model that will actually fit**, and — with your confirmation — downloads it for you with a live progress bar.
+
+  Re-open the picker anytime with `EchoCode: Select AI Provider & Model`, or refresh detection with `EchoCode: Check for AI Provider/Model Updates` (useful since Copilot's model lineup, hosted API catalogs, and your installed Ollama models all change over time).
 
 - **Adjustable AI Guidance Level**  
   Control how verbose AI explanations are (Guided, Balanced, or Concise) across the summarizer, Big O annotations, code annotations, and "What's This" explanations.
@@ -128,8 +133,8 @@ Rows marked **Dev** only fire in Developer mode (locked in Student mode).
 
 | Command                                                                                | Description                                                                                                                                                   |
 | -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `EchoCode: Select AI Provider & Model` (`echocode.selectAIProvider`) 🆕                | Choose between GitHub Copilot and local Ollama, then pick a model from the live auto-detected list for that provider.                                         |
-| `EchoCode: Check for AI Provider/Model Updates` (`echocode.checkAIProviderUpdates`) 🆕 | Re-detects available Copilot and Ollama models and warns if your currently configured model is no longer available. Also runs automatically on every startup. |
+| `EchoCode: Select AI Provider & Model` (`echocode.selectAIProvider`) 🆕                | Choose an API model (GitHub Copilot, OpenAI, OpenRouter, Groq, Anthropic, or a custom endpoint) or a local Ollama model, then pick from the live model list. Can scan your hardware and install a fitting Ollama model for you. |
+| `EchoCode: Check for AI Provider/Model Updates` (`echocode.checkAIProviderUpdates`) 🆕 | Re-detects available Copilot, hosted API, and Ollama models and warns if your currently configured model is no longer available. Also runs automatically on every startup. |
 | `echocode.selectMicrophone`                                                            | Choose which microphone EchoCode uses for voice input, enter a device name manually, or reset to the system default.                                          |
 | `echocode.switchToStudentMode` / `echocode.switchToDevMode`                            | Explicitly set the mode instead of toggling with `Ctrl+Alt+9`.                                                                                                |
 
@@ -228,7 +233,7 @@ Before using Echo Code, ensure the following are installed:
 | Command                                         | Description                                                                    |
 | ----------------------------------------------- | ------------------------------------------------------------------------------ |
 | `EchoCode: Select AI Provider & Model`          | Choose your AI provider and model from live auto-detected lists.               |
-| `EchoCode: Check for AI Provider/Model Updates` | Re-detect available Copilot/Ollama models and flag a missing configured model. |
+| `EchoCode: Check for AI Provider/Model Updates` | Re-detect available Copilot/API/Ollama models and flag a missing configured model. |
 | `echocode.selectMicrophone`                     | Choose which microphone EchoCode uses for voice input.                         |
 
 ---

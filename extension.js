@@ -24,12 +24,15 @@ const {
   STUDENT_LOCKED_COMMANDS,
 } = require("./Core/program_settings/guard");
 
-// AI provider selection (Copilot vs local Ollama) + model auto-detection
+// AI provider selection (Copilot, hosted API, or local Ollama) + model auto-detection
 const {
   initializeAIProviderOnStartup,
   pickProviderAndModel,
   checkForProviderUpdates,
 } = require("./Core/program_settings/program_settings/aiProviderSetup");
+const {
+  initSecretStorage,
+} = require("./Core/program_settings/program_settings/secretStore");
 
 // Python (optional adapter)
 const { ensurePylintInstalled } = require("./Language/Python/pylintHandler");
@@ -523,9 +526,14 @@ async function activate(context) {
   await ensureCopilotActivated(outputChannel);
 
   // --- AI PROVIDER SETUP START ---
-  // First activation ever: pop up the Copilot-vs-Ollama + model picker.
-  // Every activation after that: silently recheck availability, since both
-  // Copilot's model lineup and locally installed Ollama models change often.
+  // First activation ever: pop up the API-vs-Local + model picker.
+  // Every activation after that: silently recheck availability, since Copilot's
+  // model lineup, hosted API catalogs, and installed Ollama models all change often.
+  //
+  // Hosted API keys live in the OS keychain via SecretStorage, so the store has to be
+  // handed the extension context before any provider code can read a key.
+  initSecretStorage(context);
+
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.selectAIProvider", async () => {
       await pickProviderAndModel(context, outputChannel);

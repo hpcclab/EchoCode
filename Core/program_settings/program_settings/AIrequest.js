@@ -1,87 +1,48 @@
 const vscode = require("vscode");
-const http = require("http");
-const https = require("https");
+const { requestJson, requestNdjson } = require("./httpClient");
+const { getPreset, listApiModels, sendApiChat } = require("./apiProviders");
+const { getApiKey } = require("./secretStore");
 
+/**
+ * Reads the active AI backend from settings.
+ *
+ * `echocode.aiProvider` is the canonical setting. `echocode.useLocalOllama` predates
+ * it and is still honoured when the new setting is blank, so existing installs keep
+ * working after an update without the user touching anything.
+ */
 function getAiSettings() {
   const config = vscode.workspace.getConfiguration("echocode");
+
+  const useLocalOllama = config.get("useLocalOllama", false);
+  const explicitProvider = config.get("aiProvider", "");
+  const provider = explicitProvider || (useLocalOllama ? "ollama" : "copilot");
+
+  const apiProviderId = config.get("apiProvider", "");
+  const preset = getPreset(apiProviderId);
+
   return {
-    useLocalOllama: config.get("useLocalOllama", false),
+    provider,
+    useLocalOllama: provider === "ollama",
     ollamaBaseUrl: config.get("ollamaBaseUrl", "http://127.0.0.1:11434"),
     ollamaModel: config.get("ollamaModel", "llama3.2"),
     copilotModel: config.get("copilotModel", ""),
+    apiProviderId,
+    apiBaseUrl: config.get("apiBaseUrl", "") || preset?.baseUrl || "",
+    apiModel: config.get("apiModel", ""),
+    apiWire: preset?.wire || "openai",
   };
 }
 
-function requestJson(url, body, options = {}) {
-  return new Promise((resolve, reject) => {
-    let parsedUrl;
-    try {
-      parsedUrl = new URL(url);
-    } catch {
-      reject(new Error(`Invalid Ollama URL: ${url}`));
-      return;
-    }
-
-    const isHttps = parsedUrl.protocol === "https:";
-    const transport = isHttps ? https : http;
-    const method = options.method || (body ? "POST" : "GET");
-    const payload = body ? JSON.stringify(body) : null;
-
-    const headers = {};
-    if (payload) {
-      headers["Content-Type"] = "application/json";
-      headers["Content-Length"] = Buffer.byteLength(payload);
-    }
-
-    const req = transport.request(
-      {
-        method,
-        hostname: parsedUrl.hostname,
-        port: parsedUrl.port || (isHttps ? 443 : 80),
-        path: `${parsedUrl.pathname}${parsedUrl.search}`,
-        headers,
-      },
-      (res) => {
-        let raw = "";
-        res.setEncoding("utf8");
-        res.on("data", (chunk) => {
-          raw += chunk;
-        });
-        res.on("end", () => {
-          if (
-            !res.statusCode ||
-            res.statusCode < 200 ||
-            res.statusCode >= 300
-          ) {
-            reject(
-              new Error(
-                `Ollama request failed (${res.statusCode || "unknown"}): ${raw || "no response body"}`,
-              ),
-            );
-            return;
-          }
-
-          try {
-            resolve(JSON.parse(raw));
-          } catch {
-            reject(new Error("Ollama returned invalid JSON."));
-          }
-        });
-      },
-    );
-
-    if (options.timeoutMs) {
-      req.setTimeout(options.timeoutMs, () => {
-        req.destroy(
-          new Error(`Request to ${url} timed out after ${options.timeoutMs}ms`),
-        );
-      });
-    }
-
-    req.on("error", (err) => reject(err));
-    if (payload) req.write(payload);
-    req.end();
-  });
+/**
+ * Settings plus the API key from secret storage. Only the hosted-API path needs the
+ * key, so the async lookup stays out of the synchronous settings read.
+ */
+async function resolveAiSettings() {
+  const settings = getAiSettings();
+  if (settings.provider === "api") {
+    settings.apiKey = await getApiKey(settings.apiProviderId);
+  }
+  return settings;
 }
 
 async function listOllamaModels(opts = {}) {
@@ -95,6 +56,7 @@ async function listOllamaModels(opts = {}) {
   const json = await requestJson(url, null, {
     method: "GET",
     timeoutMs: opts.timeoutMs ?? 3000,
+    label: "Ollama",
   });
 
   if (!json || !Array.isArray(json.models)) {
@@ -102,6 +64,44 @@ async function listOllamaModels(opts = {}) {
   }
 
   return json.models.map((m) => m && m.name).filter(Boolean);
+}
+
+/**
+ * Downloads a model into the user's Ollama install. Uses Ollama's HTTP API rather
+ * than shelling out to `ollama pull` so it also works when the server is on another
+ * machine, and so the NDJSON progress stream can drive a real progress bar.
+ */
+async function pullOllamaModel(modelName, opts = {}) {
+  const settings = getAiSettings();
+  const baseUrl = String(opts.baseUrl || settings.ollamaBaseUrl || "").replace(
+    /\/$/,
+    "",
+  );
+
+  let lastStatus = "";
+  await requestNdjson(
+    `${baseUrl}/api/pull`,
+    { name: modelName, stream: true },
+    {
+      label: "Ollama",
+      cancellationToken: opts.cancellationToken,
+      onEvent: (event) => {
+        if (event && event.error) {
+          throw new Error(event.error);
+        }
+        lastStatus = (event && event.status) || lastStatus;
+        if (opts.onProgress) {
+          opts.onProgress({
+            status: lastStatus,
+            completed: (event && event.completed) || 0,
+            total: (event && event.total) || 0,
+          });
+        }
+      },
+    },
+  );
+
+  return lastStatus;
 }
 
 async function listCopilotModels() {
@@ -133,7 +133,7 @@ async function sendOllamaPrompt(prompt, opts = {}) {
     body.options.temperature = opts.temperature;
   }
 
-  const json = await requestJson(url, body);
+  const json = await requestJson(url, body, { label: "Ollama" });
   if (!json || typeof json.response !== "string") {
     throw new Error("Ollama did not return a text response.");
   }
@@ -166,19 +166,39 @@ function buildOllamaPromptFromMessages(messages) {
     .join("\n\n");
 }
 
-async function requestTextFromMessages(rawMessages, opts = {}) {
-  const messages = (rawMessages || []).map(normalizeMessage).filter(Boolean);
-  if (messages.length === 0) {
-    throw new Error("No AI messages were provided.");
+// Helper to get model safely
+async function selectModel() {
+  // 1. Get all copilot models
+  const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
+
+  // 2. Safety check
+  if (!models || models.length === 0) {
+    throw new Error(
+      "No Copilot models available. Please check your GitHub Copilot Chat extension.",
+    );
   }
 
+  // 3. Prefer the model the user explicitly chose (see aiProviderSetup.js)
   const settings = getAiSettings();
-
-  if (settings.useLocalOllama) {
-    const prompt = buildOllamaPromptFromMessages(messages);
-    return sendOllamaPrompt(prompt, { temperature: opts.temperature });
+  if (settings.copilotModel) {
+    const persisted = models.find(
+      (m) =>
+        m.id === settings.copilotModel || m.family === settings.copilotModel,
+    );
+    if (persisted) {
+      return persisted;
+    }
   }
 
+  // 4. Prefer GPT-4, fallback to default
+  let selected = models.find((m) => m.family && m.family.includes("gpt-4"));
+  if (!selected) {
+    selected = models[0];
+  }
+  return selected;
+}
+
+async function sendCopilotMessages(messages, opts = {}) {
   const model = await selectModel();
   const lmMessages = messages.map((m) => {
     if (m.role === "assistant") {
@@ -200,56 +220,38 @@ async function requestTextFromMessages(rawMessages, opts = {}) {
   return text;
 }
 
-// Helper to get model safely
-async function selectModel() {
-  // 1. Get all copilot models
-  const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
-
-  // 2. Safety check
-  if (!models || models.length === 0) {
-    throw new Error(
-      "No Copilot models available. Please check your GitHub Copilot Chat extension.",
-    );
+/**
+ * The single place that decides which backend answers a prompt. Every feature-facing
+ * helper below funnels through here, so adding a backend is one new branch instead of
+ * one per call site.
+ */
+async function dispatchMessages(rawMessages, opts = {}) {
+  const messages = (rawMessages || []).map(normalizeMessage).filter(Boolean);
+  if (messages.length === 0) {
+    throw new Error("No AI messages were provided.");
   }
 
-  // 3. Prefer the model the user explicitly chose (see aiProviderSetup.js)
-  const settings = getAiSettings();
-  if (settings.copilotModel) {
-    const persisted = models.find(
-      (m) => m.id === settings.copilotModel || m.family === settings.copilotModel,
-    );
-    if (persisted) {
-      return persisted;
-    }
+  const settings = await resolveAiSettings();
+
+  if (settings.provider === "ollama") {
+    return sendOllamaPrompt(buildOllamaPromptFromMessages(messages), opts);
   }
 
-  // 4. Prefer GPT-4, fallback to default
-  let selected = models.find((m) => m.family && m.family.includes("gpt-4"));
-  if (!selected) {
-    selected = models[0];
+  if (settings.provider === "api") {
+    return sendApiChat(messages, settings, opts);
   }
-  return selected;
+
+  return sendCopilotMessages(messages, opts);
+}
+
+async function requestTextFromMessages(rawMessages, opts = {}) {
+  return dispatchMessages(rawMessages, opts);
 }
 
 async function analyzeAI(code, instructionPrompt) {
   try {
     const combinedPrompt = `${instructionPrompt}\n\nCode to analyze:\n${code}`;
-    const settings = getAiSettings();
-
-    if (settings.useLocalOllama) {
-      return await sendOllamaPrompt(combinedPrompt, {});
-    }
-
-    const model = await selectModel();
-    const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
-    const chatRequest = await model.sendRequest(messages, {});
-
-    let results = "";
-    for await (const fragment of chatRequest.text) {
-      results += fragment;
-    }
-
-    return results;
+    return await dispatchMessages([{ role: "user", content: combinedPrompt }]);
   } catch (err) {
     // Handle off-topic refusals cleanly
     if (err.message && err.message.includes("off_topic")) {
@@ -262,7 +264,6 @@ async function analyzeAI(code, instructionPrompt) {
 async function classifyVoiceIntent(transcript, commands, opts = {}) {
   try {
     const temperature = opts.temperature ?? 0.0;
-    const settings = getAiSettings();
 
     // System prompt engineered as User message
     const systemInstruction =
@@ -272,15 +273,10 @@ async function classifyVoiceIntent(transcript, commands, opts = {}) {
       { transcript, commands: commands.map((c) => ({ id: c.id })) },
     )}`;
 
-    let text = "";
-    if (settings.useLocalOllama) {
-      text = await sendOllamaPrompt(combinedPrompt, { temperature });
-    } else {
-      const model = await selectModel();
-      const messages = [vscode.LanguageModelChatMessage.User(combinedPrompt)];
-      const chatReq = await model.sendRequest(messages, { temperature });
-      for await (const frag of chatReq.text) text += frag;
-    }
+    const text = await dispatchMessages(
+      [{ role: "user", content: combinedPrompt }],
+      { temperature },
+    );
 
     const match = text.match(/\{[\s\S]*\}/);
     const candidate = match ? match[0] : text;
@@ -302,11 +298,9 @@ async function generateCodeFromVoice(
   contextCode = "",
 ) {
   try {
-    const settings = getAiSettings();
-
-    let systemPrompt = `You are an expert coding assistant. 
+    let systemPrompt = `You are an expert coding assistant.
     Your task is to convert the user's spoken natural language request into valid ${languageId} code.
-    
+
     STRICT RULES:
     1. Return ONLY the code. No markdown backticks, no explanations, no conversational text.
     2. **Indentation**: The code MUST be inserted at indentation level: "${indentation}". Ensure all generated lines are strictly indented relative to this baseline.
@@ -315,7 +309,7 @@ async function generateCodeFromVoice(
     5. **Variable Declaration**: Explicitly declare variables (e.g., 'let'/'const' in JS; proper types in C++/Java).
     6. **Standards**: Follow standard coding conventions for ${languageId}. Use meaningful variable names.
     7. **Python Specifics**: Use standard 4-space indentation. Do NOT use triple quotes for the body unless asked.
-    
+
     If the request is unclear, just do your best to write the exact minimal code requested.`;
 
     if (contextCode) {
@@ -327,21 +321,13 @@ async function generateCodeFromVoice(
     \`\`\``;
     }
 
-    let code = "";
-    if (settings.useLocalOllama) {
-      const localPrompt = `${systemPrompt}\n\nUSER REQUEST:\n${transcript}`;
-      code = await sendOllamaPrompt(localPrompt, { temperature: 0.1 });
-    } else {
-      const model = await selectModel();
-      const messages = [
-        vscode.LanguageModelChatMessage.User(systemPrompt),
-        vscode.LanguageModelChatMessage.User(transcript),
-      ];
-      const chatReq = await model.sendRequest(messages, { temperature: 0.1 });
-      for await (const fragment of chatReq.text) {
-        code += fragment;
-      }
-    }
+    const code = await dispatchMessages(
+      [
+        { role: "user", content: systemPrompt },
+        { role: "user", content: transcript },
+      ],
+      { temperature: 0.1 },
+    );
 
     // Cleanup any leaked markdown formatting
     return code
@@ -351,7 +337,7 @@ async function generateCodeFromVoice(
   } catch (err) {
     const settings = getAiSettings();
     if (
-      !settings.useLocalOllama &&
+      settings.provider === "copilot" &&
       (err.name === "LanguageModelError" ||
         err instanceof vscode.LanguageModelError)
     ) {
@@ -363,6 +349,7 @@ async function generateCodeFromVoice(
 
 module.exports = {
   getAiSettings,
+  resolveAiSettings,
   requestTextFromMessages,
   analyzeAI,
   classifyVoiceIntent,
@@ -370,4 +357,6 @@ module.exports = {
   selectModel,
   listOllamaModels,
   listCopilotModels,
+  listApiModels,
+  pullOllamaModel,
 };
