@@ -7,7 +7,12 @@ import * as path from "path";
 import * as VS from "./helpers/vscodeMock.js";
 
 const vscode: any = VS;
-const nodeRequire = require;
+import { createRequire } from "module";
+
+// Node strips types natively and detects these files as ESM (they use `import`), so the
+// CommonJS `require` is not in scope. The suite needs a real CJS require: it injects
+// mocks by writing into require.cache, which only the CJS loader consults.
+const nodeRequire = createRequire(import.meta.url);
 const repoRoot = process.cwd();
 const extensionModulePath = nodeRequire.resolve(
   path.join(repoRoot, "extension.js"),

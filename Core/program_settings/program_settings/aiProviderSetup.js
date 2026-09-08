@@ -19,17 +19,14 @@ const BACK = "back";
 const MAX_BRANCH_HOPS = 12;
 
 /**
- * Starts speaking and returns immediately — deliberately not awaited.
+ * Speaks a message and returns immediately — deliberately not awaited.
  *
- * speakMessage resolves from say.speak's completion callback, i.e. only once the
- * sentence has finished being read aloud (~5s for a short line). Every call site here
- * speaks immediately before opening a quick pick, so awaiting it held the UI closed for
- * the full utterance on every step of setup. The pick is announced by the screen reader
- * when it takes focus, so this speech is supplementary and must not gate it.
+ * speakMessage resolves only once the sentence has finished being read aloud (~5s for a
+ * short line). Every call site here speaks just before opening a quick pick, so awaiting
+ * it held the UI closed for the full utterance on every step of setup.
  *
- * Consequence to respect when adding calls: speakMessage cuts off whatever is currently
- * being spoken, so two speak() calls with no user interaction between them means the
- * first is never heard. Say it in one line instead.
+ * Interleaving is speechHandler's problem: a new message interrupts the one in progress
+ * and the two never overlap, so callers here can just say what they need to say.
  */
 function speak(message) {
   try {
@@ -42,6 +39,124 @@ function speak(message) {
 
 async function saveGlobal(config, key, value) {
   await config.update(key, value, vscode.ConfigurationTarget.Global);
+}
+
+/* ------------------------------------------------------------------ *
+ * Spoken quick picks
+ * ------------------------------------------------------------------ */
+
+/**
+ * Quick pick labels carry codicons (`$(star-full) qwen2.5-coder:7b`). TTS reads that
+ * markup out literally — "dollar sign paren star full" — so strip it before speaking.
+ */
+function spokenText(value) {
+  return String(value ?? "")
+    .replace(/\$\([^)]*\)/g, " ")
+    .replace(/[…]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+/**
+ * The wizard's list cursor: the items, plus where the user currently is in them.
+ *
+ * EchoCode drives its own TTS rather than assuming a screen reader is running, so
+ * nothing announces the highlighted row unless we do it. Keeping the index here (rather
+ * than reading it off the quick pick each time) means the position can be spoken as
+ * "3 of 7", and means the announcement logic is testable without VS Code.
+ */
+class AnnouncedList {
+  constructor(items, { intro = "" } = {}) {
+    this.items = items;
+    this.intro = intro;
+    this.index = -1;
+  }
+
+  get current() {
+    return this.index >= 0 ? this.items[this.index] : undefined;
+  }
+
+  /**
+   * Moves the cursor to `item` and returns what should be said, or null when nothing
+   * changed (the same row re-reported, or a filter that matched nothing).
+   *
+   * The intro is spoken as its own queued message rather than being welded onto this
+   * one: the queue guarantees it is heard in full before the first row, and keeping
+   * them separate means a user who arrows immediately replaces only the pending row.
+   */
+  moveTo(item) {
+    const next = this.items.indexOf(item);
+    if (next === -1 || next === this.index) return null;
+
+    this.index = next;
+    return this.describe();
+  }
+
+  describe() {
+    const item = this.current;
+    if (!item) return this.intro || null;
+
+    const parts = [];
+    parts.push(spokenText(item.label));
+    if (item.description) parts.push(spokenText(item.description));
+    // Position is against the full list. VS Code exposes no public view of the
+    // type-to-filter result, so while filtering this counts rows the user can't see.
+    parts.push(`${this.index + 1} of ${this.items.length}`);
+
+    return `${parts.filter(Boolean).join(". ")}.`;
+  }
+}
+
+/**
+ * showQuickPick with spoken navigation: says what the list is for, then announces each
+ * row as the user arrows onto it.
+ *
+ * showQuickPick itself resolves only once something is chosen and never reports the
+ * highlighted row, so this uses createQuickPick, whose onDidChangeActive is the only
+ * hook that fires per keystroke. Hosts without it (and the test harness, which stubs
+ * showQuickPick) fall back to the one-shot picker with just the intro spoken.
+ */
+function showAnnouncedQuickPick(items, options = {}, { intro = "" } = {}) {
+  const list = new AnnouncedList(items, { intro });
+
+  if (typeof vscode.window.createQuickPick !== "function") {
+    if (intro) speak(intro);
+    return vscode.window.showQuickPick(items, options);
+  }
+
+  return new Promise((resolve) => {
+    const quickPick = vscode.window.createQuickPick();
+    quickPick.placeholder = options.placeHolder;
+    quickPick.ignoreFocusOut = options.ignoreFocusOut ?? true;
+    quickPick.matchOnDescription = options.matchOnDescription ?? false;
+    quickPick.matchOnDetail = options.matchOnDetail ?? false;
+
+    let settled = false;
+    const finish = (value) => {
+      if (settled) return;
+      settled = true;
+      quickPick.dispose();
+      resolve(value);
+    };
+
+    // Spoken before the rows so it leads. A user who arrows immediately cuts it off,
+    // which is the right outcome — they already know what the list is for.
+    if (intro) speak(intro);
+
+    // Subscribe before assigning items: setting them makes the first row active, and
+    // that is the announcement the user needs to hear on open.
+    quickPick.onDidChangeActive((active) => {
+      const line = list.moveTo(active && active[0]);
+      // Each row interrupts the last, so holding the arrow key down narrates the row
+      // landed on rather than every row travelled through.
+      if (line) speak(line);
+    });
+    quickPick.onDidAccept(() => finish(quickPick.selectedItems[0]));
+    quickPick.onDidHide(() => finish(undefined));
+
+    quickPick.items = items;
+    quickPick.show();
+  });
 }
 
 /**
@@ -124,7 +239,7 @@ async function detectProviders(outputChannel) {
  * thing that discovers a typo'd URL or a rejected key.
  */
 async function configureApiProvider(context, outputChannel) {
-  const presetPick = await vscode.window.showQuickPick(
+  const presetPick = await showAnnouncedQuickPick(
     API_PRESETS.map((p) => ({
       label: p.label,
       detail: p.detail || p.baseUrl,
@@ -134,6 +249,7 @@ async function configureApiProvider(context, outputChannel) {
       placeHolder: "Which model API do you want to use?",
       ignoreFocusOut: true,
     },
+    { intro: "Select an API provider" },
   );
 
   if (!presetPick) return BACK;
@@ -224,11 +340,15 @@ async function configureApiProvider(context, outputChannel) {
     },
   ];
 
-  const modelPick = await vscode.window.showQuickPick(items, {
-    placeHolder: `Choose a ${preset.label} model (${models.length} available)`,
-    matchOnDescription: true,
-    ignoreFocusOut: true,
-  });
+  const modelPick = await showAnnouncedQuickPick(
+    items,
+    {
+      placeHolder: `Choose a ${preset.label} model (${models.length} available)`,
+      matchOnDescription: true,
+      ignoreFocusOut: true,
+    },
+    { intro: `Select a model for ${preset.label}` },
+  );
   if (!modelPick) return false;
 
   let modelId = modelPick.value;
@@ -270,13 +390,14 @@ async function configureCopilot(context, detected) {
   let modelValue = "";
   let modelLabel = "the default model";
   if (detected.copilot.models.length) {
-    const modelPick = await vscode.window.showQuickPick(
+    const modelPick = await showAnnouncedQuickPick(
       detected.copilot.models.map((m) => ({
         label: m.name,
         description: m.family,
         value: m.id,
       })),
       { placeHolder: "Choose a Copilot model", ignoreFocusOut: true },
+      { intro: "Select a model for GitHub Copilot" },
     );
     if (!modelPick) return false;
     modelValue = modelPick.value;
@@ -301,7 +422,7 @@ async function configureCopilot(context, detected) {
  * needs no URL or key; anything else is a third-party endpoint we have to verify.
  */
 async function runApiBranch(context, outputChannel, detected) {
-  const choice = await vscode.window.showQuickPick(
+  const choice = await showAnnouncedQuickPick(
     [
       {
         label: "$(github) GitHub Copilot",
@@ -318,6 +439,7 @@ async function runApiBranch(context, outputChannel, detected) {
       { label: "$(arrow-left) Back", value: BACK },
     ],
     { placeHolder: "What model do you want?", ignoreFocusOut: true },
+    { intro: "Select which API to use" },
   );
 
   if (!choice) return false;
@@ -372,12 +494,10 @@ async function installRecommendedModel(context, outputChannel) {
   outputChannel?.appendLine(
     `[AI Setup] System scan: ${describeSpecs(specs)} (usable model budget ~${budgetGb.toFixed(1)} GB)`,
   );
-  // Kept deliberately short: this is spoken before the quick pick opens, and reading
-  // the full hardware summary aloud stalls setup for ten-plus seconds. The details go
-  // to the output channel above and to the quick pick itself, which a screen reader
-  // announces on focus anyway.
-  speak(`Recommending ${recommended.name} for this machine.`);
-
+  // The recommendation rides in on the list's own intro below rather than being spoken
+  // here — the list announces itself the moment it opens and would cut this off. Kept
+  // short either way: reading the full hardware summary aloud stalls setup for ten-plus
+  // seconds, so the details stay in the output channel above.
   if (underpowered) {
     vscode.window.showWarningMessage(
       `EchoCode: this machine has about ${budgetGb.toFixed(1)} GB to spare, which is below what any recommended model wants. ${recommended.name} will run but may be slow.`,
@@ -385,7 +505,7 @@ async function installRecommendedModel(context, outputChannel) {
   }
 
   const CUSTOM = "__custom__";
-  const modelPick = await vscode.window.showQuickPick(
+  const modelPick = await showAnnouncedQuickPick(
     [
       {
         label: `$(star-full) ${recommended.name}`,
@@ -409,6 +529,9 @@ async function installRecommendedModel(context, outputChannel) {
       placeHolder: `Install for you — ${describeSpecs(specs)}`,
       ignoreFocusOut: true,
       matchOnDetail: true,
+    },
+    {
+      intro: `Select a model to install. Recommending ${recommended.name} for this machine`,
     },
   );
 
@@ -517,7 +640,7 @@ async function runLocalBranch(context, outputChannel) {
     // --- Reachable, and models are installed ---
     if (models.length) {
       const INSTALL = "__install__";
-      const pick = await vscode.window.showQuickPick(
+      const pick = await showAnnouncedQuickPick(
         [
           ...models.map((name) => ({ label: name, value: name })),
           {
@@ -529,6 +652,7 @@ async function runLocalBranch(context, outputChannel) {
           placeHolder: "Choose an installed Ollama model",
           ignoreFocusOut: true,
         },
+        { intro: "Select a model. These are the Ollama models installed on this machine" },
       );
       if (!pick) return false;
       if (pick.value === INSTALL) {
@@ -578,15 +702,16 @@ async function runLocalBranch(context, outputChannel) {
  * what makes "Ollama isn't installed" recoverable without restarting setup.
  * Persists the choice to EchoCode's global settings; returns true if one was saved.
  */
-async function pickProviderAndModel(context, outputChannel) {
+async function pickProviderAndModel(context, outputChannel, spokenPrefix = "") {
   const detected = await detectProviders(outputChannel);
 
   for (let hop = 0; hop < MAX_BRANCH_HOPS; hop += 1) {
-    const providerPick = await vscode.window.showQuickPick(
+    const providerPick = await showAnnouncedQuickPick(
       [
         {
           label: "$(cloud) API model",
           value: "api",
+          description: "A hosted API such as GitHub Copilot or OpenAI",
           detail: detected.copilot.available
             ? `GitHub Copilot (${detected.copilot.models.length} model(s)) or another hosted API`
             : "GitHub Copilot, OpenAI, OpenRouter, Groq, Anthropic, or a custom endpoint",
@@ -594,6 +719,7 @@ async function pickProviderAndModel(context, outputChannel) {
         {
           label: "$(server-environment) Local model (Ollama)",
           value: "local",
+          description: "Runs on this machine through Ollama",
           detail: detected.ollama.available
             ? `${detected.ollama.models.length} model(s) installed — runs entirely on this machine`
             : "Runs entirely on this machine — EchoCode will help you set it up",
@@ -602,6 +728,19 @@ async function pickProviderAndModel(context, outputChannel) {
       {
         placeHolder: "Choose your EchoCode AI provider",
         ignoreFocusOut: true,
+      },
+      {
+        // States the actual fork: "choose your provider" alone does not tell a user
+        // who cannot see the list what the two choices are. The keyboard hint is
+        // first-pass only — a branch handing control back here (Ollama missing, say)
+        // re-enters the loop, and repeating the full preamble every hop is noise to
+        // someone who has already heard it.
+        intro:
+          hop === 0
+            ? `${spokenPrefix}Choose your EchoCode AI provider. ` +
+              "You are choosing between an API model and a local Ollama model. " +
+              "Use the arrow keys to move through the list, then press Enter to select"
+            : "Back to choosing your AI provider. An API model, or a local Ollama model",
       },
     );
 
@@ -703,8 +842,13 @@ async function initializeAIProviderOnStartup(context, outputChannel) {
   const alreadyConfigured = context.globalState.get(FIRST_RUN_KEY, false);
 
   if (!alreadyConfigured) {
-    speak("Welcome to EchoCode. Let's choose your AI provider.");
-    await pickProviderAndModel(context, outputChannel);
+    // Handed to the picker rather than spoken here: the list announces itself as soon
+    // as it opens, which would cut a separate welcome line off mid-sentence.
+    await pickProviderAndModel(
+      context,
+      outputChannel,
+      "Welcome to EchoCode. ",
+    );
     return;
   }
 
@@ -717,4 +861,8 @@ module.exports = {
   checkForProviderUpdates,
   initializeAIProviderOnStartup,
   installRecommendedModel,
+  // Exported for tests: the cursor carries the announcement wording, and asserting on
+  // it needs no quick pick, no VS Code window and no audio device.
+  AnnouncedList,
+  spokenText,
 };

@@ -2,13 +2,18 @@ import "./helpers/vscodeMock.js";
 import { strict as assert } from "assert";
 import { suite, test } from "mocha";
 import * as path from "path";
+import { createRequire } from "module";
 
 // @ts-ignore
 import * as VS from "./helpers/vscodeMock.js";
 
 const vscode: any = VS;
-const fs = require("fs") as typeof import("fs");
-const nodeRequire = require;
+
+// Node strips types natively and detects these files as ESM (they use `import`), so the
+// CommonJS `require` is not in scope. The suite needs a real CJS require: it injects
+// mocks by writing into require.cache, which only the CJS loader consults.
+const nodeRequire = createRequire(import.meta.url);
+const fs = nodeRequire("fs") as typeof import("fs");
 const repoRoot = process.cwd();
 
 const routerModulePath = nodeRequire.resolve(
