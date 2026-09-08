@@ -15,6 +15,28 @@ const extensionModulePath = nodeRequire.resolve(
 
 type StubMap = Record<string, any>;
 
+/**
+ * A context that reports the AI provider as already chosen.
+ *
+ * These tests cover steady-state command wiring, not onboarding. With a virgin
+ * globalState the startup wizard fires, speaks its welcome line, and races the
+ * assertions on spokenMessages/infoMessages. The provider wizard has its own suite.
+ */
+function createConfiguredContext() {
+  const context: any = vscode.__createMockContext();
+  const state: Record<string, unknown> = {
+    "echocode.aiProviderConfigured": true,
+  };
+  context.globalState = {
+    get: (key: string, fallback: unknown) =>
+      Object.prototype.hasOwnProperty.call(state, key) ? state[key] : fallback,
+    update: async (key: string, value: unknown) => {
+      state[key] = value;
+    },
+  };
+  return context;
+}
+
 function createOutputChannelRecorder() {
   const lines: string[] = [];
   return {
@@ -368,7 +390,7 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
@@ -390,6 +412,11 @@ suite("EchoCode – Root Extension Integration", () => {
         "echocode.checkPythonErrors",
         "echocode.setGuidanceLevel",
         "echocode.cycleGuidanceLevel",
+        // These are the entry points into the AI provider wizard. If activation
+        // throws before reaching them the palette entry exists but does nothing,
+        // which is indistinguishable from the command being broken.
+        "echocode.selectAIProvider",
+        "echocode.checkAIProviderUpdates",
       ];
 
       for (const command of expected) {
@@ -418,7 +445,7 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
@@ -447,7 +474,7 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
@@ -473,7 +500,7 @@ suite("EchoCode – Root Extension Integration", () => {
       voiceHandled: false,
     });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);

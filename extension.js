@@ -329,6 +329,34 @@ async function ensureCopilotActivated(channel) {
   return copilotExtension;
 }
 
+/**
+ * Warming Copilot is only ever an optimisation — it lets the provider picker list
+ * Copilot's models. It must never be able to stop the picker from opening, so a slow
+ * or failed Copilot activation degrades to "no Copilot models detected" instead of
+ * hanging the command with no visible feedback.
+ */
+async function tryEnsureCopilotActivated(channel, timeoutMs = 5000) {
+  let timer;
+  try {
+    return await Promise.race([
+      ensureCopilotActivated(channel),
+      new Promise((resolve) => {
+        timer = setTimeout(() => {
+          channel.appendLine(
+            `[EchoCode] Copilot did not activate within ${timeoutMs}ms; continuing without it.`,
+          );
+          resolve(null);
+        }, timeoutMs);
+      }),
+    ]);
+  } catch (err) {
+    channel.appendLine(`[EchoCode] Copilot activation failed: ${err.message}`);
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function activate(context) {
   outputChannel = vscode.window.createOutputChannel("EchoCode");
   outputChannel.appendLine("[EchoCode] Activated");
@@ -537,21 +565,37 @@ async function activate(context) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.selectAIProvider", async () => {
-      // The picker lists Copilot's models via vscode.lm, which reports nothing until
-      // Copilot has activated. This is a deliberate user action, so waiting is fine.
-      await ensureCopilotActivated(outputChannel);
-      await pickProviderAndModel(context, outputChannel);
+      try {
+        // The picker lists Copilot's models via vscode.lm, which reports nothing
+        // until Copilot has activated. Time-bounded so it can't stall the picker.
+        await tryEnsureCopilotActivated(outputChannel);
+        await pickProviderAndModel(context, outputChannel);
+      } catch (err) {
+        // A command that fails silently is indistinguishable from one that never
+        // ran, which makes this impossible to diagnose from the UI. Always speak up.
+        outputChannel.appendLine(`[AI Setup] Provider picker failed: ${err.stack || err.message}`);
+        vscode.window.showErrorMessage(
+          `EchoCode: could not open the AI provider picker — ${err.message}`,
+        );
+      }
     }),
   );
   context.subscriptions.push(
     vscode.commands.registerCommand(
       "echocode.checkAIProviderUpdates",
       async () => {
-        await ensureCopilotActivated(outputChannel);
-        await checkForProviderUpdates(context, outputChannel);
-        vscode.window.showInformationMessage(
-          "EchoCode: AI provider/model check complete.",
-        );
+        try {
+          await tryEnsureCopilotActivated(outputChannel);
+          await checkForProviderUpdates(context, outputChannel);
+          vscode.window.showInformationMessage(
+            "EchoCode: AI provider/model check complete.",
+          );
+        } catch (err) {
+          outputChannel.appendLine(`[AI Setup] Update check failed: ${err.stack || err.message}`);
+          vscode.window.showErrorMessage(
+            `EchoCode: AI provider check failed — ${err.message}`,
+          );
+        }
       },
     ),
   );
@@ -566,7 +610,7 @@ async function activate(context) {
   // to block the rest of activate() on a full Copilot Chat startup.
   const copilotWarmup =
     getAiSettings().provider === "copilot"
-      ? ensureCopilotActivated(outputChannel)
+      ? tryEnsureCopilotActivated(outputChannel)
       : Promise.resolve(null);
 
   copilotWarmup
