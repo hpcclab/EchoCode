@@ -1,3 +1,5 @@
+name: EchoCode Tests
+
 on:
   push:
     branches: ["**"]
@@ -6,13 +8,37 @@ on:
 
 jobs:
   run-tests:
+    # The suite is run against several Node majors because the test harness behaves
+    # differently on each, and the difference is not cosmetic:
+    #
+    #   - Node 20/22 have no native TypeScript support, so ts-node compiles test/*.ts.
+    #     With tsconfig's `module: Node16` and no `"type": "module"` in package.json,
+    #     that output is CommonJS: `require` exists, and `import.meta` is a hard
+    #     compile error (TS1470).
+    #   - Node 24 strips types natively and infers ESM from the `import` syntax, so the
+    #     same files load as ES modules: `import.meta` is legal, and `require` is not
+    #     defined at all.
+    #
+    # Code can therefore be correct on one major and fail outright on another. Node 20
+    # is closest to what ships to users (VS Code 1.99's extension host bundles Node 20
+    # via Electron), while contributors on a current Node install hit the 24 behaviour.
+    # Testing only one hides breakage in the other until someone runs CI by hand.
+    name: tests (node ${{ matrix.node-version }})
     runs-on: ubuntu-latest
+
+    strategy:
+      # Report every version's result. Cancelling siblings on the first failure would
+      # hide exactly the thing this matrix exists to reveal: which majors are affected.
+      fail-fast: false
+      matrix:
+        node-version: [20, 22, 24]
+
     steps:
       - uses: actions/checkout@v4
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
         run: npm install

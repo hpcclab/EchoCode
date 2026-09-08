@@ -5,10 +5,15 @@ import * as path from "path";
 
 import { createRequire } from "module";
 
-// Node strips types natively and detects these files as ESM (they use `import`), so the
-// CommonJS `require` is not in scope. The suite needs a real CJS require: it injects
-// mocks by writing into require.cache, which only the CJS loader consults.
-const nodeRequire = createRequire(import.meta.url);
+// Seeded from an explicit path rather than `import.meta.url`, because these files must
+// load under two different runtimes:
+//   - Node 20/22 (CI): ts-node compiles them to CommonJS, where `import.meta` is a hard
+//     compile error (TS1470) but a bare `require` exists.
+//   - Node 24 (local): Node strips types natively and detects ESM from the `import`
+//     syntax, where `import.meta` is fine but `require` is not defined.
+// createRequire with a plain path uses no meta-property, so it compiles and runs on
+// both, and still yields the real CJS require the suite needs for require.cache mocking.
+const nodeRequire = createRequire(path.join(process.cwd(), "package.json"));
 const repoRoot = process.cwd();
 const modulePath = nodeRequire.resolve(
   path.join(
