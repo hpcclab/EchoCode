@@ -232,6 +232,7 @@ function createExtensionStubs(state: {
   const selectMicrophoneCalls: number[] = [];
   const refreshCalls: number[] = [];
   const buildRegistryCalls: number[] = [];
+  const initRegistryContexts: any[] = [];
   const dependencyEnsures: number[] = [];
   const announceCalls: string[] = [];
   const initializeFolderCalls: number[] = [];
@@ -248,6 +249,10 @@ function createExtensionStubs(state: {
     },
     "Core/program_settings/program_settings/ExternalIntentRouter.js": {
       matchExternalCommand: () => null,
+      initExternalCommandRegistry: (context: any) => {
+        initRegistryContexts.push(context);
+        return "/mock/global-storage/external_commands.json";
+      },
       buildExternalCommandRegistry: async () => {
         buildRegistryCalls.push(1);
       },
@@ -381,6 +386,7 @@ function createExtensionStubs(state: {
       selectMicrophoneCalls,
       refreshCalls,
       buildRegistryCalls,
+      initRegistryContexts,
       dependencyEnsures,
       announceCalls,
       initializeFolderCalls,
@@ -433,6 +439,13 @@ suite("EchoCode – Root Extension Integration", () => {
 
       assert.equal(state.dependencyEnsures.length, 1);
       assert.equal(state.buildRegistryCalls.length, 1);
+      // The registry resolves its path from the extension context, so activate() must
+      // hand it one before asking for a build; without this the build throws.
+      assert.equal(state.initRegistryContexts.length, 1);
+      assert.ok(
+        state.initRegistryContexts[0]?.globalStorageUri,
+        "registry should be initialised with a context carrying globalStorageUri",
+      );
       assert.equal(state.initializeFolderCalls.length, 1);
       assert.deepEqual(state.announceCalls, ["student"]);
       assert.ok(

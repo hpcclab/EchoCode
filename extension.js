@@ -10,6 +10,7 @@ const {
 const {
   matchExternalCommand,
   buildExternalCommandRegistry,
+  initExternalCommandRegistry,
 } = require("./Core/program_settings/program_settings/ExternalIntentRouter");
 
 //student/dev mode system
@@ -661,7 +662,10 @@ async function activate(context) {
     setFeatureDisposable(featureKey, registerFeatureCommands(featureKey));
   });
 
-  // Build external command registry on activation (non-blocking)
+  // Build external command registry on activation (non-blocking).
+  // Init first: it resolves the registry's path under this extension's global storage
+  // and registers the file watcher's disposal against the extension lifetime.
+  initExternalCommandRegistry(context);
   buildExternalCommandRegistry().catch((err) =>
     outputChannel.appendLine(
       `[ExternalIntentRouter] Registry build failed: ${err.message}`,

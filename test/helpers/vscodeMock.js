@@ -1,3 +1,6 @@
+import path from "path";
+import os from "os";
+
 // ----- In-memory command registry -----
 const commandRegistry = new Map();
 
@@ -67,11 +70,25 @@ export const env = {
 
 // Helper to create a context like VS Code provides
 export function __createMockContext() {
+  // Points at a throwaway directory rather than the repo: code under test writes
+  // generated per-user data here, and a test run must not leave files in the checkout.
+  const storageRoot = path.join(os.tmpdir(), "echocode-test-storage");
+
   return {
     subscriptions: [],
     globalState: { get: () => undefined, update: async () => {} },
     workspaceState: { get: () => undefined, update: async () => {} },
     extensionUri: { fsPath: process.cwd() },
+    // Real VS Code always provides these; extension code may write to them without
+    // checking, so the mock has to supply them too.
+    globalStorageUri: { fsPath: storageRoot },
+    storageUri: { fsPath: path.join(storageRoot, "workspace") },
+    logUri: { fsPath: path.join(storageRoot, "logs") },
+    secrets: {
+      get: async () => undefined,
+      store: async () => {},
+      delete: async () => {},
+    },
   };
 }
 
@@ -89,6 +106,31 @@ export const copilot = {
   },
 };
 
+/**
+ * Mirrors vscode.Disposable: a dispose callback, plus the static `from` combinator.
+ * Extension code registers cleanup this way (file watchers, feature commands), so the
+ * mock has to provide it for anything that runs through activate().
+ */
+export class Disposable {
+  constructor(callOnDispose) {
+    this._callOnDispose = callOnDispose;
+  }
+
+  dispose() {
+    if (typeof this._callOnDispose === "function") {
+      this._callOnDispose();
+    }
+  }
+
+  static from(...items) {
+    return new Disposable(() => {
+      for (const item of items) {
+        if (item && typeof item.dispose === "function") item.dispose();
+      }
+    });
+  }
+}
+
 // Build a global namespace for any code using require('vscode')
 globalThis.vscode = {
   commands,
@@ -98,6 +140,7 @@ globalThis.vscode = {
   Position,
   Selection,
   Range,
+  Disposable,
   __createMockContext,
 };
 globalThis.tts = tts;

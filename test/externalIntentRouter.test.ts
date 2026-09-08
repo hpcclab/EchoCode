@@ -28,7 +28,19 @@ function loadRouterWithCommands(commands: any[]) {
 
   fs.readFileSync = (() =>
     JSON.stringify(commands)) as unknown as typeof fs.readFileSync;
-  fs.watch = (() => ({ close: () => {} })) as unknown as typeof fs.watch;
+  // `on` is part of the FSWatcher surface the router uses to drop a broken watch.
+  fs.watch = (() => ({
+    close: () => {},
+    on: () => {},
+  })) as unknown as typeof fs.watch;
+
+  // The registry resolves its path from the extension context, so the router reports no
+  // commands until it is initialised. readFileSync is stubbed above, so the directory
+  // never has to exist.
+  router.initExternalCommandRegistry({
+    globalStorageUri: { fsPath: path.join(repoRoot, ".test-global-storage") },
+    subscriptions: [],
+  });
 
   return {
     router,

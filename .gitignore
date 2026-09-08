@@ -40,6 +40,7 @@ coverage/
 echocode-venv/
 
 TestFile1.cpp
-Core/program_settings/program_settings/external_commands.json
-Core/program_settings/program_settings/external_commands.json
+# Generated per-machine on activation from the user's own installed
+# VS Code commands (see buildExternalCommandRegistry). Regenerates if
+# absent, so it must never be committed.
 Core/program_settings/program_settings/external_commands.json
