@@ -33,6 +33,9 @@ const {
 const {
   initSecretStorage,
 } = require("./Core/program_settings/program_settings/secretStore");
+const {
+  getAiSettings,
+} = require("./Core/program_settings/program_settings/AIrequest");
 
 // Python (optional adapter)
 const { ensurePylintInstalled } = require("./Language/Python/pylintHandler");
@@ -522,8 +525,6 @@ async function activate(context) {
   );
 
   context.subscriptions.push(toggleModeCommand);
-  // Ensure Copilot (stable, chat, or nightly) is available for AI features
-  await ensureCopilotActivated(outputChannel);
 
   // --- AI PROVIDER SETUP START ---
   // First activation ever: pop up the API-vs-Local + model picker.
@@ -536,6 +537,9 @@ async function activate(context) {
 
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.selectAIProvider", async () => {
+      // The picker lists Copilot's models via vscode.lm, which reports nothing until
+      // Copilot has activated. This is a deliberate user action, so waiting is fine.
+      await ensureCopilotActivated(outputChannel);
       await pickProviderAndModel(context, outputChannel);
     }),
   );
@@ -543,6 +547,7 @@ async function activate(context) {
     vscode.commands.registerCommand(
       "echocode.checkAIProviderUpdates",
       async () => {
+        await ensureCopilotActivated(outputChannel);
         await checkForProviderUpdates(context, outputChannel);
         vscode.window.showInformationMessage(
           "EchoCode: AI provider/model check complete.",
@@ -550,9 +555,25 @@ async function activate(context) {
       },
     ),
   );
-  initializeAIProviderOnStartup(context, outputChannel).catch((err) => {
-    outputChannel.appendLine(`[AI Setup] ${err.message}`);
-  });
+
+  // Warm Copilot only when it's the selected backend — Ollama and hosted-API users
+  // shouldn't pay the cost of activating an extension they never call. The startup
+  // check still has to run *after* that activation, because it probes Copilot through
+  // vscode.lm, which reports no models until Copilot is live; hence the chain rather
+  // than two independent calls.
+  //
+  // Nothing below depends on the result, so this is intentionally not awaited: it used
+  // to block the rest of activate() on a full Copilot Chat startup.
+  const copilotWarmup =
+    getAiSettings().provider === "copilot"
+      ? ensureCopilotActivated(outputChannel)
+      : Promise.resolve(null);
+
+  copilotWarmup
+    .then(() => initializeAIProviderOnStartup(context, outputChannel))
+    .catch((err) => {
+      outputChannel.appendLine(`[AI Setup] ${err.message}`);
+    });
   // --- AI PROVIDER SETUP END ---
 
   // --- DEPENDENCY CHECK START ---
@@ -562,8 +583,9 @@ async function activate(context) {
       context,
       outputChannel,
     );
-    // We don't await this blocking if we want faster startup,
-    // but for safety we await to ensure python is ready before first voice command
+    // Deliberately not awaited — the venv bootstrap can pip-install faster-whisper,
+    // which is far too slow to hold up activation. Voice commands resolve the Python
+    // path from globalState when they actually run.
     depManager.ensureDependencies().catch((err) => {
       outputChannel.appendLine(`[Dependency Error] ${err.message}`);
     });

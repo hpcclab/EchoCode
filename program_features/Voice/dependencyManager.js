@@ -135,7 +135,43 @@ class DependencyManager {
     );
   }
 
+  /**
+   * Resolves the venv's site-packages directory. Windows keeps it at a fixed path;
+   * POSIX nests it under a version-specific folder, so that one has to be discovered.
+   */
+  sitePackagesDir() {
+    if (process.platform === "win32") {
+      return path.join(this.venvPath, "Lib", "site-packages");
+    }
+
+    const libDir = path.join(this.venvPath, "lib");
+    try {
+      const pythonDir = fs
+        .readdirSync(libDir)
+        .find((entry) => entry.startsWith("python3"));
+      return pythonDir ? path.join(libDir, pythonDir, "site-packages") : null;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Spawning Python to `import faster_whisper` costs a process launch plus interpreter
+   * startup on *every* activation, which is a large share of EchoCode's load time. The
+   * package's own directory on disk answers the same question with a stat, so try that
+   * first and only fall back to the authoritative import when it's inconclusive.
+   *
+   * This is deliberately not cached in globalState: a stale "ready" flag would survive
+   * the user uninstalling the package and break voice at runtime, whereas the stat
+   * re-checks reality every launch and still costs nothing.
+   */
   async checkPackages(pythonPath) {
+    const sitePackages = this.sitePackagesDir();
+    if (sitePackages && fs.existsSync(path.join(sitePackages, "faster_whisper"))) {
+      this.log("faster-whisper found in site-packages; skipping import check.");
+      return true;
+    }
+
     try {
       // FIX: Check for faster_whisper import
       await this.runCommand(`"${pythonPath}" -c "import faster_whisper"`);
