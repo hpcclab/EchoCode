@@ -104,12 +104,44 @@ async function pullOllamaModel(modelName, opts = {}) {
   return lastStatus;
 }
 
-async function listCopilotModels() {
+/**
+ * Lists the Copilot models VS Code can currently offer.
+ *
+ * `selectChatModels` does not read a cached list — it waits for Copilot Chat to
+ * activate, sign in and fetch its catalog, which is unbounded and routinely runs to
+ * tens of seconds on a cold window (and always does for users whose backend is Ollama
+ * or a hosted API, since nothing warms Copilot for them). Every caller here only needs
+ * this to populate a menu, so cap the wait and treat "too slow" exactly like "not
+ * installed": the request path uses `selectModel()` below, which is deliberately
+ * uncapped because there the model *is* the work.
+ */
+async function listCopilotModels(opts = {}) {
   if (!vscode.lm || typeof vscode.lm.selectChatModels !== "function") {
     return [];
   }
 
-  const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
+  const timeoutMs = opts.timeoutMs ?? 3000;
+  const TIMED_OUT = Symbol("copilot-timeout");
+
+  const selection = vscode.lm.selectChatModels({ vendor: "copilot" });
+  // The losing side of the race stays pending; without this a late rejection would
+  // surface as an unhandled promise rejection long after we stopped caring.
+  selection.catch(() => {});
+
+  let timer;
+  const models = await Promise.race([
+    selection,
+    new Promise((resolve) => {
+      timer = setTimeout(() => resolve(TIMED_OUT), timeoutMs);
+    }),
+  ]).finally(() => clearTimeout(timer));
+
+  if (models === TIMED_OUT) {
+    throw new Error(
+      `Copilot did not list its models within ${timeoutMs}ms; treating it as unavailable.`,
+    );
+  }
+
   return (models || []).map((m) => ({
     id: m.id || m.family || m.name,
     name: m.name || m.family || m.id,

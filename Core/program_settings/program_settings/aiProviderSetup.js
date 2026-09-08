@@ -18,10 +18,23 @@ const BACK = "back";
 // Guards the setup loop against a user bouncing between branches forever.
 const MAX_BRANCH_HOPS = 12;
 
-async function speak(message) {
+/**
+ * Starts speaking and returns immediately — deliberately not awaited.
+ *
+ * speakMessage resolves from say.speak's completion callback, i.e. only once the
+ * sentence has finished being read aloud (~5s for a short line). Every call site here
+ * speaks immediately before opening a quick pick, so awaiting it held the UI closed for
+ * the full utterance on every step of setup. The pick is announced by the screen reader
+ * when it takes focus, so this speech is supplementary and must not gate it.
+ *
+ * Consequence to respect when adding calls: speakMessage cuts off whatever is currently
+ * being spoken, so two speak() calls with no user interaction between them means the
+ * first is never heard. Say it in one line instead.
+ */
+function speak(message) {
   try {
     const { speakMessage } = require("../speech_settings/speechHandler");
-    await speakMessage(message);
+    Promise.resolve(speakMessage(message)).catch(() => {});
   } catch (_) {
     // TTS is best-effort here; the quick pick UI is still fully usable without it.
   }
@@ -36,38 +49,43 @@ async function saveGlobal(config, key, value) {
  * Copilot models come from vscode.lm; Ollama models come from a live /api/tags call;
  * the hosted-API entry reports whatever endpoint the user has already configured.
  * Any probe failing (extension missing, server not running) just yields an empty list.
+ *
+ * The three probes hit unrelated backends, so they run concurrently: the caller waits
+ * for the slowest one rather than the sum of all three. Nothing is rendered while this
+ * runs, so every second here is a second of apparently-frozen UI.
  */
 async function detectProviders(outputChannel) {
-  const result = {
-    copilot: { available: false, models: [] },
-    ollama: { available: false, models: [] },
-    api: { available: false, models: [], configured: false },
-  };
-
-  try {
-    const copilotModels = await listCopilotModels();
-    result.copilot.available = copilotModels.length > 0;
-    result.copilot.models = copilotModels;
-  } catch (err) {
-    outputChannel?.appendLine(
-      `[AI Setup] Copilot model detection failed: ${err.message}`,
-    );
-  }
-
-  try {
-    const ollamaModels = await listOllamaModels({ timeoutMs: 2000 });
-    result.ollama.available = ollamaModels.length > 0;
-    result.ollama.models = ollamaModels;
-  } catch (err) {
-    outputChannel?.appendLine(
-      `[AI Setup] Ollama model detection failed: ${err.message}`,
-    );
-  }
-
   const config = vscode.workspace.getConfiguration("echocode");
   const apiProviderId = config.get("apiProvider", "");
-  if (apiProviderId) {
-    result.api.configured = true;
+
+  const copilotProbe = (async () => {
+    try {
+      const models = await listCopilotModels({ timeoutMs: 3000 });
+      return { available: models.length > 0, models };
+    } catch (err) {
+      outputChannel?.appendLine(
+        `[AI Setup] Copilot model detection failed: ${err.message}`,
+      );
+      return { available: false, models: [] };
+    }
+  })();
+
+  const ollamaProbe = (async () => {
+    try {
+      const models = await listOllamaModels({ timeoutMs: 2000 });
+      return { available: models.length > 0, models };
+    } catch (err) {
+      outputChannel?.appendLine(
+        `[AI Setup] Ollama model detection failed: ${err.message}`,
+      );
+      return { available: false, models: [] };
+    }
+  })();
+
+  const apiProbe = (async () => {
+    if (!apiProviderId) {
+      return { available: false, models: [], configured: false };
+    }
     try {
       const preset = getPreset(apiProviderId);
       const models = await listApiModels(
@@ -78,16 +96,22 @@ async function detectProviders(outputChannel) {
         },
         { timeoutMs: 5000 },
       );
-      result.api.available = models.length > 0;
-      result.api.models = models;
+      return { available: models.length > 0, models, configured: true };
     } catch (err) {
       outputChannel?.appendLine(
         `[AI Setup] API provider check failed: ${err.message}`,
       );
+      return { available: false, models: [], configured: true };
     }
-  }
+  })();
 
-  return result;
+  const [copilot, ollama, api] = await Promise.all([
+    copilotProbe,
+    ollamaProbe,
+    apiProbe,
+  ]);
+
+  return { copilot, ollama, api };
 }
 
 /* ------------------------------------------------------------------ *
@@ -175,7 +199,7 @@ async function configureApiProvider(context, outputChannel) {
     );
   } catch (err) {
     outputChannel?.appendLine(`[AI Setup] API verification failed: ${err.message}`);
-    await speak(`Could not reach ${preset.label}.`);
+    speak(`Could not reach ${preset.label}.`);
 
     const retry = await vscode.window.showErrorMessage(
       `EchoCode could not reach ${preset.label}: ${err.message}`,
@@ -231,7 +255,7 @@ async function configureApiProvider(context, outputChannel) {
   vscode.window.showInformationMessage(
     `EchoCode: Using ${preset.label} (${modelId}).`,
   );
-  await speak(`EchoCode will use ${preset.label} with ${modelId}.`);
+  speak(`EchoCode will use ${preset.label} with ${modelId}.`);
   await context.globalState.update(FIRST_RUN_KEY, true);
   return true;
 }
@@ -267,7 +291,7 @@ async function configureCopilot(context, detected) {
   vscode.window.showInformationMessage(
     `EchoCode: Using GitHub Copilot (${modelLabel}).`,
   );
-  await speak(`EchoCode will use GitHub Copilot with ${modelLabel}.`);
+  speak(`EchoCode will use GitHub Copilot with ${modelLabel}.`);
   await context.globalState.update(FIRST_RUN_KEY, true);
   return true;
 }
@@ -306,7 +330,12 @@ async function runApiBranch(context, outputChannel, detected) {
  * Local Ollama branch
  * ------------------------------------------------------------------ */
 
-async function saveOllamaChoice(context, modelName) {
+/**
+ * `spokenPrefix` lets a caller fold its own announcement into this one. Speech no
+ * longer blocks (see speak()), so a caller that spoke first would simply be cut off
+ * mid-sentence by the confirmation below; one utterance carries both facts instead.
+ */
+async function saveOllamaChoice(context, modelName, spokenPrefix = "") {
   const config = vscode.workspace.getConfiguration("echocode");
   await saveGlobal(config, "aiProvider", "ollama");
   await saveGlobal(config, "useLocalOllama", true);
@@ -315,7 +344,9 @@ async function saveOllamaChoice(context, modelName) {
   vscode.window.showInformationMessage(
     `EchoCode: Using local Ollama model "${modelName}".`,
   );
-  await speak(`EchoCode will use the local Ollama model ${modelName}.`);
+  speak(
+    `${spokenPrefix}EchoCode will use the local Ollama model ${modelName}.`,
+  );
   await context.globalState.update(FIRST_RUN_KEY, true);
   return true;
 }
@@ -345,7 +376,7 @@ async function installRecommendedModel(context, outputChannel) {
   // the full hardware summary aloud stalls setup for ten-plus seconds. The details go
   // to the output channel above and to the quick pick itself, which a screen reader
   // announces on focus anyway.
-  await speak(`Recommending ${recommended.name} for this machine.`);
+  speak(`Recommending ${recommended.name} for this machine.`);
 
   if (underpowered) {
     vscode.window.showWarningMessage(
@@ -430,12 +461,11 @@ async function installRecommendedModel(context, outputChannel) {
     vscode.window.showErrorMessage(
       `EchoCode: could not download "${modelName}": ${err.message}`,
     );
-    await speak(`The download failed. ${err.message}`);
+    speak(`The download failed. ${err.message}`);
     return BACK;
   }
 
-  await speak(`${modelName} is installed.`);
-  return saveOllamaChoice(context, modelName);
+  return saveOllamaChoice(context, modelName, `${modelName} is installed. `);
 }
 
 /**
@@ -460,7 +490,7 @@ async function runLocalBranch(context, outputChannel) {
 
     // --- Ollama itself is not answering ---
     if (models === null) {
-      await speak("Ollama was not detected.");
+      speak("Ollama was not detected.");
       const choice = await vscode.window.showWarningMessage(
         `EchoCode: Ollama is not responding at ${baseUrl}. Make sure Ollama is installed and running, then try again.`,
         "Retry",
@@ -508,7 +538,7 @@ async function runLocalBranch(context, outputChannel) {
     }
 
     // --- Reachable, but nothing is installed ---
-    await speak("Ollama is running, but no models are installed.");
+    speak("Ollama is running, but no models are installed.");
     const careToInstall = await vscode.window.showWarningMessage(
       "EchoCode: Ollama is running but has no models installed. Would you like EchoCode to recommend and install one?",
       "Recommend a Model",
@@ -673,7 +703,7 @@ async function initializeAIProviderOnStartup(context, outputChannel) {
   const alreadyConfigured = context.globalState.get(FIRST_RUN_KEY, false);
 
   if (!alreadyConfigured) {
-    await speak("Welcome to EchoCode. Let's choose your AI provider.");
+    speak("Welcome to EchoCode. Let's choose your AI provider.");
     await pickProviderAndModel(context, outputChannel);
     return;
   }
