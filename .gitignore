@@ -44,3 +44,7 @@ TestFile1.cpp
 # VS Code commands (see buildExternalCommandRegistry). Regenerates if
 # absent, so it must never be committed.
 Core/program_settings/program_settings/external_commands.json
+wiki/.obsidian/app.json
+wiki/.obsidian/appearance.json
+wiki/.obsidian/core-plugins.json
+wiki/.obsidian/workspace.json

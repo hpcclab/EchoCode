@@ -92,10 +92,6 @@ npm test
 
 Runs the Mocha suite. See [Testing and CI](Testing-and-CI) — it is worth reading before you touch the harness, because the test files must load under two incompatible Node runtimes.
 
-### A warning about the debugger
-
-A breakpoint left in an extension-host file pauses the whole extension, which looks identical to EchoCode failing to start. If activation appears to hang, check your breakpoints before debugging anything else.
-
 ### Where activation begins
 
 `extension.js` exports `activate(context)`. In rough order it:

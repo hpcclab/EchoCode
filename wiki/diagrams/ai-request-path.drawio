@@ -1,0 +1,96 @@
+<mxfile host="app.diagrams.net" agent="EchoCode wiki" version="24.7.17">
+  <diagram id="ai-request-path" name="AI Request Path">
+    <mxGraphModel dx="1100" dy="760" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <mxCell id="t1" value="Features never talk to a backend" style="text;html=1;align=left;verticalAlign=middle;fontSize=13;fontStyle=2;fontColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="40" y="10" width="400" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="f1" value="Annotations&#xa;Big-O" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f2" value="Chat Tutor&#xa;Summaries" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="240" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f3" value="Voice to Code" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="440" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="f4" value="Assignment rescan" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="640" y="40" width="180" height="50" as="geometry" />
+        </mxCell>
+
+        <mxCell id="lbl1" value="AIrequest.js — public surface" style="text;html=1;align=left;verticalAlign=middle;fontSize=12;fontStyle=1;fontColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="40" y="128" width="300" height="20" as="geometry" />
+        </mxCell>
+
+        <mxCell id="a1" value="analyzeAI()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="40" y="155" width="180" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="a2" value="requestTextFromMessages()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="240" y="155" width="180" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="a3" value="generateCodeFromVoice()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="440" y="155" width="180" height="45" as="geometry" />
+        </mxCell>
+        <mxCell id="a4" value="classifyVoiceIntent()" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=11;fontFamily=Courier New;" vertex="1" parent="1">
+          <mxGeometry x="640" y="155" width="180" height="45" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#6c8ebf;" edge="1" parent="1" source="f1" target="a1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#6c8ebf;" edge="1" parent="1" source="f2" target="a2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#6c8ebf;" edge="1" parent="1" source="f3" target="a3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#6c8ebf;" edge="1" parent="1" source="f4" target="a4"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="d1" value="dispatchMessages()&#xa;&#xa;reads getAiSettings().provider" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=13;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="240" y="260" width="380" height="70" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#82b366;" edge="1" parent="1" source="a1" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#82b366;" edge="1" parent="1" source="a2" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e7" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#82b366;" edge="1" parent="1" source="a3" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#82b366;" edge="1" parent="1" source="a4" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="note1" value="Add a new backend HERE.&#xa;Every feature inherits it for free." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=11;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="660" y="260" width="180" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=none;dashed=1;strokeColor=#d6b656;" edge="1" parent="1" source="note1" target="d1"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="b1" value="copilot&#xa;sendCopilotMessages()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="40" y="400" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b2" value="ollama&#xa;sendOllamaPrompt()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="320" y="400" width="220" height="55" as="geometry" />
+        </mxCell>
+        <mxCell id="b3" value="api&#xa;sendApiChat()" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;fontSize=12;" vertex="1" parent="1">
+          <mxGeometry x="600" y="400" width="220" height="55" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e10" value="copilot" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#d79b00;fontSize=10;" edge="1" parent="1" source="d1" target="b1"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e11" value="ollama" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#d79b00;fontSize=10;" edge="1" parent="1" source="d1" target="b2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e12" value="api" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#d79b00;fontSize=10;" edge="1" parent="1" source="d1" target="b3"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="t2" value="vscode.lm&#xa;&#xa;selectModel() — deliberately UNCAPPED&#xa;(here the model is the work)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="40" y="520" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="t3" value="httpClient.requestJson()&#xa;&#xa;POST /api/generate" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="320" y="520" width="220" height="80" as="geometry" />
+        </mxCell>
+        <mxCell id="t4" value="httpClient.requestJson()&#xa;&#xa;wire: openai | anthropic&#xa;key from context.secrets" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=11;align=left;spacingLeft=8;" vertex="1" parent="1">
+          <mxGeometry x="600" y="520" width="220" height="80" as="geometry" />
+        </mxCell>
+
+        <mxCell id="e13" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#9673a6;" edge="1" parent="1" source="b1" target="t2"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e14" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#9673a6;" edge="1" parent="1" source="b2" target="t3"><mxGeometry relative="1" as="geometry" /></mxCell>
+        <mxCell id="e15" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;strokeColor=#9673a6;" edge="1" parent="1" source="b3" target="t4"><mxGeometry relative="1" as="geometry" /></mxCell>
+
+        <mxCell id="note2" value="Menu path is different: listCopilotModels() is capped at 3s and treats &quot;too slow&quot; as &quot;not installed&quot;. Unifying the two makes the setup wizard hang." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=11;align=left;spacingLeft=6;" vertex="1" parent="1">
+          <mxGeometry x="40" y="625" width="380" height="60" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
