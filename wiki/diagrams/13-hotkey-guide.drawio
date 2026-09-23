@@ -1,0 +1,114 @@
+<mxfile host="app.diagrams.net" agent="EchoCode wiki generator" version="24.7.17">
+  <diagram id="hotkey-guide-l0" name="Level 0 — Context">
+    <mxGraphModel dx="1180" dy="720" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1180" pageHeight="720" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ttl" value="Hotkey Guide — Level 0 (Context)" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#222222;" vertex="1" parent="1">
+          <mxGeometry x="40" y="14" width="760" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="sub" value="F1 reads EchoCode's own shortcuts aloud — the recovery path when the user has forgotten everything else." style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1000" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="hdA" value="SOURCES" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="40" y="78" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="hdB" value="PROCESS" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="430" y="78" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="hdC" value="SINKS" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="830" y="78" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="actor" value="Users&#xa;(BVI programmer)" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#4a90d9;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="140" y="96" width="40" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="src0" value="Hardcoded guide text&#xa;(hotkeyGuide.js)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="180" width="250" height="52" as="geometry" />
+        </mxCell>
+        <mxCell id="proc" value="13.0&#xa;&#xa;Hotkey Guide" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d98cc4;fontSize=11;arcSize=16;" vertex="1" parent="1">
+          <mxGeometry x="430" y="173" width="280" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="snk0" value="Speech Output / TTS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#66a06a;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="830" y="180" width="250" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="F1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.15;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor" target="proc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="shortcut list" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="src0" target="proc">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="shortcuts, in task order" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="proc" target="snk0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="The spoken list is hand-maintained, not generated from package.json, so it drifts silently when a binding changes." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=10;align=left;spacingLeft=6;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="430" y="306" width="360" height="78" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+  <diagram id="hotkey-guide-l1" name="Level 1 — Decomposition">
+    <mxGraphModel dx="1220" dy="820" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1220" pageHeight="820" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ttl" value="Hotkey Guide — Level 1 (Decomposition)" style="text;html=1;align=left;verticalAlign=middle;fontSize=15;fontStyle=1;fontColor=#222222;" vertex="1" parent="1">
+          <mxGeometry x="40" y="14" width="820" height="24" as="geometry" />
+        </mxCell>
+        <mxCell id="sub" value="F1 reads EchoCode's own shortcuts aloud — the recovery path when the user has forgotten everything else." style="text;html=1;align=left;verticalAlign=middle;fontSize=11;fontStyle=2;fontColor=#777777;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1040" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="hdA" value="INPUTS" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="40" y="86" width="200" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="hdC" value="SERVICES &amp; SINKS" style="text;html=1;align=left;verticalAlign=middle;fontSize=10;fontStyle=1;fontColor=#999999;" vertex="1" parent="1">
+          <mxGeometry x="790" y="86" width="220" height="16" as="geometry" />
+        </mxCell>
+        <mxCell id="band" value="ECHOCODE CORE" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fdf0fb;strokeColor=#d98cc4;verticalAlign=top;align=left;spacingLeft=12;spacingTop=6;fontSize=10;fontStyle=1;fontColor=#666666;arcSize=4;container=1;collapsible=0;expand=0;recursiveResize=0;movable=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="120" width="300" height="316" as="geometry" />
+        </mxCell>
+        <mxCell id="p0" value="13.1&#xa;Load guide text" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d98cc4;fontSize=11;arcSize=16;" vertex="1" parent="band">
+          <mxGeometry x="20" y="40" width="260" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="p1" value="13.2&#xa;Order by task frequency&#xa;(spoken lists are linear)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d98cc4;fontSize=11;arcSize=16;" vertex="1" parent="band">
+          <mxGeometry x="20" y="134" width="260" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="p2" value="13.3&#xa;Speak sequentially&#xa;(interruptible)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#d98cc4;fontSize=11;arcSize=16;" vertex="1" parent="band">
+          <mxGeometry x="20" y="228" width="260" height="64" as="geometry" />
+        </mxCell>
+        <mxCell id="actor" value="Users" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;fillColor=#4a90d9;strokeColor=none;" vertex="1" parent="1">
+          <mxGeometry x="130" y="126" width="40" height="62" as="geometry" />
+        </mxCell>
+        <mxCell id="in0" value="Guide text&#xa;(module constant)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="40" y="230" width="220" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="out0" value="Speech Output / TTS" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#e8f5e9;strokeColor=#66a06a;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="790" y="154" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="out1" value="Ctrl+Alt+X&#xa;(user interrupt)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#ffffff;strokeColor=#9a9a9a;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="790" y="242" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="e0" value="F1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor" target="p0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" value="list" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in0" target="p0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e2" value="entries" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0" target="p1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" value="ordered" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="p2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" value="spoken guide" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.22;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2" target="out0">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" value="stop" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#8a8a8a;dashed=1;exitX=1;exitY=0.78;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2" target="out1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="note" value="The spoken list is hand-maintained, not generated from package.json, so it drifts silently when a binding changes." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=10;align=left;spacingLeft=6;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="790" y="506" width="340" height="82" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
