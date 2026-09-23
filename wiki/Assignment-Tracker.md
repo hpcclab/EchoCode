@@ -35,9 +35,26 @@ Needs an AI backend for task extraction and rescanning — see [AI Providers and
 
 The task list lives in memory for the session. Reloading the window clears it, and you load the assignment again. Progress is not saved to disk.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Assignment Tracker — Level 0 context diagram](diagrams/svg/10-assignment-tracker-L0.svg)
+
+*Editable source: [`10-assignment-tracker.drawio`](diagrams/10-assignment-tracker.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Assignment Tracker — Level 1 decomposition diagram](diagrams/svg/10-assignment-tracker-L1.svg)
+
+*Editable source: [`10-assignment-tracker.drawio`](diagrams/10-assignment-tracker.drawio)*
+
 
 ### File
 

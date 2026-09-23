@@ -34,9 +34,26 @@ Follow-up questions work — the tutor keeps the exchange in memory, so "why?" a
 
 Needs an AI backend. If you have not set one up, see [AI Providers and Models](AI-Providers-and-Models). Errors are reported in the panel and in **View → Output → EchoCode**.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Chat Tutor — Level 0 context diagram](diagrams/svg/02-chat-tutor-L0.svg)
+
+*Editable source: [`02-chat-tutor.drawio`](diagrams/02-chat-tutor.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Chat Tutor — Level 1 decomposition diagram](diagrams/svg/02-chat-tutor-L1.svg)
+
+*Editable source: [`02-chat-tutor.drawio`](diagrams/02-chat-tutor.drawio)*
+
 
 ### Files
 

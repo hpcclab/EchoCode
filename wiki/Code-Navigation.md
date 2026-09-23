@@ -41,9 +41,26 @@ Function jumping depends on VS Code understanding the language, which means the 
 
 There is a **Navigate Files in Current Folder** entry in the Command Palette that does not work — see [Known Gaps](Known-Gaps). Use **Ctrl+Alt+P**.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Code Navigation — Level 0 context diagram](diagrams/svg/07-code-navigation-L0.svg)
+
+*Editable source: [`07-code-navigation.drawio`](diagrams/07-code-navigation.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Code Navigation — Level 1 decomposition diagram](diagrams/svg/07-code-navigation-L1.svg)
+
+*Editable source: [`07-code-navigation.drawio`](diagrams/07-code-navigation.drawio)*
+
 
 ### Files
 

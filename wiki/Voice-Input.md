@@ -64,9 +64,26 @@ Check **View → Output → EchoCode**:
 
 Empty or noise-only recordings are discarded rather than sent anywhere.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Voice Input — Level 0 context diagram](diagrams/svg/01-voice-input-L0.svg)
+
+*Editable source: [`01-voice-input.drawio`](diagrams/01-voice-input.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Voice Input — Level 1 decomposition diagram](diagrams/svg/01-voice-input-L1.svg)
+
+*Editable source: [`01-voice-input.drawio`](diagrams/01-voice-input.drawio)*
+
 
 ### The pipeline
 

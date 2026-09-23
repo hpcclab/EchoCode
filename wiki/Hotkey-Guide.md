@@ -20,9 +20,26 @@ F1 is the conventional help key, and it is a single keypress — no chord to rem
 
 The same content is in [Keyboard Shortcuts](Keyboard-Shortcuts), organised by task and including which shortcuts are Dev-mode-only.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Hotkey Guide — Level 0 context diagram](diagrams/svg/13-hotkey-guide-L0.svg)
+
+*Editable source: [`13-hotkey-guide.drawio`](diagrams/13-hotkey-guide.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Hotkey Guide — Level 1 decomposition diagram](diagrams/svg/13-hotkey-guide-L1.svg)
+
+*Editable source: [`13-hotkey-guide.drawio`](diagrams/13-hotkey-guide.drawio)*
+
 
 ### File
 

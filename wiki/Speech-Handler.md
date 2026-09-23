@@ -2,6 +2,22 @@
 
 > **Developer page.** Users never interact with this directly — they just hear the result. The only user-visible controls are **Ctrl+Alt+U** / **Ctrl+Alt+D** (speed) and **Ctrl+Alt+X** (stop), documented in [Keyboard Shortcuts](Keyboard-Shortcuts).
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Speech Output / TTS — Level 0 context diagram](diagrams/svg/14-speech-output-L0.svg)
+
+*Editable source: [`14-speech-output.drawio`](diagrams/14-speech-output.drawio)*
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Speech Output / TTS — Level 1 decomposition diagram](diagrams/svg/14-speech-output-L1.svg)
+
+*Editable source: [`14-speech-output.drawio`](diagrams/14-speech-output.drawio)*
+
 ## What it is
 
 `Core/program_settings/speech_settings/speechHandler.js` — ~327 lines. Every spoken word in EchoCode goes through it, from **116 call sites across 26 files**.

@@ -33,9 +33,26 @@ Opening a file you have never seen:
 
 Needs an AI backend — see [AI Providers and Models](AI-Providers-and-Models). Summary length and tone follow your [guidance level](Modes-and-Guidance).
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Code Summaries — Level 0 context diagram](diagrams/svg/04-code-summaries-L0.svg)
+
+*Editable source: [`04-code-summaries.drawio`](diagrams/04-code-summaries.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Code Summaries — Level 1 decomposition diagram](diagrams/svg/04-code-summaries-L1.svg)
+
+*Editable source: [`04-code-summaries.drawio`](diagrams/04-code-summaries.drawio)*
+
 
 ### Files
 

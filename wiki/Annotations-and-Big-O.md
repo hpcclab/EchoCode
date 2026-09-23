@@ -48,9 +48,26 @@ Change it with **Ctrl+Alt+Z**.
 
 Findings are also attached to lines as editor decorations, so a sighted collaborator can see the same notes you are hearing. Toggling annotations off clears them.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Annotations and Big-O — Level 0 context diagram](diagrams/svg/03-annotations-bigo-L0.svg)
+
+*Editable source: [`03-annotations-bigo.drawio`](diagrams/03-annotations-bigo.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Annotations and Big-O — Level 1 decomposition diagram](diagrams/svg/03-annotations-bigo-L1.svg)
+
+*Editable source: [`03-annotations-bigo.drawio`](diagrams/03-annotations-bigo.drawio)*
+
 
 ### Files
 

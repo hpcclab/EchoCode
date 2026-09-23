@@ -227,17 +227,29 @@ function buildLevel1(f) {
   });
 
   // --- data stores along the bottom ---
+  //
+  // Placed so the drop from a step lands in a clear corridor: the gap between the
+  // inputs column and the band on the left, or between the band and the services
+  // column on the right. A store centred under the band would make its flow fall
+  // straight through the band and every step box below the one it came from.
   const stores = l1.stores || [];
   const storeY = TOP + bandH + 70;
+  const SW = 220;
+  const leftCorridor = 310;                       // inputs end at 260, band starts at 360
+  const rightCorridor = BAND_X + PW + 40 + 65;    // band ends here, services start at COL_R
   stores.forEach((n, i) => {
-    c.push(vertex(`st${i}`, n.name, S.store, BAND_X - 120 + i * 250, storeY, 220, 52));
+    const centre = i % 2 === 0 ? leftCorridor : rightCorridor;
+    c.push(vertex(`st${i}`, n.name, S.store, centre - SW / 2, storeY, SW, 52));
   });
 
   let e = 0;
   c.push(edge(`e${e++}`, "actor", "p0", l1.trigger || "invoke", 1, 0.5, 0, 0.35));
 
+  // Entry heights are staggered so two inputs feeding nearby steps do not run their
+  // horizontal legs — and therefore their labels — at the same height.
+  const nIn = l1.inputs.length;
   l1.inputs.forEach((n, i) =>
-    c.push(edge(`e${e++}`, `in${i}`, `p${n.into ?? 0}`, n.flow, 1, 0.5, 0, 0.65)));
+    c.push(edge(`e${e++}`, `in${i}`, `p${n.into ?? 0}`, n.flow, 1, 0.5, 0, fan(i, nIn))));
 
   // pipeline chain: bottom of one step into the top of the next
   for (let i = 0; i < l1.steps.length - 1; i++) {
@@ -249,10 +261,11 @@ function buildLevel1(f) {
     c.push(edge(`e${e++}`, `p${n.from ?? l1.steps.length - 1}`, `out${i}`, n.flow,
       1, fan(i, nOut), 0, 0.5, n.back ? EDGE_BACK : EDGE)));
 
-  // stores hang off the bottom of their step
+  // Stores leave through the side of their step, not the bottom, so the flow exits the
+  // band horizontally and only then drops down its corridor.
   stores.forEach((n, i) =>
     c.push(edge(`e${e++}`, `p${n.from ?? 0}`, `st${i}`, n.flow,
-      i % 2 === 0 ? 0.25 : 0.75, 1, 0.5, 0, n.back ? EDGE_BACK : EDGE)));
+      i % 2 === 0 ? 0 : 1, 0.5, 0.5, 0, n.back ? EDGE_BACK : EDGE)));
 
   (l1.extraEdges || []).forEach((x) =>
     c.push(edge(`e${e++}`, x.from, x.to, x.label, 1, 0.5, 0, 0.5, x.dashed ? EDGE_BACK : EDGE)));

@@ -40,10 +40,6 @@ EchoCode asks for the endpoint, then the key, then **verifies the endpoint answe
 
 **Your key is stored in your operating system's keychain**, never in `settings.json`. Settings files are plaintext, often committed to git, and sync between machines — so there is deliberately no setting for the key. Leave the key box blank when reconfiguring and EchoCode reuses the stored one.
 
-### Using Claude without an API key
-
-Copilot's own model lineup includes Claude, served under your Copilot entitlement. Choosing **API model → GitHub Copilot** gets you Claude-class models with no separate Anthropic key and no billing. The `anthropic` preset under "Another model API" is the opposite: bring-your-own-key.
-
 ### What happens on later launches
 
 EchoCode quietly re-checks that your chosen model still exists, because model lineups change often — an Ollama model gets removed, a Copilot model is renamed, an API key is revoked. If your configured model has vanished it offers to pick a new one. If everything matches, it says nothing.
@@ -60,9 +56,26 @@ Common causes:
 - **No Copilot models detected** — Copilot Chat is not installed, or you are not signed in.
 - **API request failed** — the error text comes straight from the provider and usually names the real problem (bad key, wrong model, no credit).
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![AI Provider and Model Selection — Level 0 context diagram](diagrams/svg/11-ai-provider-selection-L0.svg)
+
+*Editable source: [`11-ai-provider-selection.drawio`](diagrams/11-ai-provider-selection.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![AI Provider and Model Selection — Level 1 decomposition diagram](diagrams/svg/11-ai-provider-selection-L1.svg)
+
+*Editable source: [`11-ai-provider-selection.drawio`](diagrams/11-ai-provider-selection.drawio)*
+
 
 ### The files
 

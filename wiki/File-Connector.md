@@ -33,9 +33,26 @@ Existing `#include` lines in the source are read so the generated header carries
 - **Incompatible file types** — connecting a Python function into a C++ file is refused. Both files must be the same language.
 - **Nothing copied** — step 1 must succeed before step 2 has anything to paste.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![File Connector — Level 0 context diagram](diagrams/svg/09-file-connector-L0.svg)
+
+*Editable source: [`09-file-connector.drawio`](diagrams/09-file-connector.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![File Connector — Level 1 decomposition diagram](diagrams/svg/09-file-connector-L1.svg)
+
+*Editable source: [`09-file-connector.drawio`](diagrams/09-file-connector.drawio)*
+
 
 ### File
 

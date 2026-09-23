@@ -136,21 +136,21 @@
           <mxGeometry x="790" y="418" width="240" height="60" as="geometry" />
         </mxCell>
         <mxCell id="st0" value="Temp WAV&#xa;(deleted after use)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="240" y="694" width="220" height="52" as="geometry" />
+          <mxGeometry x="200" y="694" width="220" height="52" as="geometry" />
         </mxCell>
         <mxCell id="st1" value="Local Storage &amp; State&#xa;(python path)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="490" y="694" width="220" height="52" as="geometry" />
+          <mxGeometry x="615" y="694" width="220" height="52" as="geometry" />
         </mxCell>
         <mxCell id="e0" value="hotkey" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor" target="p0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="audio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in0" target="p0">
+        <mxCell id="e1" value="audio" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.22;entryDx=0;entryDy=0;" edge="1" parent="1" source="in0" target="p0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="code context" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in1" target="p4">
+        <mxCell id="e2" value="code context" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="in1" target="p4">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e3" value="keywords" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in2" target="p3">
+        <mxCell id="e3" value="keywords" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.78;entryDx=0;entryDy=0;" edge="1" parent="1" source="in2" target="p3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e4" value="wav path" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0" target="p1">
@@ -177,10 +177,10 @@
         <mxCell id="e11" value="what was heard / done" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.78;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p4" target="out3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e12" value="write / unlink" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0" target="st0">
+        <mxCell id="e12" value="write / unlink" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0" target="st0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e13" value="read interpreter" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#8a8a8a;dashed=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="st1">
+        <mxCell id="e13" value="read interpreter" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#8a8a8a;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="st1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="note" value="Transcription is local (faster-whisper). Audio never leaves the machine; only the resulting text may reach the AI layer." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=10;align=left;spacingLeft=6;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">

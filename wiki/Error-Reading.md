@@ -47,9 +47,26 @@ Automatic linting when you save a Python file is **not currently active**. The c
 
 The `Read Python Errors Aloud` entry in the Command Palette is part of that same dormant feature and will not work — use **Ctrl+Alt+G** instead.
 
+### Data flow — Level 0 (context)
+
+What goes in, what comes out, and who it talks to.
+
+![Error Reading — Level 0 context diagram](diagrams/svg/05-error-reading-L0.svg)
+
+*Editable source: [`05-error-reading.drawio`](diagrams/05-error-reading.drawio)*
+
 ---
 
 ## For developers
+
+### Data flow — Level 1 (decomposition)
+
+The same feature opened up into its numbered sub-processes.
+
+![Error Reading — Level 1 decomposition diagram](diagrams/svg/05-error-reading-L1.svg)
+
+*Editable source: [`05-error-reading.drawio`](diagrams/05-error-reading.drawio)*
+
 
 ### Files
 

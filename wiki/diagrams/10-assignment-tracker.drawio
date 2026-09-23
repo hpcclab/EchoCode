@@ -118,18 +118,18 @@
           <mxGeometry x="790" y="330" width="240" height="60" as="geometry" />
         </mxCell>
         <mxCell id="st0" value="Task list + index&#xa;(in memory, lost on reload)" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="240" y="694" width="220" height="52" as="geometry" />
+          <mxGeometry x="200" y="694" width="220" height="52" as="geometry" />
         </mxCell>
         <mxCell id="st1" value="Completion flags" style="shape=cylinder3;boundedLbl=1;backgroundOutline=1;size=7;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=10;" vertex="1" parent="1">
-          <mxGeometry x="490" y="694" width="220" height="52" as="geometry" />
+          <mxGeometry x="615" y="694" width="220" height="52" as="geometry" />
         </mxCell>
         <mxCell id="e0" value="load file" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.35;entryDx=0;entryDy=0;" edge="1" parent="1" source="actor" target="p0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e1" value="file" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in0" target="p0">
+        <mxCell id="e1" value="file" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.22;entryDx=0;entryDy=0;" edge="1" parent="1" source="in0" target="p0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e2" value="source" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.65;entryDx=0;entryDy=0;" edge="1" parent="1" source="in1" target="p3">
+        <mxCell id="e2" value="source" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.78;entryDx=0;entryDy=0;" edge="1" parent="1" source="in1" target="p3">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="e3" value="plain text" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p0" target="p1">
@@ -153,10 +153,10 @@
         <mxCell id="e9" value="task text, progress" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.78;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="p2" target="out2">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e10" value="read / write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="st0">
+        <mxCell id="e10" value="read / write" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p1" target="st0">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e11" value="set" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p4" target="st1">
+        <mxCell id="e11" value="set" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;endFill=1;jettySize=auto;orthogonalLoop=1;jumpStyle=arc;jumpSize=6;fontSize=9;labelBackgroundColor=#ffffff;verticalAlign=bottom;strokeColor=#555555;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="p4" target="st1">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="note" value="Completion detection is a model comparing prose to code, so it is non-deterministic. Ctrl+Alt+M is the deterministic override." style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;darkOpacity=0.05;fillColor=#fff2cc;strokeColor=#d6b656;size=14;fontSize=10;align=left;spacingLeft=6;verticalAlign=top;spacingTop=4;" vertex="1" parent="1">
