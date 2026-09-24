@@ -39,7 +39,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Code Summaries — Level 0 context diagram](diagrams/svg/04-code-summaries-L0.svg)
 
-*Editable source: [`04-code-summaries.drawio`](diagrams/04-code-summaries.drawio)*
+*Editable source: `wiki/diagrams/04-code-summaries.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -51,7 +51,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Code Summaries — Level 1 decomposition diagram](diagrams/svg/04-code-summaries-L1.svg)
 
-*Editable source: [`04-code-summaries.drawio`](diagrams/04-code-summaries.drawio)*
+*Editable source: `wiki/diagrams/04-code-summaries.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

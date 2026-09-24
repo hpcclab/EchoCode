@@ -31,7 +31,7 @@ What goes in, what comes out, and who it talks to.
 
 ![File and Folder Tools — Level 0 context diagram](diagrams/svg/08-file-folder-tools-L0.svg)
 
-*Editable source: [`08-file-folder-tools.drawio`](diagrams/08-file-folder-tools.drawio)*
+*Editable source: `wiki/diagrams/08-file-folder-tools.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -43,7 +43,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![File and Folder Tools — Level 1 decomposition diagram](diagrams/svg/08-file-folder-tools-L1.svg)
 
-*Editable source: [`08-file-folder-tools.drawio`](diagrams/08-file-folder-tools.drawio)*
+*Editable source: `wiki/diagrams/08-file-folder-tools.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

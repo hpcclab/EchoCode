@@ -8,7 +8,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Speech Output / TTS — Level 0 context diagram](diagrams/svg/14-speech-output-L0.svg)
 
-*Editable source: [`14-speech-output.drawio`](diagrams/14-speech-output.drawio)*
+*Editable source: `wiki/diagrams/14-speech-output.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ### Data flow — Level 1 (decomposition)
 
@@ -16,7 +16,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Speech Output / TTS — Level 1 decomposition diagram](diagrams/svg/14-speech-output-L1.svg)
 
-*Editable source: [`14-speech-output.drawio`](diagrams/14-speech-output.drawio)*
+*Editable source: `wiki/diagrams/14-speech-output.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ## What it is
 

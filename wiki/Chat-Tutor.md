@@ -40,7 +40,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Chat Tutor — Level 0 context diagram](diagrams/svg/02-chat-tutor-L0.svg)
 
-*Editable source: [`02-chat-tutor.drawio`](diagrams/02-chat-tutor.drawio)*
+*Editable source: `wiki/diagrams/02-chat-tutor.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -52,7 +52,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Chat Tutor — Level 1 decomposition diagram](diagrams/svg/02-chat-tutor-L1.svg)
 
-*Editable source: [`02-chat-tutor.drawio`](diagrams/02-chat-tutor.drawio)*
+*Editable source: `wiki/diagrams/02-chat-tutor.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

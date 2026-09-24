@@ -62,7 +62,7 @@ What goes in, what comes out, and who it talks to.
 
 ![AI Provider and Model Selection — Level 0 context diagram](diagrams/svg/11-ai-provider-selection-L0.svg)
 
-*Editable source: [`11-ai-provider-selection.drawio`](diagrams/11-ai-provider-selection.drawio)*
+*Editable source: `wiki/diagrams/11-ai-provider-selection.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -74,7 +74,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![AI Provider and Model Selection — Level 1 decomposition diagram](diagrams/svg/11-ai-provider-selection-L1.svg)
 
-*Editable source: [`11-ai-provider-selection.drawio`](diagrams/11-ai-provider-selection.drawio)*
+*Editable source: `wiki/diagrams/11-ai-provider-selection.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### The files

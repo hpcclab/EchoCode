@@ -41,7 +41,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Assignment Tracker — Level 0 context diagram](diagrams/svg/10-assignment-tracker-L0.svg)
 
-*Editable source: [`10-assignment-tracker.drawio`](diagrams/10-assignment-tracker.drawio)*
+*Editable source: `wiki/diagrams/10-assignment-tracker.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -53,7 +53,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Assignment Tracker — Level 1 decomposition diagram](diagrams/svg/10-assignment-tracker-L1.svg)
 
-*Editable source: [`10-assignment-tracker.drawio`](diagrams/10-assignment-tracker.drawio)*
+*Editable source: `wiki/diagrams/10-assignment-tracker.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### File

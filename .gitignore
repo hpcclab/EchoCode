@@ -49,7 +49,15 @@ wiki/.obsidian/appearance.json
 wiki/.obsidian/core-plugins.json
 wiki/.obsidian/workspace.json
 
-# Feature diagrams: the .drawio sources, the generators, and the rendered SVGs.
-# Kept local — regenerate with:
+# Feature diagrams: the rendered SVGs are tracked, because the wiki pages embed them
+# and they must resolve in a fresh clone. The .drawio sources and the generators that
+# produce both are local-only:
 #   node wiki/diagrams/generate.js && python3 wiki/diagrams/render_svg.py
-wiki/diagrams/
+#
+# Note the shape of these rules. Excluding "wiki/diagrams/" outright would make the
+# negations below impossible — git cannot re-include a file whose parent directory is
+# excluded — so the contents are excluded and svg/ is re-included instead.
+wiki/diagrams/*
+!wiki/diagrams/svg/
+wiki/diagrams/svg/*
+!wiki/diagrams/svg/*.svg

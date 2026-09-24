@@ -53,7 +53,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Error Reading — Level 0 context diagram](diagrams/svg/05-error-reading-L0.svg)
 
-*Editable source: [`05-error-reading.drawio`](diagrams/05-error-reading.drawio)*
+*Editable source: `wiki/diagrams/05-error-reading.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -65,7 +65,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Error Reading — Level 1 decomposition diagram](diagrams/svg/05-error-reading-L1.svg)
 
-*Editable source: [`05-error-reading.drawio`](diagrams/05-error-reading.drawio)*
+*Editable source: `wiki/diagrams/05-error-reading.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

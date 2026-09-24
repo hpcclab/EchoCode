@@ -47,7 +47,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Line and Character Read-Out — Level 0 context diagram](diagrams/svg/06-line-character-readout-L0.svg)
 
-*Editable source: [`06-line-character-readout.drawio`](diagrams/06-line-character-readout.drawio)*
+*Editable source: `wiki/diagrams/06-line-character-readout.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -59,7 +59,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Line and Character Read-Out — Level 1 decomposition diagram](diagrams/svg/06-line-character-readout-L1.svg)
 
-*Editable source: [`06-line-character-readout.drawio`](diagrams/06-line-character-readout.drawio)*
+*Editable source: `wiki/diagrams/06-line-character-readout.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

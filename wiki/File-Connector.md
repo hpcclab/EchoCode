@@ -39,7 +39,7 @@ What goes in, what comes out, and who it talks to.
 
 ![File Connector — Level 0 context diagram](diagrams/svg/09-file-connector-L0.svg)
 
-*Editable source: [`09-file-connector.drawio`](diagrams/09-file-connector.drawio)*
+*Editable source: `wiki/diagrams/09-file-connector.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -51,7 +51,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![File Connector — Level 1 decomposition diagram](diagrams/svg/09-file-connector-L1.svg)
 
-*Editable source: [`09-file-connector.drawio`](diagrams/09-file-connector.drawio)*
+*Editable source: `wiki/diagrams/09-file-connector.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### File

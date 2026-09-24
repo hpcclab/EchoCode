@@ -75,7 +75,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Modes and Guidance — Level 0 context diagram](diagrams/svg/12-modes-guidance-L0.svg)
 
-*Editable source: [`12-modes-guidance.drawio`](diagrams/12-modes-guidance.drawio)*
+*Editable source: `wiki/diagrams/12-modes-guidance.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -87,7 +87,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Modes and Guidance — Level 1 decomposition diagram](diagrams/svg/12-modes-guidance-L1.svg)
 
-*Editable source: [`12-modes-guidance.drawio`](diagrams/12-modes-guidance.drawio)*
+*Editable source: `wiki/diagrams/12-modes-guidance.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

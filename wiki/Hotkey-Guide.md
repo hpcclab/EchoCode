@@ -26,7 +26,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Hotkey Guide — Level 0 context diagram](diagrams/svg/13-hotkey-guide-L0.svg)
 
-*Editable source: [`13-hotkey-guide.drawio`](diagrams/13-hotkey-guide.drawio)*
+*Editable source: `wiki/diagrams/13-hotkey-guide.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -38,7 +38,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Hotkey Guide — Level 1 decomposition diagram](diagrams/svg/13-hotkey-guide-L1.svg)
 
-*Editable source: [`13-hotkey-guide.drawio`](diagrams/13-hotkey-guide.drawio)*
+*Editable source: `wiki/diagrams/13-hotkey-guide.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### File

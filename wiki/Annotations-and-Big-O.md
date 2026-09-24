@@ -54,7 +54,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Annotations and Big-O — Level 0 context diagram](diagrams/svg/03-annotations-bigo-L0.svg)
 
-*Editable source: [`03-annotations-bigo.drawio`](diagrams/03-annotations-bigo.drawio)*
+*Editable source: `wiki/diagrams/03-annotations-bigo.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -66,7 +66,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Annotations and Big-O — Level 1 decomposition diagram](diagrams/svg/03-annotations-bigo-L1.svg)
 
-*Editable source: [`03-annotations-bigo.drawio`](diagrams/03-annotations-bigo.drawio)*
+*Editable source: `wiki/diagrams/03-annotations-bigo.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files

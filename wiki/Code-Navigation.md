@@ -47,7 +47,7 @@ What goes in, what comes out, and who it talks to.
 
 ![Code Navigation — Level 0 context diagram](diagrams/svg/07-code-navigation-L0.svg)
 
-*Editable source: [`07-code-navigation.drawio`](diagrams/07-code-navigation.drawio)*
+*Editable source: `wiki/diagrams/07-code-navigation.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 ---
 
@@ -59,7 +59,7 @@ The same feature opened up into its numbered sub-processes.
 
 ![Code Navigation — Level 1 decomposition diagram](diagrams/svg/07-code-navigation-L1.svg)
 
-*Editable source: [`07-code-navigation.drawio`](diagrams/07-code-navigation.drawio)*
+*Editable source: `wiki/diagrams/07-code-navigation.drawio` — generated locally, see `wiki/diagrams/README.md`*
 
 
 ### Files
