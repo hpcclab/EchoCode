@@ -48,3 +48,8 @@ wiki/.obsidian/app.json
 wiki/.obsidian/appearance.json
 wiki/.obsidian/core-plugins.json
 wiki/.obsidian/workspace.json
+
+# Feature diagrams: the .drawio sources, the generators, and the rendered SVGs.
+# Kept local — regenerate with:
+#   node wiki/diagrams/generate.js && python3 wiki/diagrams/render_svg.py
+wiki/diagrams/
