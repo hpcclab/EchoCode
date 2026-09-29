@@ -38,7 +38,7 @@
   <circle cx="104.0" cy="442.5" r="12.5" fill="#4a90d9"/>
   <path d="M 104.0 455.0 V 480.2 M 82.0 461.9 H 126.0 M 104.0 480.2 L 83.0 506.0 M 104.0 480.2 L 125.0 506.0" stroke="#4a90d9" stroke-width="2.4" fill="none" stroke-linecap="round"/>
   <text x="104.0" y="513.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle" dominant-baseline="middle">Users</text>
-  <text x="104.0" y="526.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle" dominant-baseline="middle">(BVI programmer)</text>
+  <text x="104.0" y="526.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10" font-weight="normal" fill="#555555" text-anchor="middle" dominant-baseline="middle">(BLV programmer)</text>
   <rect x="268.0" y="306.0" width="234.0" height="68.0" rx="6" fill="#ffffff" stroke="#6c8ebf"/>
   <text x="385.0" y="331.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Keyboard / Hotkeys</text>
   <text x="385.0" y="349.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">45 bindings</text>
