@@ -7,13 +7,45 @@ import * as path from "path";
 import * as VS from "./helpers/vscodeMock.js";
 
 const vscode: any = VS;
-const nodeRequire = require;
+import { createRequire } from "module";
+
+// Seeded from an explicit path rather than `import.meta.url`, because these files must
+// load under two different runtimes:
+//   - Node 20/22 (CI): ts-node compiles them to CommonJS, where `import.meta` is a hard
+//     compile error (TS1470) but a bare `require` exists.
+//   - Node 24 (local): Node strips types natively and detects ESM from the `import`
+//     syntax, where `import.meta` is fine but `require` is not defined.
+// createRequire with a plain path uses no meta-property, so it compiles and runs on
+// both, and still yields the real CJS require the suite needs for require.cache mocking.
+const nodeRequire = createRequire(path.join(process.cwd(), "package.json"));
 const repoRoot = process.cwd();
 const extensionModulePath = nodeRequire.resolve(
   path.join(repoRoot, "extension.js"),
 );
 
 type StubMap = Record<string, any>;
+
+/**
+ * A context that reports the AI provider as already chosen.
+ *
+ * These tests cover steady-state command wiring, not onboarding. With a virgin
+ * globalState the startup wizard fires, speaks its welcome line, and races the
+ * assertions on spokenMessages/infoMessages. The provider wizard has its own suite.
+ */
+function createConfiguredContext() {
+  const context: any = vscode.__createMockContext();
+  const state: Record<string, unknown> = {
+    "echocode.aiProviderConfigured": true,
+  };
+  context.globalState = {
+    get: (key: string, fallback: unknown) =>
+      Object.prototype.hasOwnProperty.call(state, key) ? state[key] : fallback,
+    update: async (key: string, value: unknown) => {
+      state[key] = value;
+    },
+  };
+  return context;
+}
 
 function createOutputChannelRecorder() {
   const lines: string[] = [];
@@ -205,6 +237,7 @@ function createExtensionStubs(state: {
   const selectMicrophoneCalls: number[] = [];
   const refreshCalls: number[] = [];
   const buildRegistryCalls: number[] = [];
+  const initRegistryContexts: any[] = [];
   const dependencyEnsures: number[] = [];
   const announceCalls: string[] = [];
   const initializeFolderCalls: number[] = [];
@@ -221,6 +254,10 @@ function createExtensionStubs(state: {
     },
     "Core/program_settings/program_settings/ExternalIntentRouter.js": {
       matchExternalCommand: () => null,
+      initExternalCommandRegistry: (context: any) => {
+        initRegistryContexts.push(context);
+        return "/mock/global-storage/external_commands.json";
+      },
       buildExternalCommandRegistry: async () => {
         buildRegistryCalls.push(1);
       },
@@ -354,6 +391,7 @@ function createExtensionStubs(state: {
       selectMicrophoneCalls,
       refreshCalls,
       buildRegistryCalls,
+      initRegistryContexts,
       dependencyEnsures,
       announceCalls,
       initializeFolderCalls,
@@ -368,7 +406,7 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
@@ -390,6 +428,11 @@ suite("EchoCode – Root Extension Integration", () => {
         "echocode.checkPythonErrors",
         "echocode.setGuidanceLevel",
         "echocode.cycleGuidanceLevel",
+        // These are the entry points into the AI provider wizard. If activation
+        // throws before reaching them the palette entry exists but does nothing,
+        // which is indistinguishable from the command being broken.
+        "echocode.selectAIProvider",
+        "echocode.checkAIProviderUpdates",
       ];
 
       for (const command of expected) {
@@ -401,6 +444,13 @@ suite("EchoCode – Root Extension Integration", () => {
 
       assert.equal(state.dependencyEnsures.length, 1);
       assert.equal(state.buildRegistryCalls.length, 1);
+      // The registry resolves its path from the extension context, so activate() must
+      // hand it one before asking for a build; without this the build throws.
+      assert.equal(state.initRegistryContexts.length, 1);
+      assert.ok(
+        state.initRegistryContexts[0]?.globalStorageUri,
+        "registry should be initialised with a context carrying globalStorageUri",
+      );
       assert.equal(state.initializeFolderCalls.length, 1);
       assert.deepEqual(state.announceCalls, ["student"]);
       assert.ok(
@@ -418,7 +468,7 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
@@ -447,15 +497,17 @@ suite("EchoCode – Root Extension Integration", () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({ isRecording: false });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
 
       await harness.commandRegistry.get("echocode.toggleVoice")?.();
 
-      assert.deepEqual(state.chatProvider.recordingStates, [true]);
-      assert.deepEqual(state.spokenMessages.slice(-1), ["Listening"]);
+      assert.deepEqual(state.chatProvider.recordingStates, []);
+      assert.deepEqual(state.spokenMessages.slice(-1), [
+        "Chat mode. Listening.",
+      ]);
       assert.equal(state.startRecordingCalls.length, 1);
     } finally {
       module.restore();
@@ -463,7 +515,7 @@ suite("EchoCode – Root Extension Integration", () => {
     }
   });
 
-  test("toggleVoice falls back to chat when voice routing does not handle the transcript", async () => {
+  test("toggleVoice in chat mode sends transcript directly to chat provider", async () => {
     const harness = createVscodeHarness();
     const { stubs, state } = createExtensionStubs({
       isRecording: true,
@@ -471,17 +523,17 @@ suite("EchoCode – Root Extension Integration", () => {
       voiceHandled: false,
     });
     const module = loadRootExtension(stubs);
-    const context = vscode.__createMockContext();
+    const context = createConfiguredContext();
 
     try {
       await module.extension.activate(context);
 
       await harness.commandRegistry.get("echocode.toggleVoice")?.();
 
-      assert.deepEqual(state.chatProvider.recordingStates, [false]);
+      assert.deepEqual(state.chatProvider.recordingStates, []);
       assert.ok(state.spokenMessages.includes("Processing"));
       assert.equal(state.stopCalls.length, 1);
-      assert.deepEqual(state.voiceCommands, ["Explain this code"]);
+      assert.deepEqual(state.voiceCommands, []);
       assert.deepEqual(state.chatProvider.handledMessages, [
         "Explain this code",
       ]);

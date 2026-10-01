@@ -2,8 +2,11 @@ import "./helpers/vscodeMock.js";
 import { strict as assert } from "assert";
 import { suite, test } from "mocha";
 import * as path from "path";
+import { createRequire } from "module";
 
-const nodeRequire = require;
+// createRequire rather than a bare `require`: on Node 22.18+ and 24 the test files load
+// as ES modules, where `require` is not defined. See aiProviderSetup.test.ts.
+const nodeRequire = createRequire(path.join(process.cwd(), "package.json"));
 const repoRoot = process.cwd();
 const speechHandlerModulePath = nodeRequire.resolve(
   path.join(repoRoot, "Core/program_settings/speech_settings/speechHandler.js"),

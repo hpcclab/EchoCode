@@ -3,6 +3,9 @@ const vscode = require("vscode");
 const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
+const {
+  requestTextFromMessages,
+} = require("../../Core/program_settings/program_settings/AIrequest");
 
 // --- Simple mock voice input (kept for dev/demo) ---
 function performVoiceRecognition() {
@@ -188,38 +191,22 @@ class EchoCodeChatViewProvider {
 
     // Assemble messages with small running history
     const messages = [];
-    messages.push(vscode.LanguageModelChatMessage.User(prompt));
+    messages.push({ role: "system", content: prompt });
     for (const turn of this.conversationHistory.slice(-6)) {
-      messages.push(vscode.LanguageModelChatMessage.User(turn.user));
-      messages.push(vscode.LanguageModelChatMessage.Assistant(turn.response));
+      messages.push({ role: "user", content: turn.user });
+      messages.push({ role: "assistant", content: turn.response });
     }
-    messages.push(vscode.LanguageModelChatMessage.User(userInput));
-
-    // FIX: Select ANY copilot model, do not hardcode 'gpt-4o' family
-    const models = await vscode.lm.selectChatModels({ vendor: "copilot" });
-    const model = models[0];
-
-    if (!model) {
-      this._safePost({
-        type: "response",
-        text: "No language model available. Please enable GitHub Copilot.",
-      });
-      this.outputChannel.appendLine("No chat model available.");
-      return;
-    }
+    messages.push({ role: "user", content: userInput });
 
     // UI: loading
     this._safePost({ type: "responseLoading", started: true });
 
     try {
       const cts = new vscode.CancellationTokenSource();
-      const chatResponse = await model.sendRequest(messages, {}, cts.token);
-
-      let responseText = "";
-      for await (const fragment of chatResponse.text) {
-        responseText += fragment;
-        this._safePost({ type: "responseFragment", text: fragment });
-      }
+      const responseText = await requestTextFromMessages(messages, {
+        cancellationToken: cts.token,
+      });
+      this._safePost({ type: "responseFragment", text: responseText });
 
       this.conversationHistory.push({
         user: userInput,

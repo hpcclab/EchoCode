@@ -1,5 +1,5 @@
 const vscode = require("vscode");
-require("dotenv").config();
+require("dotenv").config({ quiet: true });
 const {
   loadProgramFeatureModule,
   resolveClassExport,
@@ -10,6 +10,7 @@ const {
 const {
   matchExternalCommand,
   buildExternalCommandRegistry,
+  initExternalCommandRegistry,
 } = require("./Core/program_settings/program_settings/ExternalIntentRouter");
 
 //student/dev mode system
@@ -23,6 +24,19 @@ const {
   guard,
   STUDENT_LOCKED_COMMANDS,
 } = require("./Core/program_settings/guard");
+
+// AI provider selection (Copilot, hosted API, or local Ollama) + model auto-detection
+const {
+  initializeAIProviderOnStartup,
+  pickProviderAndModel,
+  checkForProviderUpdates,
+} = require("./Core/program_settings/program_settings/aiProviderSetup");
+const {
+  initSecretStorage,
+} = require("./Core/program_settings/program_settings/secretStore");
+const {
+  getAiSettings,
+} = require("./Core/program_settings/program_settings/AIrequest");
 
 // Python (optional adapter)
 const { ensurePylintInstalled } = require("./Language/Python/pylintHandler");
@@ -316,6 +330,34 @@ async function ensureCopilotActivated(channel) {
   return copilotExtension;
 }
 
+/**
+ * Warming Copilot is only ever an optimisation — it lets the provider picker list
+ * Copilot's models. It must never be able to stop the picker from opening, so a slow
+ * or failed Copilot activation degrades to "no Copilot models detected" instead of
+ * hanging the command with no visible feedback.
+ */
+async function tryEnsureCopilotActivated(channel, timeoutMs = 5000) {
+  let timer;
+  try {
+    return await Promise.race([
+      ensureCopilotActivated(channel),
+      new Promise((resolve) => {
+        timer = setTimeout(() => {
+          channel.appendLine(
+            `[EchoCode] Copilot did not activate within ${timeoutMs}ms; continuing without it.`,
+          );
+          resolve(null);
+        }, timeoutMs);
+      }),
+    ]);
+  } catch (err) {
+    channel.appendLine(`[EchoCode] Copilot activation failed: ${err.message}`);
+    return null;
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 async function activate(context) {
   outputChannel = vscode.window.createOutputChannel("EchoCode");
   outputChannel.appendLine("[EchoCode] Activated");
@@ -512,8 +554,72 @@ async function activate(context) {
   );
 
   context.subscriptions.push(toggleModeCommand);
-  // Ensure Copilot (stable, chat, or nightly) is available for AI features
-  await ensureCopilotActivated(outputChannel);
+
+  // --- AI PROVIDER SETUP START ---
+  // First activation ever: pop up the API-vs-Local + model picker.
+  // Every activation after that: silently recheck availability, since Copilot's
+  // model lineup, hosted API catalogs, and installed Ollama models all change often.
+  //
+  // Hosted API keys live in the OS keychain via SecretStorage, so the store has to be
+  // handed the extension context before any provider code can read a key.
+  initSecretStorage(context);
+
+  context.subscriptions.push(
+    vscode.commands.registerCommand("echocode.selectAIProvider", async () => {
+      try {
+        // The picker lists Copilot's models via vscode.lm, which reports nothing
+        // until Copilot has activated. Time-bounded so it can't stall the picker.
+        await tryEnsureCopilotActivated(outputChannel);
+        await pickProviderAndModel(context, outputChannel);
+      } catch (err) {
+        // A command that fails silently is indistinguishable from one that never
+        // ran, which makes this impossible to diagnose from the UI. Always speak up.
+        outputChannel.appendLine(`[AI Setup] Provider picker failed: ${err.stack || err.message}`);
+        vscode.window.showErrorMessage(
+          `EchoCode: could not open the AI provider picker — ${err.message}`,
+        );
+      }
+    }),
+  );
+  context.subscriptions.push(
+    vscode.commands.registerCommand(
+      "echocode.checkAIProviderUpdates",
+      async () => {
+        try {
+          await tryEnsureCopilotActivated(outputChannel);
+          await checkForProviderUpdates(context, outputChannel);
+          vscode.window.showInformationMessage(
+            "EchoCode: AI provider/model check complete.",
+          );
+        } catch (err) {
+          outputChannel.appendLine(`[AI Setup] Update check failed: ${err.stack || err.message}`);
+          vscode.window.showErrorMessage(
+            `EchoCode: AI provider check failed — ${err.message}`,
+          );
+        }
+      },
+    ),
+  );
+
+  // Warm Copilot only when it's the selected backend — Ollama and hosted-API users
+  // shouldn't pay the cost of activating an extension they never call. The startup
+  // check still has to run *after* that activation, because it probes Copilot through
+  // vscode.lm, which reports no models until Copilot is live; hence the chain rather
+  // than two independent calls.
+  //
+  // Nothing below depends on the result, so this is intentionally not awaited: it used
+  // to block the rest of activate() on a full Copilot Chat startup.
+  const copilotWarmup =
+    getAiSettings().provider === "copilot"
+      ? tryEnsureCopilotActivated(outputChannel)
+      : Promise.resolve(null);
+
+  copilotWarmup
+    .then(() => initializeAIProviderOnStartup(context, outputChannel))
+    .catch((err) => {
+      outputChannel.appendLine(`[AI Setup] ${err.message}`);
+    });
+  // --- AI PROVIDER SETUP END ---
 
   // --- DEPENDENCY CHECK START ---
   // This runs once on startup and ensures the venv exists
@@ -522,8 +628,9 @@ async function activate(context) {
       context,
       outputChannel,
     );
-    // We don't await this blocking if we want faster startup,
-    // but for safety we await to ensure python is ready before first voice command
+    // Deliberately not awaited — the venv bootstrap can pip-install faster-whisper,
+    // which is far too slow to hold up activation. Voice commands resolve the Python
+    // path from globalState when they actually run.
     depManager.ensureDependencies().catch((err) => {
       outputChannel.appendLine(`[Dependency Error] ${err.message}`);
     });
@@ -555,7 +662,10 @@ async function activate(context) {
     setFeatureDisposable(featureKey, registerFeatureCommands(featureKey));
   });
 
-  // Build external command registry on activation (non-blocking)
+  // Build external command registry on activation (non-blocking).
+  // Init first: it resolves the registry's path under this extension's global storage
+  // and registers the file watcher's disposal against the extension lifetime.
+  initExternalCommandRegistry(context);
   buildExternalCommandRegistry().catch((err) =>
     outputChannel.appendLine(
       `[ExternalIntentRouter] Registry build failed: ${err.message}`,
@@ -665,7 +775,11 @@ async function activate(context) {
             outputChannel,
             context.globalState,
           );
-          const voiceResult = await tryExecuteVoiceCommand(text, outputChannel);
+          const voiceResult = await tryExecuteVoiceCommand(
+            text,
+            outputChannel,
+            { allowCodeGeneration: false },
+          );
           if (voiceResult.handled) {
             return;
           }
@@ -725,39 +839,18 @@ async function activate(context) {
   // Toggle Voice Command (Smart Router)
   context.subscriptions.push(
     vscode.commands.registerCommand("echocode.toggleVoice", async () => {
-      if (featureImplementations.isRecording()) {
-        // Sync UI: Stop immediately
-        if (chatProvider) chatProvider.setRecordingState(false);
+      const activeMode = VOICE_MODES[currentVoiceMode] || "chat";
+      const modeCommandMap = {
+        chat: "echocode.voiceChat",
+        code: "echocode.voiceCode",
+        command: "echocode.voiceCommand",
+      };
+      const targetCommand = modeCommandMap[activeMode] || "echocode.voiceChat";
 
-        // Announce processing (don't await to avoid blocking stop)
-        speakMessage("Processing");
-
-        const result = await vscode.commands.executeCommand(
-          "echocode._voiceStop",
-        );
-
-        if (result && result.ok && result.text) {
-          // Attempt to execute as a voice command first
-          const voiceResult = await tryExecuteVoiceCommand(
-            result.text,
-            outputChannel,
-          );
-
-          if (!voiceResult.handled) {
-            // Fallback: Send to Chat Tutor
-            await vscode.commands.executeCommand("echocode.openChat");
-            if (chatProvider) {
-              await chatProvider.handleUserMessage(result.text);
-            }
-          }
-        }
-      } else {
-        // Sync UI: Start immediately
-        if (chatProvider) chatProvider.setRecordingState(true);
-
-        await speakMessage("Listening");
-        await vscode.commands.executeCommand("echocode._voiceStart");
-      }
+      outputChannel.appendLine(
+        `[Voice Mode] toggleVoice dispatch -> ${activeMode} (${targetCommand})`,
+      );
+      await vscode.commands.executeCommand(targetCommand);
     }),
   );
 

@@ -1,8 +1,9 @@
-# 🚀 Ignore VS Code workspace settings
-!node_modules/**
-
-# 🚀 Ignore Node.js dependencies (not needed in the packaged extension)
-node_modules/
+# 🚀 node_modules is intentionally NOT ignored here.
+# vsce's default packaging resolves node_modules against "dependencies" in
+# package.json and prunes devDependencies automatically; excluding the whole
+# folder would strip out runtime deps (mammoth, pdf-parse, dotenv, say,
+# sound-play, ffmpeg-static, fluent-ffmpeg) and break the extension for
+# anyone installing it from the Marketplace.
 
 # 🚀 Ignore Git metadata
 .git/
@@ -13,7 +14,19 @@ node_modules/
 
 # 🚀 Ignore test-related files
 .vscode-test/
+.vscode-test.mjs
 test/
+
+# 🚀 Ignore the TS command-registry scaffold used only by the test suite
+# (the real entry point is extension.js at the repo root; nothing at
+# runtime requires src/ or its compiled out/ output).
+src/
+out/
+tsconfig.json
+
+# 🚀 Ignore CI/CD and repo scaffolding not needed by an installed extension
+.github/
+vsc-extension-quickstart.md
 
 # 🚀 Ignore temporary or cache files
 **/*.map

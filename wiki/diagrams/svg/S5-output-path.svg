@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker></defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="60.0" y="150.0" width="300.0" height="300.0" rx="4" fill="#fdf0fb" stroke="#c264a8"/>
+  <text x="72.0" y="165.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="bold" fill="#4a4a4a" letter-spacing="0.6">EVERY FEATURE</text>
+  <path d="M 360.0 240.0 L 378.0 240.0 L 415.0 240.0 L 452.0 240.0 L 470.0 240.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 360.0 390.0 L 378.0 390.0 L 415.0 390.0 L 415.0 480.0 L 452.0 480.0 L 470.0 480.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 620.0 300.0 L 620.0 318.0 L 620.0 360.0 L 620.0 402.0 L 620.0 420.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <rect x="581.7" y="332.0" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="620.0" y="339.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">formatted text</text>
+  <path d="M 770.0 480.0 L 788.0 480.0 L 835.0 480.0 L 882.0 480.0 L 900.0 480.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 1180.0 480.0 L 1198.0 480.0 L 1235.0 480.0 L 1272.0 480.0 L 1290.0 480.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 360.0 195.0 L 378.0 195.0 L 630.0 195.0 L 630.0 337.0 L 882.0 337.0 L 900.0 337.0" fill="none" stroke="#888888" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <rect x="441.1" y="181.0" width="125.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="504.0" y="188.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">queue empty, mode change</text>
+  <path d="M 360.0 165.0 L 378.0 165.0 L 630.0 165.0 L 630.0 207.0 L 882.0 207.0 L 900.0 207.0" fill="none" stroke="#888888" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <rect x="480.4" y="151.0" width="47.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="504.0" y="158.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">findings</text>
+  <path d="M 1180.0 337.0 L 1198.0 337.0 L 1415.0 337.0 L 1415.0 422.0 L 1415.0 440.0" fill="none" stroke="#888888" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <text x="50.0" y="59.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26.0" font-weight="bold" font-style="normal" fill="#1a1a1a" dominant-baseline="middle">Output Path — Everything Reaches the User as Speech</text>
+  <text x="50.0" y="89.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" font-style="normal" fill="#6a6a6a" dominant-baseline="middle">One sink, 116 call sites. Verbosity and interruption are handled centrally.</text>
+  <rect x="78.0" y="194.0" width="264.0" height="40.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="210.0" y="214.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Errors &amp; annotations</text>
+  <rect x="78.0" y="244.0" width="264.0" height="40.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="210.0" y="264.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Summaries &amp; explanations</text>
+  <rect x="78.0" y="294.0" width="264.0" height="40.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="210.0" y="314.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Navigation &amp; position</text>
+  <rect x="78.0" y="344.0" width="264.0" height="40.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="210.0" y="364.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Tasks &amp; confirmations</text>
+  <rect x="78.0" y="394.0" width="264.0" height="40.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="210.0" y="414.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="14.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Mode &amp; status</text>
+  <rect x="470.0" y="180.0" width="300.0" height="120.0" rx="6" fill="#f0e6fa" stroke="#9673a6"/>
+  <text x="620.0" y="218.2" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Guidance Formatter</text>
+  <text x="620.0" y="261.8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">guided · balanced · concise</text>
+  <text x="470.0" y="334.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">Per-field character caps are</text>
+  <text x="470.0" y="349.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">speech-duration budgets,</text>
+  <text x="470.0" y="364.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">not layout constraints.</text>
+  <rect x="470.0" y="420.0" width="300.0" height="120.0" rx="6" fill="#d6ead7" stroke="#5d9161"/>
+  <text x="620.0" y="458.2" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Speech Handler</text>
+  <text x="620.0" y="501.8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">interrupt, never overlap</text>
+  <text x="470.0" y="574.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">A new message kills the current</text>
+  <text x="470.0" y="589.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">utterance and waits for its exit</text>
+  <text x="470.0" y="604.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="italic" fill="#7a7a7a" dominant-baseline="middle">before speaking.</text>
+  <rect x="900.0" y="440.0" width="280.0" height="80.0" rx="6" fill="#ffffff" stroke="#8a8a8a"/>
+  <text x="1040.0" y="480.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="17.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">OS Speech Services</text>
+  <rect x="900.0" y="300.0" width="280.0" height="74.0" rx="6" fill="#dae8fc" stroke="#6c8ebf"/>
+  <text x="1040.0" y="327.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Audio Pings</text>
+  <text x="1040.0" y="346.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">non-verbal cues</text>
+  <rect x="900.0" y="170.0" width="280.0" height="74.0" rx="6" fill="#eeeeee" stroke="#8a8a8a"/>
+  <text x="1040.0" y="197.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Editor Decorations</text>
+  <text x="1040.0" y="216.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">for sighted collaborators</text>
+  <rect x="1290.0" y="440.0" width="250.0" height="80.0" rx="6" fill="#d6ead7" stroke="#5d9161"/>
+  <text x="1415.0" y="480.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="18.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Heard by the user</text>
+  <path d="M 60.0 560.0 H 426.0 L 440.0 574.0 V 700.0 H 60.0 Z" fill="#fff2cc" stroke="#d6b656"/>
+  <path d="M 426.0 560.0 V 574.0 H 440.0" fill="none" stroke="#d6b656"/>
+  <text x="69.0" y="575.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.0" fill="#6b5c22" dominant-baseline="middle">Interrupting rather than queueing is the right</text>
+  <text x="69.0" y="591.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.0" fill="#6b5c22" dominant-baseline="middle">default for an accessibility tool: arrowing down a</text>
+  <text x="69.0" y="608.8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.0" fill="#6b5c22" dominant-baseline="middle">list emits one announcement per row, and a queue</text>
+  <text x="69.0" y="625.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="13.0" fill="#6b5c22" dominant-baseline="middle">would narrate rows the user has already passed.</text>
+</svg>

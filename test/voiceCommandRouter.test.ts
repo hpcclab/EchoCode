@@ -2,13 +2,23 @@ import "./helpers/vscodeMock.js";
 import { strict as assert } from "assert";
 import { suite, test } from "mocha";
 import * as path from "path";
+import { createRequire } from "module";
 
 // @ts-ignore
 import * as VS from "./helpers/vscodeMock.js";
 
 const vscode: any = VS;
-const fs = require("fs") as typeof import("fs");
-const nodeRequire = require;
+
+// Seeded from an explicit path rather than `import.meta.url`, because these files must
+// load under two different runtimes:
+//   - Node 20/22 (CI): ts-node compiles them to CommonJS, where `import.meta` is a hard
+//     compile error (TS1470) but a bare `require` exists.
+//   - Node 24 (local): Node strips types natively and detects ESM from the `import`
+//     syntax, where `import.meta` is fine but `require` is not defined.
+// createRequire with a plain path uses no meta-property, so it compiles and runs on
+// both, and still yields the real CJS require the suite needs for require.cache mocking.
+const nodeRequire = createRequire(path.join(process.cwd(), "package.json"));
+const fs = nodeRequire("fs") as typeof import("fs");
 const repoRoot = process.cwd();
 
 const routerModulePath = nodeRequire.resolve(
@@ -218,6 +228,67 @@ suite("EchoCode – Voice Command Router", () => {
     }
   });
 
+  test("matches internal commands with minor STT misspellings", async () => {
+    const originalReadFileSync = fs.readFileSync;
+    const outputChannel = createOutputChannel();
+    const commands = captureCommandExecution();
+    const { router, restore } = loadVoiceRouter();
+
+    stubVoiceCommands([
+      { id: "echocode.createFile", keywords: ["create file"] },
+    ]);
+
+    try {
+      const result = await router.tryExecuteVoiceCommand(
+        "pleese creat fyle",
+        outputChannel,
+      );
+
+      assert.deepEqual(result, {
+        handled: true,
+        command: "echocode.createFile",
+      });
+      assert.deepEqual(commands.executed, ["echocode.createFile"]);
+      assert.ok(outputChannel.lines.some((line) => line.includes("score:")));
+    } finally {
+      fs.readFileSync = originalReadFileSync;
+      commands.restore();
+      restore();
+    }
+  });
+
+  test("chooses best-fit command among similar keywords", async () => {
+    const originalReadFileSync = fs.readFileSync;
+    const outputChannel = createOutputChannel();
+    const commands = captureCommandExecution();
+    const { router, restore } = loadVoiceRouter();
+
+    stubVoiceCommands([
+      { id: "echocode.createFile", keywords: ["create file", "new file"] },
+      {
+        id: "echocode.createFolder",
+        keywords: ["create folder", "new folder"],
+      },
+    ]);
+
+    try {
+      const result = await router.tryExecuteVoiceCommand(
+        "crate new foldeer",
+        outputChannel,
+      );
+
+      assert.deepEqual(result, {
+        handled: true,
+        command: "echocode.createFolder",
+      });
+      assert.deepEqual(commands.executed, ["echocode.createFolder"]);
+    } finally {
+      fs.readFileSync = originalReadFileSync;
+      commands.restore();
+      restore();
+    }
+  });
+
   test("blocks locked internal commands in student mode", async () => {
     const originalReadFileSync = fs.readFileSync;
     const spokenMessages: string[] = [];
@@ -398,6 +469,57 @@ suite("EchoCode – Voice Command Router", () => {
       assert.equal(
         messages.infoMessages[0],
         "EchoCode: Generating Python code...",
+      );
+    } finally {
+      fs.readFileSync = originalReadFileSync;
+      vscode.window.activeTextEditor = originalEditor;
+      messages.restore();
+      restore();
+    }
+  });
+
+  test("does not generate code in command-only mode when no command matches", async () => {
+    const originalReadFileSync = fs.readFileSync;
+    const outputChannel = createOutputChannel();
+    const messages = captureWindowMessages();
+    const generateCalls: any[] = [];
+    const originalEditor = vscode.window.activeTextEditor;
+    vscode.window.activeTextEditor = {
+      selection: { active: { line: 0, character: 0 } },
+      document: {
+        languageId: "python",
+        lineCount: 1,
+        lineAt: () => ({ text: "pass" }),
+        getText: () => "pass",
+      },
+      edit: async () => true,
+    };
+
+    const { router, restore } = loadVoiceRouter({
+      aiRequest: {
+        generateCodeFromVoice: async (...args: any[]) => {
+          generateCalls.push(args);
+          return "print('should-not-run')";
+        },
+      },
+    });
+
+    stubVoiceCommands([]);
+
+    try {
+      const result = await router.tryExecuteVoiceCommand(
+        "make me some code",
+        outputChannel,
+        { allowCodeGeneration: false },
+      );
+
+      assert.deepEqual(result, { handled: false });
+      assert.deepEqual(generateCalls, []);
+      assert.deepEqual(messages.errorMessages, []);
+      assert.ok(
+        outputChannel.lines.some((line) =>
+          line.includes("Command-only mode prevents code generation fallback"),
+        ),
       );
     } finally {
       fs.readFileSync = originalReadFileSync;

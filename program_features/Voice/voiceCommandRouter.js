@@ -80,28 +80,211 @@ function loadVoiceCommands() {
   return JSON.parse(fs.readFileSync(commandsPath, "utf-8"));
 }
 
+function normalizeForMatching(text) {
+  return String(text || "")
+    .toLowerCase()
+    .replace(/[^a-z0-9\s]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function levenshteinDistance(a, b) {
+  if (a === b) return 0;
+  if (!a.length) return b.length;
+  if (!b.length) return a.length;
+
+  const rows = a.length + 1;
+  const cols = b.length + 1;
+  const dp = Array.from({ length: rows }, () => Array(cols).fill(0));
+
+  for (let i = 0; i < rows; i++) dp[i][0] = i;
+  for (let j = 0; j < cols; j++) dp[0][j] = j;
+
+  for (let i = 1; i < rows; i++) {
+    for (let j = 1; j < cols; j++) {
+      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
+      dp[i][j] = Math.min(
+        dp[i - 1][j] + 1,
+        dp[i][j - 1] + 1,
+        dp[i - 1][j - 1] + cost,
+      );
+    }
+  }
+
+  return dp[a.length][b.length];
+}
+
+function normalizedEditSimilarity(a, b) {
+  const x = normalizeForMatching(a);
+  const y = normalizeForMatching(b);
+  if (!x || !y) return 0;
+
+  const maxLen = Math.max(x.length, y.length);
+  if (maxLen === 0) return 1;
+
+  const distance = levenshteinDistance(x, y);
+  return 1 - distance / maxLen;
+}
+
+function tokenSet(text) {
+  const normalized = normalizeForMatching(text);
+  if (!normalized) return new Set();
+  return new Set(normalized.split(" ").filter(Boolean));
+}
+
+function jaccardSimilarity(a, b) {
+  const setA = tokenSet(a);
+  const setB = tokenSet(b);
+  if (setA.size === 0 || setB.size === 0) return 0;
+
+  let intersection = 0;
+  for (const item of setA) {
+    if (setB.has(item)) intersection++;
+  }
+
+  const union = setA.size + setB.size - intersection;
+  return union > 0 ? intersection / union : 0;
+}
+
+function bestWindowEditSimilarity(transcript, phrase) {
+  const transcriptTokens = normalizeForMatching(transcript)
+    .split(" ")
+    .filter(Boolean);
+  const phraseTokens = normalizeForMatching(phrase).split(" ").filter(Boolean);
+
+  if (!transcriptTokens.length || !phraseTokens.length) return 0;
+
+  const phraseLen = phraseTokens.length;
+  let best = 0;
+
+  for (
+    let windowLen = Math.max(1, phraseLen - 1);
+    windowLen <= phraseLen + 1;
+    windowLen++
+  ) {
+    if (windowLen > transcriptTokens.length) continue;
+    for (let i = 0; i <= transcriptTokens.length - windowLen; i++) {
+      const windowPhrase = transcriptTokens.slice(i, i + windowLen).join(" ");
+      const score = normalizedEditSimilarity(windowPhrase, phrase);
+      if (score > best) best = score;
+    }
+  }
+
+  return best;
+}
+
+function tokenAlignmentSimilarity(transcript, phrase) {
+  const transcriptTokens = normalizeForMatching(transcript)
+    .split(" ")
+    .filter(Boolean);
+  const phraseTokens = normalizeForMatching(phrase).split(" ").filter(Boolean);
+
+  if (!transcriptTokens.length || !phraseTokens.length) return 0;
+
+  let total = 0;
+  for (const phraseToken of phraseTokens) {
+    let best = 0;
+    for (const transcriptToken of transcriptTokens) {
+      const sim = normalizedEditSimilarity(transcriptToken, phraseToken);
+      if (sim > best) best = sim;
+    }
+    total += best;
+  }
+
+  return total / phraseTokens.length;
+}
+
+function scoreTranscriptToKeyword(transcript, keyword) {
+  const normalizedTranscript = normalizeForMatching(transcript);
+  const normalizedKeyword = normalizeForMatching(keyword);
+  if (!normalizedTranscript || !normalizedKeyword) return 0;
+
+  if (normalizedTranscript.includes(normalizedKeyword)) {
+    return 1;
+  }
+
+  const globalEdit = normalizedEditSimilarity(
+    normalizedTranscript,
+    normalizedKeyword,
+  );
+  const windowEdit = bestWindowEditSimilarity(
+    normalizedTranscript,
+    normalizedKeyword,
+  );
+  const tokenScore = jaccardSimilarity(normalizedTranscript, normalizedKeyword);
+  const tokenEdit = tokenAlignmentSimilarity(
+    normalizedTranscript,
+    normalizedKeyword,
+  );
+
+  // Weighted combination favors local phrase and token-level edit fit.
+  return Math.max(
+    windowEdit * 0.5 + tokenEdit * 0.35 + tokenScore * 0.15,
+    globalEdit * 0.5 + tokenEdit * 0.35 + tokenScore * 0.15,
+  );
+}
+
+function getMinimumScoreThreshold(keyword) {
+  const normalized = normalizeForMatching(keyword);
+  if (normalized.length <= 4) return 0.94;
+  if (normalized.split(" ").length === 1) return 0.83;
+  return 0.65;
+}
+
+function findBestInternalCommand(cleanedTranscript, commands) {
+  let best = null;
+
+  for (const command of commands) {
+    const keywords = Array.isArray(command.keywords) ? command.keywords : [];
+    let commandBestScore = 0;
+    let commandBestKeyword = null;
+
+    for (const keyword of keywords) {
+      const score = scoreTranscriptToKeyword(cleanedTranscript, keyword);
+      if (score > commandBestScore) {
+        commandBestScore = score;
+        commandBestKeyword = keyword;
+      }
+    }
+
+    if (!commandBestKeyword) continue;
+
+    const threshold = getMinimumScoreThreshold(commandBestKeyword);
+    if (commandBestScore < threshold) continue;
+
+    if (!best || commandBestScore > best.score) {
+      best = {
+        command,
+        score: commandBestScore,
+        matchedKeyword: commandBestKeyword,
+      };
+    }
+  }
+
+  return best;
+}
+
 async function tryExecuteInternalCommand(cleanedTranscript, outputChannel) {
   const commands = loadVoiceCommands();
 
-  for (const command of commands) {
-    if (
-      !command.keywords.some((keyword) => cleanedTranscript.includes(keyword))
-    ) {
-      continue;
-    }
-
-    const currentMode = getMode();
-    if (currentMode !== "dev" && STUDENT_LOCKED_COMMANDS.has(command.id)) {
-      await speakMessage("That command is disabled in student mode.");
-      return { handled: true };
-    }
-
-    await vscode.commands.executeCommand(command.id);
-    outputChannel.appendLine(`[Voice Command] Matched: ${command.id}`);
-    return { handled: true, command: command.id };
+  const bestMatch = findBestInternalCommand(cleanedTranscript, commands);
+  if (!bestMatch) {
+    return null;
   }
 
-  return null;
+  const { command, score, matchedKeyword } = bestMatch;
+
+  const currentMode = getMode();
+  if (currentMode !== "dev" && STUDENT_LOCKED_COMMANDS.has(command.id)) {
+    await speakMessage("That command is disabled in student mode.");
+    return { handled: true };
+  }
+
+  await vscode.commands.executeCommand(command.id);
+  outputChannel.appendLine(
+    `[Voice Command] Matched: ${command.id} (keyword: "${matchedKeyword}", score: ${score.toFixed(2)})`,
+  );
+  return { handled: true, command: command.id };
 }
 
 async function tryExecuteExternalCommand(cleanedTranscript, outputChannel) {
@@ -200,9 +383,10 @@ async function tryGenerateCode(transcript, outputChannel) {
   }
 }
 
-async function tryExecuteVoiceCommand(transcript, outputChannel) {
+async function tryExecuteVoiceCommand(transcript, outputChannel, options = {}) {
   try {
-    const cleanedTranscript = transcript.toLowerCase().trim();
+    const allowCodeGeneration = options.allowCodeGeneration !== false;
+    const cleanedTranscript = normalizeForMatching(transcript);
     if (
       !cleanedTranscript ||
       cleanedTranscript.includes("no speech detected")
@@ -232,6 +416,13 @@ async function tryExecuteVoiceCommand(transcript, outputChannel) {
     if (shouldRouteToChat(cleanedTranscript)) {
       outputChannel.appendLine(
         `[Voice Intent] Detected Question: "${transcript}". Routing to Chat/Audio (Default).`,
+      );
+      return { handled: false };
+    }
+
+    if (!allowCodeGeneration) {
+      outputChannel.appendLine(
+        `[Voice Intent] No command match for: ${transcript}. Command-only mode prevents code generation fallback.`,
       );
       return { handled: false };
     }

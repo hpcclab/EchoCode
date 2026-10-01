@@ -49,50 +49,94 @@ Originally built for Python debugging, Echo Code has evolved into a **language-a
 - **Integration with GitHub Copilot**  
   Leverages GitHub Copilot and Copilot Chat for enhanced AI-powered coding assistance.
 
+- **Bring Your Own Model — API or Local**
+  Every EchoCode AI feature can run through GitHub Copilot, a hosted API (OpenAI, OpenRouter, Groq, Anthropic, or any OpenAI-compatible endpoint such as LM Studio or vLLM), or a local Ollama model. Whisper speech-to-text is unaffected either way. API keys are stored in VS Code's secret storage (your OS keychain), never in `settings.json`.
+
+- **AI Provider Setup Wizard (Auto-Detection)** 🆕  
+  On first launch, EchoCode asks whether you want an **API model** or a **local model**, then walks the rest of the way:
+
+  - **API →** GitHub Copilot (auto-detected via `vscode.lm`, no key needed) or another model API. For the latter, pick a preset, confirm the base URL, enter your key, and EchoCode contacts the endpoint to verify it's reachable **before** saving — the model list you pick from is the one the API actually reports.
+  - **Local →** EchoCode scans your Ollama server. If it isn't running, you get a spoken warning and a way back to the API choice instead of a dead end. If it's running but has no models, EchoCode reads your machine's specs (CPU, RAM, and GPU VRAM where detectable), **recommends a model that will actually fit**, and — with your confirmation — downloads it for you with a live progress bar.
+
+  Re-open the picker anytime with `EchoCode: Select AI Provider & Model`, or refresh detection with `EchoCode: Check for AI Provider/Model Updates` (useful since Copilot's model lineup, hosted API catalogs, and your installed Ollama models all change over time).
+
+- **Adjustable AI Guidance Level**  
+  Control how verbose AI explanations are (Guided, Balanced, or Concise) across the summarizer, Big O annotations, code annotations, and "What's This" explanations.
+
+- **Voice Modes (Chat / Code / Command)**  
+  Cycle between three voice modes and use a single hotkey to start/stop recording in whichever mode is active, or jump directly into a specific mode with its own hotkey.
+
+- **Microphone Selection**  
+  Choose which input device EchoCode uses for voice features, with manual entry and reset-to-default options.
+
 - **Line Reader**
   Allows the user to see what is put on the line exactly and generate a brief summary that also checks for issues
 
 - **Character Reader**
   Alerts the user to what key is being pressed while typing and alerts to where their cursor is.
 
+- **Assignment Task Sync**  
+  Rescan the workspace to refresh which assignment tasks are complete, and read tasks back in their original sequential order.
+
 ---
 
 ## **Keyboard Shortcuts**
 
-| Shortcut         | Command                                                                        | Description                                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------- |
-| `Ctrl+Alt+A`     | `code-tutor.Annotate`                                                          | Generates the annotations.                                                                                  |
-| `Ctrl+Alt+S`     | `code-tutor.speakNextAnnotation`                                               | Reads the next annotation, including line number and suggestion.                                            |
-| `Ctrl+Alt+Q`     | `code-tutor.readAllAnnotation`                                                 | Reads all the annotations in the queue.                                                                     |
-| `Ctrl+Alt+Down`  | `echocode.jumpToNextFunction`                                                  | Jumps to the next function in the file.                                                                     |
-| `Ctrl+Alt+Up`    | `echocode.jumpToPreviousFunction`                                              | Jumps to the previous function.                                                                             |
-| `Ctrl+Alt+E C`   | `echocode.summarizeClass`                                                      | Summarizes the current class.                                                                               |
-| `Ctrl+Alt+E F`   | `echocode.summarizeFunction`                                                   | Summarizes the current function.                                                                            |
-| `Ctrl+Alt+E P`   | `echocode.summarizeProgram`                                                    | Summarize full program.                                                                                     |
-| `Ctrl+Alt+E W`   | `echocode.whereAmI`                                                            | Describes the scope the user is in.                                                                         |
-| `Ctrl+Alt+U`     | `echocode.increaseSpeechSpeed`                                                 | Increases speech rate.                                                                                      |
-| `Ctrl+Alt+D`     | `echocode.decreaseSpeechSpeed`                                                 | Decreases speech rate.                                                                                      |
-| `Ctrl+Alt+X`     | `echocode.stopSpeech`                                                          | Stops current speech playback.                                                                              |
-| `Ctrl+Alt+O`     | `echocode.loadAssignmentFile`                                                  | Uploads an assignment file for task tracking.                                                               |
-| `Ctrl+Alt+T`     | `echocode.readNextTask`                                                        | Reads the next task aloud.                                                                                  |
-| `Ctrl+Alt+M`     | `echocode.markTaskComplete`                                                    | Marks the current task as complete.                                                                         |
-| `Ctrl + Alt + N` | `code-tutor.analyzeBigO`                                                       | Queue up the big O annotations                                                                              |
-| `Ctrl + Alt + B` | `code-tutor.iterateBigOQueue`                                                  | Read next big O recommendation outloud                                                                      |
-| `Ctrl + Alt + H` | `code-tutor.readEntireBigOQueue`                                               | Read all big O recommendations one at a time                                                                |
-| `Ctrl+Alt+C`     | `echocode.openChat`                                                            | Opens the EchoCode Tutor chat interface.                                                                    |
-| `Ctrl+Alt+V`     | `echocode.voiceInput`                                                          | Starts voice input to ask the chat a question. Future feature                                               |
-| `f1`             | Reads out the hotkey options by letting you choose 1-7 depending on the option |
-| `Ctrl+Alt+L`     | `echocode.readCurrentLine`                                                     | Tells the user what is on the line exactly                                                                  |
-| `Ctrl+Alt+K`     | `echocode.describeCurrentLine`                                                 | Generates and tells a user what is on the line                                                              |
-| `Ctrl+Alt+I`     | `echocode.copyFileNameForImport`                                               | Generates an import function for Python and C++ to be pasted for connecting multiple files at the cursor 🆕 |
-| `Ctrl+Shift+I`   | `echocode.pasteImportAtCursor`                                                 | Pastes the import function for Python and C++ at the cursor 🆕                                              |
-| `Ctrl+Alt+;`     | `echocode.createFile`                                                          | Creates a new file in the current folder 🆕                                                                 |
-| `Ctrl+Alt+F`     | `echocode.createFolder`                                                        | Creates a new folder in the workspace 🆕                                                                    |
-| `Ctrl+Alt+P`     | `echocode.navigateToNextFile`                                                  | Moves to the next file in the current folder 🆕                                                             |
-| `Ctrl+Alt+[`     | `echocode.moveToNextFolder`                                                    | Navigates to the next folder in the workspace 🆕                                                            |
-| `Ctrl+Alt+]`     | `echocode.moveToPreviousFolder`                                                | Navigates to the previous folder in the workspace 🆕                                                        |
-| `Ctrl+Alt+G`     | `echocode.compileAndParseCpp` / `echocode checkPythonErrors`                   | Compiles C++ or checks Python syntax, reading errors and fixes aloud 🆕                                     |
-| `Ctrl+Alt+9`     | `echocode.StudentAndDevMode` / `echocode StudentDevMode`                       | Switches mode depending on the users preference                                                             |
+Rows marked **Dev** only fire in Developer mode (locked in Student mode).
+
+| Shortcut           | Command                                                      | Description                                                                          |
+| ------------------ | ------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `Ctrl+Alt+9`       | `echocode.toggleMode`                                        | Switches between Student and Developer mode.                                         |
+| `F1`               | `echocode.readHotkeyGuide`                                   | Reads out the hotkey guide, letting you choose an option by number.                  |
+| `Ctrl+Alt+A`       | `echocode.annotate`                                          | Generates AI annotations for your code. **Dev**                                      |
+| `Ctrl+Alt+S`       | `echocode.speakNextAnnotation`                               | Reads the next annotation, including line number and suggestion. **Dev**             |
+| `Ctrl+Alt+Q`       | `echocode.readAllAnnotations`                                | Reads all the annotations in the queue. **Dev**                                      |
+| `Ctrl+Alt+N`       | `code-tutor.analyzeBigO`                                     | Queues up Big O complexity annotations. **Dev**                                      |
+| `Ctrl+Alt+B`       | `code-tutor.iterateBigOQueue`                                | Reads the next Big O recommendation aloud. **Dev**                                   |
+| `Ctrl+Alt+H`       | `code-tutor.readEntireBigOQueue`                             | Reads all Big O recommendations one at a time. **Dev**                               |
+| `Ctrl+Alt+Down`    | `echocode.jumpToNextFunction`                                | Jumps to the next function in the file.                                              |
+| `Ctrl+Alt+Up`      | `echocode.jumpToPreviousFunction`                            | Jumps to the previous function.                                                      |
+| `Ctrl+Alt+E C`     | `echocode.summarizeClass`                                    | Summarizes the current class. **Dev**                                                |
+| `Ctrl+Alt+E F`     | `echocode.summarizeFunction`                                 | Summarizes the current function. **Dev**                                             |
+| `Ctrl+Alt+E P`     | `echocode.summarizeProgram`                                  | Summarizes the full program. **Dev**                                                 |
+| `Ctrl+Alt+E W`     | `echocode.whereAmI`                                          | Describes the scope the user is in.                                                  |
+| `Ctrl+Alt+C`       | `echocode.openChat`                                          | Opens the EchoCode Tutor chat interface. **Dev**                                     |
+| `Ctrl+Alt+V`       | `echocode.startVoiceInput`                                   | Starts voice input for the chat tutor. **Dev**                                       |
+| `Ctrl+Alt+Space`   | `echocode.toggleVoice`                                       | Starts/stops voice recording using the currently active voice mode.                  |
+| `Ctrl+Alt+Shift+C` | `echocode.voiceCode`                                         | Toggles voice-to-code recording directly, regardless of the active mode.             |
+| `Ctrl+Alt+Shift+V` | `echocode.voiceCommand`                                      | Toggles voice-command recording directly, regardless of the active mode.             |
+| `Ctrl+Alt+Shift+T` | `echocode.voiceChat`                                         | Toggles voice-to-chat recording directly, regardless of the active mode.             |
+| `Ctrl+Alt+'`       | `echocode.cycleVoiceMode`                                    | Cycles the active voice mode between Chat, Code, and Command.                        |
+| `Ctrl+Alt+U`       | `echocode.increaseSpeechSpeed`                               | Increases speech rate.                                                               |
+| `Ctrl+Alt+D`       | `echocode.decreaseSpeechSpeed`                               | Decreases speech rate.                                                               |
+| `Ctrl+Alt+X`       | `echocode.stopSpeech`                                        | Stops current speech playback.                                                       |
+| `Ctrl+Alt+Shift+Z` | `echocode.setGuidanceLevel`                                  | Opens a picker to set AI guidance verbosity (Guided, Balanced, Concise).             |
+| `Ctrl+Alt+Z`       | `echocode.cycleGuidanceLevel`                                | Cycles through AI guidance verbosity levels.                                         |
+| `Ctrl+Alt+O`       | `echocode.loadAssignmentFile`                                | Uploads an assignment file for task tracking.                                        |
+| `Ctrl+Alt+T`       | `echocode.readNextTask`                                      | Reads the next incomplete task aloud.                                                |
+| `Ctrl+Alt+/`       | `echocode.readNextSequentialTask`                            | Reads the next task aloud in its original file order.                                |
+| `Ctrl+Alt+M`       | `echocode.markTaskComplete`                                  | Marks the current task as complete.                                                  |
+| `Ctrl+Alt+Y`       | `echocode.rescanUserCode`                                    | Rescans the workspace to refresh which assignment tasks are complete.                |
+| `Ctrl+Alt+L`       | `echocode.readCurrentLine`                                   | Tells the user what is on the line exactly.                                          |
+| `Ctrl+Alt+K`       | `echocode.describeCurrentLine`                               | Generates and reads an AI description of the current line. **Dev**                   |
+| `Ctrl+Alt+R`       | `echocode.toggleCharacterReadOut`                            | Toggles character-by-character read-out while typing.                                |
+| `Ctrl+Alt+I`       | `echocode.copyFileNameForImport`                             | Generates an import statement for Python/C++ to connect files at the cursor. **Dev** |
+| `Ctrl+Shift+I`     | `echocode.pasteImportAtCursor`                               | Pastes the generated import statement at the cursor. **Dev**                         |
+| `Ctrl+Alt+;`       | `echocode.createFile`                                        | Creates a new file in the current folder.                                            |
+| `Ctrl+Alt+F`       | `echocode.createFolder`                                      | Creates a new folder in the workspace.                                               |
+| `Ctrl+Alt+P`       | `echocode.navigateToNextFile`                                | Moves to the next file in the current folder.                                        |
+| `Ctrl+Alt+[`       | `echocode.moveToNextFolder`                                  | Navigates to the next folder in the workspace.                                       |
+| `Ctrl+Alt+]`       | `echocode.moveToPreviousFolder`                              | Navigates to the previous folder in the workspace.                                   |
+| `Ctrl+Alt+G`       | `echocode.compileAndParseCpp` / `echocode.checkPythonErrors` | Compiles C++ or checks Python syntax, reading errors and fixes aloud. **Dev**        |
+
+### Command Palette Only (no default keybinding)
+
+| Command                                                                                | Description                                                                                                                                                   |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `EchoCode: Select AI Provider & Model` (`echocode.selectAIProvider`) 🆕                | Choose an API model (GitHub Copilot, OpenAI, OpenRouter, Groq, Anthropic, or a custom endpoint) or a local Ollama model, then pick from the live model list. Can scan your hardware and install a fitting Ollama model for you. |
+| `EchoCode: Check for AI Provider/Model Updates` (`echocode.checkAIProviderUpdates`) 🆕 | Re-detects available Copilot, hosted API, and Ollama models and warns if your currently configured model is no longer available. Also runs automatically on every startup. |
+| `echocode.selectMicrophone`                                                            | Choose which microphone EchoCode uses for voice input, enter a device name manually, or reset to the system default.                                          |
+| `echocode.switchToStudentMode` / `echocode.switchToDevMode`                            | Explicitly set the mode instead of toggling with `Ctrl+Alt+9`.                                                                                                |
 
 ---
 
@@ -156,6 +200,43 @@ Before using Echo Code, ensure the following are installed:
 - Speech to text is not functional right now
 
 ## **Release Notes**
+
+### **2.1** (Current)
+
+- **AI Provider Setup Wizard**: On first launch, EchoCode now shows a quick-pick menu to choose your AI provider — GitHub Copilot or a local Ollama model — with available models for each auto-detected live (Copilot models via `vscode.lm`, Ollama models via a live `/api/tags` call to your local server). Re-open the picker anytime with `EchoCode: Select AI Provider & Model`.
+- **AI Provider/Model Update Checks**: Because both Copilot's model lineup and locally-installed Ollama models change over time, EchoCode now re-checks availability on every startup and warns if your configured model has disappeared. Trigger it manually with `EchoCode: Check for AI Provider/Model Updates`.
+- Added optional local Ollama backend: route chat, annotations, Big O analysis, summaries, voice-command classification, and voice-to-code generation to a local Ollama model instead of GitHub Copilot (`echocode.useLocalOllama`, `echocode.ollamaBaseUrl`, `echocode.ollamaModel`).
+- Added adjustable AI Guidance Level (Guided / Balanced / Concise) that controls explanation verbosity across the summarizer, Big O annotations, code annotations, and "What's This" — set it with a picker or cycle through it with a hotkey.
+- Added Voice Modes: switch between Chat, Code, and Command voice modes, cycle between them, and start/stop recording with a single hotkey (or jump directly into a specific mode).
+- Added a microphone selection command with manual entry and reset-to-default options.
+- Added a toggleable character-by-character read-out while typing.
+- Added assignment tracker sync improvements: rescan the workspace to refresh completed tasks, and read tasks back in their original sequential order.
+- Various stability fixes and expanded automated test coverage across command routing, voice handling, and AI request routing.
+
+  **New Hotkeys:**
+
+| Shortcut           | Description                                                         |
+| ------------------ | ------------------------------------------------------------------- |
+| `Ctrl+Alt+Space`   | Starts/stops voice recording using the currently active voice mode. |
+| `Ctrl+Alt+Shift+C` | Toggles voice-to-code recording directly.                           |
+| `Ctrl+Alt+Shift+V` | Toggles voice-command recording directly.                           |
+| `Ctrl+Alt+Shift+T` | Toggles voice-to-chat recording directly.                           |
+| `Ctrl+Alt+'`       | Cycles the active voice mode between Chat, Code, and Command.       |
+| `Ctrl+Alt+Shift+Z` | Opens a picker to set AI guidance verbosity.                        |
+| `Ctrl+Alt+Z`       | Cycles through AI guidance verbosity levels.                        |
+| `Ctrl+Alt+R`       | Toggles character-by-character read-out while typing.               |
+| `Ctrl+Alt+Y`       | Rescans the workspace to refresh assignment task completion.        |
+| `Ctrl+Alt+/`       | Reads the next task aloud in its original file order.               |
+
+  **New Commands (Command Palette only):**
+
+| Command                                         | Description                                                                    |
+| ----------------------------------------------- | ------------------------------------------------------------------------------ |
+| `EchoCode: Select AI Provider & Model`          | Choose your AI provider and model from live auto-detected lists.               |
+| `EchoCode: Check for AI Provider/Model Updates` | Re-detect available Copilot/API/Ollama models and flag a missing configured model. |
+| `echocode.selectMicrophone`                     | Choose which microphone EchoCode uses for voice input.                         |
+
+---
 
 ### **2.0**
 

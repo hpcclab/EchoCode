@@ -5,6 +5,9 @@ const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
 const { annotationQueue } = require("./annotations");
+const {
+  requestTextFromMessages,
+} = require("../../Core/program_settings/program_settings/AIrequest");
 
 const bigOQueue = new Queue();
 
@@ -185,9 +188,20 @@ function addBigOIssue(editor, line, suggestion, collectedIssues) {
 /**
  * Parses the chat response and applies decorations.
  */
-async function parseChatResponse(chatResponse, textEditor, collectedIssues) {
+async function parseChatResponse(
+  chatResponseOrText,
+  textEditor,
+  collectedIssues,
+) {
   let accumulatedResponse = "";
-  for await (const fragment of chatResponse.text) {
+
+  const fragments =
+    typeof chatResponseOrText === "string"
+      ? [chatResponseOrText]
+      : chatResponseOrText?.text;
+  if (!fragments) return;
+
+  for await (const fragment of fragments) {
     accumulatedResponse += fragment;
 
     // Check if the accumulated response contains a complete JSON array
@@ -321,26 +335,12 @@ async function analyzeLoops(editor, loops, collectedIssues) {
     `;
 
     try {
-      const [model] = await vscode.lm.selectChatModels({
-        vendor: "copilot",
-        family: "gpt-4o",
-      });
-
-      if (!model) {
-        vscode.window.showErrorMessage(
-          "No language model available. Please ensure Copilot is enabled.",
-        );
-        return;
-      }
-
-      const messages = [new vscode.LanguageModelChatMessage(0, prompt)];
-      const chatResponse = await model.sendRequest(
-        messages,
-        {},
-        new vscode.CancellationTokenSource().token,
+      const responseText = await requestTextFromMessages(
+        [{ role: "user", content: prompt }],
+        { cancellationToken: new vscode.CancellationTokenSource().token },
       );
 
-      await parseChatResponse(chatResponse, editor, collectedIssues);
+      await parseChatResponse(responseText, editor, collectedIssues);
     } catch (error) {
       console.error("Error analyzing loop:", error);
     }

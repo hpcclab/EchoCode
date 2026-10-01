@@ -40,5 +40,24 @@ coverage/
 echocode-venv/
 
 TestFile1.cpp
+# Generated per-machine on activation from the user's own installed
+# VS Code commands (see buildExternalCommandRegistry). Regenerates if
+# absent, so it must never be committed.
 Core/program_settings/program_settings/external_commands.json
-Core/program_settings/program_settings/external_commands.json
+wiki/.obsidian/app.json
+wiki/.obsidian/appearance.json
+wiki/.obsidian/core-plugins.json
+wiki/.obsidian/workspace.json
+
+# Feature diagrams: the rendered SVGs are tracked, because the wiki pages embed them
+# and they must resolve in a fresh clone. The .drawio sources and the generators that
+# produce both are local-only:
+#   node wiki/diagrams/generate.js && python3 wiki/diagrams/render_svg.py
+#
+# Note the shape of these rules. Excluding "wiki/diagrams/" outright would make the
+# negations below impossible — git cannot re-include a file whose parent directory is
+# excluded — so the contents are excluded and svg/ is re-included instead.
+wiki/diagrams/*
+!wiki/diagrams/svg/
+wiki/diagrams/svg/*
+!wiki/diagrams/svg/*.svg

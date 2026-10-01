@@ -5,7 +5,7 @@
   "version": "2.1.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Team-1-4910-Edward/EchoCode-Capstone-Repo.git"
+    "url": "https://github.com/hpcclab/EchoCode.git"
   },
   "icon": "images/icon.png",
   "publisher": "EchoCode",
@@ -40,7 +40,9 @@
     "onCommand:echocode.whereAmI",
     "onCommand:echocode.compileAndParseCpp",
     "onCommand:echocode.setGuidanceLevel",
-    "onCommand:echocode.cycleGuidanceLevel"
+    "onCommand:echocode.cycleGuidanceLevel",
+    "onCommand:echocode.selectAIProvider",
+    "onCommand:echocode.checkAIProviderUpdates"
   ],
   "main": "./extension.js",
   "extensionDependencies": [
@@ -250,6 +252,14 @@
       {
         "command": "echocode.cycleGuidanceLevel",
         "title": "EchoCode: Cycle Guidance Level"
+      },
+      {
+        "command": "echocode.selectAIProvider",
+        "title": "EchoCode: Select AI Provider & Model"
+      },
+      {
+        "command": "echocode.checkAIProviderUpdates",
+        "title": "EchoCode: Check for AI Provider/Model Updates"
       }
     ],
     "configuration": {
@@ -288,6 +298,43 @@
             "Concise, technical output with the raw error included."
           ],
           "description": "Controls how much detail EchoCode provides when explaining errors."
+        },
+        "echocode.aiProvider": {
+          "type": "string",
+          "default": "",
+          "enum": [
+            "",
+            "copilot",
+            "ollama",
+            "api"
+          ],
+          "enumDescriptions": [
+            "Not chosen yet - EchoCode falls back to the legacy echocode.useLocalOllama toggle.",
+            "GitHub Copilot via the VS Code language model API.",
+            "A local Ollama server.",
+            "A hosted model API (OpenAI, OpenRouter, Groq, Anthropic, or a custom endpoint)."
+          ],
+          "description": "Which AI backend EchoCode routes requests to. Set via 'EchoCode: Select AI Provider & Model'."
+        },
+        "echocode.useLocalOllama": {
+          "type": "boolean",
+          "default": false,
+          "description": "Legacy toggle for local Ollama. Only used when echocode.aiProvider is blank; prefer echocode.aiProvider."
+        },
+        "echocode.ollamaBaseUrl": {
+          "type": "string",
+          "default": "http://127.0.0.1:11434",
+          "description": "Base URL for your local Ollama server."
+        },
+        "echocode.ollamaModel": {
+          "type": "string",
+          "default": "llama3.2",
+          "description": "Model name to use when local Ollama is enabled (for example: llama3.2, qwen2.5:7b)."
+        },
+        "echocode.copilotModel": {
+          "type": "string",
+          "default": "",
+          "description": "Copilot model id to prefer when Copilot is the active provider. Leave blank to auto-select. Set via 'EchoCode: Select AI Provider & Model'."
         },
         "echocode.featureImplementation.annotationsBigO": {
           "type": "string",
@@ -360,6 +407,37 @@
             "user"
           ],
           "description": "Select built-in or user implementation for WhatIsThis. User files are loaded from program_features/WhatIsThis/UserImplementation/ and changes are auto-reloaded."
+        },
+        "echocode.apiProvider": {
+          "type": "string",
+          "default": "",
+          "enum": [
+            "",
+            "openai",
+            "openrouter",
+            "groq",
+            "anthropic",
+            "custom"
+          ],
+          "enumDescriptions": [
+            "No hosted API configured.",
+            "OpenAI (api.openai.com).",
+            "OpenRouter (openrouter.ai).",
+            "Groq (api.groq.com).",
+            "Anthropic Claude (api.anthropic.com).",
+            "Any other OpenAI-compatible endpoint."
+          ],
+          "description": "Hosted API preset used when echocode.aiProvider is 'api'. The API key is kept in VS Code secret storage, never in settings."
+        },
+        "echocode.apiBaseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Base URL of the hosted API, including the version path (for example https://api.openai.com/v1). Blank uses the preset default."
+        },
+        "echocode.apiModel": {
+          "type": "string",
+          "default": "",
+          "description": "Model id to send to the hosted API. Set via 'EchoCode: Select AI Provider & Model'."
         }
       }
     },
@@ -630,33 +708,32 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.24.0",
+    "@semantic-release/changelog": "^6.0.3",
+    "@semantic-release/exec": "^6.0.3",
+    "@semantic-release/git": "^10.0.1",
+    "@semantic-release/github": "^11.0.1",
+    "@semantic-release/npm": "^12.0.1",
     "@stylistic/eslint-plugin": "^2.13.0",
     "@types/mocha": "^10.0.10",
     "@types/node": "^20.17.30",
-    "@types/vscode": "^1.105.0",
+    "@types/vscode": "^1.99.1",
     "@vscode/test-cli": "^0.0.9",
     "@vscode/test-electron": "^2.5.2",
-    "chai": "^6.2.0",
+    "@vscode/vsce": "^3.2.1",
     "eslint": "^9.24.0",
-    "glob": "^10.3.10",
     "mocha": "^10.8.2",
-    "nyc": "^17.1.0",
+    "semantic-release": "^24.2.0",
     "ts-node": "^10.9.2",
-    "typescript": "^5.8.3",
+    "typescript": "^5.9.3",
     "typescript-eslint": "^8.29.1"
   },
   "dependencies": {
-    "@vscode/codicons": "^0.0.33",
-    "axios": "^1.8.3",
-    "dotenv": "^16.6.1",
+    "dotenv": "^17.4.2",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
     "mammoth": "^1.9.0",
-    "mic": "^2.1.2",
-    "openai": "^5.20.0",
     "pdf-parse": "^1.1.1",
     "say": "^0.16.0",
-    "sound-play": "^1.1.0",
-    "uuid": "^13.0.0"
+    "sound-play": "^1.1.0"
   }
 }
