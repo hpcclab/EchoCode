@@ -143,7 +143,7 @@ function startPending() {
   isSpeaking = true;
 
   try {
-    say.speak(entry.text, resolveVoice(), speechSpeed, (err) => {
+    const returned = say.speak(entry.text, resolveVoice(), speechSpeed, (err) => {
       // Superseded: a later utterance owns the speaker now, so this callback is the
       // tail end of a process we already stopped caring about.
       if (activeUtterance !== utterance) return;
@@ -155,6 +155,20 @@ function startPending() {
       }
       retireActive();
     });
+
+    // say.js attaches no 'error' listener to its child, so a missing TTS binary
+    // (e.g. no festival on Linux) is an uncaught exception, and the exit callback may
+    // never arrive to retire the utterance. say 0.16 returns nothing from speak() but
+    // exposes the child as say.child.
+    const child =
+      returned && typeof returned.on === "function" ? returned : say.child;
+    if (child && typeof child.on === "function") {
+      child.on("error", (err) => {
+        if (activeUtterance !== utterance) return;
+        console.warn("[EchoCode] TTS unavailable; continuing without speech", err);
+        retireActive();
+      });
+    }
     currentSpeechProcess = say;
   } catch (err) {
     // Gracefully degrade when TTS backend is unavailable (e.g., headless CI, missing 'say')
