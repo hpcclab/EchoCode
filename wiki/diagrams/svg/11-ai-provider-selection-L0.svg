@@ -2,27 +2,12 @@
   <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker></defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
   <path d="M 180.0 127.0 L 198.0 127.0 L 472.0 127.0 L 472.0 258.0 L 472.0 276.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="274.6" y="107.5" width="120.8" height="25.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="335.0" y="114.2" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">first run, or Select AI</text>
-  <text x="335.0" y="125.8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Provider</text>
   <path d="M 290.0 307.0 L 308.0 307.0 L 360.0 307.0 L 360.0 318.2 L 412.0 318.2 L 430.0 318.2" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="293.2" y="293.0" width="81.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="334.0" y="300.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">capability scan</text>
   <path d="M 290.0 398.0 L 308.0 398.0 L 360.0 398.0 L 360.0 425.8 L 412.0 425.8 L 430.0 425.8" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="295.7" y="384.0" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="334.0" y="391.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">current config</text>
   <path d="M 710.0 318.2 L 728.0 318.2 L 770.0 318.2 L 770.0 211.0 L 812.0 211.0 L 830.0 211.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="731.7" y="257.6" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="770.0" y="264.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">probe + verify</text>
   <path d="M 710.0 354.1 L 728.0 354.1 L 770.0 354.1 L 770.0 302.0 L 812.0 302.0 L 830.0 302.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="731.7" y="321.1" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="770.0" y="328.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">persist choice</text>
   <path d="M 710.0 389.9 L 728.0 389.9 L 770.0 389.9 L 770.0 403.0 L 812.0 403.0 L 830.0 403.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="713.1" y="375.9" width="71.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="749.0" y="382.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">store API key</text>
   <path d="M 710.0 425.8 L 728.0 425.8 L 770.0 425.8 L 770.0 499.0 L 812.0 499.0 L 830.0 499.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="724.3" y="455.4" width="91.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="770.0" y="462.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">announced options</text>
   <text x="40.0" y="26.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="bold" font-style="normal" fill="#222222" dominant-baseline="middle">AI Provider and Model Selection — Level 0 (Context)</text>
   <text x="40.0" y="49.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.0" font-weight="normal" font-style="italic" fill="#777777" dominant-baseline="middle">Choose and verify the backend every AI feature routes through: Copilot, local Ollama, or a hosted API.</text>
   <text x="40.0" y="86.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" font-style="normal" fill="#999999" dominant-baseline="middle">SOURCES</text>
@@ -57,4 +42,19 @@
   <path d="M 776.0 594.0 V 608.0 H 790.0" fill="none" stroke="#d6b656"/>
   <text x="439.0" y="609.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">Provider probes run concurrently and are individually capped,</text>
   <text x="439.0" y="622.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">so the picker opens in ~3s rather than the sum of three waits.</text>
+  <rect x="274.6" y="107.5" width="120.8" height="25.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="335.0" y="114.2" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">first run, or Select AI</text>
+  <text x="335.0" y="125.8" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Provider</text>
+  <rect x="293.2" y="293.0" width="81.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="334.0" y="300.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">capability scan</text>
+  <rect x="295.7" y="384.0" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="334.0" y="391.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">current config</text>
+  <rect x="731.7" y="257.6" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="770.0" y="264.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">probe + verify</text>
+  <rect x="731.7" y="321.1" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="770.0" y="328.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">persist choice</text>
+  <rect x="713.1" y="375.9" width="71.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="749.0" y="382.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">store API key</text>
+  <rect x="724.3" y="455.4" width="91.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="770.0" y="462.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">announced options</text>
 </svg>

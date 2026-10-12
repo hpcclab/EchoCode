@@ -4,38 +4,16 @@
   <rect x="360.0" y="120.0" width="300.0" height="504.0" rx="4" fill="#fdf0fb" stroke="#d98cc4"/>
   <text x="372.0" y="135.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" fill="#666666" letter-spacing="0.6">ECHOCODE CORE</text>
   <path d="M 170.0 157.0 L 188.0 157.0 L 275.0 157.0 L 275.0 182.4 L 362.0 182.4 L 380.0 182.4" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="212.8" y="143.0" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="231.5" y="150.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">hotkey</text>
   <path d="M 260.0 259.0 L 278.0 259.0 L 320.0 259.0 L 320.0 268.1 L 362.0 268.1 L 380.0 268.1" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="285.2" y="245.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="299.0" y="252.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">name</text>
   <path d="M 260.0 345.0 L 278.0 345.0 L 320.0 345.0 L 320.0 209.9 L 362.0 209.9 L 380.0 209.9" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="293.9" y="270.5" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="320.0" y="277.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">directory</text>
   <path d="M 510.0 224.0 L 510.0 242.0 L 510.0 239.0 L 510.0 236.0 L 510.0 254.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="496.2" y="226.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="233.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">path</text>
   <path d="M 510.0 318.0 L 510.0 336.0 L 510.0 333.0 L 510.0 330.0 L 510.0 348.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="496.2" y="320.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="327.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">name</text>
   <path d="M 510.0 412.0 L 510.0 430.0 L 510.0 427.0 L 510.0 424.0 L 510.0 442.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="483.9" y="414.0" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">safe path</text>
   <path d="M 510.0 506.0 L 510.0 524.0 L 510.0 521.0 L 510.0 518.0 L 510.0 536.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="488.8" y="508.0" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="515.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">created</text>
   <path d="M 640.0 456.1 L 658.0 456.1 L 715.0 456.1 L 715.0 184.0 L 772.0 184.0 L 790.0 184.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="667.8" y="442.1" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="449.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">create</text>
   <path d="M 640.0 562.0 L 658.0 562.0 L 715.0 562.0 L 715.0 272.0 L 772.0 272.0 L 790.0 272.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="650.6" y="548.0" width="71.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="555.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">open new file</text>
   <path d="M 640.0 574.0 L 658.0 574.0 L 715.0 574.0 L 715.0 360.0 L 772.0 360.0 L 790.0 360.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="653.1" y="560.0" width="66.9" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="567.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">confirmation</text>
   <path d="M 640.0 397.9 L 658.0 397.9 L 715.0 397.9 L 715.0 448.0 L 772.0 448.0 L 790.0 448.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="665.3" y="383.9" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="390.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">refusal</text>
   <text x="40.0" y="26.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="bold" font-style="normal" fill="#222222" dominant-baseline="middle">File and Folder Tools — Level 1 (Decomposition)</text>
   <text x="40.0" y="49.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.0" font-weight="normal" font-style="italic" fill="#777777" dominant-baseline="middle">Create files and folders relative to the current navigation folder, without the Explorer tree.</text>
   <text x="40.0" y="94.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" font-style="normal" fill="#999999" dominant-baseline="middle">INPUTS</text>
@@ -79,4 +57,26 @@
   <text x="799.0" y="709.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">Creation follows the navigation cursor, not the Explorer</text>
   <text x="799.0" y="722.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">selection — that is what makes move-then-create one</text>
   <text x="799.0" y="735.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">keyboard flow.</text>
+  <rect x="212.8" y="143.0" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="231.5" y="150.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">hotkey</text>
+  <rect x="285.2" y="245.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="299.0" y="252.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">name</text>
+  <rect x="293.9" y="270.5" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="320.0" y="277.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">directory</text>
+  <rect x="496.2" y="226.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="233.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">path</text>
+  <rect x="496.2" y="320.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="327.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">name</text>
+  <rect x="483.9" y="414.0" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">safe path</text>
+  <rect x="488.8" y="508.0" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="515.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">created</text>
+  <rect x="667.8" y="442.1" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="449.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">create</text>
+  <rect x="650.6" y="548.0" width="71.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="555.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">open new file</text>
+  <rect x="653.1" y="560.0" width="66.9" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="567.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">confirmation</text>
+  <rect x="665.3" y="383.9" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="390.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">refusal</text>
 </svg>

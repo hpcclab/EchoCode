@@ -4,41 +4,17 @@
   <rect x="360.0" y="120.0" width="300.0" height="504.0" rx="4" fill="#fdf0fb" stroke="#d98cc4"/>
   <text x="372.0" y="135.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" fill="#666666" letter-spacing="0.6">ECHOCODE CORE</text>
   <path d="M 170.0 157.0 L 188.0 157.0 L 275.0 157.0 L 275.0 182.4 L 362.0 182.4 L 380.0 182.4" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="205.4" y="143.0" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="231.5" y="150.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">load file</text>
   <path d="M 260.0 259.0 L 278.0 259.0 L 320.0 259.0 L 320.0 174.1 L 362.0 174.1 L 380.0 174.1" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="306.2" y="209.5" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="320.0" y="216.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">file</text>
   <path d="M 260.0 345.0 L 278.0 345.0 L 320.0 345.0 L 320.0 491.9 L 362.0 491.9 L 380.0 491.9" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="301.3" y="411.5" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="320.0" y="418.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">source</text>
   <path d="M 510.0 224.0 L 510.0 242.0 L 510.0 239.0 L 510.0 236.0 L 510.0 254.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="481.5" y="226.0" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="233.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">plain text</text>
   <path d="M 510.0 318.0 L 510.0 336.0 L 510.0 333.0 L 510.0 330.0 L 510.0 348.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="488.8" y="320.0" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="327.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">tasks[]</text>
   <path d="M 510.0 412.0 L 510.0 430.0 L 510.0 427.0 L 510.0 424.0 L 510.0 442.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="496.2" y="414.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">task</text>
   <path d="M 510.0 506.0 L 510.0 524.0 L 510.0 521.0 L 510.0 518.0 L 510.0 536.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="486.4" y="508.0" width="47.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="510.0" y="515.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">response</text>
   <path d="M 640.0 174.1 L 658.0 174.1 L 715.0 174.1 L 715.0 184.0 L 772.0 184.0 L 790.0 184.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="670.2" y="160.1" width="32.5" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="167.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">parse</text>
   <path d="M 640.0 474.0 L 658.0 474.0 L 715.0 474.0 L 715.0 272.0 L 772.0 272.0 L 790.0 272.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="640.8" y="460.0" width="91.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="467.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">extract / compare</text>
   <path d="M 640.0 397.9 L 658.0 397.9 L 715.0 397.9 L 715.0 360.0 L 772.0 360.0 L 790.0 360.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="635.9" y="383.9" width="101.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="686.5" y="390.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">task text, progress</text>
   <path d="M 380.0 286.0 L 362.0 286.0 L 310.0 286.0 L 310.0 676.0 L 310.0 694.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="302.6" y="272.0" width="66.9" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="336.0" y="279.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">read / write</text>
   <path d="M 640.0 568.0 L 658.0 568.0 L 725.0 568.0 L 725.0 676.0 L 725.0 694.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="680.1" y="554.0" width="22.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="691.5" y="561.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">set</text>
   <text x="40.0" y="26.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="bold" font-style="normal" fill="#222222" dominant-baseline="middle">Assignment Tracker — Level 1 (Decomposition)</text>
   <text x="40.0" y="49.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.0" font-weight="normal" font-style="italic" fill="#777777" dominant-baseline="middle">Turn an assignment document into a spoken task list, tracked against the code the user writes.</text>
   <text x="40.0" y="94.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" font-style="normal" fill="#999999" dominant-baseline="middle">INPUTS</text>
@@ -89,4 +65,28 @@
   <text x="799.0" y="789.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">Completion detection is a model comparing prose to code, so</text>
   <text x="799.0" y="802.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">it is non-deterministic. Ctrl+Alt+M is the deterministic</text>
   <text x="799.0" y="815.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">override.</text>
+  <rect x="205.4" y="143.0" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="231.5" y="150.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">load file</text>
+  <rect x="306.2" y="209.5" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="320.0" y="216.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">file</text>
+  <rect x="301.3" y="411.5" width="37.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="320.0" y="418.5" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">source</text>
+  <rect x="481.5" y="226.0" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="233.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">plain text</text>
+  <rect x="488.8" y="320.0" width="42.3" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="327.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">tasks[]</text>
+  <rect x="496.2" y="414.0" width="27.6" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="421.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">task</text>
+  <rect x="486.4" y="508.0" width="47.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="510.0" y="515.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">response</text>
+  <rect x="670.2" y="160.1" width="32.5" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="167.1" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">parse</text>
+  <rect x="640.8" y="460.0" width="91.4" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="467.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">extract / compare</text>
+  <rect x="635.9" y="383.9" width="101.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="686.5" y="390.9" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">task text, progress</text>
+  <rect x="302.6" y="272.0" width="66.9" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="336.0" y="279.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">read / write</text>
+  <rect x="680.1" y="554.0" width="22.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="691.5" y="561.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">set</text>
 </svg>

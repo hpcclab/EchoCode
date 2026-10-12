@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img">
+  <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker></defs>
+  <rect width="100%" height="100%" fill="#ffffff"/>
+  <rect x="50.0" y="140.0" width="288.0" height="222.0" rx="4" fill="#fdf0fb" stroke="#c264a8"/>
+  <text x="62.0" y="155.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="bold" fill="#555555" letter-spacing="0.6">C.1  Select toolchain</text>
+  <rect x="353.0" y="140.0" width="288.0" height="222.0" rx="4" fill="#fdf0fb" stroke="#c264a8"/>
+  <text x="365.0" y="155.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="bold" fill="#555555" letter-spacing="0.6">C.2  Probe availability</text>
+  <rect x="656.0" y="140.0" width="288.0" height="222.0" rx="4" fill="#ffffff" stroke="#8a8a8a"/>
+  <text x="668.0" y="155.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="bold" fill="#555555" letter-spacing="0.6">C.3  Spawn analyser</text>
+  <rect x="959.0" y="140.0" width="288.0" height="222.0" rx="4" fill="#fdf0fb" stroke="#c264a8"/>
+  <text x="971.0" y="155.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="bold" fill="#555555" letter-spacing="0.6">C.4  Parse &amp; classify</text>
+  <rect x="1262.0" y="140.0" width="288.0" height="222.0" rx="4" fill="#d6ead7" stroke="#5d9161"/>
+  <text x="1274.0" y="155.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="bold" fill="#555555" letter-spacing="0.6">C.5  Simplify &amp; speak</text>
+  <path d="M 338.0 195.5 L 356.0 195.5 L 345.5 195.5 L 335.0 195.5 L 353.0 195.5" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 641.0 195.5 L 659.0 195.5 L 648.5 195.5 L 638.0 195.5 L 656.0 195.5" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 944.0 195.5 L 962.0 195.5 L 951.5 195.5 L 941.0 195.5 L 959.0 195.5" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 1247.0 195.5 L 1265.0 195.5 L 1254.5 195.5 L 1244.0 195.5 L 1262.0 195.5" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 439.4 362.0 L 439.4 380.0 L 439.4 382.0 L 497.0 382.0 L 497.0 384.0 L 497.0 402.0" fill="none" stroke="#8a8a8a" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
+  <path d="M 857.6 362.0 L 857.6 380.0 L 857.6 420.0 L 800.0 420.0 L 800.0 460.0 L 800.0 478.0" fill="none" stroke="#b85450" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
+  <text x="50.0" y="59.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="26.0" font-weight="bold" font-style="normal" fill="#1a1a1a" dominant-baseline="middle">Pattern C — External Validation</text>
+  <text x="50.0" y="89.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="normal" font-style="normal" fill="#6a6a6a" dominant-baseline="middle">Level 2 · each stage decomposed into the functions, decisions and failure paths that implement it</text>
+  <rect x="1460.0" y="36.0" width="70.0" height="70.0" rx="6" fill="#ffffff" stroke="#8a8a8a"/>
+  <text x="1495.0" y="71.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="30.0" font-weight="bold" fill="#333333" text-anchor="middle" dominant-baseline="middle">C</text>
+  <rect x="64.0" y="178.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="194.0" y="207.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">editorLangId routes to pylint or g++</text>
+  <text x="194.0" y="222.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">the same chord, two toolchains</text>
+  <rect x="64.0" y="266.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="194.0" y="295.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">a non-matching language is refused</text>
+  <text x="194.0" y="310.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">with a spoken message, not silence</text>
+  <rect x="367.0" y="178.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="497.0" y="199.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">isPylintAvailable() — cached</text>
+  <text x="497.0" y="215.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">re-spawning an interpreter per save</text>
+  <text x="497.0" y="230.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">is the cost being avoided</text>
+  <rect x="367.0" y="266.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="497.0" y="295.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">missing-toolchain latch: prompt once,</text>
+  <text x="497.0" y="310.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">then stop retrying automatically</text>
+  <rect x="670.0" y="178.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#8a8a8a"/>
+  <text x="800.0" y="192.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">python3 -m pylint</text>
+  <text x="800.0" y="207.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">--output-format=json</text>
+  <text x="800.0" y="222.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">python is the Windows name, python3</text>
+  <text x="800.0" y="238.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">everywhere else</text>
+  <rect x="670.0" y="266.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#8a8a8a"/>
+  <text x="800.0" y="287.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">bounded: 10s timeout cleared on every</text>
+  <text x="800.0" y="303.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">exit path · maxBuffer 32MB · an</text>
+  <text x="800.0" y="318.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">'error' handler for a missing binary</text>
+  <rect x="973.0" y="178.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="1103.0" y="207.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">JSON for pylint, pattern-matched</text>
+  <text x="1103.0" y="222.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">GCC diagnostics for g++</text>
+  <rect x="973.0" y="266.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#c264a8"/>
+  <text x="1103.0" y="280.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">PYLINT_NOT_INSTALLED ·</text>
+  <text x="1103.0" y="295.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">PYTHON_NOT_FOUND</text>
+  <text x="1103.0" y="310.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">PYLINT_TIMED_OUT · PYLINT_FAILED —</text>
+  <text x="1103.0" y="326.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">a setup problem is not a failure</text>
+  <rect x="1276.0" y="178.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#5d9161"/>
+  <text x="1406.0" y="199.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">isCriticalError(symbol) — 5 symbols:</text>
+  <text x="1406.0" y="215.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">undefined-variable, syntax-error,</text>
+  <text x="1406.0" y="230.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">indentation-error, …</text>
+  <rect x="1276.0" y="266.0" width="260.0" height="74.0" rx="6" fill="#ffffff" stroke="#5d9161"/>
+  <text x="1406.0" y="287.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">simplifyError() beginner wording,</text>
+  <text x="1406.0" y="303.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">formatHelpByGuidance(), then speak</text>
+  <text x="1406.0" y="318.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">critical only; all to the channel</text>
+  <path d="M 353.0 409.3 A 144.0 7.3 0 0 1 641.0 409.3 V 450.7 A 144.0 7.3 0 0 1 353.0 450.7 Z" fill="#d5e8d4" stroke="#82b366"/>
+  <path d="M 353.0 409.3 A 144.0 7.3 0 0 0 641.0 409.3" fill="none" stroke="#82b366"/>
+  <text x="497.0" y="426.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#333333" text-anchor="middle" dominant-baseline="middle">Availability cache</text>
+  <text x="497.0" y="441.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#333333" text-anchor="middle" dominant-baseline="middle">+ missing-toolchain latch</text>
+  <rect x="656.0" y="478.0" width="288.0" height="60.0" rx="6" fill="#f8cecc" stroke="#b85450"/>
+  <text x="800.0" y="500.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">Exit 0 with empty stdout</text>
+  <text x="800.0" y="515.7" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" fill="#222222" text-anchor="middle" dominant-baseline="middle">is not success</text>
+  <path d="M 50.0 790.0 H 1516.0 L 1530.0 804.0 V 874.0 H 50.0 Z" fill="#fff2cc" stroke="#d6b656"/>
+  <path d="M 1516.0 790.0 V 804.0 H 1530.0" fill="none" stroke="#d6b656"/>
+  <text x="59.0" y="805.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" fill="#6b5c22" dominant-baseline="middle">Measured pylint cost: ~320ms on 48 lines, ~385ms on 498, ~635ms on 1998. Roughly 300ms of that is fixed interpreter and astroid startup, independent of file size — which is why debouncing saves helps far more than</text>
+  <text x="59.0" y="820.6" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" fill="#6b5c22" dominant-baseline="middle">optimising the analysis.</text>
+</svg>

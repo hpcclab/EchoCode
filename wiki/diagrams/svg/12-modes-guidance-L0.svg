@@ -2,23 +2,11 @@
   <defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M 0 1 L 10 5 L 0 9 z" fill="#555555"/></marker></defs>
   <rect width="100%" height="100%" fill="#ffffff"/>
   <path d="M 180.0 127.0 L 198.0 127.0 L 472.0 127.0 L 472.0 234.0 L 472.0 252.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="274.6" y="113.0" width="120.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="335.0" y="120.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Ctrl+Alt+9 / Ctrl+Alt+Z</text>
   <path d="M 290.0 254.0 L 308.0 254.0 L 360.0 254.0 L 360.0 283.7 L 412.0 283.7 L 430.0 283.7" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="295.7" y="240.0" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="334.0" y="247.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">current values</text>
   <path d="M 290.0 355.0 L 308.0 355.0 L 360.0 355.0 L 360.0 364.3 L 412.0 364.3 L 430.0 364.3" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="305.5" y="341.0" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="334.0" y="348.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">command id</text>
   <path d="M 710.0 283.7 L 728.0 283.7 L 770.0 283.7 L 770.0 211.0 L 812.0 211.0 L 830.0 211.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="741.5" y="240.3" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="770.0" y="247.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">setContext</text>
   <path d="M 710.0 324.0 L 728.0 324.0 L 770.0 324.0 L 770.0 307.0 L 812.0 307.0 L 830.0 307.0" fill="none" stroke="#8a8a8a" stroke-width="1.3" stroke-linejoin="round" stroke-dasharray="5 4" marker-end="url(#arrow)"/>
-  <rect x="698.4" y="310.0" width="101.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="749.0" y="317.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">formatted verbosity</text>
   <path d="M 710.0 364.3 L 728.0 364.3 L 770.0 364.3 L 770.0 403.0 L 812.0 403.0 L 830.0 403.0" fill="none" stroke="#555555" stroke-width="1.3" stroke-linejoin="round" marker-end="url(#arrow)"/>
-  <rect x="710.7" y="350.3" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="749.0" y="357.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">mode announced</text>
   <text x="40.0" y="26.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="15.0" font-weight="bold" font-style="normal" fill="#222222" dominant-baseline="middle">Modes and Guidance — Level 0 (Context)</text>
   <text x="40.0" y="49.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.0" font-weight="normal" font-style="italic" fill="#777777" dominant-baseline="middle">Student/Dev mode decides which features are reachable; guidance level decides how much is said.</text>
   <text x="40.0" y="86.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" font-weight="bold" font-style="normal" fill="#999999" dominant-baseline="middle">SOURCES</text>
@@ -50,4 +38,16 @@
   <text x="439.0" y="513.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">Mode is enforced twice — context keys stop keybindings</text>
   <text x="439.0" y="526.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">dispatching, and guard() catches Palette and voice</text>
   <text x="439.0" y="539.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">invocations.</text>
+  <rect x="274.6" y="113.0" width="120.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="335.0" y="120.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Ctrl+Alt+9 / Ctrl+Alt+Z</text>
+  <rect x="295.7" y="240.0" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="334.0" y="247.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">current values</text>
+  <rect x="305.5" y="341.0" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="334.0" y="348.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">command id</text>
+  <rect x="741.5" y="240.3" width="57.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="770.0" y="247.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">setContext</text>
+  <rect x="698.4" y="310.0" width="101.2" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="749.0" y="317.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">formatted verbosity</text>
+  <rect x="710.7" y="350.3" width="76.7" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
+  <text x="749.0" y="357.3" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">mode announced</text>
 </svg>
