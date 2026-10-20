@@ -85,30 +85,13 @@ class EchoCodeChatViewProvider {
           );
           if (this._currentWebview) {
             if (result && result.ok) {
+              // The webview sends this back as "executeVoiceCommand", which tries a
+              // voice command and falls back to the chat. Doing either here too would
+              // run the command, or send the message, twice.
               this._currentWebview.postMessage({
                 type: "voiceRecognitionResult",
                 text: result.text || "",
               });
-
-              // Try to execute a voice-mapped command before Copilot ===
-              const { tryExecuteVoiceCommand } = require("../../extension");
-              const outputChannel = this.outputChannel;
-              const voiceResult = await tryExecuteVoiceCommand(
-                transcript,
-                outputChannel,
-              );
-
-              if (voiceResult.handled) {
-                // Voice command recognized and executed — stop here
-                this._currentWebview.postMessage({
-                  type: "response",
-                  text: `Executed command: ${voiceResult.command}`,
-                });
-                return; // do NOT fall through to Copilot
-              }
-
-              // else: fall through to normal Copilot behavior
-              await this.handleUserMessage(result.text || "");
             } else {
               this._currentWebview.postMessage({
                 type: "voiceRecognitionError",
