@@ -148,6 +148,10 @@
         "title": "EchoCode: Switch to Student Mode"
       },
       {
+        "command": "echocode.studentModeBadge",
+        "title": "EchoCode is in Student Mode"
+      },
+      {
         "command": "echocode.switchToDevMode",
         "title": "EchoCode: Switch to Developer Mode"
       },
@@ -665,7 +669,7 @@
         {
           "id": "echocode",
           "title": "EchoCode",
-          "icon": "images/icon.png"
+          "icon": "images/activitybar.svg"
         }
       ]
     },
@@ -679,10 +683,21 @@
       ]
     },
     "menus": {
+      "commandPalette": [
+        {
+          "command": "echocode.studentModeBadge",
+          "when": "echocode:isStudent"
+        }
+      ],
       "editor/title": [
         {
           "command": "echocode.annotate",
           "when": "echocode:isDev",
+          "group": "navigation"
+        },
+        {
+          "command": "echocode.studentModeBadge",
+          "when": "echocode:isStudent",
           "group": "navigation"
         }
       ],

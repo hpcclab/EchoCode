@@ -416,6 +416,7 @@ suite("EchoCode – Root Extension Integration", () => {
         "echocode.toggleMode",
         "echocode.switchToStudentMode",
         "echocode.switchToDevMode",
+        "echocode.studentModeBadge",
         "echocode._voiceStart",
         "echocode._voiceStop",
         "echocode.selectMicrophone",
