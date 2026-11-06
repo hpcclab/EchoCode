@@ -38,12 +38,8 @@ const STUDENT_LOCKED_COMMANDS = new Set([
   "echocode.compileAndParseCpp",
   "echocode.checkPythonErrors",
 
-  // ✅ Assignment Tracker (LOCK in student mode)
-  "echocode.loadAssignmentFile",
-  "echocode.readNextTask",
-  "echocode.markTaskComplete",
-  "echocode.rescanUserCode",
-"echocode.readNextSequentialTask",
+  // Assignment Tracker stays available: it reads out the assignment's own steps and
+  // checks them off, without writing or explaining any code.
 ]);
 
 function isStudentMode() {

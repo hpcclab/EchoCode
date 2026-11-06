@@ -1,0 +1,51 @@
+%PDF-1.4
+%‚„œ”
+1 0 obj
+<< /Type /Catalog /Pages 2 0 R >>
+endobj
+2 0 obj
+<< /Type /Pages /Kids [3 0 R] /Count 1 >>
+endobj
+3 0 obj
+<< /Type /Page /Parent 2 0 R /MediaBox [0 0 612 792] /Contents 4 0 R /Resources << /Font << /F1 5 0 R /F2 6 0 R >> >> >>
+endobj
+4 0 obj
+<< /Length 975 >>
+stream
+BT /F2 18 Tf 72 740 Td (Assignment 1: Grade Average Calculator) Tj ET
+BT /F1 11 Tf 72 718 Td (Intro to Programming in Python) Tj ET
+BT /F1 12 Tf 72 688 Td (Write a Python program in a file named grades.py that works out a) Tj ET
+BT /F1 12 Tf 72 671 Td (student's average test score and letter grade. Complete these steps:) Tj ET
+BT /F1 12 Tf 72 641 Td (- [ ] Create a list named scores that holds five test scores.) Tj ET
+BT /F1 12 Tf 72 619 Td (- [ ] Define a function named average\(scores\) that returns their mean.) Tj ET
+BT /F1 12 Tf 72 597 Td (- [ ] Define a function named letter_grade\(avg\) that returns A, B, C, D, or F.) Tj ET
+BT /F1 12 Tf 72 575 Td (- [ ] Print the average rounded to one decimal place.) Tj ET
+BT /F1 12 Tf 72 553 Td (- [ ] Print the letter grade in a message like: Your grade is B.) Tj ET
+BT /F1 12 Tf 72 519 Td (Grading scale: A is 90 and up, B is 80 to 89, C is 70 to 79,) Tj ET
+BT /F1 12 Tf 72 502 Td (D is 60 to 69, and F is below 60.) Tj ET
+endstream
+endobj
+5 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica /Encoding /WinAnsiEncoding >>
+endobj
+6 0 obj
+<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold /Encoding /WinAnsiEncoding >>
+endobj
+7 0 obj
+<< /Title (Assignment 1: Grade Average Calculator) >>
+endobj
+xref
+0 8
+0000000000 65535 f 
+0000000015 00000 n 
+0000000064 00000 n 
+0000000121 00000 n 
+0000000257 00000 n 
+0000001283 00000 n 
+0000001380 00000 n 
+0000001482 00000 n 
+trailer
+<< /Size 8 /Root 1 0 R /Info 7 0 R >>
+startxref
+1551
+%%EOF
