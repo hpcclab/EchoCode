@@ -36,6 +36,7 @@ const {
 } = require("./Core/program_settings/program_settings/secretStore");
 const {
   getAiSettings,
+  generateCodeFromVoice,
 } = require("./Core/program_settings/program_settings/AIrequest");
 
 // Python (optional adapter)
@@ -870,7 +871,7 @@ async function activate(context) {
       await vscode.commands.executeCommand(targetCommand);
     }),
   );
-
+  
   registerWhereAmICommand(context);
   registerMoveCursor(context);
   registerFileNavigatorCommand(context);
