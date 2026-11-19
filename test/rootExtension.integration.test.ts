@@ -315,6 +315,7 @@ function createExtensionStubs(state: {
       },
       loadSavedSpeechSpeed: () => {},
       registerSpeechCommands: () => {},
+      installNotificationTracking: () => {},
       increaseSpeechSpeed: () => {},
       decreaseSpeechSpeed: () => {},
     },

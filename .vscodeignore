@@ -35,3 +35,13 @@ vsc-extension-quickstart.md
 # 🚀 Ignore unnecessary config files
 **/jsconfig.json
 **/eslint.config.mjs
+
+# 🚀 koffi (NVDA bridge) is only loaded on Windows; ship just its Windows binaries
+node_modules/koffi/build/koffi/darwin_*/**
+node_modules/koffi/build/koffi/linux_*/**
+node_modules/koffi/build/koffi/musl_*/**
+node_modules/koffi/build/koffi/freebsd_*/**
+node_modules/koffi/build/koffi/openbsd_*/**
+node_modules/koffi/src/**
+node_modules/koffi/vendor/**
+node_modules/koffi/doc/**

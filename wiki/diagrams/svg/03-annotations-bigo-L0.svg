@@ -37,7 +37,7 @@
   <text x="439.0" y="513.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">A local rules pass runs first, so findings appear with no</text>
   <text x="439.0" y="526.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="10.0" fill="#6b5c22" dominant-baseline="middle">model configured. The AI pass adds depth on top.</text>
   <rect x="274.6" y="113.0" width="120.8" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
-  <text x="335.0" y="120.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Ctrl+Alt+A / Ctrl+Alt+N</text>
+  <text x="335.0" y="120.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">Ctrl+Alt+A / Ctrl+Alt+J</text>
   <rect x="278.5" y="245.0" width="111.0" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>
   <text x="334.0" y="252.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="9" font-weight="normal" fill="#666666" text-anchor="middle" dominant-baseline="middle">source + line numbers</text>
   <rect x="307.9" y="336.0" width="52.1" height="14.0" rx="2" fill="#ffffff" fill-opacity="0.92" stroke="none"/>

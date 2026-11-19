@@ -278,6 +278,32 @@
           "default": "student",
           "description": "Student mode locks restricted features. Dev mode enables everything."
         },
+        "echocode.screenReaderOutput": {
+          "type": "string",
+          "enum": ["auto", "builtin"],
+          "enumDescriptions": [
+            "Speak through NVDA when it is running (Windows), otherwise use EchoCode's own voice.",
+            "Always use EchoCode's own voice, even when NVDA is running."
+          ],
+          "default": "auto",
+          "description": "Where EchoCode's announcements are spoken."
+        },
+        "echocode.nvdaControllerClientPath": {
+          "type": "string",
+          "default": "",
+          "description": "Full path to nvdaControllerClient.dll. Leave blank to use the copy in the extension's lib/nvda/<arch>/ folder."
+        },
+        "echocode.nvdaWordsPerMinute": {
+          "type": "number",
+          "default": 180,
+          "minimum": 60,
+          "description": "Roughly how fast NVDA speaks. Only used with NVDA older than 2026.3, which cannot report when it has finished speaking: EchoCode then estimates how long to wait before the next announcement."
+        },
+        "echocode.nvdaSkipNotificationDuplicates": {
+          "type": "boolean",
+          "default": true,
+          "description": "While speaking through NVDA, skip an announcement that repeats a notification NVDA is already reading."
+        },
         "echocode.voice": {
           "type": "string",
           "default": "",
@@ -535,7 +561,7 @@
       },
       {
         "command": "code-tutor.analyzeBigO",
-        "key": "ctrl+alt+n",
+        "key": "ctrl+alt+j",
         "when": "editorTextFocus && echocode:isDev"
       },
       {
@@ -746,6 +772,7 @@
     "dotenv": "^17.4.2",
     "ffmpeg-static": "^5.2.0",
     "fluent-ffmpeg": "^2.1.3",
+    "koffi": "^2.16.4",
     "mammoth": "^1.9.0",
     "pdf-parse": "^1.1.1",
     "say": "^0.16.0",

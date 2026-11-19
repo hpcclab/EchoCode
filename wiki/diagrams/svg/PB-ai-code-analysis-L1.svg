@@ -15,7 +15,7 @@
   <rect x="1460.0" y="36.0" width="70.0" height="70.0" rx="6" fill="#f0e6fa" stroke="#9673a6"/>
   <text x="1495.0" y="71.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="30.0" font-weight="bold" fill="#333333" text-anchor="middle" dominant-baseline="middle">B</text>
   <text x="50.0" y="768.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="11.0" font-weight="bold" font-style="normal" fill="#9a9a9a" dominant-baseline="middle">FEATURES USING THIS PATTERN</text>
-  <text x="50.0" y="827.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="normal" fill="#777777" dominant-baseline="middle">annotations (Ctrl+Alt+A) · Big-O analysis (Ctrl+Alt+N) · code summaries (Ctrl+Alt+E F/C/P)</text>
+  <text x="50.0" y="827.0" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="normal" fill="#777777" dominant-baseline="middle">annotations (Ctrl+Alt+A) · Big-O analysis (Ctrl+Alt+J) · code summaries (Ctrl+Alt+E F/C/P)</text>
   <text x="50.0" y="842.4" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',Helvetica,Arial,sans-serif" font-size="12.0" font-weight="normal" font-style="normal" fill="#777777" dominant-baseline="middle">assignment rescan (Ctrl+Alt+Y) · line explanation fallback</text>
   <circle cx="92.0" cy="341.4" r="11.4" fill="#4a90d9"/>
   <path d="M 92.0 352.9 V 373.6 M 72.0 357.7 H 112.0 M 92.0 373.6 L 73.0 396.0 M 92.0 373.6 L 111.0 396.0" stroke="#4a90d9" stroke-width="2.4" fill="none" stroke-linecap="round"/>

@@ -54,6 +54,7 @@ const {
   speakMessage,
   loadSavedSpeechSpeed,
   registerSpeechCommands,
+  installNotificationTracking,
   increaseSpeechSpeed,
   decreaseSpeechSpeed,
 } = require("./Core/program_settings/speech_settings/speechHandler");
@@ -661,6 +662,7 @@ async function activate(context) {
 
   // Speech prefs
   loadSavedSpeechSpeed();
+  installNotificationTracking();
 
   // Register core commands first (code-agnostic)
   // Register core commands first (code-agnostic)

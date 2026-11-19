@@ -91,7 +91,7 @@ Rows marked **Dev** only fire in Developer mode (locked in Student mode).
 | `Ctrl+Alt+A`       | `echocode.annotate`                                          | Generates AI annotations for your code. **Dev**                                      |
 | `Ctrl+Alt+S`       | `echocode.speakNextAnnotation`                               | Reads the next annotation, including line number and suggestion. **Dev**             |
 | `Ctrl+Alt+Q`       | `echocode.readAllAnnotations`                                | Reads all the annotations in the queue. **Dev**                                      |
-| `Ctrl+Alt+N`       | `code-tutor.analyzeBigO`                                     | Queues up Big O complexity annotations. **Dev**                                      |
+| `Ctrl+Alt+J`       | `code-tutor.analyzeBigO`                                     | Queues up Big O complexity annotations. **Dev**                                      |
 | `Ctrl+Alt+B`       | `code-tutor.iterateBigOQueue`                                | Reads the next Big O recommendation aloud. **Dev**                                   |
 | `Ctrl+Alt+H`       | `code-tutor.readEntireBigOQueue`                             | Reads all Big O recommendations one at a time. **Dev**                               |
 | `Ctrl+Alt+Down`    | `echocode.jumpToNextFunction`                                | Jumps to the next function in the file.                                              |
