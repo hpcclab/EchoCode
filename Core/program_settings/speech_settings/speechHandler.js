@@ -1,5 +1,6 @@
 const vscode = require("vscode");
 const say = require("say");
+const nvda = require("./nvdaBridge");
 
 let speechSpeed = 1.0;
 let isSpeaking = false;
@@ -192,6 +193,179 @@ function forceHandoff() {
 }
 
 /**
+ * NVDA routing.
+ *
+ * When NVDA is running, announcements go to NVDA (see nvdaBridge.js) rather than to
+ * EchoCode's own voice, so the two never talk over each other.
+ *
+ * NVDA accepts text and returns at once. Many callers `await speakMessage(...)` before
+ * announcing the next thing, and if that promise resolved immediately the next
+ * announcement would cut the first one off. So the promise resolves when NVDA has finished:
+ *
+ *   - NVDA 2026.3+: poll nvdaController_isSpeaking until it reports silence.
+ *   - Older NVDA (isSpeaking unsupported): wait an estimate of the speaking time, from the
+ *     `echocode.nvdaWordsPerMinute` setting.
+ *
+ * A later announcement or a stop resolves it early.
+ */
+
+// The announcement NVDA is still speaking: { timer, resolve }.
+let nvdaUtterance = null;
+
+const NVDA_POLL_MS = 100;
+// NVDA queues speech through its event loop, so for a moment after speakText it may still
+// report silence. Silence only counts as "finished" once speech was seen, or after this.
+const NVDA_START_GRACE_MS = 600;
+// isSpeaking is true for any NVDA speech, including NVDA reading the user's own typing or
+// cursor moves. Cap the wait so a busy NVDA can't stall EchoCode's announcements.
+const NVDA_MAX_WAIT_FACTOR = 2;
+const NVDA_MAX_WAIT_EXTRA_MS = 3000;
+
+// Notifications EchoCode showed recently: [{ text, at }]. VS Code announces its
+// notifications to screen readers itself, so with NVDA running, speaking the same text
+// again is a duplicate.
+let recentNotifications = [];
+const NOTIFICATION_DEDUPE_MS = 2000;
+
+function settleNvdaUtterance() {
+  if (!nvdaUtterance) return;
+  const { timer, resolve } = nvdaUtterance;
+  nvdaUtterance = null;
+  clearTimeout(timer);
+  resolve();
+}
+
+function estimateSpeechMs(text) {
+  const configured = vscode.workspace.getConfiguration("echocode").get("nvdaWordsPerMinute");
+  const wpm = typeof configured === "number" && configured > 0 ? configured : 180;
+  const words = text.split(/\s+/).filter(Boolean).length;
+  return Math.round(300 + (words * 60000) / Math.max(60, wpm));
+}
+
+function normalizeForCompare(text) {
+  return String(text)
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, " ")
+    .trim();
+}
+
+/**
+ * True when `text` says what a notification shown in the last couple of seconds already
+ * said: the same words, one containing the other, or nearly all of its words in common.
+ */
+function duplicatesRecentNotification(text) {
+  const now = Date.now();
+  recentNotifications = recentNotifications.filter(
+    (n) => now - n.at <= NOTIFICATION_DEDUPE_MS,
+  );
+  if (!recentNotifications.length) return false;
+
+  const spoken = normalizeForCompare(text);
+  if (!spoken) return false;
+  const spokenWords = spoken.split(" ");
+
+  return recentNotifications.some(({ text: shown }) => {
+    if (!shown) return false;
+    if (shown === spoken || shown.includes(spoken)) return true;
+    // A short notification inside a long announcement doesn't make the rest redundant.
+    if (spoken.includes(shown) && shown.length >= spoken.length * 0.6) return true;
+    const shownWords = new Set(shown.split(" "));
+    const common = spokenWords.filter((w) => shownWords.has(w)).length;
+    return common / spokenWords.length >= 0.8;
+  });
+}
+
+function speakThroughNvda(text) {
+  const skipDuplicates = vscode.workspace
+    .getConfiguration("echocode")
+    .get("nvdaSkipNotificationDuplicates", true) !== false;
+  if (skipDuplicates && duplicatesRecentNotification(text)) {
+    // NVDA is already reading the notification; saying it again is just noise.
+    return Promise.resolve();
+  }
+
+  // If the built-in voice was mid-sentence (NVDA was started just now), silence it.
+  if (activeUtterance || pendingUtterance) stopBuiltInSpeech();
+
+  if (!nvda.speak(text, { interrupt: true })) return null;
+
+  // The previous announcement has just been cut off by this one.
+  settleNvdaUtterance();
+  return new Promise((resolve) => {
+    const entry = { resolve, timer: null };
+    nvdaUtterance = entry;
+
+    const finish = () => {
+      if (nvdaUtterance !== entry) return; // superseded or stopped; already resolved
+      nvdaUtterance = null;
+      resolve();
+    };
+
+    const estimate = estimateSpeechMs(text);
+    const startedAt = Date.now();
+    const deadline = startedAt + estimate * NVDA_MAX_WAIT_FACTOR + NVDA_MAX_WAIT_EXTRA_MS;
+    let heardSpeech = false;
+
+    const poll = () => {
+      if (nvdaUtterance !== entry) return;
+      const speaking = nvda.isSpeaking();
+
+      if (speaking === null) {
+        // This NVDA can't report it: wait out the rest of the estimate instead.
+        const remaining = Math.max(0, estimate - (Date.now() - startedAt));
+        entry.timer = setTimeout(finish, remaining);
+        return;
+      }
+      if (speaking) heardSpeech = true;
+
+      const now = Date.now();
+      const silentForReal =
+        !speaking && (heardSpeech || now - startedAt >= NVDA_START_GRACE_MS);
+      if (silentForReal || now >= deadline) {
+        finish();
+        return;
+      }
+      entry.timer = setTimeout(poll, NVDA_POLL_MS);
+    };
+
+    entry.timer = setTimeout(poll, NVDA_POLL_MS);
+  });
+}
+
+/**
+ * Records EchoCode's own notifications so a spoken duplicate can be skipped while NVDA is
+ * running. Wraps this extension's copy of the show*Message functions (each extension gets
+ * its own `vscode` API object, so nothing outside EchoCode is affected). Call once from
+ * activate().
+ */
+function installNotificationTracking() {
+  for (const name of [
+    "showInformationMessage",
+    "showWarningMessage",
+    "showErrorMessage",
+  ]) {
+    const original = vscode.window[name];
+    if (typeof original !== "function" || original.__echocodeTracked) continue;
+
+    const wrapped = function (message, ...rest) {
+      if (typeof message === "string") {
+        recentNotifications.push({ text: normalizeForCompare(message), at: Date.now() });
+        if (recentNotifications.length > 20) recentNotifications.shift();
+      }
+      return original.call(this, message, ...rest);
+    };
+    wrapped.__echocodeTracked = true;
+
+    try {
+      vscode.window[name] = wrapped;
+    } catch (err) {
+      // A frozen API object just means no de-duplication; speech still works.
+      console.warn(`[EchoCode] Could not track ${name} for NVDA de-duplication`, err);
+    }
+  }
+}
+
+/**
  * Speaks a message, interrupting anything already being spoken.
  *
  * Resolves once the message has finished being read aloud, or as soon as it is
@@ -204,6 +378,12 @@ function forceHandoff() {
 function speakMessage(message) {
   const text = String(message ?? "").trim();
   if (!text) return Promise.resolve();
+
+  if (nvda.isNvdaActive()) {
+    const routed = speakThroughNvda(text);
+    if (routed) return routed;
+    // NVDA refused it (e.g. it just quit): fall through to the built-in voice.
+  }
 
   return new Promise((resolve) => {
     // Anything already waiting is now stale — it never reached the speaker, and the
@@ -245,6 +425,15 @@ function interruptActive() {
  * anything to stop.
  */
 function stopSpeaking() {
+  const nvdaWasSpeaking = Boolean(nvdaUtterance);
+  settleNvdaUtterance();
+  if (nvda.isNvdaActive()) nvda.cancel();
+
+  return stopBuiltInSpeech() || nvdaWasSpeaking;
+}
+
+// Stops EchoCode's own voice (say.js) and discards anything waiting for it.
+function stopBuiltInSpeech() {
   const hadPending = Boolean(pendingUtterance);
   const wasSpeaking = Boolean(activeUtterance);
 
@@ -279,7 +468,7 @@ function stopSpeaking() {
 
 // True while audio is actually playing. Exposed for tests.
 function isCurrentlySpeaking() {
-  return Boolean(activeUtterance);
+  return Boolean(activeUtterance || nvdaUtterance);
 }
 
 // Register speech-related commands
@@ -288,6 +477,12 @@ function registerSpeechCommands(context, outputChannel) {
   const increaseSpeechSpeedCmd = vscode.commands.registerCommand(
     "echocode.increaseSpeechSpeed",
     () => {
+      if (nvda.isNvdaActive()) {
+        speakMessage(
+          "EchoCode is speaking through NVDA. Change the speech rate in NVDA's speech settings.",
+        );
+        return;
+      }
       const newSpeed = increaseSpeechSpeed();
       const message = `Speech speed increased to ${newSpeed.toFixed(1)}x`;
       vscode.window.showInformationMessage(message);
@@ -300,6 +495,12 @@ function registerSpeechCommands(context, outputChannel) {
   const decreaseSpeechSpeedCmd = vscode.commands.registerCommand(
     "echocode.decreaseSpeechSpeed",
     () => {
+      if (nvda.isNvdaActive()) {
+        speakMessage(
+          "EchoCode is speaking through NVDA. Change the speech rate in NVDA's speech settings.",
+        );
+        return;
+      }
       const newSpeed = decreaseSpeechSpeed();
       const message = `Speech speed decreased to ${newSpeed.toFixed(1)}x`;
       vscode.window.showInformationMessage(message);
@@ -338,4 +539,5 @@ module.exports = {
   getSpeechSpeed,
   loadSavedSpeechSpeed,
   registerSpeechCommands,
+  installNotificationTracking,
 };

@@ -20,11 +20,11 @@ The design point is stepping. Rather than dumping every issue at once, **Ctrl+Al
 
 ### Big-O analysis
 
-**Ctrl+Alt+N** analyses the current file's algorithmic complexity — nested loops, repeated scans, and similar patterns that make code slow as input grows.
+**Ctrl+Alt+J** analyses the current file's algorithmic complexity — nested loops, repeated scans, and similar patterns that make code slow as input grows.
 
 | Shortcut | Does |
 |---|---|
-| **Ctrl+Alt+N** | Analyse Big-O |
+| **Ctrl+Alt+J** | Analyse Big-O |
 | **Ctrl+Alt+B** | Read next recommendation |
 | **Ctrl+Alt+H** | Read all recommendations |
 

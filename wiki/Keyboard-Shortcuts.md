@@ -44,7 +44,7 @@ EchoCode is keyboard-first. Almost every shortcut uses the **Ctrl+Alt** prefix s
 | **Ctrl+Alt+A** | Toggle inline annotations |
 | **Ctrl+Alt+S** | Speak the next annotation |
 | **Ctrl+Alt+Q** | Read all annotations |
-| **Ctrl+Alt+N** | Analyse Big-O complexity |
+| **Ctrl+Alt+J** | Analyse Big-O complexity |
 | **Ctrl+Alt+B** | Read next Big-O recommendation |
 | **Ctrl+Alt+H** | Read all Big-O recommendations |
 | **Ctrl+Alt+C** | Open the Chat Tutor |

@@ -14,6 +14,10 @@ const bigOQueue = new Queue();
 // Track lines we have already analyzed locally so we don't ask AI about them
 let analyzedLines = new Set();
 
+// Results of the last run, so the next run can replace them instead of stacking on top
+let lastRunIssues = [];
+let bigODecorations = [];
+
 const ANNOTATION_PROMPT = `
 You are a Big O complexity analyzer. For each code pattern that causes performance issues, provide a single concise sentence. Just one sentence. that explains the issue and suggests an improvement. Format each suggestion as a single JSON object without any formatting:
 
@@ -26,6 +30,7 @@ You are a Big O complexity analyzer. For each code pattern that causes performan
 async function analyzeBigO(editor) {
   const document = editor.document;
   analyzedLines.clear(); // Reset tracking
+  clearPreviousRun();
 
   // Temporary array to hold all findings so we can sort them later
   let collectedIssues = [];
@@ -73,11 +78,25 @@ async function analyzeBigO(editor) {
 }
 
 /**
+ * Drops the previous run's issues and decorations. Regular annotations share
+ * annotationQueue, so only the Big O items are taken out of it.
+ */
+function clearPreviousRun() {
+  annotationQueue.remove(lastRunIssues);
+  bigOQueue.clear();
+  lastRunIssues = [];
+
+  bigODecorations.forEach((decorationType) => decorationType.dispose());
+  bigODecorations = [];
+}
+
+/**
  * Sorts issues by line number and adds them to the Queues
  */
 function finalizeQueue(issues) {
   // Sort by line number ascending
   issues.sort((a, b) => a.line - b.line);
+  lastRunIssues = issues;
 
   // Add to queues
   issues.forEach((item) => {
@@ -290,6 +309,7 @@ function applyDecoration(editor, line, suggestion) {
   editor.setDecorations(decorationType, [
     { range: range, hoverMessage: suggestion },
   ]);
+  bigODecorations.push(decorationType);
 }
 
 /**

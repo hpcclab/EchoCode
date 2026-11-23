@@ -2,13 +2,37 @@ const vscode = require("vscode");
 const {
   speakMessage,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
-const fs = require("fs");
 const path = require("path");
+const { getCurrentFolder } = require("./folder_navigator");
 
-let currentFileIndex = 0;
+// Hidden files and folders (.git, .venv, .DS_Store), dependencies, and Python caches
+// are never worth stepping through or announcing.
+const SKIPPED_FILES_GLOB =
+  "{**/node_modules/**,**/__pycache__/**,**/.*,**/.*/**}";
+
+function isSkippedPath(relativePath) {
+  return relativePath
+    .split(/[\\/]/)
+    .some(
+      (segment) =>
+        segment.startsWith(".") ||
+        segment === "node_modules" ||
+        segment === "__pycache__",
+    );
+}
+
+// A folder's own files come first, then each subfolder's, alphabetically
+function compareFilePaths(a, b) {
+  const options = { numeric: true, sensitivity: "base" };
+  return (
+    path.dirname(a).localeCompare(path.dirname(b), undefined, options) ||
+    path.basename(a).localeCompare(path.basename(b), undefined, options)
+  );
+}
 
 /**
- * Navigates to the next file in the workspace and announces its name.
+ * Opens the file after the current one in the folder picked with the folder
+ * navigator (the whole project until another folder is picked) and announces it.
  */
 async function navigateToNextFile() {
   const workspaceFolders = vscode.workspace.workspaceFolders;
@@ -19,53 +43,84 @@ async function navigateToNextFile() {
     return;
   }
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+  const folder = getCurrentFolder() || workspaceFolders[0].uri.fsPath;
 
-  // Refresh the list of files in the workspace
-  const files = await vscode.workspace.findFiles("**/*", "**/node_modules/**");
+  // Refresh the list every time so new and deleted files are picked up
+  const files = (
+    await vscode.workspace.findFiles(
+      new vscode.RelativePattern(folder, "**/*"),
+      SKIPPED_FILES_GLOB,
+    )
+  )
+    .map((uri) => uri.fsPath)
+    .sort(compareFilePaths);
 
   if (files.length === 0) {
-    vscode.window.showErrorMessage("No files found in the workspace.");
-    await speakMessage("No files found in the workspace.");
+    vscode.window.showErrorMessage("No files found in this folder.");
+    await speakMessage("No files found in this folder.");
     return;
   }
 
-  // Navigate to the next file
-  currentFileIndex = (currentFileIndex + 1) % files.length;
-  const nextFile = files[currentFileIndex];
+  // Start after the file that is open now; if it isn't in this folder, indexOf is -1
+  // and we start at the first file
+  const activePath = vscode.window.activeTextEditor?.document.uri.fsPath;
+  const startIndex = files.indexOf(activePath) + 1;
 
-  // Open the file in the editor
-  const document = await vscode.workspace.openTextDocument(nextFile);
-  await vscode.window.showTextDocument(document);
+  for (let step = 0; step < files.length; step++) {
+    const nextFile = files[(startIndex + step) % files.length];
 
-  // Announce the file name
-  const fileName = nextFile.path.split("/").pop();
-  vscode.window.showInformationMessage(`Navigated to file: ${fileName}`);
-  await speakMessage(`Navigated to file: ${fileName}`);
+    try {
+      const document = await vscode.workspace.openTextDocument(nextFile);
+      await vscode.window.showTextDocument(document);
+    } catch {
+      // Images, audio and other binary or very large files can't be opened as text
+      continue;
+    }
+
+    const fileName = path.basename(nextFile);
+    vscode.window.showInformationMessage(`Navigated to file: ${fileName}`);
+    await speakMessage(`Navigated to file: ${fileName}`);
+    return;
+  }
+
+  vscode.window.showErrorMessage("No text files found in this folder.");
+  await speakMessage("No text files found in this folder.");
 }
 
 /**
- * Watches the workspace for new files and updates the file index.
+ * Announces files that appear in the workspace. Files that are already open are
+ * skipped: the user just created them (EchoCode's file creator announces its own).
  */
-function watchWorkspaceForFileChanges() {
-  const workspaceFolders = vscode.workspace.workspaceFolders;
+function watchWorkspaceForFileChanges(context) {
+  // Only creations; VS Code's watcher reports a save as a change, not a new file
+  const watcher = vscode.workspace.createFileSystemWatcher(
+    "**/*",
+    false,
+    true,
+    true,
+  );
 
-  if (!workspaceFolders || workspaceFolders.length === 0) {
-    return;
-  }
+  watcher.onDidCreate(async (uri) => {
+    const relativePath = vscode.workspace.asRelativePath(uri, false);
+    if (isSkippedPath(relativePath)) return;
 
-  const workspacePath = workspaceFolders[0].uri.fsPath;
+    const isOpen = vscode.workspace.textDocuments.some(
+      (document) => document.uri.fsPath === uri.fsPath,
+    );
+    if (isOpen) return;
 
-  fs.watch(workspacePath, { recursive: true }, async (eventType, filename) => {
-    if (eventType === "rename" && filename) {
-      const filePath = path.join(workspacePath, filename);
-      if (fs.existsSync(filePath) && fs.lstatSync(filePath).isFile()) {
-        vscode.window.showInformationMessage(`New file detected: ${filename}`);
-        await speakMessage(`New file detected: ${filename}`);
-        // Optionally refresh the file index here
-      }
+    try {
+      const stat = await vscode.workspace.fs.stat(uri);
+      if (!(stat.type & vscode.FileType.File)) return;
+    } catch {
+      return; // Already gone again (temp file)
     }
+
+    vscode.window.showInformationMessage(`New file detected: ${relativePath}`);
+    await speakMessage(`New file detected: ${relativePath}`);
   });
+
+  context.subscriptions.push(watcher);
 }
 
 /**
@@ -80,7 +135,7 @@ function registerFileNavigatorCommand(context) {
   context.subscriptions.push(navigateCommand);
 
   // Start watching for file changes
-  watchWorkspaceForFileChanges();
+  watchWorkspaceForFileChanges(context);
 }
 
 module.exports = { registerFileNavigatorCommand };

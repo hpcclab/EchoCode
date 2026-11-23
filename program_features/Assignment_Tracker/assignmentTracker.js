@@ -44,7 +44,10 @@ async function loadAssignmentFile() {
   try {
     let text = "";
     if (filePath.endsWith(".pdf")) {
-      const dataBuffer = fs.readFileSync(filePath);
+      // Copy into a Uint8Array that owns its memory. Small files come back as a slice
+      // of Node's shared buffer pool, and pdf-parse's bundled pdf.js ignores the
+      // slice's offset, reads the wrong bytes, and fails with "bad XRef entry".
+      const dataBuffer = new Uint8Array(fs.readFileSync(filePath));
       const data = await pdfParse(dataBuffer);
       text = data.text;
     } else if (filePath.endsWith(".docx")) {

@@ -68,7 +68,7 @@ async function showHotkeyGuide() {
     case "6":
       await speakMessage(`
                 Time Complexity Hotkeys:
-                Ctrl + Alt + N: Generate Big O annotations.
+                Ctrl + Alt + J: Generate Big O annotations.
                 Ctrl + Alt + B: Read the first annotations in the queue.
                 Ctrl + Alt + H: Read the entire queue of Big O annotations.
             `);

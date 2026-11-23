@@ -5,10 +5,23 @@ const {
   speakMessage,
   startSpeaking,
 } = require("../../Core/program_settings/speech_settings/speechHandler");
-const { navigateToNextFile } = require("./file_navigator");
 
 let folderList = []; // Array to store the project folder and subfolders
 let currentFolderIndex = 0; // Tracks the current folder index
+
+/**
+ * Lists a folder's own files in the order Navigate to Next File visits them,
+ * skipping hidden files like .DS_Store.
+ */
+function getFilesInFolder(folder) {
+  return fs
+    .readdirSync(folder, { withFileTypes: true })
+    .filter((entry) => entry.isFile() && !entry.name.startsWith("."))
+    .map((entry) => entry.name)
+    .sort((a, b) =>
+      a.localeCompare(b, undefined, { numeric: true, sensitivity: "base" }),
+    );
+}
 
 /**
  * Initializes the folder list with the project folder and its subfolders.
@@ -26,10 +39,17 @@ async function initializeFolderList() {
   const projectFolder = workspaceFolders[0].uri.fsPath;
 
   try {
-    // Get all subfolders in the project folder
+    // Get all subfolders in the project folder, skipping hidden ones (.git, .venv),
+    // dependencies, and Python caches
     const subfolders = fs
       .readdirSync(projectFolder, { withFileTypes: true })
-      .filter((entry) => entry.isDirectory())
+      .filter(
+        (entry) =>
+          entry.isDirectory() &&
+          !entry.name.startsWith(".") &&
+          entry.name !== "node_modules" &&
+          entry.name !== "__pycache__",
+      )
       .map((entry) => path.join(projectFolder, entry.name));
 
     console.log("Detected subfolders:", subfolders);
@@ -82,13 +102,10 @@ async function moveToNextFolder() {
   await speakMessage(`Moved to folder: ${folderName}`);
 
   // Get files in the current folder
-  const files = fs
-    .readdirSync(currentFolder, { withFileTypes: true })
-    .filter((entry) => entry.isFile())
-    .map((entry) => path.join(currentFolder, entry.name));
+  const files = getFilesInFolder(currentFolder);
 
   if (files.length > 0) {
-    const firstFile = path.basename(files[0]); // Extract only the file name
+    const firstFile = files[0];
     vscode.window.showInformationMessage(`First file in folder: ${firstFile}`);
     await speakMessage(`First file in folder: ${firstFile}`);
   } else {
@@ -126,13 +143,10 @@ async function moveToPreviousFolder() {
   await speakMessage(`Moved to folder: ${folderName}`);
 
   // Get files in the current folder
-  const files = fs
-    .readdirSync(currentFolder, { withFileTypes: true })
-    .filter((entry) => entry.isFile())
-    .map((entry) => path.join(currentFolder, entry.name));
+  const files = getFilesInFolder(currentFolder);
 
   if (files.length > 0) {
-    const firstFile = path.basename(files[0]); // Extract only the file name
+    const firstFile = files[0];
     vscode.window.showInformationMessage(`First file in folder: ${firstFile}`);
     await speakMessage(`First file in folder: ${firstFile}`);
   } else {

@@ -36,6 +36,7 @@ const {
 } = require("./Core/program_settings/program_settings/secretStore");
 const {
   getAiSettings,
+  generateCodeFromVoice,
 } = require("./Core/program_settings/program_settings/AIrequest");
 
 // Python (optional adapter)
@@ -53,6 +54,7 @@ const {
   speakMessage,
   loadSavedSpeechSpeed,
   registerSpeechCommands,
+  installNotificationTracking,
   increaseSpeechSpeed,
   decreaseSpeechSpeed,
 } = require("./Core/program_settings/speech_settings/speechHandler");
@@ -548,9 +550,22 @@ async function activate(context) {
     },
   );
 
+  // Backs the "EchoCode is in Student Mode" label in the editor title bar. The label
+  // has no icon, so VS Code shows its title as text; clicking it says what is locked.
+  const studentModeBadgeCommand = vscode.commands.registerCommand(
+    "echocode.studentModeBadge",
+    async () => {
+      vscode.window.showInformationMessage(
+        "EchoCode is in Student Mode. AI chat, summaries, annotations, and error explanations are turned off.",
+      );
+      announceMode("student", outputChannel);
+    },
+  );
+
   context.subscriptions.push(
     switchToStudentModeCommand,
     switchToDevModeCommand,
+    studentModeBadgeCommand,
   );
 
   context.subscriptions.push(toggleModeCommand);
@@ -574,7 +589,9 @@ async function activate(context) {
       } catch (err) {
         // A command that fails silently is indistinguishable from one that never
         // ran, which makes this impossible to diagnose from the UI. Always speak up.
-        outputChannel.appendLine(`[AI Setup] Provider picker failed: ${err.stack || err.message}`);
+        outputChannel.appendLine(
+          `[AI Setup] Provider picker failed: ${err.stack || err.message}`,
+        );
         vscode.window.showErrorMessage(
           `EchoCode: could not open the AI provider picker — ${err.message}`,
         );
@@ -592,7 +609,9 @@ async function activate(context) {
             "EchoCode: AI provider/model check complete.",
           );
         } catch (err) {
-          outputChannel.appendLine(`[AI Setup] Update check failed: ${err.stack || err.message}`);
+          outputChannel.appendLine(
+            `[AI Setup] Update check failed: ${err.stack || err.message}`,
+          );
           vscode.window.showErrorMessage(
             `EchoCode: AI provider check failed — ${err.message}`,
           );
@@ -643,6 +662,7 @@ async function activate(context) {
 
   // Speech prefs
   loadSavedSpeechSpeed();
+  installNotificationTracking();
 
   // Register core commands first (code-agnostic)
   // Register core commands first (code-agnostic)
@@ -853,7 +873,7 @@ async function activate(context) {
       await vscode.commands.executeCommand(targetCommand);
     }),
   );
-
+  
   registerWhereAmICommand(context);
   registerMoveCursor(context);
   registerFileNavigatorCommand(context);
